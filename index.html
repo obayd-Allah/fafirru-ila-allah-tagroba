@@ -1,1 +1,125 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ففروا إلى الله - تجربة 2</title><link rel="stylesheet" href="style.css"></head><body><header><h1>ففروا إلى الله</h1><h3>تجربة 2</h3><input id="q" placeholder="ابحث باسم الطالب"></header><div id="cards"></div><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ففروا إلى الله</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="overlay">
+
+<img src="logo.png" class="logo" alt="الشعار">
+
+<h1>فَفِرُّوا إِلَى اللَّه</h1>
+
+<p class="subtitle">
+لوحة نقاط الطلاب
+</p>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<section class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 ابحث عن اسم الطالب...">
+
+</section>
+
+<section class="filters">
+
+<button class="filter-btn active" data-filter="all">
+📋 الجميع
+</button>
+
+<button class="filter-btn" data-filter="boys">
+👦 الأولاد
+</button>
+
+<button class="filter-btn" data-filter="girls">
+👧 البنات
+</button>
+
+</section>
+
+<section class="statistics">
+
+<div class="stat-card">
+
+<span class="stat-icon">
+👥
+</span>
+
+<div>
+
+<h3>عدد الطلاب</h3>
+
+<p id="studentsCount">
+0
+</p>
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<span class="stat-icon">
+💎
+</span>
+
+<div>
+
+<h3>إجمالي النقاط</h3>
+
+<p id="pointsCount">
+0
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="cards"
+id="cards">
+
+<!-- سيتم إنشاء البطاقات تلقائياً -->
+
+</section>
+
+</main>
+
+<footer>
+
+© ففروا إلى الله
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
