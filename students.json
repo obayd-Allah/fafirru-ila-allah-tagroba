@@ -1,5 +1,219 @@
 [
-{"name":"أحمد محمد","points":966,"gender":"ذكر"},
-{"name":"محمد علي","points":780,"gender":"ذكر"},
-{"name":"أسماء حسن","points":749,"gender":"أنثى"}
+  {
+    "name": "أحمد محمد",
+    "points": 966,
+    "gender": "ذكر"
+  },
+  {
+    "name": "محمد علي",
+    "points": 910,
+    "gender": "ذكر"
+  }, {
+    "name": "عبدالله حسن",
+    "points": 875,
+    "gender": "ذكر"
+  },
+  {
+    "name": "يوسف خالد",
+    "points": 820,
+    "gender": "ذكر"
+  },
+  {
+    "name": "عمر أحمد",
+    "points": 790,
+    "gender": "ذكر"
+  },
+  {
+    "name": "أسماء أحمد",
+    "points": 860,
+    "gender": "أنثى"
+  }, ChatGPT
+
+أنت قلت:
+1782668921881.jpg
+1782668934618.jpg
+نا هذا لماذا لا يعرض الخطة المجانية
+
+
+
+أنت قلت:
+Screenshot_٢٠٢٦٠٦٢٩_٠٠١٧١٣.jpg
+1. ففروا إلى الله تجربة 2 لا 3 اسم الطالب وعدد النقاط والنوع ذكر ام أنثى 
+
+
+
+أنت قلت:
+لا أفهم 
+
+
+
+أنت قلت:
+ماذا 
+
+
+
+أنت قلت:
+
+
+
+أنت قلت:
+Screenshot_20260629_010224_com.huawei.browser.jpg
+
+
+
+أنت قلت:
+
+
+
+أنت قلت:
+
+
+
+قال ChatGPT:
+بسم الله الرحمن الرحيم.
+
+هذا هو الجزء الأول من ملف script.js. انسخه كما هو، وسأرسل الجزء الثاني بعده مباشرة.
+
+JavaScript
+
+const students = [
+  { name: "أحمد محمد", points: 966, gender: "ذكر" },
+  { name: "محمد علي", points: 910, gender: "ذكر" },
+  { name: "عبدالله حسن", points: 875, gender: "ذكر" },
+  { name: "أسماء أحمد", points: 860, gender: "أنثى" },
+  { name: "فاطمة علي", points: 840, gender: "أنثى" },
+  { name: "يوسف خالد", points: 820, gender: "ذكر" },
+  { name: "مريم حسن", points: 790, gender: "أنثى" }
+];
+
+let currentFilter = "all";
+
+const cards = document.getElementById("cards");
+const search = document.getElementById("search");
+const studentsCount = document.getElementById("studentsCount");
+const pointsCount = document.getElementById("pointsCount");
+
+const buttons = document.querySelectorAll(".filter-btn");
+
+buttons.forEach(btn => {
+
+btn.onclick = () => {
+
+buttons.forEach(b => b.classList.remove("active"));
+
+btn.classList.add("active");
+
+currentFilter = btn.dataset.filter;
+
+draw();
+
+};
+
+});
+
+search.addEventListener("input", draw);
+
+function draw() {
+
+let list = [...students];
+
+if(currentFilter==="boys"){
+
+list=list.filter(s=>s.gender==="ذكر");
+
+}
+
+if(currentFilter==="girls"){
+
+list=list.filter(s=>s.gender==="أنثى");
+
+}
+
+const word = search.value.trim();
+
+if(word){
+
+list=list.filter(s=>s.name.includes(word));
+
+}
+
+list.sort((a,b)=>b.points-a.points);
+
+studentsCount.textContent=list.length;
+
+pointsCount.textContent=list.reduce((x,s)=>x+s.points,0);
+
+cards.innerHTML="";
+أرسل كلمة "أكمل" وسأرسل الجزء الثاني الذي يحتوي على إنشاء البطاقات، والمراكز الثلاثة الأولى (ذهبي، فضي، برونزي)، وإنهاء الملف بالكامل.
+
+
+
+
+
+
+
+
+أنت قلت:
+اكمل 
+
+
+
+قال ChatGPT:
+بسم الله الرحمن الرحيم.
+
+هذا هو ملف students.json. احفظه باسم students.json في نفس مجلد الموقع.
+
+JSON
+
+[
+  {
+    "name": "أحمد محمد",
+    "points": 966,
+    "gender": "ذكر"
+  },
+  {
+    "name": "محمد علي",
+    "points": 910,
+    "gender": "ذكر"
+  },
+  {
+    "name": "عبدالله حسن",
+    "points": 875,
+    "gender": "ذكر"
+  },
+  {
+    "name": "يوسف خالد",
+    "points": 820,
+    "gender": "ذكر"
+  },
+  {
+    "name": "عمر أحمد",
+    "points": 790,
+    "gender": "ذكر"
+  },
+  {
+    "name": "أسماء أحمد",
+    "points": 860,
+    "gender": "أنثى"
+  },
+  {
+    "name": "فاطمة علي",
+    "points": 840,
+    "gender": "أنثى"
+  },
+  {
+    "name": "مريم حسن",
+    "points": 810,
+    "gender": "أنثى"
+  },
+  {
+    "name": "خديجة محمد",
+    "points": 760,
+    "gender": "أنثى"
+  },
+  {
+    "name": "زينب علي",
+    "points": 730,
+    "gender": "أنثى"
+  }
 ]
