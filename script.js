@@ -1,0 +1,1 @@
+let data=[];fetch('students.json').then(r=>r.json()).then(d=>{data=d;show(d)});function show(a){cards.innerHTML=a.map(s=>`<div class='card'><h2>👤 ${s.name}</h2><p>💎 ${s.points} نقطة</p><p>${s.gender=='ذكر'?'👦':'👧'} ${s.gender}</p></div>`).join('')}q.oninput=e=>show(data.filter(x=>x.name.includes(e.target.value)));
