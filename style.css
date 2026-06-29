@@ -30,7 +30,7 @@ color:inherit;
 
 .hero{
 
-height:270px;
+height:370px;
 
 background:
 linear-gradient(rgba(18,90,130,.75),
@@ -76,9 +76,6 @@ padding:20px;
 font-size:34px;
 font-weight:800;
 margin-bottom:8px;
-      display:flex;
-align-items:center;
-justify-content:center;
 }
 
 .subtitle{
