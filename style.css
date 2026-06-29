@@ -87,11 +87,8 @@ padding:20px;
 }
 
 .search-box{
-
-margin-top:-40px;
-
-margin-bottom:25px;
-
+    margin-top:0;
+    margin-bottom:25px;
 }
 
 .search-box input{
@@ -418,9 +415,15 @@ font-size:28px;
 }
 
 .subtitle{
+    font-size:20px;
+    font-weight:700;
+    margin-top:12px;
+    letter-spacing:1px;
 
-font-size:16px;
-
+    text-shadow:
+        0 0 8px rgba(255,255,255,.35),
+        0 2px 6px rgba(0,0,0,.35);
+animation: glow 2.5s ease-in-out infinite;
 }
 
 .search-box input{
@@ -456,3 +459,24 @@ font-size:20px;
 }
 
   }
+@keyframes glow{
+
+    0%{
+        text-shadow:
+        0 0 5px rgba(255,255,255,.25),
+        0 2px 6px rgba(0,0,0,.35);
+    }
+      50%{
+        text-shadow:
+        0 0 14px rgba(255,255,255,.75),
+        0 2px 8px rgba(0,0,0,.45);
+    }
+
+    100%{
+        text-shadow:
+        0 0 5px rgba(255,255,255,.25),
+        0 2px 6px rgba(0,0,0,.35);
+    }
+
+}
+
