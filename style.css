@@ -29,28 +29,18 @@ color:inherit;
 }
 
 .hero{
-
-height:570px;
-
+height:1070px;
 background:
 linear-gradient(rgba(18,90,130,.75),
 rgba(16,126,92,.75)),
 url("background.jpg");
-
 background-size:cover;
-
 background-position:center;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 text-align:center;
-
 color:#fff;
-
 }
 
 .overlay{
