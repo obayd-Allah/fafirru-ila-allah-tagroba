@@ -62,31 +62,23 @@ padding:20px;
 }
 
 .logo{
-
-width:95px;
-
-height:95px;
-
-border-radius:50%;
-
-background:#fff;
-
-padding:8px;
-
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-
-margin-bottom:15px;
-
+    width:120px;
+    height:120px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 20px;
+    background:#fff;
+    padding:10px;
+    border-radius:50%;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
 }
-
 .hero h1{
-
 font-size:34px;
-
 font-weight:800;
-
 margin-bottom:8px;
-
+      display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .subtitle{
