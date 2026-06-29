@@ -1,47 +1,47 @@
 [
   {
     "name": "أحمد محمد جابر",
-    "points": 0,
+    "points": 10,
     "gender": "ذكر"
   },
   {
     "name": "تميم محمد",
-    "points": 0,
+    "points": 20,
     "gender": "ذكر"
   },
   {
     "name": "حمزة حسن",
-    "points": 0,
+    "points": 20,
     "gender": "ذكر"
   },
   {
     "name": "يوسف عبد الله",
-    "points": 0,
+    "points": 50,
     "gender": "ذكر"
   },
   {
     "name": "محمود ياسر",
-    "points": 0,
+    "points": 100,
     "gender": "ذكر"
   },
   {
     "name": "أبرار",
-    "points": 0,
+    "points": 100,
     "gender": "أنثى"
   },
   {
     "name": "علي علي",
-    "points": 0,
+    "points": 30,
     "gender": "ذكر"
   },
   {
     "name": "يس علي",
-    "points": 0,
+    "points": 30,
     "gender": "ذكر"
   },
   {
     "name": "زياد أحمد",
-    "points": 0,
+    "points": 1,
     "gender": "ذكر"
   },
   {
@@ -56,7 +56,7 @@
   },
   {
     "name": "إبراهيم إسلام",
-    "points": 0,
+    "points": 70,
     "gender": "ذكر"
   }
 ]
