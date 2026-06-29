@@ -1,52 +1,62 @@
 [
   {
-    "name": "أحمد محمد",
-    "points": 966,
+    "name": "أحمد محمد جابر,
+    "points": 0,
     "gender": "ذكر"
   },
   {
-    "name": "محمد علي",
-    "points": 910,
+    "name": "تميم محمد",
+    "points": 0,
     "gender": "ذكر"
   },
   {
-    "name": "عبدالله حسن",
-    "points": 875,
+    "name": "حمزة حسن",
+    "points": 0,
     "gender": "ذكر"
   },
   {
-    "name": "يوسف خالد",
-    "points": 820,
+    "name": "يوسف عبد الله",
+    "points": 0,
     "gender": "ذكر"
   },
   {
-    "name": "عمر أحمد",
-    "points": 790,
+    "name": "محمود ياسر",
+    "points": 0,
     "gender": "ذكر"
   },
   {
-    "name": "أسماء أحمد",
-    "points": 860,
+    "name": "أبرار",
+    "points": 0,
     "gender": "أنثى"
   },
   {
-    "name": "فاطمة علي",
-    "points": 840,
-    "gender": "أنثى"
+    "name": "علي علي",
+    "points": 0,
+    "gender": "ذكر"
   },
   {
-    "name": "مريم حسن",
+    "name": "يس علي",
     "points": 810,
-    "gender": "أنثى"
+    "gender": "ذكر"
   },
   {
-    "name": "خديجة محمد",
-    "points": 760,
-    "gender": "أنثى"
+    "name": "زياد أحمد",
+    "points": 0,
+    "gender": "ذكر"
   },
   {
-    "name": "زينب علي",
-    "points": 730,
-    "gender": "أنثى"
+    "name": "إياد أحمد",
+    "points": 0,
+    "gender": "ذكر"
+  },
+  {
+    "name": "زيد إسلام",
+    "points": 0,
+    "gender": "ذكر"
+  },
+  {
+    "name": "إبراهيم إسلام",
+    "points": 0,
+    "gender": "ذكر"
   }
 ]
