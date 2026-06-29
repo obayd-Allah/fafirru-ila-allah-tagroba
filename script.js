@@ -49,25 +49,45 @@ cards.innerHTML = "";
 
     list.forEach((s,i)=>{
 
-        cards.innerHTML += `
-        <div class="student-card">
+    let medal = "";
+    let cardClass = "";
 
-            <div class="student-name">
-                ${i+1}- ${s.name}
-            </div>
-<div class="student-info">
-                <span>💎 النقاط</span>
-                <span class="points">${s.points}</span>
-            </div>
+    if(i === 0){
+        medal = "🥇";
+        cardClass = "gold";
+    }
+    else if(i === 1){
+        medal = "🥈";
+        cardClass = "silver";
+    }
+    else if(i === 2){
+        medal = "🥉";
+        cardClass = "bronze";
+    }
 
-            <div class="student-info">
-                <span>النوع</span>
-                <span>${s.gender}</span>
-            </div>
+    cards.innerHTML += `
+    <div class="student-card ${cardClass}">
 
+        <div class="student-name">
+            ${medal} ${s.name}
         </div>
-        `;
 
-    });
+        <div class="student-info">
+            <span>💎 النقاط</span>
+            <span class="points">${s.points}</span>
+        </div>
+        <div class="student-info">
+            <span>النوع</span>
+            <span>${s.gender === "ذكر" ? "👦 الأولاد" : "👧 البنات"}</span>
+        </div>
+
+        <div class="rank">
+            🏅 المركز ${i + 1}
+        </div>
+
+    </div>
+    `;
+
+});
 
 }
