@@ -49,18 +49,28 @@ cards.innerHTML = "";
 
     list.forEach((s,i)=>{
 
-    let medal = "";
-    let cardClass = "";
+    let rank = 1;
 
-    if(i === 0){
+    for(let j=0;j<i;j++){
+        if(list[j].points > s.points){
+            rank++;
+        }
+    }
+
+    let sameRank =
+        list.filter(x => x.points === s.points).length > 1;
+
+    let medal = "";
+        let cardClass = "";
+
+    if(rank === 1){
         medal = "🥇";
         cardClass = "gold";
     }
-    else if(i === 1){
+    else if(rank === 2){
         medal = "🥈";
         cardClass = "silver";
-    }
-    else if(i === 2){
+    }else if(rank === 3){
         medal = "🥉";
         cardClass = "bronze";
     }
@@ -71,18 +81,17 @@ cards.innerHTML = "";
         <div class="student-name">
             ${medal} ${s.name}
         </div>
-
         <div class="student-info">
             <span>💎 النقاط</span>
             <span class="points">${s.points}</span>
         </div>
+
         <div class="student-info">
             <span>النوع</span>
             <span>${s.gender === "ذكر" ? "👦 الأولاد" : "👧 البنات"}</span>
         </div>
-
-        <div class="rank">
-            🏅 المركز ${i + 1}
+<div class="rank">
+            🏅 المركز ${rank}${sameRank ? " (مكرر)" : ""}
         </div>
 
     </div>
