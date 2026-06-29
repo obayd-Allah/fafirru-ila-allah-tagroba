@@ -29,7 +29,7 @@ color:inherit;
 }
 
 .hero{
-height:300px;
+height:500px;
 background:
 linear-gradient(rgba(18,90,130,.75),
 rgba(16,126,92,.75)),
@@ -52,7 +52,7 @@ padding:20px;
 }
 
 .logo{
-    width:420px;
+    width:120px;
     height:120px;
     object-fit:contain;
     display:block;
