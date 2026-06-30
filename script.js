@@ -23,18 +23,51 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
     };
 });
 search.oninput = render;
+function isBoy(gender){
 
+    gender = (gender || "").trim().toLowerCase();
+
+    return [
+        "ذكر",
+        "ولد",
+        "رجل",
+        "male",
+        "boy",
+        "m",
+        "زكر",
+        "دكر"
+    ].includes(gender);
+
+}
+function isGirl(gender){
+
+    gender = (gender || "").trim().toLowerCase();
+
+    return [
+        "أنثى",
+        "انثى",
+        "أنثي",
+        "انثي",
+        "بنت",
+        "امرأة",
+        "امراه",
+        "female",
+        "girl",
+        "f"
+    ].includes(gender);
+
+}
 function render() {
 
     let list = [...students];
 
     if(currentFilter === "boys"){
-        list = list.filter(s => s.gender === "ذكر");
-    }
+    list = list.filter(s => isBoy(s.gender));
+}
 
-    if(currentFilter === "girls"){
-        list = list.filter(s => s.gender === "أنثى");
-    }
+if(currentFilter === "girls"){
+    list = list.filter(s => isGirl(s.gender));
+}
 let word = search.value.trim();
 
     if(word !== ""){
@@ -89,16 +122,13 @@ cards.innerHTML = "";
         </div>
 
         <div class="student-info">
-            <span>النوع</span>
-            <span>${
-["ذكر","ذكر","ولد","رجل","male","boy","m","male.","ذكر.","ولد.","زكر","دكر"]
-.includes((s.gender || "").trim().toLowerCase())
-? "👦 الأولاد"
-: ["أنثى","انثى","بنت","امرأة","امراه","female","girl","f","انثي","أنثي","بنوته","بنت.","انثى.","أنثى."]
-.includes((s.gender || "").trim().toLowerCase())
-? "👧 البنات"
-: "❓ غير محدد"
-}</span></div>
+    <span>النوع</span>
+    <span>
+        ${isBoy(s.gender) ? "👦 الأولاد" :
+        isGirl(s.gender) ? "👧 البنات" :
+        "❓ غير محدد"}
+    </span>
+</div>
 <div class="rank">
             🏅 المركز ${rank}${sameRank ? " (مكرر)" : ""}
         </div>
