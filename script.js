@@ -5,11 +5,13 @@ const cards = document.getElementById("cards");
 const search = document.getElementById("search");
 const studentsCount = document.getElementById("studentsCount");
 const pointsCount = document.getElementById("pointsCount");
-
+const loading = document.getElementById("loading");
+    
 fetch("https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec")
 .then(r => r.json())
 .then(data => {
     students = data;
+    loading.style.display = "none";
     render();
 });
 document.querySelectorAll(".filter-btn").forEach(btn => {
