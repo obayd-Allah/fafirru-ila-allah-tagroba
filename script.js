@@ -98,6 +98,9 @@ cards.innerHTML = "";
     let medal = "";
         let cardClass = "";
 
+        if(isGirl(s.gender)){
+    cardClass = "girl-card";
+        }
     if(rank === 1){
         medal = "🥇";
         cardClass = "gold";
