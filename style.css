@@ -402,6 +402,17 @@ background:linear-gradient(135deg,#fff3e8,#e8b07a);
 background:#b87333;
 
 }
+.girl-card{
+
+background:#fff8fc;
+
+}
+
+.girl-card::before{
+
+background:#f3a9c8;
+
+}
 
 /*=========================
       التذييل
