@@ -88,8 +88,15 @@ cards.innerHTML = "";
 
         <div class="student-info">
             <span>النوع</span>
-            <span>${s.gender === "ذكر" ? "👦 الأولاد" : "👧 البنات"}</span>
-        </div>
+            <span>${
+["ذكر","ذكر","ولد","رجل","male","boy","m","male.","ذكر.","ولد.","زكر","دكر"]
+.includes((s.gender || "").trim().toLowerCase())
+? "👦 الأولاد"
+: ["أنثى","انثى","بنت","امرأة","امراه","female","girl","f","انثي","أنثي","بنوته","بنت.","انثى.","أنثى."]
+.includes((s.gender || "").trim().toLowerCase())
+? "👧 البنات"
+: "❓ غير محدد"
+}</span></div>
 <div class="rank">
             🏅 المركز ${rank}${sameRank ? " (مكرر)" : ""}
         </div>
