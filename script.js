@@ -6,7 +6,7 @@ const search = document.getElementById("search");
 const studentsCount = document.getElementById("studentsCount");
 const pointsCount = document.getElementById("pointsCount");
 
-fetch("students.json")
+fetch("https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec")
 .then(r => r.json())
 .then(data => {
     students = data;
