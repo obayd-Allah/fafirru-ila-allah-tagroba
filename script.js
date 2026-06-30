@@ -129,9 +129,15 @@ cards.innerHTML = "";
         "❓ غير محدد"}
     </span>
 </div>
+${s.points > 0 ? `
 <div class="rank">
-            🏅 المركز ${rank}${sameRank ? " (مكرر)" : ""}
-        </div>
+    🏅 المركز ${i + 1}
+</div>
+` : `
+<div class="rank">
+    ⏳ ${isBoy(s.gender) ? "سيبدأ في المنافسة قريبًا..." : "ستبدأ في المنافسة قريبًا..."}
+</div>
+`}
 
     </div>
     `;
