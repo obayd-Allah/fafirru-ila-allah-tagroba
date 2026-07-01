@@ -59,7 +59,8 @@ function isGirl(gender){
 }
 function render(){
 
-let list=[...boys,...girls];
+let boys=students.filter(s=>isBoy(s.gender));
+let girls=students.filter(s=>isGirl(s.gender));
 
 [boys,girls].forEach(group=>{
 
