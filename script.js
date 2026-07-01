@@ -1,5 +1,5 @@
 let students = [];
-let currentFilter = "all";
+let currentFilter = "boys";
 
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
@@ -59,23 +59,22 @@ function isGirl(gender){
 }
 function render() {
 
-    let list = [...students];
+    // بعد ذلك فقط نطبق الفلاتر
+let list = [...allStudents];
 
-    if(currentFilter === "boys"){
+if(currentFilter === "boys"){
     list = list.filter(s => isBoy(s.gender));
 }
 
 if(currentFilter === "girls"){
     list = list.filter(s => isGirl(s.gender));
 }
+
 let word = search.value.trim();
 
-    if(word !== ""){
-        list = list.filter(s => s.name.includes(word));
-    }
-
-    list.sort((a,b)=>b.points-a.points);
-
+if(word !== ""){
+    list = list.filter(s => s.name.includes(word));
+}
     studentsCount.textContent = list.length;
 
     pointsCount.textContent =
@@ -84,13 +83,7 @@ cards.innerHTML = "";
 
     list.forEach((s,i)=>{
 
-    let rank = 1;
-
-    for(let j=0;j<i;j++){
-        if(list[j].points > s.points){
-            rank++;
-        }
-    }
+    let rank = s.rank;
         
     let sameRank =
         list.filter(x => x.points === s.points).length > 1;
