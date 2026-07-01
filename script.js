@@ -57,88 +57,67 @@ function isGirl(gender){
     ].includes(gender);
 
 }
-function render() {
-if(currentFilter === "boys"){
-    list = list.filter(s => isBoy(s.gender));
+function render(){
+
+let allStudents=[...students];
+
+allStudents.sort((a,b)=>b.points-a.points);
+
+allStudents.forEach((s,i)=>{
+let rank=1;
+for(let j=0;j<i;j++) if(allStudents[j].points>s.points) rank++;
+s.rank=rank;
+});
+
+let list=[...allStudents];
+
+if(currentFilter==="boys") list=list.filter(s=>isBoy(s.gender));
+if(currentFilter==="girls") list=list.filter(s=>isGirl(s.gender));
+
+let word=search.value.trim();
+if(word!=="") list=list.filter(s=>s.name.includes(word));
+
+studentsCount.textContent=list.length;
+pointsCount.textContent=list.reduce((sum,s)=>sum+s.points,0);
+
+cards.innerHTML="";
+
+list.forEach(s=>{
+
+let rank=s.rank;
+let repeated=allStudents.filter(x=>x.points===s.points).length>1;
+
+let medal="";
+let cardClass=isGirl(s.gender)?"girl-card":"";
+
+if(s.points>0){
+if(rank===1){medal="🥇";cardClass="gold";}
+else if(rank===2){medal="🥈";cardClass="silver";}
+else if(rank===3){medal="🥉";cardClass="bronze";}
 }
 
-if(currentFilter === "girls"){
-    list = list.filter(s => isGirl(s.gender));
-}
-
-let word = search.value.trim();
-
-if(word !== ""){
-    list = list.filter(s => s.name.includes(word));
-}
-    studentsCount.textContent = list.length;
-
-    pointsCount.textContent =
-        list.reduce((sum,s)=>sum+s.points,0);
-cards.innerHTML = "";
-
-    list.forEach((s,i)=>{
-
-    let rank = s.rank;
-    // بعد ذلك فقط نطبق الفلاتر
-let list = [...allStudents];
-
-
-        
-    
-    let medal = "";
-        let cardClass = "";
-
-        if(isGirl(s.gender)){
-    cardClass = "girl-card";
-        }
-    if(s.points > 0){
-
-    if(rank === 1){
-        medal = "🥇";
-        cardClass = "gold";
-    }
-    else if(rank === 2){
-        medal = "🥈";
-        cardClass = "silver";
-    }
-    else if(rank === 3){
-        medal = "🥉";
-        cardClass = "bronze";
-    }
-
-}
-        const repeated = list.filter(x => x.points === s.points).length > 1;
-
-
-    cards.innerHTML += `
-    <div class="student-card ${cardClass}">
-
-        <div class="student-name">
-            ${medal} ${s.name}
-        </div>
-        <div class="student-info">
-            <span>💎 النقاط</span>
-            <span class="points">${s.points}</span>
-        </div>
-
-        <div class="student-info">
-    <span>النوع</span>
-    <span>
-        ${isBoy(s.gender) ? "👦 الأولاد" :
-        isGirl(s.gender) ? "👧 البنات" :
-        "❓ غير محدد"}
-    </span>
+cards.innerHTML+=`
+<div class="student-card ${cardClass}">
+<div class="student-name">${medal} ${s.name}</div>
+<div class="student-info">
+<span>النوع</span>
+<span>${isBoy(s.gender)?"👦 الأولاد":isGirl(s.gender)?"👧 البنات":"❓ غير محدد"}</span>
 </div>
-${s.points > 0 ? `
+
+${s.points>0?`
 <div class="rank">
-    🏅 المركز ${rank}${repeated ? " (مكرر)" : ""}
+🏅 المركز ${rank}${repeated?" (مكرر)":""}
 </div>
-` : `
+`:`
 <div class="rank">
-    ⏳ ${isBoy(s.gender) ? "سيبدأ في المنافسة قريبًا..." : "ستبدأ في المنافسة قريبًا..."}
+⏳ ${isBoy(s.gender)?"سيبدأ في المنافسة قريبًا...":"ستبدأ في المنافسة قريبًا..."}
 </div>
 `}
+
+</div>`;
+});
+
+}
 
     </div>
     `;
