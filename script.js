@@ -91,8 +91,7 @@ cards.innerHTML = "";
             rank++;
         }
     }
-        const repeated = list.filter(x => x.points === s.points).length > 1;
-
+        
     let sameRank =
         list.filter(x => x.points === s.points).length > 1;
 
@@ -118,6 +117,8 @@ cards.innerHTML = "";
     }
 
 }
+        const repeated = list.filter(x => x.points === s.points).length > 1;
+
 
     cards.innerHTML += `
     <div class="student-card ${cardClass}">
