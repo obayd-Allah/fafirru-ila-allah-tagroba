@@ -58,10 +58,6 @@ function isGirl(gender){
 
 }
 function render() {
-
-    // بعد ذلك فقط نطبق الفلاتر
-let list = [...allStudents];
-
 if(currentFilter === "boys"){
     list = list.filter(s => isBoy(s.gender));
 }
@@ -84,10 +80,12 @@ cards.innerHTML = "";
     list.forEach((s,i)=>{
 
     let rank = s.rank;
-        
-    let sameRank =
-        list.filter(x => x.points === s.points).length > 1;
+    // بعد ذلك فقط نطبق الفلاتر
+let list = [...allStudents];
 
+
+        
+    
     let medal = "";
         let cardClass = "";
 
