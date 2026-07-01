@@ -448,7 +448,25 @@ font-weight:700;
 .whatsapp-box p{font-size:17px;color:#555;margin-bottom:20px;}
 .whatsapp-btn{display:inline-block;padding:14px 30px;background:#25D366;color:#fff;border-radius:14px;font-size:18px;font-weight:700;transition:.3s;}
 .whatsapp-btn:hover{background:#1fa855;
+.salawat-card{
+max-width:320px;
+margin:12px auto 25px;
+padding:10px 15px;
+background:#fff;
+border-radius:12px;
+text-align:center;
+font-size:18px;
+font-weight:700;
+color:#1f7a3d;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+border:2px solid #d9f5df;
+transition:.2s;
+}
 
+.salawat-card:hover{
+transform:translateY(-2px);
+box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
 /*=========================
       الهاتف
 =========================*/
