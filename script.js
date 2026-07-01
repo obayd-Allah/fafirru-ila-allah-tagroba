@@ -99,6 +99,12 @@ else if(rank===3){medal="🥉";cardClass="bronze";}
 cards.innerHTML+=`
 <div class="student-card ${cardClass}">
 <div class="student-name">${medal} ${s.name}</div>
+
+<div class="student-info">
+<span>💎 النقاط</span>
+<span class="points">${s.points}</span>
+</div>
+
 <div class="student-info">
 <span>النوع</span>
 <span>${isBoy(s.gender)?"👦 الأولاد":isGirl(s.gender)?"👧 البنات":"❓ غير محدد"}</span>
@@ -117,10 +123,6 @@ ${s.points>0?`
 </div>`;
 });
 
-}
-
-    </div>
-    `;
 
 });
 
