@@ -101,6 +101,8 @@ cards.innerHTML = "";
         if(isGirl(s.gender)){
     cardClass = "girl-card";
         }
+    if(s.points > 0){
+
     if(rank === 1){
         medal = "🥇";
         cardClass = "gold";
@@ -108,10 +110,13 @@ cards.innerHTML = "";
     else if(rank === 2){
         medal = "🥈";
         cardClass = "silver";
-    }else if(rank === 3){
+    }
+    else if(rank === 3){
         medal = "🥉";
         cardClass = "bronze";
     }
+
+}
 
     cards.innerHTML += `
     <div class="student-card ${cardClass}">
