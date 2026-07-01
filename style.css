@@ -447,7 +447,7 @@ font-weight:700;
 .whatsapp-box h3{color:#128C7E;font-size:24px;margin-bottom:10px;}
 .whatsapp-box p{font-size:17px;color:#555;margin-bottom:20px;}
 .whatsapp-btn{display:inline-block;padding:14px 30px;background:#25D366;color:#fff;border-radius:14px;font-size:18px;font-weight:700;transition:.3s;}
-.whatsapp-btn:hover{background:#1fa855;
+.whatsapp-btn:hover{background:#1fa855;} 
 .salawat-card{
 max-width:320px;
 margin:12px auto 25px;
