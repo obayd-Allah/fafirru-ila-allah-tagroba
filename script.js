@@ -59,17 +59,26 @@ function isGirl(gender){
 }
 function render(){
 
-let allStudents=[...students];
+let list=[...boys,...girls];
 
-allStudents.sort((a,b)=>b.points-a.points);
+[boys,girls].forEach(group=>{
 
-allStudents.forEach((s,i)=>{
+group.sort((a,b)=>b.points-a.points);
+
+group.forEach((s,i)=>{
+
 let rank=1;
-for(let j=0;j<i;j++) if(allStudents[j].points>s.points) rank++;
+
+for(let j=0;j<i;j++)
+if(group[j].points>s.points) rank++;
+
 s.rank=rank;
+
 });
 
-let list=[...allStudents];
+});
+
+let list=[...boys,...girls];
 
 if(currentFilter==="boys") list=list.filter(s=>isBoy(s.gender));
 if(currentFilter==="girls") list=list.filter(s=>isGirl(s.gender));
@@ -85,8 +94,9 @@ cards.innerHTML="";
 list.forEach(s=>{
 
 let rank=s.rank;
-let repeated=allStudents.filter(x=>x.points===s.points).length>1;
+let group=isBoy(s.gender)?boys:girls;
 
+let repeated=group.filter(x=>x.points===s.points).length>1;
 let medal="";
 let cardClass=isGirl(s.gender)?"girl-card":"";
 
