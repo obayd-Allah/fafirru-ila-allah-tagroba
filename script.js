@@ -91,6 +91,7 @@ cards.innerHTML = "";
             rank++;
         }
     }
+        const repeated = list.filter(x => x.points === s.points).length > 1;
 
     let sameRank =
         list.filter(x => x.points === s.points).length > 1;
@@ -139,7 +140,7 @@ cards.innerHTML = "";
 </div>
 ${s.points > 0 ? `
 <div class="rank">
-    🏅 المركز ${i + 1}
+    🏅 المركز ${rank}${repeated ? " (مكرر)" : ""}
 </div>
 ` : `
 <div class="rank">
