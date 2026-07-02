@@ -121,16 +121,33 @@ id="cards">
   <button id="rewardBtn" class="reward-btn">
 🎁 استلام النقاط
 </button>
-  <div id="rewardModal" class="modal">
 
-<div class="modal-box">
+<div id="rewardModal" class="modal">
 
-<h3>🎁 استلام النقاط</h3>
+  <div class="modal-box">
 
-<select id="studentSelect"></select>
+    <h3>🎁 استلام النقاط</h3>
 
-<input
-   
+    <select id="studentSelect"></select>
+
+    <input
+      type="text"
+      id="rewardCode"
+      placeholder="أدخل الكود">
+
+    <button id="sendReward">
+      استلام النقاط
+    </button>
+
+    <button id="closeReward">
+      إغلاق
+    </button>
+
+    <p id="rewardMessage"></p>
+
+  </div>
+
+</div>
 <div class="whatsapp-box">
 
 <h3>📱 مجموعة الواتساب</h3>
