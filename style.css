@@ -420,7 +420,61 @@ background:#fff8fc;
 background:#f3a9c8;
 
 }
+.reward-btn{
+width:100%;
+padding:12px;
+margin:15px 0;
+font-size:18px;
+border:none;
+border-radius:12px;
+background:#ff9800;
+color:#fff;
+cursor:pointer;
+font-weight:bold;
+}
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+.modal-box{
+width:90%;
+max-width:360px;
+background:#fff;
+padding:20px;
+border-radius:18px;
+text-align:center;
+}
 
+.modal-box input,
+.modal-box select{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:10px;
+}
+.modal-box button{
+width:100%;
+padding:10px;
+margin-top:8px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+#sendReward{
+background:#4caf50;
+color:white;
+}
+
+#closeReward{
+background:#ddd;
+}
 
 /*=========================
       التذييل
