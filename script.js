@@ -133,5 +133,69 @@ ${s.points>0?`
 
 </div>`;
 });
+const rewardBtn=document.getElementById("rewardBtn");
+const rewardModal=document.getElementById("rewardModal");
+const studentSelect=document.getElementById("studentSelect");
+const rewardCode=document.getElementById("rewardCode");
+const rewardMessage=document.getElementById("rewardMessage");
 
+rewardBtn.onclick=()=>{
+
+studentSelect.innerHTML="";
+
+students.forEach(s=>{
+
+studentSelect.innerHTML+=`
+<option value="${s.name}">
+${s.name}
+</option>
+`;
+
+});
+
+rewardMessage.textContent="";
+rewardCode.value="";
+
+rewardModal.style.display="flex";
+
+};
+document.getElementById("closeReward").onclick=()=>{
+rewardModal.style.display="none";
+};
+
+document.getElementById("sendReward").onclick=()=>{
+
+fetch("https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:studentSelect.value,
+
+code:rewardCode.value
+
+})
+
+})
+
+.then(r=>r.json())
+
+.then(res=>{
+
+rewardMessage.textContent=res.message;
+
+if(res.success){
+
+setTimeout(()=>location.reload(),1000);
+
+}
+
+});
+
+};
 }
