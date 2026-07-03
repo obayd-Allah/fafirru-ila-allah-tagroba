@@ -152,7 +152,7 @@ ${s.name}
 `;
 
 });
-
+        }
 rewardMessage.textContent="";
 rewardCode.value="";
 
@@ -198,4 +198,4 @@ setTimeout(()=>location.reload(),1000);
 });
 
 };
-}
+
