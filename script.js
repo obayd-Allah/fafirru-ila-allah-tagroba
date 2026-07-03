@@ -177,22 +177,8 @@ return;
 rewardMessage.style.color="#555";
 rewardMessage.textContent="⏳ جارٍ التحقق...";
 
-fetch("https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-name:studentSelect.value,
-code:rewardCode.value.trim()
-})
-
-})
+fetch(`https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec?name=${encodeURIComponent(studentSelect.value)}&code=${encodeURIComponent(rewardCode.value.trim())}`)
 .then(r=>r.json())
-
 .then(res=>{
 
 rewardMessage.style.color=res.success?"green":"red";
@@ -204,23 +190,11 @@ setTimeout(()=>{
 
 rewardModal.style.display="none";
 rewardCode.value="";
-render();
-
 location.reload();
 
 },1500);
 
 }
-
-})
-.catch(error=>{
-
-alert(error);
-
-rewardMessage.style.color="red";
-rewardMessage.textContent=error;
-
-console.log(error);
 
 });
 
