@@ -133,6 +133,7 @@ ${s.points>0?`
 
 </div>`;
 });
+   } 
 const rewardBtn=document.getElementById("rewardBtn");
 const rewardModal=document.getElementById("rewardModal");
 const studentSelect=document.getElementById("studentSelect");
@@ -152,7 +153,7 @@ ${s.name}
 `;
 
 });
-        }
+        
 rewardMessage.textContent="";
 rewardCode.value="";
 
