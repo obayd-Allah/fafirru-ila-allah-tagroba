@@ -166,6 +166,8 @@ rewardModal.style.display="none";
 
 document.getElementById("sendReward").onclick=()=>{
 
+alert("تم الضغط");
+
 if(rewardCode.value.trim()===""){
 rewardMessage.style.color="red";
 rewardMessage.textContent="اكتب الكود أولاً.";
