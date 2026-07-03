@@ -166,6 +166,15 @@ rewardModal.style.display="none";
 
 document.getElementById("sendReward").onclick=()=>{
 
+if(rewardCode.value.trim()===""){
+rewardMessage.style.color="red";
+rewardMessage.textContent="اكتب الكود أولاً.";
+return;
+}
+
+rewardMessage.style.color="#555";
+rewardMessage.textContent="⏳ جارٍ التحقق...";
+
 fetch("https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec",{
 
 method:"POST",
@@ -175,28 +184,38 @@ headers:{
 },
 
 body:JSON.stringify({
-
 name:studentSelect.value,
-
-code:rewardCode.value
-
+code:rewardCode.value.trim()
 })
 
 })
-
 .then(r=>r.json())
 
 .then(res=>{
 
+rewardMessage.style.color=res.success?"green":"red";
 rewardMessage.textContent=res.message;
 
 if(res.success){
 
-setTimeout(()=>location.reload(),1000);
+setTimeout(()=>{
+
+rewardModal.style.display="none";
+rewardCode.value="";
+render();
+
+location.reload();
+
+},1500);
 
 }
+
+})
+.catch(()=>{
+
+rewardMessage.style.color="red";
+rewardMessage.textContent="حدث خطأ في الاتصال بالخادم.";
 
 });
 
 };
-
