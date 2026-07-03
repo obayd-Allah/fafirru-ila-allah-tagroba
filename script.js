@@ -213,10 +213,14 @@ location.reload();
 }
 
 })
-.catch(()=>{
+.catch(error=>{
+
+alert(error);
 
 rewardMessage.style.color="red";
-rewardMessage.textContent="حدث خطأ في الاتصال بالخادم.";
+rewardMessage.textContent=error;
+
+console.log(error);
 
 });
 
