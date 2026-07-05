@@ -1,3 +1,23 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig={
+apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
+authDomain:"fafirru-ila-allah.firebaseapp.com",
+projectId:"fafirru-ila-allah",
+storageBucket:"fafirru-ila-allah.firebasestorage.app",
+messagingSenderId:"564958663441",
+appId:"1:564958663441:web:9e6e6a246ec0e2c48472b0"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+
 let students = [];
 let currentFilter = "boys";
 
@@ -7,13 +27,25 @@ const studentsCount = document.getElementById("studentsCount");
 const pointsCount = document.getElementById("pointsCount");
 const loading = document.getElementById("loading");
     
-fetch("https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec")
-.then(r => r.json())
-.then(data => {
-    students = data;
-    loading.style.display = "none";
-    render();
+async function loadStudents(){
+
+const snapshot=await getDocs(collection(db,"Students"));
+
+students=[];
+
+snapshot.forEach(doc=>{
+
+students.push(doc.data());
+
 });
+
+loading.style.display="none";
+
+render();
+
+}
+
+loadStudents();
 document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.onclick = () => {
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
