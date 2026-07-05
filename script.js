@@ -3,7 +3,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/fireba
 import {
 getFirestore,
 collection,
-getDocs
+getDocs,
+query,
+where,
+doc,
+updateDoc
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const firebaseConfig={
