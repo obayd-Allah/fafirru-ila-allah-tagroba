@@ -43,7 +43,10 @@ students=[];
 
 snapshot.forEach(doc=>{
 
-students.push(doc.data());
+students.push({
+  id: doc.id,
+  ...doc.data()
+});
 
 });
 
