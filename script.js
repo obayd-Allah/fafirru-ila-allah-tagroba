@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 import {
-import {
   getFirestore,
   collection,
   getDocs,
