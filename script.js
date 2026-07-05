@@ -8,9 +8,9 @@ import {
   where,
   doc,
   updateDoc,
-  getDoc
+  getDoc,
+  documentId
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-
 import {
   runTransaction
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
