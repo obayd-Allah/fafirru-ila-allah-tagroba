@@ -7,12 +7,11 @@ import {
   query,
   where,
   doc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-
-import {
+  updateDoc,
+  getDoc,
   runTransaction
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
 
 const firebaseConfig={
 apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
