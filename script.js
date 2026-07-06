@@ -256,3 +256,42 @@ rewardMessage.textContent="الكود غير موجود.";
 return;
 
 }
+const codeRef = codeDoc.ref;
+const studentRef = doc(db,"Students",student.id);
+
+try{
+
+await runTransaction(db,async(transaction)=>{
+
+const studentSnap=await transaction.get(studentRef);
+const rewardSnap=await transaction.get(codeRef);
+
+if(!studentSnap.exists()){
+throw new Error("الطالب غير موجود");
+}
+
+if(!rewardSnap.exists()){
+throw new Error("الكود غير موجود");
+}
+
+const rewardData=rewardSnap.data();
+
+if(rewardData.used===true){
+throw new Error("تم استخدام هذا الكود من قبل");
+}
+const studentData=studentSnap.data();
+
+const newPoints=
+Number(studentData.points||0)+
+Number(rewardData.points||0);
+
+transaction.update(studentRef,{
+points:newPoints
+});
+
+transaction.update(codeRef,{
+used:true,
+student:studentData.name
+});
+
+});
