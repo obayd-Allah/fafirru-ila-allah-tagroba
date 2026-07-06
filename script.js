@@ -226,38 +226,36 @@ rewardModal.style.display="none";
 };
 
 document.getElementById("sendReward").onclick = async () => {
+const code=rewardCode.value.trim();
 
-if(rewardCode.value.trim()===""){
-    rewardMessage.style.color="red";
-    rewardMessage.textContent="اكتب الكود أولاً.";
-    return;
+if(code===""){
+rewardMessage.style.color="red";
+rewardMessage.textContent="اكتب الكود أولاً.";
+return;
 }
 
 rewardMessage.style.color="#555";
 rewardMessage.textContent="⏳ جارٍ التحقق...";
 
-const student = students.find(s=>s.name===studentSelect.value);
-
-if(!student){
-    rewardMessage.style.color="red";
-    rewardMessage.textContent="الطالب غير موجود.";
-    return;
-}
-
-const q = query(
-    collection(db,"Codes"),
-    where("code","==",rewardCode.value.trim()),
-    limit(1)
+const student=students.find(
+s=>s.name===studentSelect.value
 );
 
-const snap = await getDocs(q);
+if(!student){
 
-if(snap.empty){
-    rewardMessage.style.color="red";
-    rewardMessage.textContent="الكود غير موجود.";
-    return;
+rewardMessage.style.color="red";
+rewardMessage.textContent="الطالب غير موجود.";
+
+return;
 }
 
-const codeRef = snap.docs[0].ref;
-const studentRef = doc(db,"Students",student.id);
-  
+const codeDoc=await getCodeDocument(code);
+
+if(codeDoc===null){
+
+rewardMessage.style.color="red";
+rewardMessage.textContent="الكود غير موجود.";
+
+return;
+
+}
