@@ -208,38 +208,39 @@ document.getElementById("closeReward").onclick=()=>{
 rewardModal.style.display="none";
 };
 
-document.getElementById("sendReward").onclick=()=>{
-
-alert("تم الضغط");
+document.getElementById("sendReward").onclick = async () => {
 
 if(rewardCode.value.trim()===""){
-rewardMessage.style.color="red";
-rewardMessage.textContent="اكتب الكود أولاً.";
-return;
+    rewardMessage.style.color="red";
+    rewardMessage.textContent="اكتب الكود أولاً.";
+    return;
 }
 
 rewardMessage.style.color="#555";
 rewardMessage.textContent="⏳ جارٍ التحقق...";
 
-fetch(`https://script.google.com/macros/s/AKfycbyg6PCfjT7aompHFw38IWK8vUMi3zVydjSPLdgZ3R_ZdHRkmaDgL9T0nfZZzuEwFTt0cQ/exec?name=${encodeURIComponent(studentSelect.value)}&code=${encodeURIComponent(rewardCode.value.trim())}`)
-.then(r=>r.json())
-.then(res=>{
+const student = students.find(s=>s.name===studentSelect.value);
 
-rewardMessage.style.color=res.success?"green":"red";
-rewardMessage.textContent=res.message;
-
-if(res.success){
-
-setTimeout(()=>{
-
-rewardModal.style.display="none";
-rewardCode.value="";
-location.reload();
-
-},1500);
-
+if(!student){
+    rewardMessage.style.color="red";
+    rewardMessage.textContent="الطالب غير موجود.";
+    return;
 }
 
-});
+const q = query(
+    collection(db,"Codes"),
+    where("code","==",rewardCode.value.trim()),
+    limit(1)
+);
 
-};
+const snap = await getDocs(q);
+
+if(snap.empty){
+    rewardMessage.style.color="red";
+    rewardMessage.textContent="الكود غير موجود.";
+    return;
+}
+
+const codeRef = snap.docs[0].ref;
+const studentRef = doc(db,"Students",student.id);
+  
