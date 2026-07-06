@@ -295,3 +295,24 @@ student:studentData.name
 });
 
 });
+rewardMessage.style.color="green";
+rewardMessage.textContent="✅ تم استلام النقاط بنجاح.";
+
+setTimeout(()=>{
+
+rewardModal.style.display="none";
+rewardCode.value="";
+location.reload();
+
+},1500);
+
+}catch(error){
+
+rewardMessage.style.color="red";
+
+rewardMessage.textContent=
+error.message || "حدث خطأ أثناء استلام النقاط.";
+
+}
+
+};
