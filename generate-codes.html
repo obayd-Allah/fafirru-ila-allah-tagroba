@@ -108,7 +108,9 @@ id="create">
 إنشاء الأكواد
 
 </button>
-
+<button id="deleteAll">
+🗑️ حذف جميع الأكواد
+</button>
 <div id="status"></div>
 
 </div>
@@ -122,21 +124,12 @@ from
 "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 import {
-
-getFirestore,
-
-collection,
-
-addDoc,
-
-getDocs
-
-}
-
-from
-
-"https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 const firebaseConfig={
 
 apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
@@ -275,7 +268,32 @@ status.innerHTML=
 alert("تم إنشاء الأكواد وتنزيل ملف CSV.");
 
 };
+document.getElementById("deleteAll").onclick = async () => {
 
+if(!confirm("هل تريد حذف جميع الأكواد؟"))
+return;
+
+const snapshot = await getDocs(collection(db,"Codes"));
+
+let count = 0;
+
+for(const d of snapshot.docs){
+
+await deleteDoc(d.ref);
+
+count++;
+
+status.innerHTML =
+`⏳ تم حذف ${count} كود`;
+
+}
+
+status.innerHTML =
+`✅ تم حذف جميع الأكواد بنجاح.`;
+
+alert("تم حذف جميع الأكواد.");
+
+};
 </script>
 
 </body>
