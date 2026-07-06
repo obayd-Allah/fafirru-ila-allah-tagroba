@@ -58,6 +58,23 @@ render();
 }
 
 loadStudents();
+async function getCodeDocument(code){
+
+const q=query(
+collection(db,"Codes"),
+where("code","==",code),
+limit(1)
+);
+
+const snap=await getDocs(q);
+
+if(snap.empty)
+return null;
+
+return snap.docs[0];
+
+}
+
 document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.onclick = () => {
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
