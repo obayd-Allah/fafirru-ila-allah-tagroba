@@ -271,7 +271,7 @@ throw new Error("الطالب غير موجود");
 }
 
 if(!rewardSnap.exists()){
-throw new Error("الكود غير موجود");
+throw new Error("الكود غير صحيح");
 }
 
 const rewardData=rewardSnap.data();
@@ -296,7 +296,7 @@ student:studentData.name
 
 });
 rewardMessage.style.color="green";
-rewardMessage.textContent="✅ تم استلام النقاط بنجاح.";
+rewardMessage.textContent="🎉 تم استلام النقاط بنجاح.";
 
 setTimeout(()=>{
 
