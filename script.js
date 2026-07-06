@@ -10,7 +10,8 @@ import {
   updateDoc,
   getDoc,
   runTransaction,
-  limit
+  limit,
+  increment
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 
