@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>إنشاء الأكواد</title>
+
+<style>
+
+body{
+
+font-family:Cairo,sans-serif;
+background:#f3f7fb;
+padding:25px;
+text-align:center;
+
+}
+
+.box{
+
+max-width:420px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,.1);
+
+}
+
+h2{
+
+color:#1b5e20;
+
+}
+
+input{
+
+width:100%;
+padding:12px;
+margin:10px 0;
+font-size:18px;
+border-radius:8px;
+border:1px solid #ccc;
+box-sizing:border-box;
+
+}
+
+button{
+
+width:100%;
+padding:14px;
+font-size:20px;
+border:none;
+border-radius:10px;
+background:#2e7d32;
+color:white;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#1b5e20;
+
+}
+
+#status{
+
+margin-top:20px;
+font-size:18px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>
+
+إنشاء أكواد المكافآت
+
+</h2>
+
+<input
+id="count"
+type="number"
+value="100"
+placeholder="عدد الأكواد">
+
+<input
+id="points"
+type="number"
+value="10"
+placeholder="عدد النقاط">
+
+<button
+id="create">
+
+إنشاء الأكواد
+
+</button>
+
+<div id="status"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+
+from
+
+"https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+
+getFirestore,
+
+collection,
+
+addDoc,
+
+getDocs
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig={
+
+apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
+
+authDomain:"fafirru-ila-allah.firebaseapp.com",
+
+projectId:"fafirru-ila-allah",
+
+storageBucket:"fafirru-ila-allah.firebasestorage.app",
+
+messagingSenderId:"564958663441",
+
+appId:"1:564958663441:web:9e6e6a246ec0e2c48472b0"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+async function loadExistingCodes(){
+
+const set=new Set();
+
+const snapshot=
+await getDocs(collection(db,"Codes"));
+
+snapshot.forEach(doc=>{
+
+set.add(doc.data().code);
+
+});
+
+return set;
+
+}
+const status=document.getElementById("status");
+
+function randomCode(){
+
+return Math.floor(
+100000+Math.random()*900000
+).toString();
+
+}
+
+document.getElementById("create").onclick=async()=>{
+
+const count=Number(
+document.getElementById("count").value
+);
+
+const points=Number(
+document.getElementById("points").value
+);
+
+if(count<=0||points<=0){
+
+alert("أدخل قيماً صحيحة.");
+return;
+
+}
+
+const used=
+await loadExistingCodes();#ffe91e63
+
+let csv="الكود,النقاط\n";
+
+status.innerHTML="⏳ جارٍ إنشاء الأكواد...";
+
+let created=0;
+while(created<count){
+
+const code=randomCode();
+
+if(used.has(code))
+continue;
+
+used.add(code);
+
+await addDoc(
+
+collection(db,"Codes"),
+
+{
+
+code:code,
+
+points:points,
+
+student:"",
+used:false
+
+}
+
+);
+
+csv+=`${code},${points}\n`;
+
+created++;
+
+status.innerHTML=
+`⏳ تم إنشاء ${created} من ${count}`;
+
+}
+const blob=new Blob(
+
+[csv],
+
+{
+
+type:"text/csv;charset=utf-8;"
+
+}
+
+);
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+
+a.download="codes.csv";
+
+document.body.appendChild(a);
+a.click();
+
+document.body.removeChild(a);
+
+URL.revokeObjectURL(url);
+
+status.innerHTML=
+`✅ تم إنشاء ${count} كود بنجاح.`;
+
+alert("تم إنشاء الأكواد وتنزيل ملف CSV.");
+
+};
+
+</script>
+
+</body>
+
+</html>
