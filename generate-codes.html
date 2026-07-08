@@ -339,7 +339,9 @@ csv+=`${code},${points}\n`;
 
 created++;
 
-progressBar.value =
+
+};
+  progressBar.value =
 (created/count)*100;
 
 status.innerHTML =
@@ -377,7 +379,6 @@ status.innerHTML=
 
 alert("تم إنشاء الأكواد وتنزيل ملف CSV.");
 
-};
 document.getElementById("deleteAll").onclick = async () => {
 
 if(!confirm("هل تريد حذف جميع الأكواد؟"))
