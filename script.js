@@ -484,7 +484,6 @@ rewardCode.addEventListener("keydown", (e) => {
     الزر العائم
 =========================*/
 
-const floatingRewardBtn = document.getElementById("floatingRewardBtn");
 const statistics = document.querySelector(".statistics");
 
 floatingRewardBtn.onclick = () => {
