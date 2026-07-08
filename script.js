@@ -240,7 +240,7 @@ ${medal} ${s.name}
 
 <div class="student-info">
 
-<span>💎 النقاط</span>
+<span>💎 الجواهر</span>
 
 <span class="points">
 
@@ -426,7 +426,7 @@ document.getElementById("sendReward").onclick = async ()=>{
         });
 
         rewardMessage.style.color="green";
-        rewardMessage.textContent="🎉 تم استلام النقاط بنجاح.";
+        rewardMessage.textContent="🎉 تم استلام الجواهر بنجاح.";
 
         setTimeout(()=>{
 
@@ -446,7 +446,7 @@ document.getElementById("sendReward").onclick = async ()=>{
 
         rewardMessage.textContent =
             error.message ||
-            "حدث خطأ أثناء استلام النقاط.";
+            "حدث خطأ أثناء استلام الجواهر.";
 
     }
 
