@@ -148,15 +148,25 @@ function render(){
 
         let rank = 1;
 
-        group.forEach((s,i)=>{
+group.forEach((s, i) => {
 
-            if(i > 0 && s.points < group[i - 1].points){
-                rank++;
-            }
+    if (i === 0) {
+        s.rank = 1;
+        return;
+    }
 
-            s.rank = rank;
+    if (s.points === group[i - 1].points) {
 
-        });
+        s.rank = rank;
+
+    } else {
+
+        rank++;
+        s.rank = rank;
+
+    }
+
+});
 
     });
 
