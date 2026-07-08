@@ -146,15 +146,19 @@ function render(){
 
         group.sort((a,b)=>b.points-a.points);
 
-        .student-card .points,
-.girl-card .points,
-.gold .points,
-.silver .points,
-.bronze .points{
-    color:#fff !important;
-}
+        let rank = 1;
 
-    });
+group.forEach((s,i)=>{
+
+    if(i > 0 && s.points < group[i - 1].points){
+
+        rank++;
+
+    }
+
+    s.rank = rank;
+
+});
 
     let list = [...boys,...girls];
 
