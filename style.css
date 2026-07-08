@@ -1206,8 +1206,8 @@ linear-gradient(
 =========================*/
 .floating-reward-btn{
     position:fixed;
-    bottom:20px;
-    left:50%;
+    bottom:25px;
+	right:25px;
     transform:translateX(-50%) translateY(80px);
 
     width:60px;
