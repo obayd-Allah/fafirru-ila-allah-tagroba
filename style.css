@@ -1173,34 +1173,126 @@ linear-gradient(
 
 
 /*=========================
-      المركز الثالث
+/*=========================
+      المركز الأول 🥇
+=========================*/
+
+.gold{
+
+background:linear-gradient(
+180deg,
+#fff9d9 0%,
+#ffe97a 30%,
+#ffd447 60%,
+#ffbf1f 100%
+);
+
+border:4px solid #d4af37;
+
+}
+
+.gold::before{
+
+background:linear-gradient(
+180deg,
+#ffe27a,
+#d49b00
+);
+
+}
+
+
+/*=========================
+      المركز الثاني 🥈
+=========================*/
+
+.silver{
+
+background:linear-gradient(
+180deg,
+#f8fafb 0%,
+#dfe4ea 30%,
+#bcc5cf 60%,
+#e9edf2 100%
+);
+
+border:4px solid #b5bcc5;
+
+}
+
+.silver::before{
+
+background:linear-gradient(
+180deg,
+#d6dce3,
+#8d98a5
+);
+
+}
+
+
+/*=========================
+      المركز الثالث 🥉
 =========================*/
 
 .bronze{
 
-background:
-
-linear-gradient(
+background:linear-gradient(
 180deg,
-#fff2e5,
-#ffd1a8
+#fff4e6 0%,
+#efbe8b 35%,
+#cf8347 70%,
+#a85c25 100%
 );
+
+border:4px solid #b87333;
 
 }
 
 .bronze::before{
 
-background:
-
-linear-gradient(
+background:linear-gradient(
 180deg,
-#d78a49,
-#b76d2f
+#d79a62,
+#8f4d1d
 );
 
 }
+.gold .points{
 
+background:linear-gradient(
+180deg,
+#ffd84d,
+#e2a900
+);
 
+box-shadow:0 5px 0 #b98500;
+
+}
+
+.silver .points{
+
+background:linear-gradient(
+180deg,
+#d9dfe6,
+#98a3b1
+);
+
+box-shadow:0 5px 0 #778290;
+
+}
+
+.bronze .points{
+
+background:linear-gradient(
+180deg,
+#d99a62,
+#a85c25
+);
+
+box-shadow:0 5px 0 #7c3f15;
+
+}
 /*=========================
       التحميل
 =========================*/
