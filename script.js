@@ -619,3 +619,6 @@ error.message || "حدث خطأ أثناء استلام النقاط.";
 }
 
 };
+floatingRewardBtn.addEventListener("click", () => {
+    rewardModal.style.display = "flex";
+});
