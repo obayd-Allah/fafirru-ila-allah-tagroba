@@ -271,7 +271,9 @@ return set;
 
 }
 const status=document.getElementById("status");
-
+const progressBar =
+document.getElementById("progressBar");
+  
 function randomCode(){
 
 return Math.floor(
@@ -306,6 +308,7 @@ let csv="الكود,النقاط\n";
 status.innerHTML="⏳ جارٍ إنشاء الأكواد...";
 
 let created=0;
+  progressBar.style.display="block";
 while(created<count){
 
 const code=randomCode();
