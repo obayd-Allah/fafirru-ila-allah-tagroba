@@ -176,8 +176,10 @@ max-width:500px;
 
 }
 .hero{
+    min-height:320px;
+    height:auto;
+    padding:30px 20px 40px;
 
-height:430px;
 
 position:relative;
 
@@ -286,7 +288,7 @@ width:100%;
 =========================*/
 
 .logo{
-
+    
 width:120px;
 
 height:120px;
@@ -297,6 +299,10 @@ display:block;
 
 margin:0 auto 22px;
 
+	width:90%;
+    max-width:360px;
+    display:block;
+    margin:15px auto 0;
 padding:12px;
 
 background:#fff;
