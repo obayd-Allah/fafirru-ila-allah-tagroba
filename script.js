@@ -476,20 +476,29 @@ rewardCode.addEventListener("keydown", (e) => {
     الزر العائم
 =========================*/
 
-floatingRewardBtn.style.opacity = "0";
-floatingRewardBtn.style.pointerEvents = "none";
-floatingRewardBtn.style.transform = "translateX(-50%) translateY(80px)";
-
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 50) {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
 
-        floatingRewardBtn.classList.add("show");
-
-    } else {
+    // إخفاء الزر في أعلى الصفحة
+    if (scrollTop < 50) {
 
         floatingRewardBtn.classList.remove("show");
+        return;
 
     }
+
+    // إخفاؤه عند الوصول إلى أسفل الصفحة
+    if (scrollTop + windowHeight >= documentHeight - 50) {
+
+        floatingRewardBtn.classList.remove("show");
+        return;
+
+    }
+
+    // إظهاره في باقي الصفحة
+    floatingRewardBtn.classList.add("show");
 
 });
