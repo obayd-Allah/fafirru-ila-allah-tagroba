@@ -142,26 +142,27 @@ function render(){
     let boys = students.filter(s => isBoy(s.gender));
     let girls = students.filter(s => isGirl(s.gender));
 
-    [boys, girls].forEach(group=>{
+    [boys, girls].forEach(group => {
 
         group.sort((a,b)=>b.points-a.points);
 
         let rank = 1;
 
-group.forEach((s,i)=>{
+        group.forEach((s,i)=>{
 
-    if(i > 0 && s.points < group[i - 1].points){
+            if(i > 0 && s.points < group[i - 1].points){
+                rank++;
+            }
 
-        rank++;
+            s.rank = rank;
 
-    }
+        });
 
-    s.rank = rank;
-
-});
+    });
 
     let list = [...boys,...girls];
 
+   
     if(currentFilter==="boys")
         list = list.filter(s=>isBoy(s.gender));
 
