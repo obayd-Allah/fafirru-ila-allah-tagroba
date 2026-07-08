@@ -331,41 +331,68 @@ scale(1.05);
 
 .hero h1{
 
-font-size:64px;
-
+font-size:58px;
 font-weight:900;
-
-line-height:1.1;
-
-letter-spacing:.5px;
-
-color:#ff4f87;
+line-height:1.15;
 
 background:linear-gradient(
 180deg,
-#ff7bb0 0%,
-#ff4f87 45%,
-#e62f6d 100%
+#ff6aa8 0%,
+#ff2f76 100%
 );
 
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 
+-webkit-text-stroke:8px #ffffff;
+
 text-shadow:
+0 4px 0 #ff9dc4,
+0 8px 0 #e51d63,
+0 12px 18px rgba(0,0,0,.18);
 
-0 2px 0 rgba(255,255,255,.95),
+filter:
+drop-shadow(0 8px 10px rgba(0,0,0,.18));
 
-0 5px 0 rgba(255,255,255,.75),
+letter-spacing:1px;
 
-0 8px 0 rgba(215,50,110,.9),
+}
+.game-title{
 
-0 12px 18px rgba(0,0,0,.22);
+font-size:58px;
+font-weight:900;
 
-filter:drop-shadow(0 10px 12px rgba(0,0,0,.15));
+}
 
-transform:rotate(-1deg);
+.game-title span{
 
-animation:titleFloat 3s ease-in-out infinite;
+display:inline-block;
+
+-webkit-text-stroke:8px white;
+
+text-shadow:
+0 4px 0 rgba(0,0,0,.12),
+0 8px 10px rgba(0,0,0,.18);
+
+margin:0 6px;
+
+}
+
+.pink{
+
+color:#ff3d83;
+
+}
+
+.green{
+
+color:#55d83a;
+
+}
+
+.blue{
+
+color:#2f7cff;
 
 }
 
