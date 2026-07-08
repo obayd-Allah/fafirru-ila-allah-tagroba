@@ -451,4 +451,24 @@ document.getElementById("sendReward").onclick = async ()=>{
     }
 
 };
+// إغلاق النافذة عند الضغط خارجها
+window.onclick = (e) => {
 
+    if (e.target === rewardModal) {
+
+        rewardModal.style.display = "none";
+
+    }
+
+};
+
+// زر Enter داخل مربع الكود
+rewardCode.addEventListener("keydown", (e) => {
+
+    if (e.key === "Enter") {
+
+        document.getElementById("sendReward").click();
+
+    }
+
+});
