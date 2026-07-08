@@ -75,7 +75,51 @@ margin-top:20px;
 font-size:18px;
 
 }
+#templates{
 
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+margin-top:20px;
+
+flex-wrap:wrap;
+
+}
+
+
+.cardOption{
+
+cursor:pointer;
+
+}
+.cardOption img{
+
+width:120px;
+
+border-radius:12px;
+
+border:4px solid transparent;
+
+transition:.2s;
+
+}
+
+
+.cardOption input{
+
+display:none;
+
+}
+.cardOption input:checked+img{
+
+border:4px solid #2e7d32;
+
+transform:scale(1.05);
+
+}
 </style>
 
 </head>
@@ -102,6 +146,48 @@ type="number"
 value="10"
 placeholder="عدد النقاط">
 
+  <h3>اختر تصميم البطاقة</h3>
+
+<div id="templates">
+
+<label class="cardOption">
+
+<input
+type="radio"
+name="template"
+value="10"
+checked>
+
+<img src="templates/10.png">
+
+</label>
+
+
+<label class="cardOption">
+
+<input
+type="radio"
+name="template"
+value="20">
+
+<img src="templates/20.png">
+
+</label>
+
+
+<label class="cardOption">
+
+<input
+type="radio"
+name="template"
+value="30">
+
+<img src="templates/30.png">
+
+</label>
+
+</div>
+  
 <button
 id="create">
 
@@ -114,7 +200,26 @@ id="create">
 <div id="status"></div>
 
 </div>
+  <br><br>
 
+<progress
+id="progressBar"
+value="0"
+max="100"
+style="
+width:100%;
+height:24px;
+display:none;
+">
+</progress>
+<!-- JSZip -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!-- FileSaver -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script type="module">
 
 import { initializeApp }
