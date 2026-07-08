@@ -1384,11 +1384,6 @@ transform:translateY(0);
       زر المكافآت
 =========================*/
 
-
-#rewardBtn:hover{
-    transform: scale(1.05);
-    filter: brightness(1.08);
-}
 .reward-btn{
 
 width:100%;
