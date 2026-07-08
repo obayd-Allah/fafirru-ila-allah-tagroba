@@ -331,19 +331,41 @@ scale(1.05);
 
 .hero h1{
 
-font-size:58px;
+font-size:64px;
 
 font-weight:900;
 
-line-height:1.15;
+line-height:1.1;
 
-color:#ffffff;
+letter-spacing:.5px;
+
+color:#ff4f87;
+
+background:linear-gradient(
+180deg,
+#ff7bb0 0%,
+#ff4f87 45%,
+#e62f6d 100%
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 
 text-shadow:
 
-0 5px 0 #1d73d4,
+0 2px 0 rgba(255,255,255,.95),
 
-0 9px 18px rgba(0,0,0,.28);
+0 5px 0 rgba(255,255,255,.75),
+
+0 8px 0 rgba(215,50,110,.9),
+
+0 12px 18px rgba(0,0,0,.22);
+
+filter:drop-shadow(0 10px 12px rgba(0,0,0,.15));
+
+transform:rotate(-1deg);
+
+animation:titleFloat 3s ease-in-out infinite;
 
 }
 
