@@ -617,7 +617,8 @@ rewardMessage.textContent=
 error.message || "حدث خطأ أثناء استلام النقاط.";
 
 }
-
+const floatingRewardBtn =
+document.getElementById("floatingRewardBtn");
 };
 floatingRewardBtn.addEventListener("click", () => {
     rewardModal.style.display = "flex";
