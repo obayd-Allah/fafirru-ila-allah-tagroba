@@ -482,19 +482,13 @@ floatingRewardBtn.style.transform = "translateX(-50%) translateY(80px)";
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 350) {
+    if (window.scrollY > 50) {
 
-        floatingRewardBtn.style.opacity = "1";
-        floatingRewardBtn.style.pointerEvents = "auto";
-        floatingRewardBtn.style.transform =
-            "translateX(-50%) translateY(0)";
+        floatingRewardBtn.classList.add("show");
 
     } else {
 
-        floatingRewardBtn.style.opacity = "0";
-        floatingRewardBtn.style.pointerEvents = "none";
-        floatingRewardBtn.style.transform =
-            "translateX(-50%) translateY(80px)";
+        floatingRewardBtn.classList.remove("show");
 
     }
 
