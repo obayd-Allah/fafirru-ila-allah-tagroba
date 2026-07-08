@@ -339,10 +339,12 @@ csv+=`${code},${points}\n`;
 
 created++;
 
-status.innerHTML=
-`⏳ تم إنشاء ${created} من ${count}`;
+progressBar.value =
+(created/count)*100;
 
-}
+status.innerHTML =
+`⏳ تم إنشاء ${created} من ${count}`;
+  progressBar.value=100;
 const blob=new Blob(
 
 [csv],
