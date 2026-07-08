@@ -1204,7 +1204,43 @@ linear-gradient(
 /*=========================
       التحميل
 =========================*/
+.floating-reward-btn{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%) translateY(80px);
 
+    width:60px;
+    height:60px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#00b894;
+    color:#fff;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.35s;
+
+    z-index:9999;
+}
+
+.floating-reward-btn.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:translateX(-50%) translateY(0);
+
+}
 .loading{
 
 text-align:center;
