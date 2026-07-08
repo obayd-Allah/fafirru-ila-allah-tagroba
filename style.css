@@ -1334,22 +1334,10 @@ box-shadow:
 transition:.18s;
 
 }
-#reward-btn{
-    background: linear-gradient(135deg,#00b894,#00cec9);
-    color: white;
-    border: none;
-    border-radius: 14px;
-    padding: 12px 22px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .25s;
-}
 
 .reward-btn:hover{
 
 transform:translateY(-3px);
-filter:brightness(1.08);
 }
 
 .reward-btn:active{
