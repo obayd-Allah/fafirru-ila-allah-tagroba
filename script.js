@@ -484,21 +484,29 @@ rewardCode.addEventListener("keydown", (e) => {
     الزر العائم
 =========================*/
 
-const footer = document.querySelector("footer");
+const floatingRewardBtn = document.getElementById("floatingRewardBtn");
+const statistics = document.querySelector(".statistics");
+
+floatingRewardBtn.onclick = () => {
+    rewardBtn.click();
+};
 
 window.addEventListener("scroll", () => {
 
-    // أعلى الصفحة
-    if (window.scrollY < 50) {
+    // لا يظهر إلا بعد تجاوز الإحصائيات
+    if (window.scrollY < statistics.offsetTop + statistics.offsetHeight) {
         floatingRewardBtn.classList.remove("show");
         return;
     }
 
-    const footerTop = footer.offsetTop;
-    const scrollBottom = window.scrollY + window.innerHeight;
+    // هل الزر الكبير ظاهر؟
+    const rect = rewardBtn.getBoundingClientRect();
 
-    // إذا اقترب المستخدم من الفوتر بـ 120 بكسل
-    if (scrollBottom >= footerTop - 120) {
+    const rewardVisible =
+        rect.top < window.innerHeight &&
+        rect.bottom > 0;
+
+    if (rewardVisible) {
         floatingRewardBtn.classList.remove("show");
     } else {
         floatingRewardBtn.classList.add("show");
