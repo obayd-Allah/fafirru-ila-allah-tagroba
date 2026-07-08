@@ -289,9 +289,9 @@ width:100%;
 
 .logo{
     
-width:120px;
+width:200px;
 
-height:120px;
+height:200px;
 
 object-fit:contain;
 
@@ -305,11 +305,10 @@ margin:0 auto 22px;
     margin:15px auto 0;
 padding:12px;
 
-background:#fff;
+
 
 border-radius:50%;
 
-border:6px solid #ffffff;
 
 box-shadow:
 
@@ -327,7 +326,7 @@ transform:
 
 rotate(-6deg)
 
-scale(1.05);
+scale(1.10);
 
 }
 
