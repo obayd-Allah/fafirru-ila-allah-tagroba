@@ -645,14 +645,10 @@ ctx.textBaseline=
 "middle";
 
             ctx.fillText(
-
-                code,
-
-                canvas.width/2,
-
-                canvas.height/2
-
-            );
+    code.split("").join(" "),
+    canvas.width / 2,
+    canvas.height / 2
+);
 
             canvas.toBlob(
 
