@@ -506,6 +506,29 @@ zip.file(
 `${code}.png`,
 card
 );
+  await addCardToPdf(
+
+pdf,
+
+card,
+
+created
+
+);
+
+if(
+
+(created+1)%21===0
+
+&&
+
+created+1<count
+
+){
+
+pdf.addPage();
+
+}
 csv += `"${code}","${points}"\n`;
 
 created++;
@@ -558,6 +581,9 @@ await zip.generateAsync({
 saveAs(
     zipBlob,
     "cards.zip"
+);
+  pdf.save(
+"cards.pdf"
 );
 document.getElementById("deleteAll").onclick = async () => {
 
