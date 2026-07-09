@@ -339,14 +339,14 @@ csv+=`${code},${points}\n`;
 
 created++;
 
-
-};
-  progressBar.value =
+progressBar.value =
 (created/count)*100;
 
 status.innerHTML =
 `⏳ تم إنشاء ${created} من ${count}`;
-  progressBar.value=100;
+  
+}
+  
 const blob=new Blob(
 
 [csv],
@@ -397,8 +397,8 @@ count++;
 status.innerHTML =
 `⏳ تم حذف ${count} كود`;
 
-}
-
+};
+progressBar.value=100;
 status.innerHTML =
 `✅ تم حذف جميع الأكواد بنجاح.`;
 
