@@ -8,95 +8,175 @@
 <meta name="viewport"
 content="width=device-width,initial-scale=1.0">
 
-<title>إنشاء الأكواد</title>
+<title>إنشاء أكواد المكافآت</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
 <link
-href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap"
+href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@700&family=Changa:wght@700&family=Baloo+Bhaijaan+2:wght@700&family=Aref+Ruqaa:wght@700&family=Amiri:wght@700&display=swap"
 rel="stylesheet">
+
 <style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+}
 
 body{
 
 font-family:Cairo,sans-serif;
-background:#f3f7fb;
+
+background:#eef5fb;
+
 padding:25px;
-text-align:center;
 
 }
 
 .box{
 
-max-width:420px;
+max-width:520px;
+
 margin:auto;
+
 background:white;
+
 padding:25px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,.1);
+
+border-radius:18px;
+
+box-shadow:0 0 20px rgba(0,0,0,.12);
 
 }
 
 h2{
 
+text-align:center;
+
 color:#1b5e20;
+
+margin-bottom:20px;
 
 }
 
-input{
+label{
+
+display:block;
+
+margin-top:15px;
+
+margin-bottom:6px;
+
+font-weight:bold;
+
+color:#444;
+
+}
+
+input,
+
+select{
 
 width:100%;
+
 padding:12px;
-margin:10px 0;
+
 font-size:18px;
-border-radius:8px;
+
+border-radius:10px;
+
 border:1px solid #ccc;
-box-sizing:border-box;
+
+font-family:Cairo;
 
 }
 
 button{
 
 width:100%;
+
 padding:14px;
+
+margin-top:15px;
+
 font-size:20px;
+
 border:none;
+
 border-radius:10px;
-background:#2e7d32;
-color:white;
+
 cursor:pointer;
+
+font-family:Cairo;
 
 }
 
-button:hover{
+#create{
+
+background:#2e7d32;
+
+color:white;
+
+}
+
+#create:hover{
 
 background:#1b5e20;
 
 }
 
-#status{
+#deleteAll{
 
-margin-top:20px;
-font-size:18px;
+background:#d32f2f;
+
+color:white;
 
 }
+
+#deleteAll:hover{
+
+background:#b71c1c;
+
+}
+
 #templates{
 
 display:flex;
 
+gap:12px;
+
 justify-content:center;
-
-gap:15px;
-
-margin-top:20px;
 
 flex-wrap:wrap;
 
-}
+margin-top:15px;
 
+margin-bottom:20px;
+
+}
 
 .cardOption{
 
 cursor:pointer;
 
 }
+
+.cardOption input{
+
+display:none;
+
+}
+
 .cardOption img{
 
 width:120px;
@@ -105,26 +185,46 @@ border-radius:12px;
 
 border:4px solid transparent;
 
-transition:.2s;
+transition:.25s;
 
 }
 
-
-.cardOption input{
-
-display:none;
-
-}
 .cardOption input:checked+img{
 
-border:4px solid #2e7d32;
+border-color:#2e7d32;
 
 transform:scale(1.05);
 
 }
+
+#status{
+
+margin-top:20px;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#1b5e20;
+
+}
+
+#progressBar{
+
+margin-top:20px;
+
+width:100%;
+
+height:24px;
+
+display:none;
+
+}
+
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Tajawal:wght@700&family=Changa:wght@700&family=Baloo+Bhaijaan+2:wght@700&family=Aref+Ruqaa:wght@700&family=Amiri:wght@700&display=swap" rel="stylesheet">
-  
+
 </head>
 
 <body>
@@ -137,19 +237,33 @@ transform:scale(1.05);
 
 </h2>
 
+<label>
+
+عدد الأكواد
+
+</label>
+
 <input
 id="count"
 type="number"
-value="100"
-placeholder="عدد الأكواد">
+value="100">
+
+<label>
+
+عدد الجواهر
+
+</label>
 
 <input
 id="points"
 type="number"
-value="10"
-placeholder="عدد النقاط">
+value="10">
 
-  <h3>اختر تصميم البطاقة</h3>
+<label>
+
+اختر تصميم البطاقة
+
+</label>
 
 <div id="templates">
 
@@ -165,7 +279,6 @@ checked>
 
 </label>
 
-
 <label class="cardOption">
 
 <input
@@ -177,7 +290,6 @@ value="20">
 
 </label>
 
-
 <label class="cardOption">
 
 <input
@@ -188,75 +300,110 @@ value="30">
 <img src="templates/30.png">
 
 </label>
-<h3>لون الكود</h3>
+
+</div>
+
+<label>
+
+لون الكود
+
+</label>
 
 <input
 type="color"
 id="textColor"
-value="#2e7d32">
+value="#1565c0">
 
-<h3>حجم الخط</h3>
+<label>
+
+حجم الخط
+
+</label>
 
 <input
 type="number"
 id="fontSize"
-value="80"
-min="30"
-max="150">
+value="82"
+min="20"
+max="180">
 
-<h3>نوع الخط</h3>
+<label>
 
-<select id="fontFamily">
+نوع الخط
 
-<option value="Cairo" selected>Cairo</option>
+</label>
 
-<option value="Tajawal">Tajawal</option>
+<select
+id="fontFamily">
 
-<option value="Changa">Changa</option>
+<option value="Cairo">
+Cairo
+</option>
 
-<option value="Baloo Bhaijaan 2">Baloo Bhaijaan 2</option>
+<option value="Tajawal">
+Tajawal
+</option>
 
-<option value="Aref Ruqaa">Aref Ruqaa</option>
+<option value="Changa">
+Changa
+</option>
 
-<option value="Amiri">Amiri</option>
+<option value="Baloo Bhaijaan 2">
+Baloo Bhaijaan 2
+</option>
+
+<option value="Aref Ruqaa">
+Aref Ruqaa
+</option>
+
+<option value="Amiri">
+Amiri
+</option>
 
 </select>
-</div>
-  
+
 <button
 id="create">
 
 إنشاء الأكواد
 
 </button>
-<button id="deleteAll">
+
+<button
+id="deleteAll">
+
 🗑️ حذف جميع الأكواد
+
 </button>
+
 <div id="status"></div>
 
-</div>
-  <br><br>
-
 <progress
+
 id="progressBar"
+
 value="0"
-max="100"
-style="
-width:100%;
-height:24px;
-display:none;
-">
+
+max="100">
+
 </progress>
-<!-- JSZip -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
-<!-- FileSaver -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</div>
 
-<!-- jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js">
+</script>
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js">
+</script>
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+</script>
+
 <script type="module">
-
+أكمل
 import { initializeApp }
 
 from
@@ -264,12 +411,23 @@ from
 "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc
-} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+getFirestore,
+
+collection,
+
+addDoc,
+
+getDocs,
+
+deleteDoc
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
 const firebaseConfig={
 
 apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
@@ -286,76 +444,177 @@ appId:"1:564958663441:web:9e6e6a246ec0e2c48472b0"
 
 };
 
-const app=initializeApp(firebaseConfig);
+const app=
 
-const db=getFirestore(app);
+initializeApp(
+
+firebaseConfig
+
+);
+
+const db=
+
+getFirestore(app);
+
+const status=
+
+document.getElementById("status");
+
+const progressBar=
+
+document.getElementById("progressBar");
+
+const zip=
+
+new JSZip();
+
+function randomCode(){
+
+return Math.floor(
+
+100000+
+
+Math.random()*900000
+
+).toString();
+
+}
+
 async function loadExistingCodes(){
 
-const set=new Set();
+const set=
+
+new Set();
 
 const snapshot=
-await getDocs(collection(db,"Codes"));
+
+await getDocs(
+
+collection(
+
+db,
+
+"Codes"
+
+)
+
+);
 
 snapshot.forEach(doc=>{
 
-set.add(doc.data().code);
+set.add(
+
+doc.data().code
+
+);
 
 });
 
 return set;
 
 }
-const status=document.getElementById("status");
-const progressBar =
-document.getElementById("progressBar");
-  
-function randomCode(){
 
-return Math.floor(
-100000+Math.random()*900000
-).toString();
-
-}
 async function createCard(code){
 
-    return new Promise((resolve)=>{
+return new Promise((resolve)=>{
 
-        const template =
-        document.querySelector(
-        'input[name="template"]:checked'
-        ).value;
+const template=
 
-        const img = new Image();
+document.querySelector(
 
-        img.src = `templates/${template}.png`;
+'input[name="template"]:checked'
 
-        img.onload = ()=>{
+).value;
 
-            const canvas =
-            document.createElement("canvas");
+const img=
 
-            const ctx =
-            canvas.getContext("2d");
-canvas.width = img.width;
+new Image();
 
-            canvas.height = img.height;
+img.src=
 
-            ctx.drawImage(img,0,0);
+`templates/${template}.png`;
 
-            // ========= الكود =========
+img.onload=()=>{
 
-            ctx.font =
-            "bold 82px Cairo";
+const canvas=
 
-            ctx.fillStyle =
-            "#1565c0";
+document.createElement(
 
-            ctx.textAlign =
-            "center";
+"canvas"
 
-            ctx.textBaseline =
-            "middle";
-ctx.fillText(
+);
+
+canvas.width=
+
+img.width;
+
+canvas.height=
+
+img.height;
+
+const ctx=
+
+canvas.getContext(
+
+"2d"
+
+);
+
+ctx.drawImage(
+
+img,
+
+0,
+
+0
+
+);
+
+const fontSize=
+
+Number(
+
+document.getElementById(
+
+"fontSize"
+
+).value
+
+);
+
+const fontFamily=
+
+document.getElementById(
+
+"fontFamily"
+
+).value;
+
+const textColor=
+
+document.getElementById(
+
+"textColor"
+
+).value;
+
+ctx.font=
+
+`bold ${fontSize}px "${fontFamily}"`;
+
+ctx.fillStyle=
+
+textColor;
+
+ctx.textAlign=
+
+"center";
+
+ctx.textBaseline=
+
+"middle";
+أكمل 
+            ctx.fillText(
 
                 code,
 
@@ -365,99 +624,243 @@ ctx.fillText(
 
             );
 
-            // ==========================
+            canvas.toBlob(
 
-            canvas.toBlob((blob)=>{
+                (blob)=>{
 
-                resolve(blob);
+                    resolve(blob);
 
-            },"image/png");
+                },
+
+                "image/png"
+
+            );
 
         };
-});
-  async function addCardToPdf(pdf, imageBlob, index){
-
-    const imageUrl =
-    URL.createObjectURL(imageBlob);
-
-    const img = new Image();
-
-    await new Promise((resolve)=>{
-
-        img.onload = resolve;
-
-        img.src = imageUrl;
 
     });
 
-    const canvas =
-    document.createElement("canvas");
-
-    canvas.width = img.width;
-
-    canvas.height = img.height;
-
-    canvas
-    .getContext("2d")
-    .drawImage(img,0,0);
-
-    const imageData =
-    canvas.toDataURL("image/png");
-
-    const col = index % 3;
-
-    const row = Math.floor(index/3)%7;
-
-    const x = 8 + col*66;
-
-    const y = 8 + row*40;
-
-    pdf.addImage(
-
-        imageData,
-
-        "PNG",
-
-        x,
-
-        y,
-
-        60,
-
-        34
-
-    );
-
-    URL.revokeObjectURL(imageUrl);
-
-  }
-  const zip = new JSZip();
 }
-document.getElementById("create").onclick=async()=>{
-alert("بدأ التنفيذ");
-  
-const count=Number(
-document.getElementById("count").value
+
+async function addCardToPdf(
+
+pdf,
+
+imageBlob,
+
+index
+
+){
+
+const imageUrl=
+
+URL.createObjectURL(
+
+imageBlob
+
 );
 
-const points=Number(
-document.getElementById("points").value
+const img=
+
+new Image();
+
+await new Promise(resolve=>{
+
+img.onload=
+
+resolve;
+
+img.src=
+
+imageUrl;
+
+});
+
+const canvas=
+
+document.createElement(
+
+"canvas"
+
 );
 
-if(count<=0||points<=0){
+canvas.width=
 
-alert("أدخل قيماً صحيحة.");
+img.width;
+
+canvas.height=
+
+img.height;
+
+const ctx=
+
+canvas.getContext(
+
+"2d"
+
+);
+
+ctx.drawImage(
+
+img,
+
+0,
+
+0
+
+);
+
+const imageData=
+
+canvas.toDataURL(
+
+"image/png"
+
+);
+
+const col=
+
+index%3;
+
+const row=
+
+Math.floor(
+
+index/3
+
+)%7;
+
+const cardWidth=
+
+60;
+
+const cardHeight=
+
+34;
+
+const marginX=
+
+8;
+
+const marginY=
+
+8;
+
+const spaceX=
+
+6;
+
+const spaceY=
+
+4;
+
+const x=
+
+marginX+
+
+col*(cardWidth+spaceX);
+
+const y=
+
+marginY+
+
+row*(cardHeight+spaceY);
+
+pdf.addImage(
+
+imageData,
+
+"PNG",
+
+x,
+
+y,
+
+cardWidth,
+
+cardHeight
+
+);
+
+URL.revokeObjectURL(
+
+imageUrl
+
+);
+
+}
+
+document.getElementById(
+
+"create"
+
+).onclick=
+
+async()=>{
+
+const count=
+
+Number(
+
+document.getElementById(
+
+"count"
+
+).value
+
+);
+
+const points=
+
+Number(
+
+document.getElementById(
+
+"points"
+
+).value
+
+);
+
+if(
+
+count<=0||
+
+points<=0
+
+){
+
+alert(
+
+"أدخل قيماً صحيحة."
+
+);
+
 return;
 
 }
 
-const used=
-await loadExistingCodes();
-  
-let csv = "الكود,الجواهر\n";
-const { jsPDF } = window.jspdf;
+progressBar.value=0;
 
-const pdf =
+progressBar.style.display="block";
+
+status.innerHTML=
+
+"⏳ جارٍ إنشاء الأكواد...";
+
+const used=
+
+await loadExistingCodes();
+
+let csv=
+
+"الكود,الجواهر\n";
+
+const {jsPDF}=
+
+window.jspdf;
+
+const pdf=
 
 new jsPDF({
 
@@ -468,24 +871,38 @@ unit:"mm",
 format:"a4"
 
 });
-status.innerHTML="⏳ جارٍ إنشاء الأكواد...";
 
 let created=0;
-  progressBar.value = 0;
-progressBar.style.display = "block";
-
+اكمل 
 while(created<count){
 
-const code=randomCode();
+const code=
 
-if(used.has(code))
+randomCode();
+
+if(
+
+used.has(code)
+
+)
+
 continue;
 
-used.add(code);
+used.add(
+
+code
+
+);
 
 await addDoc(
 
-collection(db,"Codes"),
+collection(
+
+db,
+
+"Codes"
+
+),
 
 {
 
@@ -494,19 +911,30 @@ code:code,
 points:points,
 
 student:"",
+
 used:false
 
 }
 
 );
-const card =
-await createCard(code);
+
+const card=
+
+await createCard(
+
+code
+
+);
 
 zip.file(
+
 `${code}.png`,
+
 card
+
 );
-  await addCardToPdf(
+
+await addCardToPdf(
 
 pdf,
 
@@ -529,88 +957,223 @@ created+1<count
 pdf.addPage();
 
 }
-csv += `"${code}","${points}"\n`;
+
+csv+=
+
+`"${code}","${points}"\n`;
 
 created++;
 
-progressBar.value =
+progressBar.value=
+
 (created/count)*100;
 
-status.innerHTML =
+status.innerHTML=
+
 `⏳ تم إنشاء ${created} من ${count}`;
-  
+
 }
-  progressBar.value=100;
-const blob=new Blob(
+
+progressBar.value=
+
+100;
+
+const csvBlob=
+
+new Blob(
 
 [csv],
 
 {
 
-type:"text/csv;charset=utf-8;"
+type:
+
+"text/csv;charset=utf-8;"
 
 }
 
 );
 
-const url=URL.createObjectURL(blob);
+const csvUrl=
 
-const a=document.createElement("a");
+URL.createObjectURL(
 
-a.href=url;
+csvBlob
 
-a.download="codes.csv";
+);
 
-document.body.appendChild(a);
-a.click();
+const csvLink=
 
-document.body.removeChild(a);
+document.createElement(
 
-URL.revokeObjectURL(url);
+"a"
 
-status.innerHTML=
-`✅ تم إنشاء ${count} كود بنجاح.`;
+);
 
-alert("تم إنشاء الأكواد وتنزيل ملف CSV.");
- };
-  const zipBlob =
+csvLink.href=
+
+csvUrl;
+
+csvLink.download=
+
+`أكواد_${points}.csv`;
+
+document.body.appendChild(
+
+csvLink
+
+);
+
+csvLink.click();
+
+document.body.removeChild(
+
+csvLink
+
+);
+
+URL.revokeObjectURL(
+
+csvUrl
+
+);
+
+const zipBlob=
+
 await zip.generateAsync({
-    type:"blob"
+
+type:"blob"
+
 });
 
 saveAs(
-    zipBlob,
-    "cards.zip"
-);
-  pdf.save(
-"cards.pdf"
-);
-document.getElementById("deleteAll").onclick = async () => {
 
-if(!confirm("هل تريد حذف جميع الأكواد؟"))
+zipBlob,
+
+`بطاقات_${points}.zip`
+
+);
+
+pdf.save(
+
+`بطاقات_${points}.pdf`
+
+);
+
+status.innerHTML=
+
+`✅ تم إنشاء ${count} كود بنجاح.`;
+
+alert(
+
+"تم إنشاء جميع الملفات بنجاح."
+
+);
+
+};
+اكمل 
+document.getElementById(
+
+"deleteAll"
+
+).onclick=
+
+async()=>{
+
+if(
+
+!confirm(
+
+"هل تريد حذف جميع الأكواد؟"
+
+)
+
+)
+
 return;
 
-const snapshot = await getDocs(collection(db,"Codes"));
+progressBar.style.display=
 
-let count = 0;
+"block";
 
-for(const d of snapshot.docs){
+progressBar.value=
 
-await deleteDoc(d.ref);
+0;
 
-count++;
+status.innerHTML=
 
-status.innerHTML =
-`⏳ تم حذف ${count} كود`;
+"⏳ جارٍ حذف الأكواد...";
+
+const snapshot=
+
+await getDocs(
+
+collection(
+
+db,
+
+"Codes"
+
+)
+
+);
+
+const total=
+
+snapshot.docs.length;
+
+let deleted=
+
+0;
+
+for(
+
+const doc
+
+of
+
+snapshot.docs
+
+){
+
+await deleteDoc(
+
+doc.ref
+
+);
+
+deleted++;
+
+if(total>0){
+
+progressBar.value=
+
+(deleted/total)*100;
+
+}
+
+status.innerHTML=
+
+`⏳ تم حذف ${deleted} من ${total}`;
+
+}
+
+progressBar.value=
+
+100;
+
+status.innerHTML=
+
+"✅ تم حذف جميع الأكواد بنجاح.";
+
+alert(
+
+"تم حذف جميع الأكواد."
+
+);
 
 };
 
-status.innerHTML =
-`✅ تم حذف جميع الأكواد بنجاح.`;
-
-alert("تم حذف جميع الأكواد.");
-
-};
 </script>
 
 </body>
