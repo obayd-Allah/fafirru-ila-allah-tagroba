@@ -308,15 +308,33 @@ value="30">
 لون الكود
 
 </label>
-<button type="button" onclick="textColor.value='#0065F3'">🔵</button>
 
-<button type="button" onclick="textColor.value='#18D7CC'">🟢</button>
-
-<button type="button" onclick="textColor.value='#000000'">⚫</button>
 <input
 type="color"
 id="textColor"
 value="#0065F3">
+
+<div style="display:flex;gap:10px;margin-top:10px;justify-content:center;">
+
+<button
+type="button"
+onclick="document.getElementById('textColor').value='#0065F3'"
+style="width:45px;height:45px;background:#0065F3;border-radius:50%;border:2px solid #ccc;">
+</button>
+
+<button
+type="button"
+onclick="document.getElementById('textColor').value='#18D7CC'"
+style="width:45px;height:45px;background:#18D7CC;border-radius:50%;border:2px solid #ccc;">
+</button>
+
+<button
+type="button"
+onclick="document.getElementById('textColor').value='#000000'"
+style="width:45px;height:45px;background:#000000;border-radius:50%;border:2px solid #ccc;">
+</button>
+
+</div>
 
 <label>
 
