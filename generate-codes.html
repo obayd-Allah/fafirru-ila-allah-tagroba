@@ -1004,7 +1004,9 @@ type:
 }
 
 );
-
+const zipBlob = await zip.generateAsync({
+    type: "blob"
+});
 window.csvBlob = csvBlob;
 
 window.zipBlob = zipBlob;
