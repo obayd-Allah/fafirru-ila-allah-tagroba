@@ -504,7 +504,13 @@ used:false
 }
 
 );
+const card =
+await createCard(code);
 
+zip.file(
+`${code}.png`,
+card
+);
 csv += `"${code}","${points}"\n`;
 
 created++;
