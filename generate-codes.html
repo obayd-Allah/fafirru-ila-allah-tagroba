@@ -347,12 +347,23 @@ async function createCard(code){
             ctx.drawImage(img,0,0);
 
             // الخط
-            ctx.font =
-            "bold 80px Cairo";
+            const fontSize =
+Number(document.getElementById("fontSize").value);
+
+const fontFamily =
+document.getElementById("fontFamily").value;
+
+const textColor =
+document.getElementById("textColor").value;
+
+ctx.font =
+`bold ${fontSize}px "${fontFamily}"`;
+
+ctx.fillStyle = textColor;
 
             ctx.textAlign="center";
 
-            ctx.fillStyle="#333";
+            
 
             // كتابة الكود
             ctx.fillText(
