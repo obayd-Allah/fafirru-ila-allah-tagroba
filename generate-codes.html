@@ -388,6 +388,68 @@ ctx.fillStyle = textColor;
     });
 
 }
+  const zip = new JSZip();
+async function createCard(code){
+
+    return new Promise((resolve)=>{
+
+        const template =
+        document.querySelector(
+        'input[name="template"]:checked'
+        ).value;
+
+        const img = new Image();
+
+        img.src = `templates/${template}.png`;
+
+        img.onload = ()=>{
+
+            const canvas =
+            document.createElement("canvas");
+
+            const ctx =
+            canvas.getContext("2d");
+canvas.width = img.width;
+
+            canvas.height = img.height;
+
+            ctx.drawImage(img,0,0);
+
+            // ========= الكود =========
+
+            ctx.font =
+            "bold 82px Cairo";
+
+            ctx.fillStyle =
+            "#1565c0";
+
+            ctx.textAlign =
+            "center";
+
+            ctx.textBaseline =
+            "middle";
+ctx.fillText(
+
+                code,
+
+                canvas.width/2,
+
+                canvas.height/2
+
+            );
+
+            // ==========================
+
+            canvas.toBlob((blob)=>{
+
+                resolve(blob);
+
+            },"image/png");
+
+        };
+});
+
+}
 document.getElementById("create").onclick=async()=>{
 alert("بدأ التنفيذ");
   
