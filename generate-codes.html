@@ -387,7 +387,17 @@ value="0"
 max="100">
 
 </progress>
+<button id="downloadCsv" style="display:none">
+تنزيل ملف CSV
+</button>
 
+<button id="downloadZip" style="display:none">
+تنزيل البطاقات ZIP
+</button>
+
+<button id="downloadPdf" style="display:none">
+تنزيل ملف الطباعة PDF
+</button>
 </div>
 
 <script
@@ -995,71 +1005,25 @@ type:
 
 );
 
-const csvUrl=
+window.csvBlob = csvBlob;
 
-URL.createObjectURL(
+window.zipBlob = zipBlob;
 
-csvBlob
+window.pdf = pdf;
 
-);
+window.points = points;
 
-const csvLink=
+document.getElementById(
+"downloadCsv"
+).style.display="block";
 
-document.createElement(
+document.getElementById(
+"downloadZip"
+).style.display="block";
 
-"a"
-
-);
-
-csvLink.href=
-
-csvUrl;
-
-csvLink.download=
-
-`أكواد_${points}.csv`;
-
-document.body.appendChild(
-
-csvLink
-
-);
-
-csvLink.click();
-
-document.body.removeChild(
-
-csvLink
-
-);
-
-URL.revokeObjectURL(
-
-csvUrl
-
-);
-
-const zipBlob=
-
-await zip.generateAsync({
-
-type:"blob"
-
-});
-
-saveAs(
-
-zipBlob,
-
-`بطاقات_${points}.zip`
-
-);
-
-pdf.save(
-
-`بطاقات_${points}.pdf`
-
-);
+document.getElementById(
+"downloadPdf"
+).style.display="block";
 
 status.innerHTML=
 
@@ -1072,7 +1036,51 @@ alert(
 );
 
 };
+document.getElementById(
+"downloadCsv"
+).onclick=()=>{
 
+const url=
+URL.createObjectURL(
+window.csvBlob
+);
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+`أكواد_${window.points}.csv`;
+
+a.click();
+URL.revokeObjectURL(url);
+
+};
+            document.getElementById(
+"downloadZip"
+).onclick=()=>{
+
+saveAs(
+
+window.zipBlob,
+
+`بطاقات_${window.points}.zip`
+
+);
+
+};
+            document.getElementById(
+"downloadPdf"
+).onclick=()=>{
+
+window.pdf.save(
+
+`بطاقات_${window.points}.pdf`
+
+);
+
+};
 document.getElementById(
 
 "deleteAll"
