@@ -281,7 +281,67 @@ return Math.floor(
 ).toString();
 
 }
+async function createCard(code){
 
+    return new Promise((resolve)=>{
+
+        // اسم التصميم المختار
+        const template =
+        document.querySelector(
+        'input[name="template"]:checked'
+        ).value;
+
+        // تحميل الصورة
+        const img = new Image();
+
+        img.src = `templates/${template}.png`;
+
+        img.onload = ()=>{
+
+            // إنشاء Canvas
+            const canvas =
+            document.createElement("canvas");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            const ctx =
+            canvas.getContext("2d");
+
+            // رسم البطاقة
+            ctx.drawImage(img,0,0);
+
+            // الخط
+            ctx.font =
+            "bold 80px Cairo";
+
+            ctx.textAlign="center";
+
+            ctx.fillStyle="#333";
+
+            // كتابة الكود
+            ctx.fillText(
+
+                code,
+
+                canvas.width/2,
+
+                canvas.height/2+20
+
+            );
+
+            // تحويلها لصورة
+            canvas.toBlob((blob)=>{
+
+                resolve(blob);
+
+            });
+
+        };
+
+    });
+
+}
 document.getElementById("create").onclick=async()=>{
 alert("بدأ التنفيذ");
   
@@ -308,7 +368,9 @@ let csv = "الكود,الجواهر\n";
 status.innerHTML="⏳ جارٍ إنشاء الأكواد...";
 
 let created=0;
-  progressBar.style.display="block";
+  progressBar.value = 0;
+progressBar.style.display = "block";
+
 while(created<count){
 
 const code=randomCode();
