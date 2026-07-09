@@ -302,8 +302,8 @@ return;
 
 const used=
 await loadExistingCodes();
-
-let csv="الكود,النقاط\n";
+  
+let csv = "الكود,الجواهر\n";
 
 status.innerHTML="⏳ جارٍ إنشاء الأكواد...";
 
@@ -335,7 +335,7 @@ used:false
 
 );
 
-csv+=`${code},${points}\n`;
+csv += `"${code}","${points}"\n`;
 
 created++;
 
@@ -346,7 +346,7 @@ status.innerHTML =
 `⏳ تم إنشاء ${created} من ${count}`;
   
 }
-  
+  progressBar.value=100;
 const blob=new Blob(
 
 [csv],
@@ -378,7 +378,8 @@ status.innerHTML=
 `✅ تم إنشاء ${count} كود بنجاح.`;
 
 alert("تم إنشاء الأكواد وتنزيل ملف CSV.");
-
+ };
+  
 document.getElementById("deleteAll").onclick = async () => {
 
 if(!confirm("هل تريد حذف جميع الأكواد؟"))
@@ -398,7 +399,7 @@ status.innerHTML =
 `⏳ تم حذف ${count} كود`;
 
 };
-progressBar.value=100;
+
 status.innerHTML =
 `✅ تم حذف جميع الأكواد بنجاح.`;
 
