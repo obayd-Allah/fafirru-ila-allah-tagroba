@@ -375,6 +375,62 @@ ctx.fillText(
 
         };
 });
+  async function addCardToPdf(pdf, imageBlob, index){
+
+    const imageUrl =
+    URL.createObjectURL(imageBlob);
+
+    const img = new Image();
+
+    await new Promise((resolve)=>{
+
+        img.onload = resolve;
+
+        img.src = imageUrl;
+
+    });
+
+    const canvas =
+    document.createElement("canvas");
+
+    canvas.width = img.width;
+
+    canvas.height = img.height;
+
+    canvas
+    .getContext("2d")
+    .drawImage(img,0,0);
+
+    const imageData =
+    canvas.toDataURL("image/png");
+
+    const col = index % 3;
+
+    const row = Math.floor(index/3)%7;
+
+    const x = 8 + col*66;
+
+    const y = 8 + row*40;
+
+    pdf.addImage(
+
+        imageData,
+
+        "PNG",
+
+        x,
+
+        y,
+
+        60,
+
+        34
+
+    );
+
+    URL.revokeObjectURL(imageUrl);
+
+  }
   const zip = new JSZip();
 }
 document.getElementById("create").onclick=async()=>{
@@ -399,7 +455,19 @@ const used=
 await loadExistingCodes();
   
 let csv = "الكود,الجواهر\n";
+const { jsPDF } = window.jspdf;
 
+const pdf =
+
+new jsPDF({
+
+orientation:"portrait",
+
+unit:"mm",
+
+format:"a4"
+
+});
 status.innerHTML="⏳ جارٍ إنشاء الأكواد...";
 
 let created=0;
