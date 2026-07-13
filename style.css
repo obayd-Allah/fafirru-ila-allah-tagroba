@@ -1776,7 +1776,109 @@ text-align:center;
 
 }
 
+/*=========================
+      جواهر متطايرة
+=========================*/
 
+.flying-gem{
+
+position:fixed;
+
+font-size:30px;
+
+pointer-events:none;
+
+z-index:100000;
+
+animation:flyGem 1.4s ease-out forwards;
+
+filter:drop-shadow(0 0 8px rgba(0,180,255,.5));
+
+}
+
+@keyframes flyGem{
+
+0%{
+
+opacity:1;
+
+transform:
+translate(0,0)
+scale(.5)
+rotate(0deg);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:
+translate(var(--x),var(--y))
+scale(1.4)
+rotate(720deg);
+
+}
+
+}
+
+
+/*=========================
+      نجاح النافذة
+=========================*/
+
+.modal-box.success{
+
+animation:rewardSuccess .8s;
+
+}
+
+@keyframes rewardSuccess{
+
+0%{
+
+transform:scale(.8);
+
+}
+
+40%{
+
+transform:scale(1.12);
+
+}
+
+60%{
+
+transform:scale(.95);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+
+/*=========================
+      عداد الجواهر
+=========================*/
+
+.reward-total{
+
+margin-top:18px;
+
+font-size:28px;
+
+font-weight:900;
+
+color:#17a44a;
+
+text-align:center;
+
+}
 /*=========================
       الفوتر
 =========================*/
