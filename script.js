@@ -467,7 +467,8 @@ document.getElementById("sendReward").onclick = async ()=>{
 
     const codeRef = codeDoc.ref;
     const studentRef = doc(db,"Students",student.id);
-
+let rewardValue = 0;
+let totalPoints = 0;
     try{
 
         await runTransaction(db,async(transaction)=>{
@@ -492,6 +493,8 @@ document.getElementById("sendReward").onclick = async ()=>{
 
             const rewardData = rewardSnap.data();
 
+rewardValue = Number(rewardData.points || 0);
+         
             if(rewardData.used===true){
 
                 throw new Error("تم استخدام هذا الكود من قبل");
@@ -501,8 +504,10 @@ document.getElementById("sendReward").onclick = async ()=>{
             const studentData = studentSnap.data();
 
             const newPoints =
-                Number(studentData.points||0)+
-                Number(rewardData.points||0);
+Number(studentData.points || 0) +
+rewardValue;
+
+totalPoints = newPoints;
 
             transaction.update(studentRef,{
                 points:newPoints
@@ -515,18 +520,77 @@ document.getElementById("sendReward").onclick = async ()=>{
 
         });
 
-        rewardMessage.style.color="green";
-        rewardMessage.textContent="🎉 تم استلام الجواهر بنجاح.";
+        // قيمة الجائزة
+const rewardValue = Number(rewardData.points || 0);
 
-        setTimeout(()=>{
+// المجموع الجديد
+const totalPoints = newPoints;
 
-            rewardModal.style.display="none";
+// تكبير النافذة
+document.querySelector(".modal-box")
+.classList.add("success");
 
-            rewardCode.value="";
+// كونفيتي
+launchConfetti();
 
-            location.reload();
+// جواهر متطايرة
+launchGems();
 
-        },1500);
+// رسالة النجاح
+rewardMessage.style.color = "#18a84c";
+
+rewardMessage.innerHTML = `
+<div style="font-size:26px;font-weight:900;">
+🎉 أحسنت
+</div>
+
+<div style="
+margin-top:15px;
+font-size:28px;
+font-weight:900;
+color:#00a0ff;
+">
+💎 +${rewardValue}
+</div>
+
+<div class="reward-total">
+0 💎
+</div>
+`;
+
+// تشغيل العداد بعد نصف ثانية
+setTimeout(()=>{
+
+const totalElement =
+rewardMessage.querySelector(".reward-total");
+
+animateNumber(
+
+totalElement,
+
+totalPoints - rewardValue,
+
+totalPoints,
+
+900
+
+);
+
+},500);
+
+// إغلاق النافذة
+setTimeout(()=>{
+
+document.querySelector(".modal-box")
+.classList.remove("success");
+
+rewardModal.style.display="none";
+
+rewardCode.value="";
+
+location.reload();
+
+},3200);
 
     }
 
