@@ -342,7 +342,89 @@ document.getElementById("closeReward").onclick = ()=>{
     rewardModal.style.display = "none";
 
 };
+function launchConfetti(){
 
+confetti({
+
+particleCount:180,
+
+spread:90,
+
+origin:{y:.7}
+
+});
+
+}
+
+function launchGems(){
+
+for(let i=0;i<24;i++){
+
+const gem=document.createElement("div");
+
+gem.className="flying-gem";
+
+gem.textContent="💎";
+
+gem.style.left=(window.innerWidth/2)+"px";
+
+gem.style.top=(window.innerHeight/2)+"px";
+
+gem.style.setProperty(
+"--x",
+(Math.random()*500-250)+"px"
+);
+
+gem.style.setProperty(
+"--y",
+(-Math.random()*400-100)+"px"
+);
+
+document.body.appendChild(gem);
+
+setTimeout(()=>{
+
+gem.remove();
+
+},1400);
+
+}
+
+}
+
+function animateNumber(element,start,end,duration){
+
+let startTime=null;
+
+function step(time){
+
+if(!startTime)
+startTime=time;
+
+const progress=Math.min(
+(time-startTime)/duration,
+1
+);
+
+const value=Math.floor(
+
+start+(end-start)*progress
+
+);
+
+element.textContent=value+" 💎";
+
+if(progress<1){
+
+requestAnimationFrame(step);
+
+}
+
+}
+
+requestAnimationFrame(step);
+
+}
 document.getElementById("sendReward").onclick = async ()=>{
 
     const code = rewardCode.value.trim();
