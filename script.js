@@ -520,11 +520,7 @@ totalPoints = newPoints;
 
         });
 
-        // قيمة الجائزة
-const rewardValue = Number(rewardData.points || 0);
-
-// المجموع الجديد
-const totalPoints = newPoints;
+        
 
 // تكبير النافذة
 document.querySelector(".modal-box")
