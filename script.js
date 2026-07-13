@@ -537,7 +537,7 @@ rewardMessage.style.color = "#18a84c";
 
 rewardMessage.innerHTML = `
 <div style="font-size:26px;font-weight:900;">
-🎉 أحسنت
+🎉 بارك الله فيك
 </div>
 
 <div style="
