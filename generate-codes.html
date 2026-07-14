@@ -1190,7 +1190,7 @@ data-id="${item.id}">
     document.getElementById(
         "unusedCodes"
     ).textContent = unused;
-
+updateSelectedButton();
 }
 // =====================
 // أزرار الجدول
@@ -1225,7 +1225,47 @@ document.addEventListener("change",(e)=>{
 });
     
 document.addEventListener("click", async (e)=>{
+// =====================
+// حذف المحدد
+// =====================
 
+if(e.target.id=="deleteSelected"){
+
+    const ids = [];
+
+    document
+    .querySelectorAll(".rowCheck:checked")
+    .forEach(c=>{
+
+        ids.push(c.dataset.id);
+
+    });
+
+    if(ids.length==0)
+        return;
+if(!confirm(`حذف ${ids.length} كود؟`))
+        return;
+
+    for(const id of ids){
+
+        await deleteDoc(
+            doc(db,"Codes",id)
+        );
+
+    }
+
+    allCodes =
+        allCodes.filter(
+            x=>!ids.includes(x.id)
+        );
+
+    renderCodesTable();
+
+    updateSelectedButton();
+
+    return;
+
+}
     // =====================
     // حذف كود
     // =====================
