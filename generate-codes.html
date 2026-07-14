@@ -164,7 +164,123 @@ margin-top:15px;
 margin-bottom:20px;
 
 }
+hr{
 
+border:none;
+
+height:1px;
+
+background:#ddd;
+
+margin:20px 0;
+
+}
+
+#codesTable{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:white;
+
+}
+
+#codesTable th{
+
+background:#1976d2;
+
+color:white;
+
+padding:10px;
+
+}
+
+#codesTable td{
+
+padding:10px;
+
+border-bottom:1px solid #eee;
+
+text-align:center;
+
+}
+
+#codesTable tr:hover{
+
+background:#f8fbff;
+
+}
+
+.statCard{
+
+flex:1;
+
+min-width:130px;
+
+background:#f5f9ff;
+
+border-radius:12px;
+
+padding:15px;
+
+text-align:center;
+
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.statCard .num{
+
+font-size:28px;
+
+font-weight:bold;
+
+color:#1976d2;
+
+}
+
+.statCard .title{
+
+margin-top:6px;
+
+color:#666;
+
+font-size:15px;
+
+}
+
+.editBtn{
+
+background:#2e7d32;
+
+color:white;
+
+border:none;
+
+padding:6px 12px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+.deleteBtn{
+
+background:#d32f2f;
+
+color:white;
+
+border:none;
+
+padding:6px 12px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+} 
 .cardOption{
 
 cursor:pointer;
@@ -403,7 +519,13 @@ id="deleteAll">
 🗑️ حذف جميع الأكواد
 
 </button>
+<button
+id="selectAll"
+style="background:#546e7a;color:white">
+تحديد الكل
+</button>
 
+</div>
 <div id="status"></div>
 
 <progress
