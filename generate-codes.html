@@ -1097,7 +1097,94 @@ data-id="${item.id}">
     ).textContent = unused;
 
 }
+// =====================
+// أزرار الجدول
+// =====================
 
+document.addEventListener("click", async (e)=>{
+
+    // =====================
+    // حذف كود
+    // =====================
+
+    if(e.target.classList.contains("deleteBtn")){
+
+        const id = e.target.dataset.id;
+
+        if(!confirm("هل تريد حذف هذا الكود؟"))
+            return;
+
+        await deleteDoc(
+            doc(db,"Codes",id)
+        );
+
+        allCodes = allCodes.filter(x=>x.id!=id);
+
+        renderCodesTable();
+
+        return;
+    }
+
+    // =====================
+    // تعديل كود
+    // =====================
+
+    if(e.target.classList.contains("editBtn")){
+
+        const id = e.target.dataset.id;
+
+        const item = allCodes.find(x=>x.id==id);
+
+        if(!item)
+            return;
+
+        const newPoints = prompt(
+            "عدد الجواهر",
+            item.points
+        );
+
+        if(newPoints===null)
+            return;
+
+        const newStudent = prompt(
+            "اسم الطالب",
+            item.student || ""
+        );
+
+        if(newStudent===null)
+            return;
+
+        const usedAnswer = confirm(
+            "هل الكود مستخدم؟"
+        );
+
+        await updateDoc(
+
+            doc(db,"Codes",id),
+
+            {
+
+                points:Number(newPoints),
+
+                student:newStudent,
+
+                used:usedAnswer
+
+            }
+
+        );
+
+        item.points = Number(newPoints);
+
+        item.student = newStudent;
+
+        item.used = usedAnswer;
+
+        renderCodesTable();
+
+    }
+
+});
 document.getElementById(
     "refreshTable"
 ).onclick = loadCodesTable;
