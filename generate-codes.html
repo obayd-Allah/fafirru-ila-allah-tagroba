@@ -1235,7 +1235,15 @@ const selectBtn =
     }
 
 }
+document.addEventListener("change",(e)=>{
 
+    if(e.target.classList.contains("rowCheck")){
+
+        updateSelectedButton();
+
+    }
+
+});
 
 document.addEventListener("click", async (e)=>{
 // =====================
@@ -1388,15 +1396,7 @@ document.getElementById("selectAll").onclick = () => {
 
 };
         
-    checks.forEach(c=>{
-
-        c.checked = !allChecked;
-
-});
-
-    updateSelectedButton();
-
-};
+    
 }
 
 document.getElementById(
