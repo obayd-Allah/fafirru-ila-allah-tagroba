@@ -1055,16 +1055,19 @@ async function loadCodesTable() {
     );
 
     allCodes = [];
+
 snapshot.forEach(doc => {
 
-        allCodes.push({
-            id: doc.id,
-            ...doc.data()
-        });
-
+    allCodes.push({
+        id: doc.id,
+        ...doc.data()
     });
 
-    renderCodesTable();
+});
+
+allCodes.reverse();
+
+renderCodesTable();
 
     status.innerHTML = "";
 
