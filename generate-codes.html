@@ -947,7 +947,169 @@ imageUrl
 );
 
 }
+// ==========================
+// لوحة إدارة الأكواد
+// ==========================
 
+let allCodes = [];
+
+async function loadCodesTable() {
+
+    status.innerHTML = "⏳ جار تحميل الأكواد...";
+
+    const tbody = document.querySelector("#codesTable tbody");
+
+    tbody.innerHTML = "";
+
+    const snapshot = await getDocs(
+        collection(db, "Codes")
+    );
+
+    allCodes = [];
+snapshot.forEach(doc => {
+
+        allCodes.push({
+            id: doc.id,
+            ...doc.data()
+        });
+
+    });
+
+    renderCodesTable();
+
+    status.innerHTML = "";
+
+}
+
+function renderCodesTable() {
+
+    const tbody = document.querySelector("#codesTable tbody");
+
+    tbody.innerHTML = "";
+}
+
+function renderCodesTable() {
+
+    const tbody = document.querySelector("#codesTable tbody");
+
+    tbody.innerHTML = "";
+
+    const search = document
+        .getElementById("searchCode")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const filter = document
+        .getElementById("filterUsed")
+        .value;
+
+    let total = 0;
+    let used = 0;
+    let unused = 0;
+allCodes.forEach(item => {
+
+        total++;
+
+        if (item.used)
+            used++;
+        else
+            unused++;
+
+        if (
+            search &&
+            !item.code.toLowerCase().includes(search) &&
+            !(item.student || "")
+                .toLowerCase()
+                .includes(search)
+        ) {
+            return;
+        }
+
+        if (
+            filter != "all" &&
+String(item.used) != filter
+        ) {
+            return;
+        }
+
+        tbody.innerHTML += `
+
+<tr>
+
+<td>
+
+<input
+type="checkbox"
+class="rowCheck"
+data-id="${item.id}">
+
+</td>
+
+<td>${item.code}</td>
+
+<td>${item.points}</td>
+
+<td>${item.student || "-"}</td>
+
+<td>
+
+${item.used ? "✅" : "❌"}
+
+</td>
+
+<td>
+
+<button
+class="editBtn"
+data-id="${item.id}">
+تعديل
+</button>
+
+<button
+class="deleteBtn"
+data-id="${item.id}">
+حذف
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+    });
+
+    document.getElementById(
+        "totalCodes"
+    ).textContent = total;
+
+    document.getElementById(
+        "usedCodes"
+    ).textContent = used;
+
+    document.getElementById(
+        "unusedCodes"
+    ).textContent = unused;
+
+}
+
+document.getElementById(
+    "refreshTable"
+).onclick = loadCodesTable;
+
+document.getElementById(
+    "searchCode"
+).oninput = renderCodesTable;
+
+document.getElementById(
+    "filterUsed"
+).onchange = renderCodesTable;
+
+window.addEventListener(
+    "load",
+    loadCodesTable
+);
 document.getElementById(
 
 "create"
