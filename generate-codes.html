@@ -1236,23 +1236,7 @@ if(checkAll){
 
 }
 }
-document.addEventListener("change",(e)=>{
 
-    if(e.target.id=="checkAll"){
-
-        document
-        .querySelectorAll(".rowCheck")
-        .forEach(c=>{
-
-            c.checked=e.target.checked;
-
-        });
-
-        updateSelectedButton();
-
-    }
-
-});
 
 document.addEventListener("click", async (e)=>{
 // =====================
@@ -1387,23 +1371,24 @@ if(!confirm(`حذف ${ids.length} كود؟`))
     document.getElementById("filterUsed").onchange = renderCodesTable;
 
     window.addEventListener("load", loadCodesTable);
-document.getElementById("selectAll").onclick = ()=>{
+document.getElementById("selectAll").onclick = () => {
 
-    const checks =
-        document.querySelectorAll(".rowCheck");
+    const checks = document.querySelectorAll(".rowCheck");
 
-    if(checks.length==0)
-        return;
+    if (checks.length === 0) return;
 
-    let allChecked = true;
+    const checked = document.querySelectorAll(".rowCheck:checked");
 
-    checks.forEach(c=>{
+    const selectAll = checked.length !== checks.length;
 
-        if(!c.checked)
-            allChecked = false;
-
+    checks.forEach(c => {
+        c.checked = selectAll;
     });
 
+    updateSelectedButton();
+
+};
+        
     checks.forEach(c=>{
 
         c.checked = !allChecked;
