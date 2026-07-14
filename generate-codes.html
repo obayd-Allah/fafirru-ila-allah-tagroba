@@ -549,7 +549,13 @@ style="background:#1976d2;color:white">
 تحديث الجدول
 
 </button>
+<button
+id="selectAll"
+style="background:#546e7a;color:white">
 
+تحديد الكل
+
+</button>
 <div
 style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap">
 
@@ -1387,7 +1393,32 @@ if(!confirm(`حذف ${ids.length} كود؟`))
     document.getElementById("filterUsed").onchange = renderCodesTable;
 
     window.addEventListener("load", loadCodesTable);
+document.getElementById("selectAll").onclick = ()=>{
 
+    const checks =
+        document.querySelectorAll(".rowCheck");
+
+    if(checks.length==0)
+        return;
+
+    let allChecked = true;
+
+    checks.forEach(c=>{
+
+        if(!c.checked)
+            allChecked = false;
+
+    });
+
+    checks.forEach(c=>{
+
+        c.checked = !allChecked;
+
+});
+
+    updateSelectedButton();
+
+};
 }
 
 document.getElementById(
