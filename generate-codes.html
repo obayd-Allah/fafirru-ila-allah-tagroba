@@ -1195,7 +1195,35 @@ data-id="${item.id}">
 // =====================
 // أزرار الجدول
 // =====================
+// تحديث عدد العناصر المحددة
 
+function updateSelectedButton(){
+
+    const checks =
+        document.querySelectorAll(".rowCheck:checked");
+
+    const btn =
+        document.getElementById("deleteSelected");
+
+    const count =
+        document.getElementById("selectedCount");
+
+    count.textContent = checks.length;
+
+    btn.style.display =
+        checks.length ? "block" : "none";
+
+}
+document.addEventListener("change",(e)=>{
+
+    if(e.target.classList.contains("rowCheck")){
+
+        updateSelectedButton();
+
+    }
+
+});
+    
 document.addEventListener("click", async (e)=>{
 
     // =====================
