@@ -1219,22 +1219,21 @@ function updateSelectedButton(){
 
     btn.style.display =
         checks.length ? "block" : "none";
-const all =
-document.querySelectorAll(".rowCheck");
 
-const checked =
-document.querySelectorAll(".rowCheck:checked");
+    const all =
+        document.querySelectorAll(".rowCheck");
+const selectBtn =
+        document.getElementById("selectAll");
 
-const checkAll =
-document.getElementById("checkAll");
+    if(selectBtn){
 
-if(checkAll){
+        selectBtn.textContent =
+            (all.length > 0 && checks.length === all.length)
+            ? "إلغاء تحديد الكل"
+            : "تحديد الكل";
 
-    checkAll.checked =
-    all.length>0 &&
-    all.length==checked.length;
+    }
 
-}
 }
 
 
