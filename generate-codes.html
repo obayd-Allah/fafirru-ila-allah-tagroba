@@ -519,11 +519,96 @@ id="deleteAll">
 🗑️ حذف جميع الأكواد
 
 </button>
+<hr>
+
+<h2>لوحة إدارة الأكواد</h2>
+
+<label>بحث</label>
+
+<input
+id="searchCode"
+type="text"
+placeholder="ابحث بالكود أو اسم الطالب">
+
+<label>عرض</label>
+
+<select id="filterUsed">
+
+<option value="all">جميع الأكواد</option>
+
+<option value="false">غير المستخدمة</option>
+
+<option value="true">المستخدمة</option>
+
+</select>
+
 <button
-id="selectAll"
-style="background:#546e7a;color:white">
-تحديد الكل
+id="refreshTable"
+style="background:#1976d2;color:white">
+
+تحديث الجدول
+
 </button>
+
+<div
+style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap">
+
+<div class="statCard">
+
+<div class="num" id="totalCodes">0</div>
+
+<div class="title">الإجمالي</div>
+
+</div>
+
+<div class="statCard">
+
+<div class="num" id="usedCodes">0</div>
+
+<div class="title">المستخدمة</div>
+
+</div>
+
+<div class="statCard">
+
+<div class="num" id="unusedCodes">0</div>
+
+<div class="title">غير المستخدمة</div>
+
+</div>
+
+</div>
+
+<div
+style="overflow:auto;margin-top:20px">
+
+<table id="codesTable">
+
+<thead>
+
+<tr>
+
+<th>الكود</th>
+
+<th>الجواهر</th>
+
+<th>الطالب</th>
+
+<th>الحالة</th>
+
+<th>الإجراءات</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
 
 </div>
 <div id="status"></div>
