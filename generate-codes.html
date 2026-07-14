@@ -1070,12 +1070,6 @@ snapshot.forEach(doc => {
 
 }
 
-function renderCodesTable() {
-
-    const tbody = document.querySelector("#codesTable tbody");
-
-    tbody.innerHTML = "";
-}
 
 function renderCodesTable() {
 
@@ -1270,22 +1264,18 @@ document.addEventListener("click", async (e)=>{
     }
 
 });
-document.getElementById(
-    "refreshTable"
-).onclick = loadCodesTable;
+    if(document.getElementById("searchCode")){
 
-document.getElementById(
-    "searchCode"
-).oninput = renderCodesTable;
+    document.getElementById("refreshTable").onclick = loadCodesTable;
 
-document.getElementById(
-    "filterUsed"
-).onchange = renderCodesTable;
+    document.getElementById("searchCode").oninput = renderCodesTable;
 
-window.addEventListener(
-    "load",
-    loadCodesTable
-);
+    document.getElementById("filterUsed").onchange = renderCodesTable;
+
+    window.addEventListener("load", loadCodesTable);
+
+}
+
 document.getElementById(
 
 "create"
