@@ -588,6 +588,14 @@ style="overflow:auto;margin-top:20px">
 
 <tr>
 
+<th>
+
+<input
+type="checkbox"
+id="checkAll">
+
+</th>
+
 <th>الكود</th>
 
 <th>الجواهر</th>
@@ -599,7 +607,6 @@ style="overflow:auto;margin-top:20px">
 <th>الإجراءات</th>
 
 </tr>
-
 </thead>
 
 <tbody>
@@ -1134,8 +1141,8 @@ String(item.used) != filter
 
         tbody.innerHTML += `
 
-<tr>
 
+<tr>
 <td>
 
 <input
@@ -1212,18 +1219,41 @@ function updateSelectedButton(){
 
     btn.style.display =
         checks.length ? "block" : "none";
+const all =
+document.querySelectorAll(".rowCheck");
 
+const checked =
+document.querySelectorAll(".rowCheck:checked");
+
+const checkAll =
+document.getElementById("checkAll");
+
+if(checkAll){
+
+    checkAll.checked =
+    all.length>0 &&
+    all.length==checked.length;
+
+}
 }
 document.addEventListener("change",(e)=>{
 
-    if(e.target.classList.contains("rowCheck")){
+    if(e.target.id=="checkAll"){
+
+        document
+        .querySelectorAll(".rowCheck")
+        .forEach(c=>{
+
+            c.checked=e.target.checked;
+
+        });
 
         updateSelectedButton();
 
     }
 
 });
-    
+
 document.addEventListener("click", async (e)=>{
 // =====================
 // حذف المحدد
