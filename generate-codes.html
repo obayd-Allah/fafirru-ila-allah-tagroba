@@ -716,7 +716,9 @@ updateDoc,
 
 doc,
 
-getDoc
+getDoc,
+
+serverTimestamp
 
 }
 from
@@ -1547,22 +1549,23 @@ code
 await addDoc(
 
 collection(
-
 db,
-
 "Codes"
-
 ),
 
 {
 
-code:code,
+code: code,
 
-points:points,
+points: points,
 
-student:"",
+student: "",
 
-used:false
+used: false,
+
+createdAt: serverTimestamp(),
+
+usedAt: null
 
 }
 
