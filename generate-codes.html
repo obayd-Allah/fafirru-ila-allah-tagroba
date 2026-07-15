@@ -519,6 +519,14 @@ id="deleteAll">
 🗑️ حذف جميع الأكواد
 
 </button>
+
+    <button
+id="exportUsed"
+style="background:#ff9800;color:white">
+
+💾 حفظ الأكواد المستخدمة
+
+    </button>
     <hr>
 
 <label>اختر ملفات CSV</label>
@@ -1876,6 +1884,59 @@ status.innerHTML="☁️ جار مقارنة الأكواد...";
     alert(`تم حذف ${deleted} كود`);
 
     loadCodesTable();
+
+};
+    document.getElementById("exportUsed").onclick = async ()=>{
+
+    status.innerHTML = "⏳ جار استخراج الأكواد المستخدمة...";
+
+    const snapshot = await getDocs(
+        collection(db,"Codes")
+    );
+
+    let csv = "الكود,الجواهر,الطالب\n";
+
+    let count = 0;
+
+    snapshot.forEach(doc=>{
+
+        const data = doc.data();
+
+        if(data.used){
+
+            csv += `"${data.code}","${data.points}","${data.student || ""}"\n`;
+
+            count++;
+
+        }
+
+    });
+
+    const blob = new Blob(
+
+        [csv],
+
+        {
+
+            type:"text/csv;charset=utf-8;"
+
+        }
+
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+
+    a.download = "الأكواد_المستخدمة.csv";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+    status.innerHTML = `✅ تم حفظ ${count} كود مستخدم`;
 
 };
 </script>
