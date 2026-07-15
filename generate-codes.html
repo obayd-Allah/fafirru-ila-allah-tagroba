@@ -1210,6 +1210,36 @@ ${item.used ? "✅" : "❌"}
 
 <td>
 
+${
+item.createdAt?.toDate
+? item.createdAt.toDate().toLocaleString("ar-EG")
+: "-"
+}
+
+</td>
+
+<td>
+
+${
+item.usedAt?.toDate
+? item.usedAt.toDate().toLocaleString("ar-EG")
+: "-"
+}
+
+</td>
+
+<td>
+
+${
+item.usedAt?.toDate
+? item.usedAt.toDate().toLocaleString("ar-EG")
+: "-"
+}
+
+</td>
+
+<td>
+
 <button
 class="editBtn"
 data-id="${item.id}">
