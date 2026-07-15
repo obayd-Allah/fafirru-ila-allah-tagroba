@@ -979,11 +979,7 @@ img,
 
 const imageData=
 
-canvas.toDataURL(
-
-"image/png"
-
-);
+canvas.toDataURL("image/jpeg", 0.8);
 
 const col=
 
@@ -1035,17 +1031,17 @@ row*(cardHeight+spaceY);
 
 pdf.addImage(
 
-imageData,
+    imageData,
 
-"PNG",
+    "JPEG",
 
-x,
+    x,
 
-y,
+    y,
 
-cardWidth,
+    cardWidth,
 
-cardHeight
+    cardHeight
 
 );
 
