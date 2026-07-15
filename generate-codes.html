@@ -943,21 +943,14 @@ imageUrl;
 
 });
 
-const canvas=
+const canvas =
+document.createElement("canvas");
 
-document.createElement(
+const scale = 900 / img.width;
 
-"canvas"
+canvas.width = 900;
 
-);
-
-canvas.width=
-
-img.width;
-
-canvas.height=
-
-img.height;
+canvas.height = Math.round(img.height * scale);
 
 const ctx=
 
