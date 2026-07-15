@@ -1392,7 +1392,8 @@ if(!confirm(`حذف ${ids.length} كود؟`))
 
                 student:newStudent,
 
-                used:usedAnswer
+                used: usedAnswer,
+usedAt: usedAnswer ? serverTimestamp() : null
 
             }
 
