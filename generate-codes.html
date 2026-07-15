@@ -519,6 +519,23 @@ id="deleteAll">
 🗑️ حذف جميع الأكواد
 
 </button>
+    <hr>
+
+<label>اختر ملفات CSV</label>
+
+<input
+type="file"
+id="csvFiles"
+accept=".csv"
+multiple>
+
+<button
+id="keepCsvOnly"
+style="background:#6a1b9a;color:white">
+
+🛡️ الإبقاء على أكواد ملفات CSV فقط
+
+</button>
 <hr>
 
 <h2>لوحة إدارة الأكواد</h2>
@@ -746,7 +763,38 @@ Math.random()*900000
 ).toString();
 
 }
+async function readCsvCodes(files){
 
+    const codes = new Set();
+
+    for(const file of files){
+
+        const text = await file.text();
+
+        const lines = text.split(/\r?\n/);
+
+        for(let line of lines){
+
+            line = line.trim();
+
+            if(!line) continue;
+
+            if(line.startsWith("الكود")) continue;
+
+            const parts = line.replace(/"/g,"").split(",");
+
+            if(parts[0]){
+codes.add(parts[0].trim());
+
+            }
+
+        }
+
+    }
+
+    return codes;
+
+    }
 async function loadExistingCodes(){
 
 const set=
@@ -1767,7 +1815,69 @@ alert(
 );
 
 };
+document.getElementById("keepCsvOnly").onclick = async ()=>{
 
+    const files =
+        document.getElementById("csvFiles").files;
+
+    if(files.length==0){
+
+        alert("اختر ملفات CSV أولاً");
+
+        return;
+
+    }
+
+    if(!confirm("سيتم حذف جميع الأكواد غير الموجودة داخل ملفات CSV. هل أنت متأكد؟")){
+
+        return;
+
+    }
+
+    status.innerHTML="📄 جار قراءة ملفات CSV...";
+
+    const keepCodes =
+        await readCsvCodes(files);
+status.innerHTML="☁️ جار مقارنة الأكواد...";
+
+    const snapshot =
+        await getDocs(collection(db,"Codes"));
+
+    let deleted=0;
+
+    let total=snapshot.docs.length;
+
+    progressBar.style.display="block";
+
+    progressBar.value=0;
+
+    for(const d of snapshot.docs){
+
+        const data=d.data();
+
+        if(!keepCodes.has(data.code)){
+
+            await deleteDoc(d.ref);
+
+            deleted++;
+}
+
+        progressBar.value++;
+
+        progressBar.max=total;
+
+        status.innerHTML=
+        `تم فحص ${progressBar.value} من ${total}`;
+
+    }
+
+    progressBar.style.display="none";
+
+    alert(`تم حذف ${deleted} كود`);
+
+    loadCodesTable();
+
+};
 </script>
 
 </body>
