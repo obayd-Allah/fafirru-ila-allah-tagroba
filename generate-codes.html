@@ -1126,7 +1126,13 @@ snapshot.forEach(doc => {
 
 });
 
-allCodes.reverse();
+allCodes.sort((a,b)=>{
+
+    if(!a.createdAt || !b.createdAt) return 0;
+
+    return b.createdAt.seconds - a.createdAt.seconds;
+
+});
 
 renderCodesTable();
 
@@ -1210,16 +1216,6 @@ ${item.used ? "✅" : "❌"}
 ${
 item.createdAt?.toDate
 ? item.createdAt.toDate().toLocaleString("ar-EG")
-: "-"
-}
-
-</td>
-
-<td>
-
-${
-item.usedAt?.toDate
-? item.usedAt.toDate().toLocaleString("ar-EG")
 : "-"
 }
 
@@ -1413,23 +1409,40 @@ if(!confirm(`حذف ${ids.length} كود؟`))
             "هل الكود مستخدم؟"
         );
 
-        await updateDoc(
+        const updateData = {
 
-            doc(db,"Codes",id),
+    points:Number(newPoints),
 
-            {
+    student:newStudent,
 
-                points:Number(newPoints),
+    used:usedAnswer
 
-                student:newStudent,
+};
 
-                used: usedAnswer,
-usedAt: usedAnswer ? serverTimestamp() : null
+if(
 
-            }
+    usedAnswer &&
 
-        );
+    !item.used
 
+){
+
+    updateData.usedAt = serverTimestamp();
+
+}
+if(!usedAnswer){
+
+    updateData.usedAt = null;
+
+}
+
+await updateDoc(
+
+    doc(db,"Codes",id),
+
+    updateData
+
+);
         item.points = Number(newPoints);
 
         item.student = newStudent;
