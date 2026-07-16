@@ -531,11 +531,8 @@ style="background:#ff9800;color:white">
 
 <label>اختر ملفات CSV</label>
 
-<input
-type="file"
-id="csvFiles"
-accept=".csv"
-multiple>
+<input type="file" id="csvFile" accept=".csv" multiple>
+    
 
 <button
 id="keepCsvOnly"
@@ -1863,9 +1860,8 @@ alert(
 };
 document.getElementById("keepCsvOnly").onclick = async ()=>{
 
-    const files =
-        document.getElementById("csvFiles").files;
-
+    const files = document.getElementById("csvFile").files;
+    
     if(files.length==0){
 
         alert("اختر ملفات CSV أولاً");
