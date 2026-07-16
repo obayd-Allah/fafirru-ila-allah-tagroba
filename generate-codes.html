@@ -531,7 +531,8 @@ style="background:#ff9800;color:white">
 
 <label>اختر ملفات CSV</label>
 
-<input type="file" id="csvFile" accept=".csv" multiple>
+<input type="file" id="csvFile" accept=".csv">
+    <div id="csvFilesList" style="margin-top:10px"></div>
     
 
 <button
@@ -760,7 +761,7 @@ document.getElementById("status");
 const progressBar=
 
 document.getElementById("progressBar");
-
+let csvFiles = [];
 
 
 function randomCode(){
@@ -1986,6 +1987,24 @@ status.innerHTML="☁️ جار مقارنة الأكواد...";
     status.innerHTML = `✅ تم حفظ ${count} كود مستخدم`;
 
 };
+    document.getElementById("csvFile").addEventListener("change",(e)=>{
+
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    if(!csvFiles.find(f=>f.name===file.name && f.size===file.size)){
+
+        csvFiles.push(file);
+
+    }
+
+    document.getElementById("csvFilesList").innerHTML =
+        csvFiles.map(f=>"📄 "+f.name).join("<br>");
+
+    e.target.value = "";
+
+});
 </script>
 
 </body>
