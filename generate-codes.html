@@ -2013,6 +2013,55 @@ status.innerHTML="☁️ جار مقارنة الأكواد...";
     e.target.value = "";
 
 });
+    document.getElementById("deleteLastBatch").onclick = async ()=>{
+
+    if(!confirm("سيتم حذف آخر دفعة تم إنشاؤها، هل أنت متأكد؟"))
+        return;
+
+    const snapshot = await getDocs(
+        collection(db,"Codes")
+    );
+
+    let lastBatch = null;
+
+    snapshot.forEach(doc=>{
+
+        const data = doc.data();
+
+        if(
+            data.batchId &&
+            (!lastBatch || data.batchId > lastBatch)
+        ){
+            lastBatch = data.batchId;
+        }
+
+    });
+if(!lastBatch){
+
+        alert("لا توجد دفعات.");
+
+        return;
+
+    }
+
+    let deleted = 0;
+
+    for(const d of snapshot.docs){
+
+        if(d.data().batchId == lastBatch){
+
+            await deleteDoc(d.ref);
+
+            deleted++;
+
+        }
+
+    }
+alert(`تم حذف ${deleted} كود من آخر دفعة.`);
+
+    loadCodesTable();
+
+};
 </script>
 
 </body>
