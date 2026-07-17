@@ -1571,7 +1571,7 @@ format:"a4"
 });
 
 let created=0;
-
+const batchId = Date.now();
 while(created<count){
 
 const code=
@@ -1611,7 +1611,9 @@ used: false,
 
 createdAt: serverTimestamp(),
 
-usedAt: null
+usedAt: null,
+
+     batchId: batchId
 
 }
 
