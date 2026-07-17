@@ -460,7 +460,18 @@ students.filter(
 student=>isGirl(student.gender)
 );
 
+if(currentFilter==="boys"){
 
+girls=[];
+
+}
+
+
+if(currentFilter==="girls"){
+
+boys=[];
+
+}
 
 const searchValue =
 searchInput.value
