@@ -1133,11 +1133,13 @@ snapshot.forEach(doc => {
 
 });
 
-allCodes.sort((a,b)=>{
+allCodes.sort((a, b) => {
 
-    if(!a.createdAt || !b.createdAt) return 0;
+    const ta = a.createdAt?.seconds || 0;
 
-    return b.createdAt.seconds - a.createdAt.seconds;
+    const tb = b.createdAt?.seconds || 0;
+
+    return tb - ta;
 
 });
 
