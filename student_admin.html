@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+
+<title>
+لوحة إدارة الطلاب - ففروا إلى الله
+</title>
+
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="style_student_admin.css">
+
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+
+<h2>
+🌟 لوحة إدارة الطلاب 🌟
+</h2>
+
+
+
+<button
+id="addStudent">
+
+➕ إضافة طالب جديد
+
+</button>
+
+
+
+<hr>
+
+
+
+<div
+style="
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+">
+
+
+<div class="statCard">
+
+<div class="num"
+id="totalStudents">
+
+0
+
+</div>
+
+<div class="title">
+
+عدد الطلاب
+
+</div>
+
+</div>
+
+
+
+<div class="statCard">
+
+<div class="num"
+id="boysCount">
+
+0
+
+</div>
+
+<div class="title">
+
+👦 الأولاد
+
+</div>
+
+</div>
+
+
+
+<div class="statCard">
+
+<div class="num"
+id="girlsCount">
+
+0
+
+</div>
+
+<div class="title">
+
+👧 البنات
+
+</div>
+
+</div>
+
+
+
+<div class="statCard">
+
+<div class="num"
+id="totalPoints">
+
+0
+
+</div>
+
+<div class="title">
+
+💎 إجمالي الجواهر
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<hr>
+
+
+
+<label>
+
+🔍 البحث عن طالب
+
+</label>
+
+
+<input
+id="searchStudent"
+type="text"
+placeholder="اكتب اسم الطالب...">
+
+<div id="loading">
+
+⏳ جار تحميل بيانات الطلاب...
+
+</div>
+
+
+<div id="status">
+
+</div>
+
+
+
+<hr>
+
+
+
+<h2>
+
+👦 الأولاد
+
+</h2>
+
+
+<div
+id="boysContainer">
+
+</div>
+
+
+
+
+<hr>
+
+
+
+
+<h2>
+
+👧 البنات
+
+</h2>
+
+
+<div
+id="girlsContainer">
+
+</div>
+
+
+</div>
+
+<!-- ==========================
+     نافذة إضافة / تعديل طالب
+========================== -->
+
+<div
+id="studentModal"
+class="modal">
+
+
+<div
+class="modalBox">
+
+
+<h3
+id="modalTitle">
+
+إضافة طالب
+
+</h3>
+
+
+
+<label>
+
+اسم الطالب
+
+</label>
+
+
+<input
+id="studentName"
+type="text"
+placeholder="اسم الطالب">
+
+
+
+<label>
+
+عدد الجواهر
+
+</label>
+
+
+<input
+id="studentPoints"
+type="number"
+value="0"
+min="0">
+
+
+
+<label>
+
+النوع
+
+</label>
+
+
+<select
+id="studentGender">
+
+
+<option value="ذكر">
+
+👦 ولد
+
+</option>
+
+
+<option value="أنثى">
+
+👧 بنت
+
+</option>
+
+
+</select>
+
+
+
+<div
+class="modalButtons">
+
+
+<button
+id="saveStudent">
+
+💾 حفظ
+
+</button>
+
+
+
+<button
+id="cancelStudent">
+
+إلغاء
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- ==========================
+     نافذة التأكيد
+========================== -->
+
+
+<div
+id="confirmModal"
+class="modal">
+
+
+<div
+class="modalBox">
+
+
+<h3>
+
+⚠️ تأكيد العملية
+
+</h3>
+
+
+
+<p
+id="confirmText">
+
+هل أنت متأكد؟
+
+</p>
+
+
+
+<div
+class="modalButtons">
+
+
+<button
+id="confirmYes">
+
+نعم
+
+</button>
+
+
+
+<button
+id="confirmNo">
+
+لا
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- ==========================
+     نافذة الرسائل
+========================== -->
+
+
+<div
+id="messageModal"
+class="modal">
+
+
+<div
+class="modalBox">
+
+
+<h3
+id="messageIcon">
+
+✅
+
+</h3>
+
+
+
+<p
+id="messageText">
+
+تمت العملية بنجاح
+
+</p>
+
+
+
+<button
+id="closeMessage">
+
+إغلاق
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<script
+type="module"
+src="script_student_admin.js">
+
+</script>
+
+
+</body>
+
+
+</html>
