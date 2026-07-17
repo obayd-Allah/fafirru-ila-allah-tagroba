@@ -624,20 +624,47 @@ launchConfetti();
 launchGems();
 
 // رسالة النجاح
-rewardMessage.style.color = "#18a84c";
+// اختيار الرسائل حسب الجنس
+const messages =
+isBoy(student.gender)
+? boyMessages
+: girlMessages;
+
+// اختيار رسالة عشوائية
+const randomMessage =
+messages[Math.floor(Math.random() * messages.length)];
+
+// اختيار إيموجي عشوائي
+const randomEmoji =
+rewardEmojis[Math.floor(Math.random() * rewardEmojis.length)];
+
+// اختيار لون عشوائي
+const randomColor =
+rewardColors[Math.floor(Math.random() * rewardColors.length)];
 
 rewardMessage.innerHTML = `
-<div style="font-size:26px;font-weight:900;">
-🎉 بارك الله فيك
+<div
+style="
+font-size:26px;
+font-weight:900;
+color:${randomColor};
+text-shadow:0 2px 8px rgba(0,0,0,.12);
+">
+
+${randomEmoji} ${randomMessage}
+
 </div>
 
-<div style="
+<div
+style="
 margin-top:15px;
 font-size:28px;
 font-weight:900;
 color:#00a0ff;
 ">
+
 💎 +${rewardValue}
+
 </div>
 
 <div class="reward-total">
