@@ -62,6 +62,8 @@ let currentStudent=null;
 
 let confirmAction=null;
 
+let currentFilter = "all";
+
 /*==================================
           عناصر الصفحة
 ==================================*/
@@ -74,6 +76,27 @@ document.getElementById("girlsContainer");
 
 const searchInput=
 document.getElementById("searchStudent");
+
+document.querySelectorAll(".filterBtn").forEach(btn=>{
+
+btn.onclick = ()=>{
+
+document
+.querySelectorAll(".filterBtn")
+.forEach(b=>b.classList.remove("active"));
+
+
+btn.classList.add("active");
+
+
+currentFilter = btn.dataset.filter;
+
+
+renderStudents();
+
+};
+
+});
 
 const totalStudents=
 document.getElementById("totalStudents");
