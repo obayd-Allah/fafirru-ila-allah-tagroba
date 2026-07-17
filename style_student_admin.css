@@ -1,0 +1,680 @@
+/* ===========================
+   إعدادات عامة
+=========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:"Cairo",sans-serif;
+
+background:#eef5fb;
+
+padding:20px;
+
+color:#333;
+
+}
+
+.box{
+
+max-width:700px;
+
+margin:auto;
+
+background:#fff;
+
+padding:20px;
+
+border-radius:18px;
+
+box-shadow:0 0 20px rgba(0,0,0,.12);
+
+}
+
+/* ===========================
+   العناوين
+=========================== */
+
+h2{
+
+text-align:center;
+
+color:#1b5e20;
+
+margin-bottom:20px;
+
+font-size:30px;
+
+}
+
+/* ===========================
+   الحقول
+=========================== */
+
+label{
+
+display:block;
+
+margin-top:18px;
+
+margin-bottom:8px;
+
+font-weight:bold;
+
+color:#444;
+
+}
+
+input,
+select{
+
+width:100%;
+
+padding:13px;
+
+font-size:18px;
+
+border-radius:10px;
+
+border:1px solid #cfcfcf;
+
+font-family:"Cairo",sans-serif;
+
+outline:none;
+
+transition:.25s;
+
+}
+
+input:focus,
+select:focus{
+
+border-color:#1976d2;
+
+box-shadow:0 0 8px rgba(25,118,210,.25);
+
+}
+
+/* ===========================
+   الأزرار العامة
+=========================== */
+
+button{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:18px;
+
+font-family:"Cairo",sans-serif;
+
+transition:.25s;
+
+}
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+/* زر إضافة طالب */
+
+#addStudent{
+
+background:#2e7d32;
+
+color:#fff;
+
+margin-top:10px;
+
+margin-bottom:20px;
+
+}
+
+#addStudent:hover{
+
+background:#1b5e20;
+
+}
+
+/* ===========================
+   بطاقات الإحصائيات
+=========================== */
+
+.statCard{
+
+flex:1;
+
+min-width:140px;
+
+background:#f5f9ff;
+
+border-radius:14px;
+
+padding:16px;
+
+text-align:center;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.statCard .num{
+
+font-size:28px;
+
+font-weight:bold;
+
+color:#1976d2;
+
+}
+
+.statCard .title{
+
+margin-top:6px;
+
+font-size:15px;
+
+color:#666;
+
+}
+
+/* ===========================
+   الفاصل
+=========================== */
+
+hr{
+
+border:none;
+
+height:1px;
+
+background:#ddd;
+
+margin:25px 0;
+
+}
+/* ===========================
+   أقسام الطلاب
+=========================== */
+
+#boysContainer,
+#girlsContainer{
+
+display:flex;
+
+flex-direction:column;
+
+gap:16px;
+
+margin-top:18px;
+
+}
+
+/* ===========================
+   بطاقة الطالب
+=========================== */
+
+.studentCard{
+
+background:#ffffff;
+
+border-radius:18px;
+
+padding:18px;
+
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+border-right:6px solid #1976d2;
+
+transition:.25s;
+
+}
+
+.studentCard:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 8px 18px rgba(0,0,0,.12);
+
+}
+
+/* بطاقة البنات */
+
+.studentCard.girl{
+
+border-right-color:#e91e63;
+
+}
+
+/* ===========================
+   اسم الطالب
+=========================== */
+
+.studentName{
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#222;
+
+margin-bottom:12px;
+
+text-align:center;
+
+word-break:break-word;
+
+}
+
+/* ===========================
+   عدد الجواهر
+=========================== */
+
+.studentPoints{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:8px;
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#1976d2;
+
+margin-bottom:18px;
+
+}
+
+/* ===========================
+   صف الأزرار
+=========================== */
+
+.buttonsRow{
+
+display:flex;
+
+gap:10px;
+
+margin-bottom:10px;
+
+}
+
+/* ===========================
+   أزرار +10 و -10
+=========================== */
+
+.plusBtn{
+
+flex:1;
+
+background:#2e7d32;
+
+color:#fff;
+
+}
+
+.plusBtn:hover{
+
+background:#1b5e20;
+
+}
+
+.minusBtn{
+
+flex:1;
+
+background:#ef6c00;
+
+color:#fff;
+
+}
+
+.minusBtn:hover{
+
+background:#d84315;
+
+}
+
+/* ===========================
+   أزرار التعديل والحذف
+=========================== */
+
+.editBtn{
+
+flex:1;
+
+background:#1976d2;
+
+color:#fff;
+
+}
+
+.editBtn:hover{
+
+background:#0d47a1;
+
+}
+
+.deleteBtn{
+
+flex:1;
+
+background:#d32f2f;
+
+color:#fff;
+
+}
+
+.deleteBtn:hover{
+
+background:#b71c1c;
+
+}
+
+/* ===========================
+   حالة عدم وجود طلاب
+=========================== */
+
+.emptyMessage{
+
+text-align:center;
+
+padding:30px;
+
+font-size:20px;
+
+color:#888;
+
+background:#fafafa;
+
+border-radius:14px;
+
+border:2px dashed #ddd;
+
+}
+/* ===========================
+   النوافذ المنبثقة
+=========================== */
+
+.modal{
+
+position:fixed;
+
+top:0;
+
+right:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.45);
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+z-index:9999;
+
+}
+
+/* ===========================
+   صندوق النافذة
+=========================== */
+
+.modalBox{
+
+width:100%;
+
+max-width:420px;
+
+background:#fff;
+
+border-radius:20px;
+
+padding:22px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+animation:popup .25s ease;
+
+}
+
+@keyframes popup{
+
+from{
+
+opacity:0;
+
+transform:scale(.9);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+.modalBox h3{
+
+text-align:center;
+
+margin-bottom:18px;
+
+font-size:24px;
+
+color:#1b5e20;
+
+}
+
+.modalBox p{
+
+text-align:center;
+
+font-size:18px;
+
+line-height:1.8;
+
+margin:18px 0;
+
+color:#555;
+
+}
+
+/* ===========================
+   أزرار النوافذ
+=========================== */
+
+.modalButtons{
+
+display:flex;
+
+gap:10px;
+
+margin-top:20px;
+
+}
+
+.modalButtons button{
+
+flex:1;
+
+}
+
+#saveStudent,
+#confirmYes{
+
+background:#2e7d32;
+
+color:#fff;
+
+}
+
+#saveStudent:hover,
+#confirmYes:hover{
+
+background:#1b5e20;
+
+}
+
+#cancelStudent,
+#confirmNo{
+
+background:#9e9e9e;
+
+color:#fff;
+
+}
+
+#cancelStudent:hover,
+#confirmNo:hover{
+
+background:#757575;
+
+}
+
+#closeMessage{
+
+margin-top:15px;
+
+background:#1976d2;
+
+color:#fff;
+
+}
+
+#closeMessage:hover{
+
+background:#0d47a1;
+
+}
+
+/* ===========================
+   رسالة التحميل
+=========================== */
+
+#loading{
+
+display:none;
+
+text-align:center;
+
+margin-top:20px;
+
+font-size:19px;
+
+font-weight:bold;
+
+color:#1976d2;
+
+}
+
+/* ===========================
+   شريط الحالة
+=========================== */
+
+#status{
+
+margin-top:20px;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#2e7d32;
+
+}
+
+/* ===========================
+   الهواتف
+=========================== */
+
+@media (max-width:600px){
+
+body{
+
+padding:12px;
+
+}
+
+.box{
+
+padding:15px;
+
+}
+
+h2{
+
+font-size:25px;
+
+}
+
+.studentName{
+
+font-size:21px;
+
+}
+
+.studentPoints{
+
+font-size:22px;
+
+}
+
+.buttonsRow{
+
+flex-direction:column;
+
+}
+
+.modalButtons{
+
+flex-direction:column;
+
+}
+
+button{
+
+font-size:17px;
+
+padding:13px;
+
+}
+
+.statCard{
+
+min-width:100%;
+
+}
+
+}
