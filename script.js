@@ -316,7 +316,19 @@ rewardBtn.onclick = ()=>{
 
     studentSelect.innerHTML = "";
 
-    students.forEach(s=>{
+    // اختيار الطلاب حسب الفلتر الحالي
+    let list =
+        currentFilter === "boys"
+        ? students.filter(s => isBoy(s.gender))
+        : students.filter(s => isGirl(s.gender));
+
+    // ترتيب الأسماء أبجدياً
+    list.sort((a,b)=>
+        a.name.localeCompare(b.name,"ar")
+    );
+
+// إنشاء القائمة
+    list.forEach(s=>{
 
         studentSelect.innerHTML += `
 <option value="${s.name}">
