@@ -335,10 +335,19 @@ document.createElement("div");
 name.className =
 "studentName";
 
+const fullName =
+student.fullName ||
+student.name ||
+(
+(student.firstName || "") +
+" " +
+(student.familyName || "")
+).trim();
+
 name.textContent =
 (isBoy(student.gender) ? "👦 " : "👧 ")
 +
-student.name;
+fullName;
 
 
 
