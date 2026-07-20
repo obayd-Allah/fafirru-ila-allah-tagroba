@@ -515,21 +515,33 @@ if(searchValue){
 boys =
 boys.filter(student=>
 
-student.name
+(
+student.fullName ||
+student.name ||
+(
+(student.firstName || "") +
+" " +
+(student.familyName || "")
+).trim()
+)
 .toLowerCase()
 .includes(searchValue)
-
-);
 
 
 girls =
 girls.filter(student=>
 
-student.name
+(
+student.fullName ||
+student.name ||
+(
+(student.firstName || "") +
+" " +
+(student.familyName || "")
+).trim()
+)
 .toLowerCase()
 .includes(searchValue)
-
-);
 
 }
 
