@@ -135,15 +135,6 @@ document.getElementById("modalTitle");
 const studentName=
 document.getElementById("studentName");
 
-const studentFamily =
-document.getElementById("studentFamily");
-
-const nicknamesContainer =
-document.getElementById("nicknamesContainer");
-
-const addNickname =
-document.getElementById("addNickname");
-
 const studentPoints=
 document.getElementById("studentPoints");
 
@@ -551,6 +542,8 @@ student.name ||
 )
 .toLowerCase()
 .includes(searchValue)
+
+            );
 
 }
 
