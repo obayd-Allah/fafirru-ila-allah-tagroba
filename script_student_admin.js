@@ -141,10 +141,31 @@ document.getElementById("studentPoints");
 const studentGender=
 document.getElementById("studentGender");
 
+const studentFamily =
+document.getElementById("studentFamily");
+
+const nicknamesContainer =
+document.getElementById("nicknamesContainer");
+
+const addNickname =
+document.getElementById("addNickname");
 /*==================================
           دوال المساعدة
 ==================================*/
+addNickname.onclick = ()=>{
 
+const input =
+document.createElement("input");
+
+input.type = "text";
+
+input.className = "nicknameInput";
+
+input.placeholder = "اسم تدليل";
+
+nicknamesContainer.appendChild(input);
+
+};
 function showLoading(text){
 
 loading.style.display="block";
@@ -662,6 +683,15 @@ modalTitle.textContent=
 
 studentName.value="";
 
+studentFamily.value="";
+
+nicknamesContainer.innerHTML=`
+<input
+class="nicknameInput"
+type="text"
+placeholder="اسم تدليل">
+`;
+
 studentPoints.value=0;
 
 studentGender.value="ذكر";
@@ -679,15 +709,53 @@ modalTitle.textContent=
 "✏️ تعديل بيانات الطالب";
 
 
-studentName.value=
-student.name || "";
+studentName.value =
+student.firstName || student.name || "";
 
+studentFamily.value =
+student.familyName || "";
 
-studentPoints.value=
+nicknamesContainer.innerHTML="";
+
+const names =
+student.nicknames || [];
+
+if(names.length===0){
+
+const input =
+document.createElement("input");
+
+input.type="text";
+
+input.className="nicknameInput";
+
+input.placeholder="اسم تدليل";
+nicknamesContainer.appendChild(input);
+
+}else{
+
+names.forEach(n=>{
+
+const input =
+document.createElement("input");
+
+input.type="text";
+
+input.className="nicknameInput";
+
+input.placeholder="اسم تدليل";
+
+input.value=n;
+
+nicknamesContainer.appendChild(input);
+
+});
+}
+
+studentPoints.value =
 student.points || 0;
 
-
-studentGender.value=
+studentGender.value =
 student.gender || "ذكر";
 
 
@@ -752,20 +820,30 @@ document
 .onclick=async()=>{
 
 
-const name =
+const firstName =
 studentName.value.trim();
 
+const familyName =
+studentFamily.value.trim();
+
+const fullName =
+(firstName + " " + familyName).trim();
+
+const nicknames =
+[
+...document.querySelectorAll(".nicknameInput")
+]
+.map(input=>input.value.trim())
+.filter(name=>name!=="");
 
 const points =
 Number(studentPoints.value || 0);
-
 
 const gender =
 studentGender.value;
 
 
-
-if(name===""){
+if(firstName===""){
 
 showMessage(
 
