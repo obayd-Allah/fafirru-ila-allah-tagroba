@@ -524,6 +524,7 @@ getFullName(student)
 .toLowerCase()
 .includes(searchValue)
 
+);
 
 girls =
 girls.filter(student=>
@@ -532,8 +533,7 @@ getFullName(student)
 .toLowerCase()
 .includes(searchValue)
 
-            );
-
+);
 }
 
 
