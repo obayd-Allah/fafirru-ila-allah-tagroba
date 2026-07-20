@@ -265,7 +265,9 @@ group.forEach((s, i) => {
     if(word!==""){
 
         list = list.filter(s=>
-            s.name.includes(word)
+            getFullName(s)
+.toLowerCase()
+.includes(word.toLowerCase())
         );
 
     }
@@ -323,7 +325,7 @@ group.forEach((s, i) => {
 
 <div class="student-name">
 
-${medal} ${s.name}
+${medal} ${getFullName(s)}
 
 </div>
 
@@ -403,15 +405,19 @@ rewardBtn.onclick = ()=>{
 
     // ترتيب الأسماء أبجدياً
     list.sort((a,b)=>
-        a.name.localeCompare(b.name,"ar")
+        getFullName(a)
+.localeCompare(
+getFullName(b),
+"ar"
+)
     );
 
 // إنشاء القائمة
     list.forEach(s=>{
 
         studentSelect.innerHTML += `
-<option value="${s.name}">
-${s.name}
+<option value="${s.id}">
+${getFullName(s)}
 </option>
 `;
 
@@ -535,8 +541,8 @@ document.getElementById("sendReward").onclick = async ()=>{
     rewardMessage.textContent="⏳ جارٍ التحقق...";
 
     const student = students.find(
-        s=>s.name===studentSelect.value
-    );
+    s=>s.id===studentSelect.value
+);
 
     if(!student){
 
