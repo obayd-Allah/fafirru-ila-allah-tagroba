@@ -1077,8 +1077,8 @@ return;
 
 askConfirm(
 
-`${value>0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`
-            
+`${value>0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,
+
 async()=>{
 
 
