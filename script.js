@@ -218,6 +218,41 @@ function getFullName(student){
 
 }
 
+function getNickname(student){
+
+    const names =
+    student.nicknames || [];
+
+    if(names.length>0){
+
+        return names[
+            Math.floor(
+                Math.random()*names.length
+            )
+        ];
+
+    }
+
+    return student.firstName || student.name;
+
+}
+
+function parseMessage(message,student){
+
+    return message
+
+    .replaceAll(
+        "{name}",
+        student.firstName || student.name
+    )
+
+    .replaceAll(
+        "{nickname}",
+        getNickname(student)
+    );
+
+}
+
 function render(){
 
     let boys = students.filter(s => isBoy(s.gender));
@@ -641,8 +676,17 @@ isBoy(student.gender)
 
 // اختيار رسالة عشوائية
 const randomMessage =
-messages[Math.floor(Math.random() * messages.length)];
+parseMessage(
 
+messages[
+Math.floor(
+Math.random()*messages.length
+)],
+
+student
+
+);
+     
 // اختيار إيموجي عشوائي
 const randomEmoji =
 rewardEmojis[Math.floor(Math.random() * rewardEmojis.length)];
