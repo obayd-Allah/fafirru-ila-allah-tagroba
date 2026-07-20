@@ -757,7 +757,7 @@ rewardCode.value="";
 
 location.reload();
 
-},3200);
+},4000);
 
     }
 
