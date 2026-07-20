@@ -517,8 +517,7 @@ searchInput.value
 
 if(searchValue){
 
-boys =
-boys.filter(student=>
+boys = boys.filter(student =>
 
 getFullName(student)
 .toLowerCase()
@@ -526,8 +525,7 @@ getFullName(student)
 
 );
 
-girls =
-girls.filter(student=>
+girls = girls.filter(student =>
 
 getFullName(student)
 .toLowerCase()
@@ -1199,7 +1197,7 @@ return;
 
 askConfirm(
             
-`هل تريد حذف الطالب ${student.fullName || student.name} نهائياً؟`
+`هل تريد حذف الطالب ${student.fullName || student.name} نهائياً؟`,
             
 async()=>{
 
