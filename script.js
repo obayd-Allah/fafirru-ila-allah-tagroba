@@ -203,6 +203,21 @@ function isGirl(gender){
     ].includes(gender);
 
 }
+
+function getFullName(student){
+
+    return (
+        student.fullName ||
+        student.name ||
+        (
+            (student.firstName || "") +
+            " " +
+            (student.familyName || "")
+        ).trim()
+    );
+
+}
+
 function render(){
 
     let boys = students.filter(s => isBoy(s.gender));
