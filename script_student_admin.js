@@ -306,7 +306,19 @@ return [
 }
 
 
+function getFullName(student){
 
+return (
+student.fullName ||
+student.name ||
+(
+(student.firstName || "") +
+" " +
+(student.familyName || "")
+).trim()
+);
+
+}
 /*==================================
         إنشاء بطاقة طالب
 ==================================*/
@@ -335,14 +347,7 @@ document.createElement("div");
 name.className =
 "studentName";
 
-const fullName =
-student.fullName ||
-student.name ||
-(
-(student.firstName || "") +
-" " +
-(student.familyName || "")
-).trim();
+const fullName = getFullName(student);
 
 name.textContent =
 (isBoy(student.gender) ? "👦 " : "👧 ")
@@ -515,15 +520,7 @@ if(searchValue){
 boys =
 boys.filter(student=>
 
-(
-student.fullName ||
-student.name ||
-(
-(student.firstName || "") +
-" " +
-(student.familyName || "")
-).trim()
-)
+getFullName(student)
 .toLowerCase()
 .includes(searchValue)
 
@@ -531,15 +528,7 @@ student.name ||
 girls =
 girls.filter(student=>
 
-(
-student.fullName ||
-student.name ||
-(
-(student.firstName || "") +
-" " +
-(student.familyName || "")
-).trim()
-)
+getFullName(student)
 .toLowerCase()
 .includes(searchValue)
 
