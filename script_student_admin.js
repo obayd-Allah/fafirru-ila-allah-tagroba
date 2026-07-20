@@ -878,8 +878,15 @@ await addDoc(
 collection(db,"Students"),
 
 {
+firstName:firstName,
 
-name:name,
+familyName:familyName,
+
+fullName:fullName,
+
+name:fullName,
+
+nicknames:nicknames,
 
 points:points,
 
@@ -887,7 +894,6 @@ gender:gender,
 
 createdAt:
 serverTimestamp()
-
 }
 
 );
@@ -910,13 +916,19 @@ currentStudent
 ),
 
 {
+firstName:firstName,
 
-name:name,
+familyName:familyName,
+
+fullName:fullName,
+
+name:fullName,
+
+nicknames:nicknames,
 
 points:points,
 
 gender:gender
-
 }
 
 );
