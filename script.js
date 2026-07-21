@@ -691,6 +691,11 @@ totalPoints = newPoints;
 document.querySelector(".modal-box")
 .classList.add("success");
 
+// اهتزاز خفيف (إذا كان الجهاز يدعمه)
+if ("vibrate" in navigator) {
+    navigator.vibrate(35);
+}
+
 // كونفيتي
 launchConfetti();
 
