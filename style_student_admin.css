@@ -692,3 +692,50 @@ min-width:100%;
 }
 
 }
+.nicknameRow{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:8px;
+
+}
+
+.nicknameInput{
+
+    flex:1;
+
+}
+
+.removeNickname{
+
+    width:34px;
+
+    height:34px;
+border:none;
+
+    border-radius:8px;
+
+    background:#e53935;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.removeNickname:hover{
+background:#c62828;
+
+    transform:scale(1.05);
+
+}
