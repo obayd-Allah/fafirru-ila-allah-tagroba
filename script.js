@@ -725,10 +725,17 @@ rewardEmojis[Math.floor(Math.random() * rewardEmojis.length)];
 const randomColor =
 rewardColors[Math.floor(Math.random() * rewardColors.length)];
 
+const len = randomMessage.length;
+
+const messageSize =
+len > 40 ? "24px" :
+len > 28 ? "25px" :
+"26px";
+     
 rewardMessage.innerHTML = `
 <div
 style="
-font-size:26px;
+font-size:${messageSize};
 font-weight:900;
 color:${randomColor};
 text-shadow:0 2px 8px rgba(0,0,0,.12);
