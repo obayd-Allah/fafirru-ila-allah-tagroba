@@ -149,23 +149,49 @@ document.getElementById("nicknamesContainer");
 
 const addNickname =
 document.getElementById("addNickname");
+
+function createNicknameInput(value = "") {
+
+    const row = document.createElement("div");
+    row.className = "nicknameRow";
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "nicknameInput";
+    input.placeholder = "اسم تدليل";
+    input.value = value;
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "removeNickname";
+    remove.textContent = "✖";
+
+    remove.onclick = () => {
+
+        if (nicknamesContainer.children.length > 1) {
+            row.remove();
+        } else {
+            input.value = "";
+}
+
+    };
+
+    row.append(input, remove);
+
+    return row;
+
+}
 /*==================================
           دوال المساعدة
 ==================================*/
 addNickname.onclick = ()=>{
 
-const input =
-document.createElement("input");
-
-input.type = "text";
-
-input.className = "nicknameInput";
-
-input.placeholder = "اسم تدليل";
-
-nicknamesContainer.appendChild(input);
+    nicknamesContainer.appendChild(
+        createNicknameInput()
+    );
 
 };
+
 function showLoading(text){
 
 loading.style.display="block";
@@ -696,12 +722,11 @@ studentName.value="";
 
 studentFamily.value="";
 
-nicknamesContainer.innerHTML=`
-<input
-class="nicknameInput"
-type="text"
-placeholder="اسم تدليل">
-`;
+nicknamesContainer.innerHTML = "";
+
+nicknamesContainer.appendChild(
+    createNicknameInput()
+);
 
 studentPoints.value=0;
 
@@ -726,41 +751,26 @@ student.firstName || student.name || "";
 studentFamily.value =
 student.familyName || "";
 
-nicknamesContainer.innerHTML="";
+nicknamesContainer.innerHTML = "";
 
-const names =
-student.nicknames || [];
+const names = student.nicknames || [];
 
-if(names.length===0){
+if (names.length === 0) {
 
-const input =
-document.createElement("input");
+    nicknamesContainer.appendChild(
+        createNicknameInput()
+    );
 
-input.type="text";
+} else {
 
-input.className="nicknameInput";
+    names.forEach(name => {
 
-input.placeholder="اسم تدليل";
-nicknamesContainer.appendChild(input);
+        nicknamesContainer.appendChild(
+            createNicknameInput(name)
+        );
 
-}else{
+    });
 
-names.forEach(n=>{
-
-const input =
-document.createElement("input");
-
-input.type="text";
-
-input.className="nicknameInput";
-
-input.placeholder="اسم تدليل";
-
-input.value=n;
-
-nicknamesContainer.appendChild(input);
-
-});
 }
 
 studentPoints.value =
