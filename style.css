@@ -2765,3 +2765,9 @@ to{
 canvas.confetti-canvas{
     z-index:1000000 !important;
 }
+	.hide-ui{
+    opacity:0;
+    transform:translateY(-10px);
+    transition:.25s ease;
+    pointer-events:none;
+}
