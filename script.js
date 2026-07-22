@@ -975,16 +975,50 @@ document.getElementById("closeReward").onclick = ()=>{
 };
 function launchConfetti(){
 
-confetti({
+const canvas=document.createElement("canvas");
 
-particleCount:180,
+canvas.style.position="fixed";
 
-spread:90,
+canvas.style.inset="0";
 
-origin:{y:.7}
+canvas.style.width="100%";
+
+canvas.style.height="100%";
+
+canvas.style.zIndex="1000000";
+
+canvas.style.pointerEvents="none";
+
+document.body.appendChild(canvas);
+
+
+const myConfetti = confetti.create(
+    canvas,
+    {
+        resize:true,
+useWorker:true
+    }
+);
+
+
+myConfetti({
+
+    particleCount:180,
+
+    spread:90,
+
+    origin:{
+        y:.7
+    }
 
 });
 
+
+setTimeout(()=>{
+
+    canvas.remove();
+
+},3000);
 }
 
 function launchGems(){
