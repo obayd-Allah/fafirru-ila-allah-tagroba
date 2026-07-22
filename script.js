@@ -522,7 +522,19 @@ createSpark(
 
     // إزالة العنصر
 
+    reward.element.style.transition=
+"transform .12s ease, opacity .12s ease";
+
+reward.element.style.transform=
+"translate(-50%,-50%) scale(1.45)";
+
+reward.element.style.opacity="0";
+
+setTimeout(()=>{
+
     reward.element.remove();
+
+},120);
 
     const index=
 
