@@ -356,13 +356,13 @@ sets[
         Math.floor(Math.random()*sets.length)
     ];
 
-    let count=12;
+    let count=8;
 
     if(rewardValue>=20)
-        count=18;
+        count=9;
 
     if(rewardValue>=30)
-        count=24;
+        count=10;
 
     // مركز نافذة النجاح تقريبًا
     const startX=window.innerWidth/2;
