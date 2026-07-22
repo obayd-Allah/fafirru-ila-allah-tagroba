@@ -204,6 +204,8 @@ function createReward(icon,startX,startY){
 
     document.body.appendChild(el);
 
+ el.style.left = startX + "px";
+el.style.top = startY + "px";
     const reward={
 element:el,
 
