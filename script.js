@@ -487,6 +487,96 @@ floatingRewards.splice(i,1);
     }
 
 }
+/*====================================
+        فرقعة الإيموجي
+====================================*/
+
+function popReward(reward){
+
+    // منع تكرار الفرقعة
+    if(reward.popped) return;
+
+    reward.popped=true;
+
+    const color=
+
+        rewardSparkColors[reward.icon]
+
+        ||
+
+        defaultSparkColor;
+
+    // إنشاء الشرارات
+    for(let i=0;i<14;i++){
+createSpark(
+
+            reward.x,
+
+            reward.y,
+
+            color
+
+        );
+
+    }
+
+    // إزالة العنصر
+
+    reward.element.remove();
+
+    const index=
+
+        floatingRewards.indexOf(reward);
+
+    if(index!==-1){
+floatingRewards.splice(index,1);
+
+    }
+
+}
+/*====================================
+        إنشاء شرارة
+====================================*/
+
+function createSpark(x,y,color){
+
+    const spark=document.createElement("div");
+
+    spark.className="reward-spark";
+
+    spark.style.left=x+"px";
+
+    spark.style.top=y+"px";
+
+    spark.style.background=color;
+
+    const angle=Math.random()*Math.PI*2;
+
+    const distance=25+Math.random()*40;
+
+    spark.style.setProperty(
+"--dx",
+
+        Math.cos(angle)*distance+"px"
+
+    );
+
+    spark.style.setProperty(
+
+        "--dy",
+
+        Math.sin(angle)*distance+"px"
+
+    );
+
+    document.body.appendChild(spark);
+
+    setTimeout(()=>{
+
+        spark.remove();
+
+    },500);
+}
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
 const studentsCount = document.getElementById("studentsCount");
