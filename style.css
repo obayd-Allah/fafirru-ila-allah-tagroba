@@ -2691,8 +2691,17 @@ height:24px;
 .floating-reward{
 
     transition:transform .18s ease;
+position:fixed;
 
+    will-change:transform;
+
+    pointer-events:auto;
 }
+	
+
+    
+
+	
 
 .floating-reward.tap{
 
