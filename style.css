@@ -2695,15 +2695,19 @@ height:24px;
 
     position:fixed;
 
-    font-size:40px;
+    font-size:42px;
 
-    z-index:999999;
+    z-index:9999999;
 
     pointer-events:auto;
 
-    will-change:transform;
+    user-select:none;
 
-	}
+    cursor:pointer;
+
+    transform:translate(-50%,-50%);
+
+}
 
 	
 
