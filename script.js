@@ -1169,7 +1169,7 @@ launchConfetti();
 // جواهر متطايرة
 launchGems();
 
- launchFloatingRewards(rewardValue);
+// launchFloatingRewards(rewardValue);
 
 // رسالة النجاح
 // اختيار الرسائل حسب الجنس
