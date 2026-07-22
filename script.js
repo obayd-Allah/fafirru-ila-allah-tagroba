@@ -204,8 +204,8 @@ function createReward(icon,startX,startY){
 
     document.body.appendChild(el);
 
- el.style.left = startX + "px";
-el.style.top = startY + "px";
+ el.style.left = "0px";
+el.style.top = "0px";
     const reward={
 element:el,
 
@@ -438,27 +438,11 @@ function updateRewards(){
 
         }
 
-        reward.element.style.transform =
-`
-translate3d(
-${reward.x}px,
-${reward.y}px,
-0
-)
-rotate(${reward.rotation}deg)
-`;
+        reward.element.style.opacity = reward.opacity;
 
-        reward.element.style.opacity=
-        reward.opacity;
-
-        reward.element.style.transform =
-`
-translate3d(
-${reward.x}px,
-${reward.y}px,
-0
-)
-translate(-50%,-50%)
+reward.element.style.transform = `
+translate(${reward.x}px, ${reward.y}px)
+translate(-50%, -50%)
 rotate(${reward.rotation}deg)
 `;
 
