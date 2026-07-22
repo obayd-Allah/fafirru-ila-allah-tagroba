@@ -449,11 +449,16 @@ rotate(${reward.rotation}deg)
         reward.element.style.opacity=
         reward.opacity;
 
-        reward.element.style.transform=
-        `
-        translate(-50%,-50%)
+        reward.element.style.transform =
+`
+translate3d(
+${reward.x}px,
+${reward.y}px,
+0
+)
+translate(-50%,-50%)
 rotate(${reward.rotation}deg)
-        `;
+`;
 
         // حذف العنصر
 
