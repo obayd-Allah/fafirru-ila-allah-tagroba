@@ -303,6 +303,100 @@ icons[
     }
 
 }
+/*====================================
+        محرك الفيزياء
+====================================*/
+
+function updateRewards(){
+
+    for(let i=floatingRewards.length-1;i>=0;i--){
+
+        const reward=floatingRewards[i];
+
+        if(!reward.dragging){
+
+            // الحركة
+            reward.x+=reward.vx;
+            reward.y+=reward.vy;
+
+            // مقاومة الهواء
+            reward.vx*=0.992;
+            reward.vy*=0.998;
+// قوة الرفع
+            if(reward.vy>-3.2){
+
+                reward.vy-=0.025;
+
+            }
+
+            // التمايل
+            reward.vx+=Math.sin(
+                reward.rotation*Math.PI/180
+            )*0.015;
+
+            // الدوران
+            reward.rotation+=reward.rotationSpeed;
+
+        }
+// الاختفاء تدريجياً
+
+        if(reward.y<window.innerHeight*0.20){
+
+            reward.opacity-=0.02;
+
+        }
+
+        reward.element.style.left=
+        reward.x+"px";
+
+        reward.element.style.top=
+        reward.y+"px";
+
+        reward.element.style.opacity=
+        reward.opacity;
+
+        reward.element.style.transform=
+        `
+        translate(-50%,-50%)
+rotate(${reward.rotation}deg)
+        `;
+
+        // حذف العنصر
+
+        if(
+
+            reward.opacity<=0 ||
+
+            reward.y<-100 ||
+
+            reward.x<-100 ||
+
+            reward.x>window.innerWidth+100
+
+        ){
+
+            reward.element.remove();
+floatingRewards.splice(i,1);
+
+        }
+
+    }
+
+    if(floatingRewards.length){
+
+        rewardAnimation=
+
+        requestAnimationFrame(updateRewards);
+
+    }
+
+    else{
+
+        rewardAnimation=null;
+
+    }
+
+}
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
 const studentsCount = document.getElementById("studentsCount");
