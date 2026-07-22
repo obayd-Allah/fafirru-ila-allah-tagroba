@@ -1113,7 +1113,16 @@ document.getElementById("sendReward").onclick = async ()=>{
         return;
 
     }
+/ منع الضغط المتكرر وإخفاء عناصر الإدخال
+document.getElementById("sendReward").style.display = "none";
+rewardCode.style.display = "none";
+studentSelect.style.display = "none";
 
+// إخفاء عنوان الكود
+document.querySelector('label[for="rewardCode"]')?.style.setProperty("display","none");
+
+// إخفاء عنوان اختيار الطالب
+document.querySelector('label[for="studentSelect"]')?.style.setProperty("display","none");
     const codeDoc = await getCodeDocument(code);
 
     if(codeDoc===null){
@@ -1309,7 +1318,6 @@ location.reload();
             error.message ||
             "حدث خطأ أثناء استلام الجواهر.";
 
-    }
 
 };
 // إغلاق النافذة عند الضغط خارجها
