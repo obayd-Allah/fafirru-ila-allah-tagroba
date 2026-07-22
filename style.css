@@ -2688,18 +2688,22 @@ height:24px;
       نبضة الإيموجي
 ====================================*/
 
-.floating-reward{
 
-    transition:transform .18s ease;
-position:fixed;
+	
+
+    .floating-reward{
+
+    position:fixed;
+
+    font-size:40px;
+
+    z-index:999999;
+
+    pointer-events:auto;
 
     will-change:transform;
 
-    pointer-events:auto;
-}
-	
-
-    
+	}
 
 	
 
