@@ -240,7 +240,73 @@ pointerId:null,
 
     floatingRewards.push(reward);
 
-    return reward;
+enableRewardInteraction(reward);
+
+return reward;
+
+}
+/*====================================
+      السحب الفيزيائي
+====================================*/
+
+function enableRewardInteraction(reward){
+
+    const el=reward.element;
+
+    el.addEventListener("pointerdown",(e)=>{
+
+        reward.dragging=true;
+
+        reward.pointerId=e.pointerId;
+
+        reward.lastX=e.clientX;
+
+        reward.lastY=e.clientY;
+reward.lastTime=performance.now();
+
+        el.setPointerCapture(e.pointerId);
+
+    });
+
+    el.addEventListener("pointermove",(e)=>{
+
+        if(
+            !reward.dragging ||
+            reward.pointerId!==e.pointerId
+        ) return;
+
+        const now=performance.now();
+
+        const dt=Math.max(now-reward.lastTime,1);
+
+        // سرعة اليد
+reward.vx=(e.clientX-reward.lastX)/dt*2.5;
+        reward.vy=(e.clientY-reward.lastY)/dt*2.5;
+
+        reward.x=e.clientX;
+        reward.y=e.clientY;
+
+        reward.lastX=e.clientX;
+        reward.lastY=e.clientY;
+        reward.lastTime=now;
+
+    });
+
+    function release(e){
+
+        if(reward.pointerId!==e.pointerId)
+            return;
+
+        reward.dragging=false;
+
+        reward.pointerId=null;
+el.releasePointerCapture(e.pointerId);
+
+    }
+
+    el.addEventListener("pointerup",release);
+
+    el.addEventListener("pointercancel",release);
 
 }
 /*====================================
