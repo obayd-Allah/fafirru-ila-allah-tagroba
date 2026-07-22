@@ -436,11 +436,15 @@ function updateRewards(){
 
         }
 
-        reward.element.style.left=
-        reward.x+"px";
-
-        reward.element.style.top=
-        reward.y+"px";
+        reward.element.style.transform =
+`
+translate3d(
+${reward.x}px,
+${reward.y}px,
+0
+)
+rotate(${reward.rotation}deg)
+`;
 
         reward.element.style.opacity=
         reward.opacity;
