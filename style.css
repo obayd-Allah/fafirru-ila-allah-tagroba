@@ -2746,5 +2746,5 @@ to{
 
 }
 canvas.confetti-canvas{
-    z-index:99999 !important;
+    z-index:1000000 !important;
 }
