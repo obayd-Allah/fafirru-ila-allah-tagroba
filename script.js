@@ -147,17 +147,17 @@ const rewardSets=[
 
 const rareRewardSets=[
 
-["👑"],
+["🏅"],
 
 ["🏆"],
 
 ["🎖️"],
 
-["👑","💎"],
+["🍉","💎"],
 
 ["🏆","💎"],
 
-["👑","🏆","🎖️"]
+["🍉","🏆","🎖️"]
 
 ];
 
@@ -174,14 +174,14 @@ const rewardSparkColors={
 
 "✨":"#ffffff",
 
-"👑":"#ffe066",
+"🍉":"#ff5b45",
 
 "🏆":"#ffd700",
 
 "🎖️":"#d4af37"
 
 };
-const defaultSparkColor="#ffffff";
+const defaultSparkColor="#808080";
 
 // العناصر الحالية
 
