@@ -254,7 +254,31 @@ function enableRewardInteraction(reward){
     const el=reward.element;
 
     el.addEventListener("pointerdown",(e)=>{
+// نبضة
+el.classList.remove("tap");
 
+void el.offsetWidth;
+
+el.classList.add("tap");
+
+setTimeout(()=>{
+
+    el.classList.remove("tap");
+
+},180);
+
+// ضغطتان متتاليتان
+const now=Date.now();
+
+if(now-reward.lastTap<300){
+
+    popReward(reward);
+
+    return;
+
+}
+
+reward.lastTap=now;
         reward.dragging=true;
 
         reward.pointerId=e.pointerId;
