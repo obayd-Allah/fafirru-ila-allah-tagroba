@@ -121,7 +121,75 @@ const rewardColors = [
 "#10ac84", // أخضر احترافي
 
 ];
+/*====================================
+      Floating Reward System
+====================================*/
 
+// مجموعات الاحتفال
+
+const rewardSets=[
+
+["💎"],
+["🎁"],
+["🎈"],
+["⭐"],
+["✨"],
+
+["💎","🎁"],
+["💎","🎈"],
+["🎁","✨"],
+["⭐","✨"],
+
+["💎","🎈","🎁"]
+
+];
+// الاحتفال النادر
+
+const rareRewardSets=[
+
+["👑"],
+
+["🏆"],
+
+["🎖️"],
+
+["👑","💎"],
+
+["🏆","💎"],
+
+["👑","🏆","🎖️"]
+
+];
+
+// ألوان الشرارات
+
+const rewardSparkColors={
+"💎":"#37b8ff",
+
+"🎁":"#ffb347",
+
+"🎈":"#ff6b6b",
+
+"⭐":"#ffd43b",
+
+"✨":"#ffffff",
+
+"👑":"#ffe066",
+
+"🏆":"#ffd700",
+
+"🎖️":"#d4af37"
+
+};
+const defaultSparkColor="#ffffff";
+
+// العناصر الحالية
+
+const floatingRewards=[];
+
+// الأنيميشن
+
+let rewardAnimation=null;
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
 const studentsCount = document.getElementById("studentsCount");
