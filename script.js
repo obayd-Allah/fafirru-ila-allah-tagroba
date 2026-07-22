@@ -243,6 +243,66 @@ pointerId:null,
     return reward;
 
 }
+/*====================================
+      تشغيل الاحتفال
+====================================*/
+
+function launchFloatingRewards(rewardValue){
+
+    const sets=
+
+    rewardValue>=30
+
+    ?
+
+    [...rewardSets,...rareRewardSets]
+
+    :
+
+    rewardSets;
+
+    const icons=
+sets[
+        Math.floor(Math.random()*sets.length)
+    ];
+
+    let count=12;
+
+    if(rewardValue>=20)
+        count=18;
+
+    if(rewardValue>=30)
+        count=24;
+
+    // مركز نافذة النجاح تقريبًا
+    const startX=window.innerWidth/2;
+
+    const startY=window.innerHeight*0.70;
+
+    for(let i=0;i<count;i++){
+
+        createReward(
+icons[
+                Math.floor(Math.random()*icons.length)
+            ],
+
+            startX+(Math.random()*180-90),
+
+            startY+(Math.random()*40-20)
+
+        );
+
+    }
+
+    if(!rewardAnimation){
+
+        rewardAnimation=
+
+        requestAnimationFrame(updateRewards);
+
+    }
+
+}
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
 const studentsCount = document.getElementById("studentsCount");
@@ -822,6 +882,8 @@ launchConfetti();
 
 // جواهر متطايرة
 launchGems();
+
+ launchFloatingRewards(rewardValue);
 
 // رسالة النجاح
 // اختيار الرسائل حسب الجنس
