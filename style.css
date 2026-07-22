@@ -2684,3 +2684,64 @@ height:24px;
 .bronze .points{
     color:#fff !important;
 }
+/*====================================
+      نبضة الإيموجي
+====================================*/
+
+.floating-reward{
+
+    transition:transform .18s ease;
+
+}
+
+.floating-reward.tap{
+
+    transform:
+    translate(-50%,-50%)
+    scale(1.25);
+
+}
+/*====================================
+        شرارات الفرقعة
+====================================*/
+
+.reward-spark{
+
+    position:fixed;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:10000;
+animation:rewardSpark .5s ease-out forwards;
+
+    box-shadow:0 0 8px currentColor;
+
+}
+
+@keyframes rewardSpark{
+
+    from{
+
+        transform:
+        translate(0,0)
+        scale(1);
+
+        opacity:1;
+
+    }
+to{
+
+        transform:
+        translate(var(--dx),var(--dy))
+        scale(.15);
+
+        opacity:0;
+
+    }
+
+}
