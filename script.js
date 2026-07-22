@@ -190,6 +190,59 @@ const floatingRewards=[];
 // الأنيميشن
 
 let rewardAnimation=null;
+/*====================================
+      إنشاء إيموجي
+====================================*/
+
+function createReward(icon,startX,startY){
+
+    const el=document.createElement("div");
+
+    el.className="floating-reward";
+
+    el.textContent=icon;
+
+    document.body.appendChild(el);
+
+    const reward={
+element:el,
+
+        icon,
+
+        // الموقع
+        x:startX,
+        y:startY,
+
+        // السرعة (فيزياء)
+        vx:(Math.random()-0.5)*1.6,
+        vy:-(2.8+Math.random()*1.2),
+
+        // الدوران
+        rotation:Math.random()*360,
+        rotationSpeed:(Math.random()-0.5)*6,
+
+        // الشفافية
+        opacity:1,
+
+        // السحب
+        dragging:false,
+pointerId:null,
+
+        // للنقرة المزدوجة
+        lastTap:0,
+
+        // لحساب سرعة اليد
+        lastX:0,
+        lastY:0,
+        lastTime:0
+
+    };
+
+    floatingRewards.push(reward);
+
+    return reward;
+
+}
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
 const studentsCount = document.getElementById("studentsCount");
