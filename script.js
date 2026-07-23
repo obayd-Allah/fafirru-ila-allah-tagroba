@@ -1118,7 +1118,7 @@ rewardSending = false;
         return;
 
     }
-/ منع الضغط المتكرر وإخفاء عناصر الإدخال
+// منع الضغط المتكرر وإخفاء عناصر الإدخال
 document.getElementById("sendReward").style.display = "none";
 rewardCode.style.display = "none";
 studentSelect.style.display = "none";
@@ -1330,7 +1330,7 @@ studentSelect.style.display = "";
 
 document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
 document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
-
+} 
 };
 // إغلاق النافذة عند الضغط خارجها
 window.onclick = (e) => {
