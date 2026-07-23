@@ -25,6 +25,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const CURRENT_MOSQUE_ID = "fafirru-ila-allah";
+
 let students = [];
 let currentFilter = "boys";
 let rewardSending = false;
