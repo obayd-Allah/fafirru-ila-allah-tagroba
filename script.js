@@ -1319,7 +1319,7 @@ rewardCode.value="";
 
 location.reload();
 
-},6000);
+},5030);
 
     }
 
