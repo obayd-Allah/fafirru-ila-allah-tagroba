@@ -357,7 +357,8 @@ document.createElement("div");
 
 card.className =
 "studentCard";
-
+            
+card.dataset.studentId = student.id;
 
 if(isGirl(student.gender)){
 
