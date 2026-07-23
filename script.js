@@ -1095,7 +1095,7 @@ rewardSending = true;
     const code = rewardCode.value.trim();
 
     if(code===""){
-
+rewardSending = false;
         rewardMessage.style.color="red";
         rewardMessage.textContent="اكتب الكود أولاً.";
 
@@ -1111,7 +1111,7 @@ rewardSending = true;
 );
 
     if(!student){
-
+rewardSending = false;
         rewardMessage.style.color="red";
         rewardMessage.textContent="الطالب غير موجود.";
 
@@ -1131,7 +1131,7 @@ document.querySelector('label[for="studentSelect"]')?.style.setProperty("display
     const codeDoc = await getCodeDocument(code);
 
     if(codeDoc===null){
-
+rewardSending = false;
         rewardMessage.style.color="red";
         rewardMessage.textContent="الكود غير موجود.";
 
@@ -1203,7 +1203,7 @@ document.querySelector(".modal-box")
 
 // اهتزاز خفيف (إذا كان الجهاز يدعمه)
 if ("vibrate" in navigator) {
-    navigator.vibrate(35);
+    navigator.vibrate(40);
 }
 
 // كونفيتي
