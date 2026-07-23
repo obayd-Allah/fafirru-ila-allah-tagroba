@@ -1218,7 +1218,9 @@ data-id="${item.id}">
 
 <td>${item.points}</td>
 
-<td>${item.student || "-"}</td>
+<td data-student-id="${item.studentId || ""}">
+    ${item.student || "-"}
+</td>
 
 <td>
 
