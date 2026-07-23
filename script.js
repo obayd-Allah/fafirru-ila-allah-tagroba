@@ -27,6 +27,7 @@ const db = getFirestore(app);
 
 let students = [];
 let currentFilter = "boys";
+let rewardSending = false;
 /*====================================
         رسائل النجاح
 ====================================*/
@@ -965,6 +966,8 @@ floatingRewardBtn.onclick = ()=>{
 
 document.getElementById("closeReward").onclick = ()=>{
 
+    if(rewardSending) return;
+
     rewardModal.style.display = "none";
 
 };
@@ -1086,7 +1089,9 @@ requestAnimationFrame(step);
 
 }
 document.getElementById("sendReward").onclick = async ()=>{
-
+if (rewardSending) return;
+rewardSending = true;
+ 
     const code = rewardCode.value.trim();
 
     if(code===""){
@@ -1317,7 +1322,14 @@ location.reload();
         rewardMessage.textContent =
             error.message ||
             "حدث خطأ أثناء استلام الجواهر.";
+rewardSending = false;
 
+document.getElementById("sendReward").style.display = "";
+rewardCode.style.display = "";
+studentSelect.style.display = "";
+
+document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
+document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
 
 };
 // إغلاق النافذة عند الضغط خارجها
