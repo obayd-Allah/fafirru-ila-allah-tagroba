@@ -26,6 +26,8 @@ from
 
 "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
+import { APP_CONFIG } from "./config.js";
+
 /*==================================
             Firebase
 ==================================*/
@@ -947,6 +949,8 @@ familyName:familyName,
 
 fullName:fullName,
 
+mosqueId: APP_CONFIG.mosqueId,
+            
 name:fullName,
 
 nicknames:nicknames,
