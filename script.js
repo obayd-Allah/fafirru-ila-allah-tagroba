@@ -1335,6 +1335,8 @@ document.querySelector('label[for="studentSelect"]')?.style.removeProperty("disp
 // إغلاق النافذة عند الضغط خارجها
 window.onclick = (e) => {
 
+    if(rewardSending) return;
+
     if (e.target === rewardModal) {
 
         rewardModal.style.display = "none";
@@ -1342,7 +1344,6 @@ window.onclick = (e) => {
     }
 
 };
-
 // زر Enter داخل مربع الكود
 rewardCode.addEventListener("keydown", (e) => {
 
