@@ -914,6 +914,8 @@ points:points,
 
 gender:gender,
 
+mosqueId: CURRENT_MOSQUE_ID, 
+
 createdAt:
 serverTimestamp()
 }
