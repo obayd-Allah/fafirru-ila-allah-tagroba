@@ -764,6 +764,7 @@ const db=
 
 getFirestore(app);
 
+ let studentsList = [];
 const CURRENT_MOSQUE_ID = "fafirru-ila-allah";
  
 const status=
@@ -819,6 +820,30 @@ codes.add(parts[0].trim());
     return codes;
 
     }
+
+ async function loadStudents(){
+
+    studentsList = [];
+
+    const snapshot = await getDocs(
+        collection(db,"Students")
+    );
+
+    snapshot.forEach(doc=>{
+
+        const data = doc.data();
+
+        studentsList.push({
+
+            id: doc.id,
+
+            name: data.fullName || data.name || ""
+
+        });
+
+    });
+
+ }
 async function loadExistingCodes(){
 
 const set=
@@ -1489,7 +1514,14 @@ renderCodesTable();
 
     document.getElementById("filterUsed").onchange = renderCodesTable;
 
-    window.addEventListener("load", loadCodesTable);
+    window.addEventListener("load", async()=>{
+
+    await loadStudents();
+
+    await loadCodesTable();
+
+});
+     
 document.getElementById("selectAll").onclick = () => {
 
     const checks = document.querySelectorAll(".rowCheck");
