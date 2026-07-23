@@ -1131,6 +1131,14 @@ document.querySelector('label[for="studentSelect"]')?.style.setProperty("display
     const codeDoc = await getCodeDocument(code);
 
     if(codeDoc===null){
+
+
+     document.getElementById("sendReward").style.display = "";
+rewardCode.style.display = "";
+studentSelect.style.display = "";
+
+document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
+document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
 rewardSending = false;
         rewardMessage.style.color="red";
         rewardMessage.textContent="الكود غير موجود.";
