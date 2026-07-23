@@ -1128,7 +1128,13 @@ document.querySelector('label[for="rewardCode"]')?.style.setProperty("display","
 
 // إخفاء عنوان اختيار الطالب
 document.querySelector('label[for="studentSelect"]')?.style.setProperty("display","none");
-    const codeDoc = await getCodeDocument(code);
+
+// إخفاء عنوان النافذة
+document.querySelector(".modal-box h3").style.display = "none";
+
+// إخفاء زر الإغلاق
+document.getElementById("closeReward").style.display = "none";
+ const codeDoc = await getCodeDocument(code);
 
     if(codeDoc===null){
 
@@ -1338,6 +1344,9 @@ studentSelect.style.display = "";
 
 document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
 document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
+     document.querySelector(".modal-box h3").style.display = "";
+document.getElementById("closeReward"
+                        
 } 
 };
 // إغلاق النافذة عند الضغط خارجها
