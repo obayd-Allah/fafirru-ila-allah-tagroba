@@ -1437,7 +1437,7 @@ if(!confirm(`حذف ${ids.length} كود؟`))
     used:usedAnswer
 
 };
-
+     
 if(
 
     usedAnswer &&
@@ -1468,11 +1468,13 @@ await updateDoc(
 );
         item.points = Number(newPoints);
 
-        item.student = newStudent;
+item.student = newStudent;
 
-        item.used = usedAnswer;
+item.studentId = updateData.studentId;
 
-        renderCodesTable();
+item.used = usedAnswer;
+
+renderCodesTable();
 
     }
 
