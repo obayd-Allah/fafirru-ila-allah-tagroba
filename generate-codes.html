@@ -1419,6 +1419,8 @@ if(!confirm(`حذف ${ids.length} كود؟`))
             item.student || ""
         );
 
+         const currentStudentId = item.studentId || "";
+
         if(newStudent===null)
             return;
 
