@@ -218,7 +218,7 @@ element:el,
 
         // السرعة (فيزياء)
         vx:(Math.random()-0.5)*1.6,
-        vy:-(2.8+Math.random()*1.2),
+        vy:-(1.2+Math.random()*0.5),
 
         // الدوران
         rotation:Math.random()*360,
@@ -368,24 +368,21 @@ sets[
         count=10;
 
     // مركز نافذة النجاح تقريبًا
-    const startX=window.innerWidth/2;
+    const startY = window.innerHeight + 20;
 
-    const startY=window.innerHeight*0.70;
+for (let i = 0; i < count; i++) {
 
-    for(let i=0;i<count;i++){
+    const startX =
+        (window.innerWidth / (count + 1)) * (i + 1) +
+        (Math.random() * 60 - 30);
 
-        createReward(
-icons[
-                Math.floor(Math.random()*icons.length)
-            ],
+    createReward(
+        icons[Math.floor(Math.random() * icons.length)],
+        startX,
+        startY
+    );
 
-            startX+(Math.random()*180-90),
-
-            startY+(Math.random()*40-20)
-
-        );
-
-    }
+}
 
     if(!rewardAnimation){
 
@@ -416,11 +413,9 @@ function updateRewards(){
             reward.vx*=0.992;
             reward.vy*=0.998;
 // قوة الرفع
-            if(reward.vy>-3.2){
-
-                reward.vy-=0.025;
-
-            }
+            if(reward.vy>-1.8){
+    reward.vy-=0.008;
+}
 
             // التمايل
             reward.vx+=Math.sin(
@@ -433,11 +428,9 @@ function updateRewards(){
         }
 // الاختفاء تدريجياً
 
-        if(reward.y<window.innerHeight*0.20){
-
-            reward.opacity-=0.02;
-
-        }
+        if(reward.y<window.innerHeight*0.10){
+    reward.opacity-=0.01;
+}
 
         reward.element.style.opacity = reward.opacity;
 
