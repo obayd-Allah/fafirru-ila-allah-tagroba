@@ -1141,7 +1141,8 @@ document.querySelector('label[for="studentSelect"]')?.style.removeProperty("disp
 rewardSending = false;
         rewardMessage.style.color="red";
         rewardMessage.textContent="الكود غير موجود.";
-
+document.querySelector(".modal-box h3").style.display = "";
+document.getElementById("closeReward").style.display = "";
         return;
 
     }
@@ -1338,7 +1339,7 @@ studentSelect.style.display = "";
 document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
 document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
      document.querySelector(".modal-box h3").style.display = "";
-document.getElementById("closeReward"
+document.getElementById("closeReward").style.display = "";
                         
 } 
 };
