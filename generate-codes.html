@@ -736,6 +736,8 @@ serverTimestamp
 from
 
 "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+ import { APP_CONFIG } from "./config.js";
+ 
 const firebaseConfig={
 
 apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
@@ -1666,7 +1668,9 @@ points: points,
 student: "",
 
 studentId: "",
-
+ 
+mosqueId: APP_CONFIG.mosqueId,
+ 
 used: false,
 
 mosqueId: CURRENT_MOSQUE_ID,
