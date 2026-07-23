@@ -1081,7 +1081,7 @@ const student =
 students.find(
 s=>s.id===id
 );
-
+const studentId = student.id;
 
 if(!student)
 return;
@@ -1124,7 +1124,7 @@ await updateDoc(
 doc(
 db,
 "Students",
-id
+studentId
 ),
 
 {
@@ -1202,7 +1202,7 @@ const student =
 students.find(
 s=>s.id===id
 );
-
+const studentId = student.id;
 
 if(!student)
 return;
@@ -1230,7 +1230,7 @@ await deleteDoc(
 doc(
 db,
 "Students",
-id
+studentId
 )
 
 );
