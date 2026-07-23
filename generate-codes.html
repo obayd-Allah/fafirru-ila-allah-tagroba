@@ -1428,6 +1428,8 @@ if(!confirm(`حذف ${ids.length} كود؟`))
 
     student:newStudent,
 
+    studentId:item.studentId || "",
+
     used:usedAnswer
 
 };
@@ -1446,6 +1448,10 @@ if(
 if(!usedAnswer){
 
     updateData.usedAt = null;
+
+    updateData.student = "";
+
+    updateData.studentId = "";
 
 }
 
@@ -1618,6 +1624,8 @@ code: code,
 points: points,
 
 student: "",
+
+studentId: "",
 
 used: false,
 
