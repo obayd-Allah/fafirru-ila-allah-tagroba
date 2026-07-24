@@ -1425,3 +1425,27 @@ window.addEventListener("scroll", () => {
     }
 
 });
+window.addEventListener("DOMContentLoaded", () => {
+
+    const logo = document.querySelector(".logo");
+
+    if (logo) {
+
+        logo.src = CURRENT_MOSQUE.logo;
+
+        logo.alt = CURRENT_MOSQUE.name;
+
+    }
+
+    const title = document.querySelector(".hero-title");
+
+    if (title) {
+
+        title.src = CURRENT_MOSQUE.title;
+
+        title.alt = CURRENT_MOSQUE.name;
+
+    }
+document.title = CURRENT_MOSQUE.name;
+
+});
