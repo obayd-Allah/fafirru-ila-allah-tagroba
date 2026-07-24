@@ -28,6 +28,7 @@ const db = getFirestore(app);
 let students = [];
 let currentFilter = "boys";
 let rewardSending = false;
+import { APP_CONFIG } from "./config.js";
 /*====================================
         رسائل النجاح
 ====================================*/
@@ -602,12 +603,17 @@ async function loadStudents(){
 
     snapshot.forEach(doc=>{
 
-        students.push({
-            id:doc.id,
-            ...doc.data()
-        });
+const data = doc.data();
 
-    });
+if(data.mosqueId !== APP_CONFIG.mosqueId)
+    return;
+
+students.push({
+id:doc.id,
+...data
+});
+
+});
 
     loading.style.display = "none";
 
@@ -620,10 +626,11 @@ loadStudents();
 async function getCodeDocument(code){
 
     const q = query(
-        collection(db,"Codes"),
-        where("code","==",code),
-        limit(1)
-    );
+collection(db,"Codes"),
+where("code","==",code),
+where("mosqueId","==",APP_CONFIG.mosqueId),
+limit(1)
+);
 
     const snap = await getDocs(q);
 
