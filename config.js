@@ -14,6 +14,8 @@ export const APP_CONFIG = {
 
             logo: "new logo.png",
 
+            slogan: "ففروا إلى الله",
+
             title: "title.png"
 
         }
