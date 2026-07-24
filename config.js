@@ -1,4 +1,9 @@
+import { MOSQUES } from "./mosques.js";
+
 export const APP_CONFIG = {
+
     mosqueId: "mosque_001",
-    mosqueName: "مسجد ففروا إلى الله"
+
+    mosque: MOSQUES["mosque_001"]
+
 };
