@@ -28,7 +28,10 @@ const db = getFirestore(app);
 let students = [];
 let currentFilter = "boys";
 let rewardSending = false;
-import { APP_CONFIG } from "./config.js";
+import {
+    APP_CONFIG,
+    CURRENT_MOSQUE
+} from "./config.js";
 /*====================================
         رسائل النجاح
 ====================================*/
