@@ -871,7 +871,28 @@ Number(studentPoints.value || 0);
 const gender =
 studentGender.value;
 
+// منع تكرار الاسم داخل نفس المسجد
+const duplicate = students.find(s => {
 
+    if (currentStudent && s.id === currentStudent)
+        return false;
+
+    return (
+        (s.fullName || "").trim() === fullName &&
+        s.mosqueId === APP_CONFIG.mosqueId
+    );
+
+});
+
+if (duplicate) {
+
+    showMessage(
+        "❌ يوجد طالب بهذا الاسم بالفعل",
+        "error"
+    );
+
+    return;
+}
 if(firstName===""){
 
 showMessage(
