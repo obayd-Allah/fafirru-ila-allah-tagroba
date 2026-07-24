@@ -18,6 +18,15 @@ export const APP_CONFIG = {
 
             title: "title.png"
 
+            whatsapp:
+            "https://chat.whatsapp.com/ISuJUCU31U8DdjYEAITmye?s=cl&p=a&ilr=1",
+
+            studentsPageTitle:
+            "لوحة نقاط التلاميذ",
+
+            primaryColor:
+            "#1976d2"
+
         }
 }
 
