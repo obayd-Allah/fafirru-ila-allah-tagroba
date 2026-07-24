@@ -2017,9 +2017,12 @@ const snapshot = await getDocs(q);
 
     status.innerHTML = "⏳ جار استخراج الأكواد المستخدمة...";
 
-    const snapshot = await getDocs(
-        collection(db,"Codes")
-    );
+    const q = query(
+    collection(db,"Codes"),
+    where("mosqueId","==",APP_CONFIG.mosqueId)
+);
+
+const snapshot = await getDocs(q);
 
     let csv = "الكود,الجواهر,الطالب\n";
 
