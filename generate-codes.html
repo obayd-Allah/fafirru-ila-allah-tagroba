@@ -1151,9 +1151,12 @@ async function loadCodesTable() {
 
     tbody.innerHTML = "";
 
-    const snapshot = await getDocs(
-        collection(db, "Codes")
-    );
+    const q = query(
+    collection(db, "Codes"),
+    where("mosqueId", "==", APP_CONFIG.mosqueId)
+);
+
+const snapshot = await getDocs(q);
 
     allCodes = [];
 
@@ -1876,19 +1879,12 @@ status.innerHTML=
 
 "⏳ جارٍ حذف الأكواد...";
 
-const snapshot=
-
-await getDocs(
-
-collection(
-
-db,
-
-"Codes"
-
-)
-
+const q = query(
+    collection(db,"Codes"),
+    where("mosqueId","==",APP_CONFIG.mosqueId)
 );
+
+const snapshot = await getDocs(q);
 
 const total=
 
@@ -1974,9 +1970,12 @@ document.getElementById("keepCsvOnly").onclick = async ()=>{
         await readCsvCodes(files);
 status.innerHTML="☁️ جار مقارنة الأكواد...";
 
-    const snapshot =
-        await getDocs(collection(db,"Codes"));
+    const q = query(
+    collection(db,"Codes"),
+    where("mosqueId","==",APP_CONFIG.mosqueId)
+);
 
+const snapshot = await getDocs(q);
     let deleted=0;
 
     let total=snapshot.docs.length;
@@ -2093,9 +2092,12 @@ if(
     if(!confirm("سيتم حذف آخر دفعة تم إنشاؤها، هل أنت متأكد؟"))
         return;
 
-    const snapshot = await getDocs(
-        collection(db,"Codes")
-    );
+    const q = query(
+    collection(db,"Codes"),
+    where("mosqueId","==",APP_CONFIG.mosqueId)
+);
+
+const snapshot = await getDocs(q);
 
     let lastBatch = null;
 
