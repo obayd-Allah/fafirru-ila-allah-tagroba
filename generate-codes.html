@@ -833,23 +833,23 @@ codes.add(parts[0].trim());
 
     studentsList = [];
 
-    const snapshot = await getDocs(
-        collection(db,"Students")
-    );
+    const q = query(
+    collection(db,"Students"),
+    where("mosqueId","==",APP_CONFIG.mosqueId)
+);
 
-    snapshot.forEach(doc=>{
+const snapshot = await getDocs(q);
 
-        const data = doc.data();
+snapshot.forEach(doc=>{
 
-        studentsList.push({
+    const data = doc.data();
 
-            id: doc.id,
-
-            name: data.fullName || data.name || ""
-
-        });
-
+    studentsList.push({
+        id: doc.id,
+        name: data.fullName || data.name || ""
     });
+
+});
 
  }
 async function loadExistingCodes(){
@@ -2171,7 +2171,7 @@ alert(`تم حذف ${deleted} كود من آخر دفعة.`);
         await updateDoc(
             student.ref,
             {
-mosqueId: "mosque_001"
+mosqueId: APP_CONFIG.mosqueId
             }
         );
 
