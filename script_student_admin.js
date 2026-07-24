@@ -247,11 +247,16 @@ collection(db,"Students")
 
 snapshot.forEach(document=>{
 
+const data = document.data();
+
+if(data.mosqueId !== APP_CONFIG.mosqueId)
+    return;
+
 students.push({
 
 id:document.id,
 
-...document.data()
+...data
 
 });
 
