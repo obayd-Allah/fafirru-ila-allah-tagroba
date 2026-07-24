@@ -921,7 +921,7 @@ points:points,
 
 gender:gender,
 
-mosqueId: CURRENT_MOSQUE_ID, 
+mosqueId: APP_CONFIG.mosqueId,
 
 createdAt:
 serverTimestamp()
