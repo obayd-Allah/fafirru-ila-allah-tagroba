@@ -1426,12 +1426,21 @@ window.addEventListener("scroll", () => {
 
 });
 window.addEventListener("DOMContentLoaded", () => {
+ const whatsapp =
+document.getElementById("whatsappLink");
+
+if(whatsapp){
+
+    whatsapp.href =
+    CURRENT_MOSQUE.whatsapp;
+
+}
 const subtitle = document.getElementById("pageSubtitle");
 
 if (subtitle) {
 
     subtitle.textContent =
-        CURRENT_MOSQUE.slogan;
+CURRENT_MOSQUE.studentsPageTitle;
 
 }
  const footer = document.getElementById("footerText");
