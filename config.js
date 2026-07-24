@@ -16,7 +16,7 @@ export const APP_CONFIG = {
 
             slogan: "ففروا إلى الله",
 
-            title: "title.png"
+            title: "title.png",
 
             whatsapp:
             "https://chat.whatsapp.com/ISuJUCU31U8DdjYEAITmye?s=cl&p=a&ilr=1",
