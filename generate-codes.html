@@ -732,6 +732,8 @@ updateDoc,
 doc,
 
 getDoc,
+ query,
+where,
 
 serverTimestamp
 
@@ -856,19 +858,12 @@ const set=
 
 new Set();
 
-const snapshot=
-
-await getDocs(
-
-collection(
-
-db,
-
-"Codes"
-
-)
-
+const q = query(
+collection(db,"Codes"),
+where("mosqueId","==",APP_CONFIG.mosqueId)
 );
+
+const snapshot = await getDocs(q);
 
 snapshot.forEach(doc=>{
 
