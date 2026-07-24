@@ -1426,7 +1426,22 @@ window.addEventListener("scroll", () => {
 
 });
 window.addEventListener("DOMContentLoaded", () => {
+const subtitle = document.getElementById("pageSubtitle");
 
+if (subtitle) {
+
+    subtitle.textContent =
+        CURRENT_MOSQUE.slogan;
+
+}
+ const footer = document.getElementById("footerText");
+
+if (footer) {
+
+    footer.textContent =
+        "© " + CURRENT_MOSQUE.name;
+
+}
     const logo = document.querySelector(".logo");
 
     if (logo) {
