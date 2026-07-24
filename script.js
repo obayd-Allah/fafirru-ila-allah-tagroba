@@ -1109,15 +1109,26 @@ rewardSending = false;
     const student = students.find(
     s=>s.id===studentSelect.value
 );
+if (!student || student.mosqueId !== APP_CONFIG.mosqueId) {
 
-    if(!student){
-rewardSending = false;
-        rewardMessage.style.color="red";
-        rewardMessage.textContent="الطالب غير موجود.";
+    rewardSending = false;
 
-        return;
+    rewardMessage.style.color = "red";
+    rewardMessage.textContent = "الطالب غير موجود.";
 
-    }
+    document.getElementById("sendReward").style.display = "";
+    rewardCode.style.display = "";
+    studentSelect.style.display = "";
+
+    document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
+    document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
+
+    document.querySelector(".modal-box h3").style.display = "";
+    document.getElementById("closeReward").style.display = "";
+
+    return;
+}
+    
 // منع الضغط المتكرر وإخفاء عناصر الإدخال
 document.getElementById("sendReward").style.display = "none";
 rewardCode.style.display = "none";
@@ -1195,9 +1206,12 @@ rewardValue = Number(rewardData.points || 0);
 
             const studentData = studentSnap.data();
 
-            const newPoints =
-Number(studentData.points || 0) +
-rewardValue;
+if (studentData.mosqueId !== APP_CONFIG.mosqueId) {
+    throw new Error("الطالب غير موجود");
+}
+
+const newPoints =
+    Number(studentData.points || 0) + rewardValue;
 
 totalPoints = newPoints;
 
