@@ -1182,8 +1182,11 @@ let totalPoints = 0;
 
             const rewardData = rewardSnap.data();
 
+if (rewardData.mosqueId !== APP_CONFIG.mosqueId) {
+    throw new Error("الكود غير موجود");
+}
+
 rewardValue = Number(rewardData.points || 0);
-         
             if(rewardData.used===true){
 
                 throw new Error("تم استخدام هذا الكود من قبل");
