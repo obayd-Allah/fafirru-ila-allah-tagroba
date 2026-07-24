@@ -868,11 +868,12 @@ db,
 
 snapshot.forEach(doc=>{
 
-set.add(
+const data = doc.data();
 
-doc.data().code
+if(data.mosqueId !== APP_CONFIG.mosqueId)
+    return;
 
-);
+set.add(data.code);
 
 });
 
@@ -1159,10 +1160,15 @@ async function loadCodesTable() {
 
 snapshot.forEach(doc => {
 
-    allCodes.push({
-        id: doc.id,
-        ...doc.data()
-    });
+const data = doc.data();
+
+if(data.mosqueId !== APP_CONFIG.mosqueId)
+    return;
+
+allCodes.push({
+id: doc.id,
+...data
+});
 
 });
 
