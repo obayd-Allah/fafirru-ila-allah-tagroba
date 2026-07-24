@@ -528,6 +528,9 @@ style="background:#ff5722;color:white">
 حذف آخر دفعة
 
 </button>
+ <button id="addMosqueId" style="background:#1565c0;color:white">
+إضافة mosqueId لجميع الطلاب
+ </button>
  <div
   style="display:none">
  <button
@@ -2146,6 +2149,36 @@ alert(`تم حذف ${deleted} كود من آخر دفعة.`);
 
     loadCodesTable();
 
+};
+ document.getElementById("addMosqueId").onclick = async () => {
+
+    if (!confirm("سيتم إضافة mosqueId لجميع الطلاب الذين لا يملكونه، هل أنت متأكد؟"))
+        return;
+
+    const snapshot = await getDocs(
+        collection(db, "Students")
+    );
+
+    let updated = 0;
+
+    for (const student of snapshot.docs) {
+
+        const data = student.data();
+
+        if (data.mosqueId)
+            continue;
+
+        await updateDoc(
+            student.ref,
+            {
+mosqueId: "mosque_001"
+            }
+        );
+
+        updated++;
+    }
+
+    alert(`تم تحديث ${updated} طالب بنجاح.`);
 };
 </script>
 
