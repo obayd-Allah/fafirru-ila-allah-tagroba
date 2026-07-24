@@ -1463,6 +1463,8 @@ if(!confirm(`حذف ${ids.length} كود؟`))
 
         const updateData = {
 
+    mosqueId: item.mosqueId || APP_CONFIG.mosqueId,
+
     points:Number(newPoints),
 
     student:newStudent,
@@ -1987,6 +1989,8 @@ status.innerHTML="☁️ جار مقارنة الأكواد...";
     for(const d of snapshot.docs){
 
         const data=d.data();
+     if(data.mosqueId !== APP_CONFIG.mosqueId)
+    continue;
 
         if(!keepCodes.has(data.code)){
 
@@ -2027,7 +2031,10 @@ status.innerHTML="☁️ جار مقارنة الأكواد...";
 
         const data = doc.data();
 
-        if(data.used){
+if(
+    data.mosqueId === APP_CONFIG.mosqueId &&
+    data.used
+){
 
             csv += `"${data.code}","${data.points}","${data.student || ""}"\n`;
 
