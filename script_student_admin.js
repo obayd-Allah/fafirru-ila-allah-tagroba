@@ -54,7 +54,6 @@ initializeApp(firebaseConfig);
 const db=
 getFirestore(app);
 
-const CURRENT_MOSQUE_ID = "fafirru-ila-allah";
 /*==================================
           المتغيرات العامة
 ==================================*/
