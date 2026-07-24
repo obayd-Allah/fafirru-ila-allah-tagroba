@@ -10,6 +10,9 @@ collection,
 
 getDocs,
 
+            query,
+where,
+            
 addDoc,
 
 updateDoc,
@@ -236,20 +239,17 @@ clearStatus();
 
 students=[];
 
-const snapshot=
-
-await getDocs(
-
-collection(db,"Students")
-
+const q = query(
+    collection(db, "Students"),
+    where("mosqueId", "==", APP_CONFIG.mosqueId)
 );
+
+const snapshot = await getDocs(q);
 
 snapshot.forEach(document=>{
 
 const data = document.data();
 
-if(data.mosqueId !== APP_CONFIG.mosqueId)
-    return;
 
 students.push({
 
