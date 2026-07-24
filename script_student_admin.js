@@ -1089,10 +1089,15 @@ const student =
 students.find(
 s=>s.id===id
 );
-const studentId = student.id;
 
-if(!student)
+if(
+!student ||
+student.mosqueId !== APP_CONFIG.mosqueId
+){
 return;
+}
+
+const studentId = student.id;
 
 
 
@@ -1210,10 +1215,15 @@ const student =
 students.find(
 s=>s.id===id
 );
-const studentId = student.id;
 
-if(!student)
+if(
+!student ||
+student.mosqueId !== APP_CONFIG.mosqueId
+){
 return;
+}
+
+const studentId = student.id;
 
 
 
@@ -1366,7 +1376,10 @@ s=>s.id===id
 );
 
 
-if(student){
+if(
+student &&
+student.mosqueId === APP_CONFIG.mosqueId
+){
 
 openStudentModal(
 "edit",
