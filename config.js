@@ -1,4 +1,4 @@
 export const APP_CONFIG = {
-    mosqueId: "fafirru-ila-allah",
+    mosqueId: "mosque_001",
     mosqueName: "مسجد ففروا إلى الله"
 };
