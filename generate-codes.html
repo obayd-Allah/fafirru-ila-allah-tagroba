@@ -741,7 +741,12 @@ serverTimestamp
 from
 
 "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
- import { APP_CONFIG } from "./config.js";
+ import {
+    APP_CONFIG,
+    getCurrentMosqueId
+} from "./config.js";
+ 
+ const mosqueId = getCurrentMosqueId();
  
 const firebaseConfig={
 
@@ -835,7 +840,7 @@ codes.add(parts[0].trim());
 
     const q = query(
     collection(db,"Students"),
-    where("mosqueId","==",APP_CONFIG.mosqueId)
+    where("mosqueId","==",mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -860,7 +865,7 @@ new Set();
 
 const q = query(
 collection(db,"Codes"),
-where("mosqueId","==",APP_CONFIG.mosqueId)
+where("mosqueId","==",mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -869,7 +874,7 @@ snapshot.forEach(doc=>{
 
 const data = doc.data();
 
-if(data.mosqueId !== APP_CONFIG.mosqueId)
+if(data.mosqueId !== mosqueId)
     return;
 
 set.add(data.code);
@@ -1153,7 +1158,7 @@ async function loadCodesTable() {
 
     const q = query(
     collection(db, "Codes"),
-    where("mosqueId", "==", APP_CONFIG.mosqueId)
+    where("mosqueId", "==", mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -1164,7 +1169,7 @@ snapshot.forEach(doc => {
 
 const data = doc.data();
 
-if(data.mosqueId !== APP_CONFIG.mosqueId)
+if(data.mosqueId !== mosqueId)
     return;
 
 allCodes.push({
@@ -1465,7 +1470,7 @@ if(!confirm(`حذف ${ids.length} كود؟`))
 
         const updateData = {
 
-    mosqueId: item.mosqueId || APP_CONFIG.mosqueId,
+    mosqueId: item.mosqueId || mosqueId,
 
     points:Number(newPoints),
 
@@ -1679,7 +1684,7 @@ student: "",
 
 studentId: "",
  
-mosqueId: APP_CONFIG.mosqueId,
+mosqueId: mosqueId,
  
 used: false,
 
@@ -1881,7 +1886,7 @@ status.innerHTML=
 
 const q = query(
     collection(db,"Codes"),
-    where("mosqueId","==",APP_CONFIG.mosqueId)
+    where("mosqueId","==",mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -1906,7 +1911,7 @@ snapshot.docs
 
  const data = doc.data();
 
-if(data.mosqueId !== APP_CONFIG.mosqueId)
+if(data.mosqueId !== mosqueId)
     continue;
  
 await deleteDoc(
@@ -1972,7 +1977,7 @@ status.innerHTML="☁️ جار مقارنة الأكواد...";
 
     const q = query(
     collection(db,"Codes"),
-    where("mosqueId","==",APP_CONFIG.mosqueId)
+    where("mosqueId","==",mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -1987,7 +1992,7 @@ const snapshot = await getDocs(q);
     for(const d of snapshot.docs){
 
         const data=d.data();
-     if(data.mosqueId !== APP_CONFIG.mosqueId)
+     if(data.mosqueId !== mosqueId)
     continue;
 
         if(!keepCodes.has(data.code)){
@@ -2019,7 +2024,7 @@ const snapshot = await getDocs(q);
 
     const q = query(
     collection(db,"Codes"),
-    where("mosqueId","==",APP_CONFIG.mosqueId)
+    where("mosqueId","==",mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -2033,7 +2038,7 @@ const snapshot = await getDocs(q);
         const data = doc.data();
 
 if(
-    data.mosqueId === APP_CONFIG.mosqueId &&
+    data.mosqueId === mosqueId &&
     data.used
 ){
 
@@ -2097,7 +2102,7 @@ if(
 
     const q = query(
     collection(db,"Codes"),
-    where("mosqueId","==",APP_CONFIG.mosqueId)
+    where("mosqueId","==",mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -2108,7 +2113,7 @@ const snapshot = await getDocs(q);
 
 const data = doc.data();
 
-if(data.mosqueId !== APP_CONFIG.mosqueId)
+if(data.mosqueId !== mosqueId)
     return;
 
 if(
@@ -2133,7 +2138,7 @@ if(!lastBatch){
 
     const data = d.data();
 
-    if(data.mosqueId !== APP_CONFIG.mosqueId)
+    if(data.mosqueId !== mosqueId)
         continue;
 
     if(data.batchId == lastBatch){
@@ -2171,7 +2176,7 @@ alert(`تم حذف ${deleted} كود من آخر دفعة.`);
         await updateDoc(
             student.ref,
             {
-mosqueId: APP_CONFIG.mosqueId
+mosqueId: mosqueId
             }
         );
 
