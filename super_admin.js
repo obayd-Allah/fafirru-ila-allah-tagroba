@@ -10,8 +10,10 @@ getDocs,
 
 query,
 
-where
-
+where,
+addDoc,
+    updateDoc,
+    doc
 }
 
 from
@@ -40,6 +42,32 @@ const db=getFirestore(app);
 
 const mosquesContainer=document.getElementById("mosquesContainer");
 
+const mosqueModal =
+document.getElementById("mosqueModal");
+
+const mosqueName =
+document.getElementById("mosqueName");
+
+const mosqueShortName =
+document.getElementById("mosqueShortName");
+
+const mosqueLogo =
+document.getElementById("mosqueLogo");
+
+const mosqueTitle =
+document.getElementById("mosqueTitle");
+
+const mosqueWhatsapp =
+document.getElementById("mosqueWhatsapp");
+
+const mosqueColor =
+document.getElementById("mosqueColor");
+
+const modalTitle =
+document.getElementById("modalTitle");
+
+let editingMosque = null;
+
 async function loadMosques(){
 
 const snapshot=await getDocs(
@@ -53,6 +81,7 @@ const mosque=doc.data();
 
 const card=document.createElement("div");
 
+  
 card.style.background="#f8fbff";
 
 card.style.borderRadius="15px";
@@ -155,6 +184,33 @@ loadStatistics(doc.id);
 }
 
 window.onload=loadMosques;
+document.getElementById("addMosque").onclick = ()=>{
+
+editingMosque = null;
+
+modalTitle.textContent =
+"➕ إضافة مسجد";
+
+mosqueName.value = "";
+
+mosqueShortName.value = "";
+
+mosqueLogo.value = "";
+
+mosqueTitle.value = "";
+
+mosqueWhatsapp.value = "";
+
+mosqueColor.value = "#1976d2";
+mosqueModal.style.display = "flex";
+
+};
+document.getElementById("cancelMosque").onclick = ()=>{
+
+mosqueModal.style.display = "none";
+
+};
+
 async function loadStatistics(mosqueId){
 
 const studentsQuery = query(
