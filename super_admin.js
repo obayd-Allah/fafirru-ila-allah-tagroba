@@ -8,6 +8,7 @@ import {
     where,
     addDoc,
     updateDoc,
+    deleteDoc,
     doc,
     serverTimestamp
 }
@@ -465,9 +466,91 @@ mosqueName.value =
             mosque.primaryColor || "#1976d2";
 mosqueModal.style.display = "flex";
 
+    
+        return;
+
+    }
+// حذف المسجد
+if(e.target.classList.contains("deleteMosque")){
+
+    const mosqueId = e.target.dataset.id;
+
+    await deleteMosque(mosqueId);
+
+    return;
+
+}
+});
+
+async function deleteMosque(mosqueId){
+
+    const ok = confirm(
+        "هل تريد حذف هذا المسجد؟"
+    );
+
+    if(!ok)
+        return;
+
+    // البحث عن المسجد
+    const mosqueQuery = query(
+        collection(db,"Mosques"),
+        where("id","==",mosqueId)
+    );
+
+    const mosqueSnapshot =
+        await getDocs(mosqueQuery);
+
+    if(mosqueSnapshot.empty){
+alert("المسجد غير موجود");
+
         return;
 
     }
 
-});
+    // هل يوجد طلاب؟
+    const studentsSnapshot =
+        await getDocs(
+            query(
+                collection(db,"Students"),
+                where("mosqueId","==",mosqueId)
+            )
+        );
 
+    if(!studentsSnapshot.empty){
+
+        alert(
+            "لا يمكن حذف المسجد لأنه يحتوي على طلاب."
+        );
+return;
+
+    }
+
+    // هل توجد أكواد؟
+    const codesSnapshot =
+        await getDocs(
+            query(
+                collection(db,"Codes"),
+                where("mosqueId","==",mosqueId)
+            )
+        );
+
+    if(!codesSnapshot.empty){
+
+        alert(
+            "لا يمكن حذف المسجد لأنه يحتوي على أكواد."
+        );
+
+        return;
+}
+
+    await deleteDoc(
+        mosqueSnapshot.docs[0].ref
+    );
+
+    alert("تم حذف المسجد.");
+
+    mosquesContainer.innerHTML = "";
+
+    await loadMosques();
+
+}
