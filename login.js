@@ -10,7 +10,8 @@ collection,
 getDocs,
 
 query,
-
+doc,
+    getDoc,
 where
 
 }
@@ -119,16 +120,46 @@ mosquesList.forEach(mosque=>{
 
         button.textContent=mosque.name;
 
-        button.onclick=()=>{
+        button.onclick = async ()=>{
 
-            sessionStorage.setItem(
-                "currentMosqueId",
-                doc.id
-            );
+    const mosqueDoc =
+    await getDoc(
+        doc(db,"Mosques",doc.id)
+    );
 
-            location.href="mosque_login.html";
+    if(!mosqueDoc.exists()){
 
-        };
+        alert("المسجد غير موجود.");
+
+        return;
+
+    }
+
+    const mosqueData =
+    mosqueDoc.data();
+
+    const enteredPassword = prompt(
+        "أدخل كلمة مرور هذا المسجد"
+    );
+if(
+        enteredPassword !==
+        mosqueData.adminPassword
+    ){
+
+        alert("كلمة المرور غير صحيحة.");
+
+        return;
+
+    }
+
+    sessionStorage.setItem(
+        "currentMosqueId",
+        doc.id
+    );
+
+    location.href = "admin.html";
+
+};
 
         mosquesContainer.appendChild(button);
 
