@@ -185,17 +185,41 @@ placeholder="أدخل كلمة المرور">
 
 
 
-<script>
+<script type="module">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
+import {
 
-const mosqueId =
-sessionStorage.getItem("currentMosqueId");
-const mosqueDoc =
-await getDoc(
-doc(db,"Mosques",mosqueId)
-);
-  const mosque =
-mosqueDoc.data();
+getFirestore,
+
+doc,
+
+getDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+const firebaseConfig={
+
+apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
+
+authDomain:"fafirru-ila-allah.firebaseapp.com",
+
+projectId:"fafirru-ila-allah",
+
+storageBucket:"fafirru-ila-allah.firebasestorage.app",
+
+messagingSenderId:"564958663441",
+
+appId:"1:564958663441:web:9e6e6a246ec0e2c48472b0"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+  
 
 const password =
 document.getElementById("password");
@@ -209,16 +233,33 @@ const message =
 document.getElementById("message");
 
 
-const buttons =
-document.getElementById("buttons");
 
 
 
-login.onclick = ()=>{
+login.onclick = async ()=>{
 
+const mosqueId =
+sessionStorage.getItem("currentMosqueId");
 
+const mosqueDoc =
+await getDoc(
+doc(db,"Mosques",mosqueId)
+);
+
+if(!mosqueDoc.exists()){
+
+    message.style.color="red";
+
+    message.textContent="المسجد غير موجود";
+
+    return;
+
+}
+
+const mosque =
+mosqueDoc.data();
 if(
-password.value !==
+password.value ===
 mosque.codesPassword
 ){
 
@@ -229,14 +270,10 @@ message.textContent=
 "تم بحمد لله رب العالمين تسجيل الدخول ✅ أُعْطِيت أمانة يا عُبيد الله";
 
 
-buttons.classList.remove("hidden");
 
 
-password.style.display="none";
-
-login.style.display="none";
-
-
+location.href =
+"generate-codes.html";
 }
 
 else{
