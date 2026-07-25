@@ -149,9 +149,69 @@ data-id="${doc.id}">
 `;
 
 mosquesContainer.appendChild(card);
-
+loadStatistics(doc.id);
 });
 
 }
 
 window.onload=loadMosques;
+async function loadStatistics(mosqueId){
+
+const studentsQuery = query(
+
+collection(db,"Students"),
+
+where("mosqueId","==",mosqueId)
+
+);
+
+const studentsSnapshot = await getDocs(
+
+studentsQuery
+
+);
+
+const codesQuery = query(
+collection(db,"Codes"),
+
+where("mosqueId","==",mosqueId)
+
+);
+
+const codesSnapshot = await getDocs(
+
+codesQuery
+
+);
+
+const studentsElement =
+
+document.getElementById(
+
+`students_${mosqueId}`
+
+);
+
+const codesElement =
+document.getElementById(
+
+`codes_${mosqueId}`
+
+);
+
+if(studentsElement){
+
+studentsElement.textContent =
+
+studentsSnapshot.size;
+
+}
+
+if(codesElement){
+
+codesElement.textContent =
+
+codesSnapshot.size;
+
+}
+}
