@@ -760,23 +760,32 @@ document.getElementById("fixMosqueIdBtn").onclick = async () => {
 
         const snapshot = await getDocs(collection(db, "Codes"));
 
-        const batch = writeBatch(db);
+const totalCodes = snapshot.size; // إجمالي الأكواد
+let loadedCodes = 0;
 
-        let count = 0;
+const batch = writeBatch(db);
+
+let count = 0;
 
         snapshot.forEach(codeDoc => {
 
-            const data = codeDoc.data();
+    loadedCodes++;
 
-            // لا يعدل الأكواد التي تحتوي بالفعل على mosqueId
-            if (data.mosqueId) return;
+    showLoading(
+        `⏳ جارٍ تحميل الأكواد... (${loadedCodes} / ${totalCodes})`
+    );
 
-            batch.update(codeDoc.ref, {
-                mosqueId: "mosque_001"
-            });
+    const data = codeDoc.data();
 
-            count++;
-         });
+    if (data.mosqueId) return;
+
+    batch.update(codeDoc.ref, {
+        mosqueId: "mosque_001"
+    });
+
+    count++;
+
+});
 
         await batch.commit();
 
