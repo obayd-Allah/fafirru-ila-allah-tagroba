@@ -531,6 +531,9 @@ style="background:#ff5722;color:white">
  <button id="addMosqueId" style="background:#1565c0;color:white;display:none">
 إضافة mosqueId لجميع الطلاب
  </button>
+ <button id="fixMosqueIdBtn">
+إضافة mosqueId لجميع الأكواد
+ </button>
  <div
   style="display:none">
  <button
@@ -730,7 +733,7 @@ deleteDoc,
 updateDoc,
 
 doc,
-
+writeBatch,
 getDoc,
  query,
 where,
@@ -745,7 +748,61 @@ from
     APP_CONFIG,
     getCurrentMosqueId
 } from "./config.js";
- 
+
+
+document.getElementById("fixMosqueIdBtn").onclick = async () => {
+
+    if (!confirm("سيتم إضافة mosqueId إلى جميع الأكواد القديمة. هل تريد المتابعة؟"))
+        return;
+
+    try {
+     showLoading("⏳ جارٍ إصلاح الأكواد...");
+
+        const snapshot = await getDocs(collection(db, "Codes"));
+
+        const batch = writeBatch(db);
+
+        let count = 0;
+
+        snapshot.forEach(codeDoc => {
+
+            const data = codeDoc.data();
+
+            // لا يعدل الأكواد التي تحتوي بالفعل على mosqueId
+            if (data.mosqueId) return;
+
+            batch.update(codeDoc.ref, {
+                mosqueId: "mosque_001"
+            });
+
+            count++;
+         });
+
+        await batch.commit();
+
+        hideLoading();
+
+        showMessage(
+            `✅ تم إصلاح ${count} كود بنجاح`,
+            "success"
+        );
+
+        loadCodesTable();
+
+    } catch (err) {
+
+        hideLoading();
+
+        console.error(err);
+
+        showMessage(
+         "❌ حدث خطأ أثناء إصلاح الأكواد",
+            "error"
+        );
+
+    }
+
+};
  const mosqueId = getCurrentMosqueId();
  if(
     sessionStorage.getItem("codesAuthorized")
