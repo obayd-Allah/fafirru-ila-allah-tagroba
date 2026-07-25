@@ -93,77 +93,40 @@ mosquesList.forEach(mosque=>{
 
     button.textContent=mosque.name;
 
-    button.onclick=()=>{
-
-        sessionStorage.setItem(
-            "currentMosqueId",
-            mosque.id
-        );
-
-        location.href="admin.html";
-
-    };
-    mosquesContainer.appendChild(button);
-
-});
-    
-    snapshot.forEach(doc=>{
-
-        const mosque = doc.data();
-
-        const button =
-        document.createElement("button");
-
-        button.className="student";
-
-        button.style.marginTop="12px";
-
-        button.textContent=mosque.name;
-
-        button.onclick = async ()=>{
+    button.onclick = async ()=>{
 
     const mosqueDoc =
     await getDoc(
-        doc(db,"Mosques",doc.id)
+        doc(db,"Mosques",mosque.id)
     );
-
-    if(!mosqueDoc.exists()){
-
-        alert("المسجد غير موجود.");
-
-        return;
-
-    }
 
     const mosqueData =
     mosqueDoc.data();
 
     const enteredPassword = prompt(
-        "أدخل كلمة مرور هذا المسجد"
+        "أدخل كلمة مرور المسجد"
     );
-if(
+
+    if(
         enteredPassword !==
         mosqueData.adminPassword
     ){
-
-        alert("كلمة المرور غير صحيحة.");
-
+alert("كلمة المرور غير صحيحة");
         return;
-
     }
 
     sessionStorage.setItem(
         "currentMosqueId",
-        doc.id
+        mosque.id
     );
 
-    location.href = "admin-login.html";
+    location.href = "admin.html";
 
 };
+    mosquesContainer.appendChild(button);
 
-        mosquesContainer.appendChild(button);
+});
 
-    });
 
 }
 
