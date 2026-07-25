@@ -30,8 +30,11 @@ let currentFilter = "boys";
 let rewardSending = false;
 import {
     APP_CONFIG,
-    CURRENT_MOSQUE
+    CURRENT_MOSQUE,
+    getCurrentMosqueId
 } from "./config.js";
+
+const mosqueId = getCurrentMosqueId();
 /*====================================
         رسائل النجاح
 ====================================*/
@@ -608,7 +611,7 @@ async function loadStudents(){
 
 const data = doc.data();
 
-if(data.mosqueId !== APP_CONFIG.mosqueId)
+if(data.mosqueId !== mosqueId)
     return;
 
 students.push({
@@ -631,7 +634,7 @@ async function getCodeDocument(code){
     const q = query(
 collection(db,"Codes"),
 where("code","==",code),
-where("mosqueId","==",APP_CONFIG.mosqueId),
+where("mosqueId","==",mosqueId),
 limit(1)
 );
 
@@ -1112,7 +1115,7 @@ rewardSending = false;
     const student = students.find(
     s=>s.id===studentSelect.value
 );
-if (!student || student.mosqueId !== APP_CONFIG.mosqueId) {
+if (!student || student.mosqueId !== mosqueId) {
 
     rewardSending = false;
 
@@ -1196,7 +1199,7 @@ let totalPoints = 0;
 
             const rewardData = rewardSnap.data();
 
-if (rewardData.mosqueId !== APP_CONFIG.mosqueId) {
+if (rewardData.mosqueId !== mosqueId) {
     throw new Error("الكود غير موجود");
 }
 
@@ -1209,7 +1212,7 @@ rewardValue = Number(rewardData.points || 0);
 
             const studentData = studentSnap.data();
 
-if (studentData.mosqueId !== APP_CONFIG.mosqueId) {
+if (studentData.mosqueId !== mosqueId) {
     throw new Error("الطالب غير موجود");
 }
 
