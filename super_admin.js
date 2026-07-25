@@ -215,3 +215,19 @@ codesSnapshot.size;
 
 }
 }
+document.addEventListener("click",(e)=>{
+
+    if(!e.target.classList.contains("manageMosque"))
+        return;
+
+    const mosqueId = e.target.dataset.id;
+
+    sessionStorage.setItem(
+        "currentMosqueId",
+        mosqueId
+    );
+
+    window.location.href =
+        "admin.html";
+
+});
