@@ -35,3 +35,12 @@ export const APP_CONFIG = {
 // بيانات المسجد الحالي
 export const CURRENT_MOSQUE =
     APP_CONFIG.mosques[APP_CONFIG.mosqueId];
+export function getCurrentMosqueId() {
+
+    return (
+        sessionStorage.getItem("currentMosqueId")
+        ||
+        APP_CONFIG.mosqueId
+    );
+
+}
