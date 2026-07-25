@@ -179,27 +179,13 @@ placeholder="أدخل كلمة المرور">
 
 
 
-<div id="buttons" class="hidden">
+<div id="mosques" class="hidden">
 
+<h3 style="margin-top:25px">
+اختر المسجد
+</h3>
 
-<button 
-class="student"
-onclick="location.href='student_admin.html'">
-
-👨‍🎓 التلاميذ
-
-</button>
-
-
-
-<button 
-class="codes"
-onclick="location.href='generate-codes.html'">
-
-🎁 الأكواد
-
-</button>
-
+<div id="mosquesContainer"></div>
 
 </div>
 
@@ -208,78 +194,7 @@ onclick="location.href='generate-codes.html'">
 
 
 
-<script>
-
-
-const correctPassword = "الرحمن";
-
-
-const password =
-document.getElementById("password");
-
-
-const login =
-document.getElementById("login");
-
-
-const message =
-document.getElementById("message");
-
-
-const buttons =
-document.getElementById("buttons");
-
-
-
-login.onclick = ()=>{
-
-
-if(password.value === correctPassword){
-
-
-message.style.color="green";
-
-message.textContent=
-"تم بحمد لله رب العالمين تسجيل الدخول ✅ أُعْطِيت أمانة يا عُبيد الله";
-
-
-buttons.classList.remove("hidden");
-
-
-password.style.display="none";
-
-login.style.display="none";
-
-
-}
-
-else{
-
-
-message.style.color="red";
-
-message.textContent=
-"❌ كلمة المرور غير صحيحة";
-
-
-}
-
-
-};
-
-
-password.addEventListener("keydown",(e)=>{
-
-if(e.key==="Enter"){
-
-login.click();
-
-}
-
-});
-
-
-</script>
+<script type="module" src="login.js"></script>
 
 
 </body>
