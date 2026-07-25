@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-دخول الأمانة
+لوحة إدارة المسجد
 </title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&display=swap" rel="stylesheet">
@@ -160,22 +160,11 @@ display:none;
 
 
 <h2>
-🔐 دخول الأمانة
+لوحة الإدارة
 </h2>
 
 
-<input
-id="password"
-type="password"
-placeholder="أدخل كلمة المرور">
 
-
-<button id="login">
-دخول بسم الله الرحمن الرحيم
-</button>
-
-
-<p id="message"></p>
 
 
 
@@ -211,19 +200,9 @@ onclick="location.href='generate-codes.html'">
 <script>
 
 
-const correctPassword = "الرحمن";
 
 
-const password =
-document.getElementById("password");
 
-
-const login =
-document.getElementById("login");
-
-
-const message =
-document.getElementById("message");
 
 
 const buttons =
@@ -231,52 +210,6 @@ document.getElementById("buttons");
 
 
 
-login.onclick = ()=>{
-
-
-if(password.value === correctPassword){
-
-
-message.style.color="green";
-
-message.textContent=
-"تم بحمد لله رب العالمين تسجيل الدخول ✅ أُعْطِيت أمانة يا عُبيد الله";
-
-
-buttons.classList.remove("hidden");
-
-
-password.style.display="none";
-
-login.style.display="none";
-
-
-}
-
-else{
-
-
-message.style.color="red";
-
-message.textContent=
-"❌ كلمة المرور غير صحيحة";
-
-
-}
-
-
-};
-
-
-password.addEventListener("keydown",(e)=>{
-
-if(e.key==="Enter"){
-
-login.click();
-
-}
-
-});
 
 
 </script>
