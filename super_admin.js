@@ -1,21 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 import {
-
-getFirestore,
-
-collection,
-
-getDocs,
-
-query,
-
-where,
-addDoc,
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where,
+    addDoc,
     updateDoc,
-    doc
+    doc,
+    serverTimestamp
 }
-
 from
 
 "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
@@ -184,6 +179,147 @@ loadStatistics(doc.id);
 }
 
 window.onload=loadMosques;
+
+
+
+
+
+async function generateMosqueId(){
+
+    const snapshot =
+    await getDocs(collection(db,"Mosques"));
+
+    let max = 0;
+
+    snapshot.forEach(document=>{
+
+        const id =
+        document.data().id || "";
+
+        const match =
+        id.match(/^mosque_(\d+)$/);
+
+        if(match){
+
+            const number =
+            Number(match[1]);
+
+            if(number>max)
+max=number;
+
+        }
+
+    });
+
+    return "mosque_" +
+    String(max+1).padStart(3,"0");
+
+}
+document.getElementById("saveMosque").onclick = async ()=>{
+
+    const name = mosqueName.value.trim();
+
+    const shortName = mosqueShortName.value.trim();
+
+    if(name===""){
+
+        alert("اكتب اسم المسجد");
+
+        return;
+
+    }
+
+    try{
+if(editingMosque===null){
+
+            const mosqueId =
+            await generateMosqueId();
+
+            await addDoc(
+
+                collection(db,"Mosques"),
+
+                {
+
+                    id: mosqueId,
+
+                    name: name,
+
+                    shortName:
+                    shortName || name,
+
+                    logo:
+mosqueLogo.value.trim(),
+
+                    title:
+                    mosqueTitle.value.trim(),
+
+                    whatsapp:
+                    mosqueWhatsapp.value.trim(),
+
+                    studentsPageTitle:
+                    "لوحة نقاط التلاميذ",
+
+                    primaryColor:
+                    mosqueColor.value,
+
+                    createdAt:
+                    serverTimestamp()
+
+                }
+);
+
+        }
+
+        else{
+
+            await updateDoc(
+
+                doc(
+                    db,
+                    "Mosques",
+                    editingMosque
+                ),
+
+                {
+
+                    name:name,
+shortName:shortName,
+
+                    logo:
+                    mosqueLogo.value.trim(),
+
+                    title:
+                    mosqueTitle.value.trim(),
+
+                    whatsapp:
+                    mosqueWhatsapp.value.trim(),
+
+                    primaryColor:
+                    mosqueColor.value
+
+                }
+
+            );
+
+        }
+mosqueModal.style.display = "none";
+
+        mosquesContainer.innerHTML = "";
+
+        await loadMosques();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("حدث خطأ أثناء حفظ المسجد");
+
+    }
+
+};
 document.getElementById("addMosque").onclick = ()=>{
 
 editingMosque = null;
