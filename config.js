@@ -34,7 +34,7 @@ export const APP_CONFIG = {
 
 // بيانات المسجد الحالي
 export const CURRENT_MOSQUE =
-    APP_CONFIG.mosques[APP_CONFIG.mosqueId];
+    APP_CONFIG.mosques[getCurrentMosqueId()];
 export function getCurrentMosqueId() {
 
     return (
