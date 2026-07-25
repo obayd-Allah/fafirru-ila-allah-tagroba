@@ -66,7 +66,46 @@ async function loadMosques(){
     );
 
     const snapshot = await getDocs(q);
+const mosquesList = [];
 
+snapshot.forEach(doc=>{
+
+    mosquesList.push({
+        id: doc.id,
+        ...doc.data()
+    });
+
+});
+
+mosquesList.sort((a,b)=>
+    a.name.localeCompare(b.name,"ar")
+);
+
+mosquesList.forEach(mosque=>{
+
+    const button =
+        document.createElement("button");
+
+    button.className="student";
+
+    button.style.marginTop="12px";
+
+    button.textContent=mosque.name;
+
+    button.onclick=()=>{
+
+        sessionStorage.setItem(
+            "currentMosqueId",
+            mosque.id
+        );
+
+        location.href="admin.html";
+
+    };
+    mosquesContainer.appendChild(button);
+
+});
+    
     snapshot.forEach(doc=>{
 
         const mosque = doc.data();
@@ -110,10 +149,7 @@ login.onclick = async ()=>{
 
     }
 
-    message.style.color="#2e7d32";
-
-    message.textContent=
-    "تم التحقق بنجاح";
+    message.textContent = "";
 
     password.style.display="none";
 
