@@ -531,9 +531,11 @@ style="background:#ff5722;color:white">
  <button id="addMosqueId" style="background:#1565c0;color:white;display:none">
 إضافة mosqueId لجميع الطلاب
  </button>
+ 
  <button id="fixMosqueIdBtn">
 إضافة mosqueId لجميع الأكواد
  </button>
+ 
  <div
   style="display:none">
  <button
@@ -750,68 +752,7 @@ from
 } from "./config.js";
 
 
-document.getElementById("fixMosqueIdBtn").onclick = async () => {
 
-    if (!confirm("سيتم إضافة mosqueId إلى جميع الأكواد القديمة. هل تريد المتابعة؟"))
-        return;
-
-    try {
-     showLoading("⏳ جارٍ إصلاح الأكواد...");
-
-        const snapshot = await getDocs(collection(db, "Codes"));
-
-const totalCodes = snapshot.size; // إجمالي الأكواد
-let loadedCodes = 0;
-
-const batch = writeBatch(db);
-
-let count = 0;
-
-        snapshot.forEach(codeDoc => {
-
-    loadedCodes++;
-
-    showLoading(
-        `⏳ جارٍ تحميل الأكواد... (${loadedCodes} / ${totalCodes})`
-    );
-
-    const data = codeDoc.data();
-
-    if (data.mosqueId) return;
-
-    batch.update(codeDoc.ref, {
-        mosqueId: "mosque_001"
-    });
-
-    count++;
-
-});
-
-        await batch.commit();
-
-        hideLoading();
-
-        showMessage(
-            `✅ تم إصلاح ${count} كود بنجاح`,
-            "success"
-        );
-
-        loadCodesTable();
-
-    } catch (err) {
-
-        hideLoading();
-
-        console.error(err);
-
-        showMessage(
-         "❌ حدث خطأ أثناء إصلاح الأكواد",
-            "error"
-        );
-
-    }
-
-};
  const mosqueId = getCurrentMosqueId();
  if(
     sessionStorage.getItem("codesAuthorized")
@@ -2231,6 +2172,68 @@ if(!lastBatch){
 alert(`تم حذف ${deleted} كود من آخر دفعة.`);
 
     loadCodesTable();
+
+};
+ document.getElementById("fixMosqueIdBtn").onclick = async () => {
+
+    if (!confirm("سيتم إضافة mosqueId إلى جميع الأكواد القديمة. هل تريد المتابعة؟"))
+        return;
+
+    try {
+     showLoading("⏳ جارٍ إصلاح الأكواد...");
+
+        const snapshot = await getDocs(collection(db, "Codes"));
+
+const totalCodes = snapshot.size; // إجمالي الأكواد
+let loadedCodes = 0;
+
+const batch = writeBatch(db);
+
+let count = 0;
+
+        snapshot.forEach(codeDoc => {
+
+    loadedCodes++;
+
+    showLoading(
+        `⏳ جارٍ تحميل الأكواد... (${loadedCodes} / ${totalCodes})`
+    );
+
+    const data = codeDoc.data();
+
+    if (data.mosqueId) return;
+
+    batch.update(codeDoc.ref, {
+        mosqueId: "mosque_001"
+    });
+
+    count++;
+
+});
+
+        await batch.commit();
+
+        hideLoading();
+
+        showMessage(
+            `✅ تم إصلاح ${count} كود بنجاح`,
+            "success"
+        );
+
+        loadCodesTable();
+
+    } catch (err) {
+
+        hideLoading();
+
+        console.error(err);
+
+        showMessage(
+         "❌ حدث خطأ أثناء إصلاح الأكواد",
+            "error"
+        );
+
+    }
 
 };
  document.getElementById("addMosqueId").onclick = async () => {
