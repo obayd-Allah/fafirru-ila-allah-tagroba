@@ -120,7 +120,7 @@ alert("كلمة المرور غير صحيحة");
         mosque.id
     );
 
-    location.href = "student_admin.html";
+    location.href = "mosque_home.html";
 
 };
     mosquesContainer.appendChild(button);
