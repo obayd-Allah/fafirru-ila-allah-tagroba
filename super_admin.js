@@ -36,6 +36,7 @@ const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
 
 const mosquesContainer=document.getElementById("mosquesContainer");
+let currentMosqueId = null;
 
 const mosqueModal =
 document.getElementById("mosqueModal");
@@ -469,3 +470,57 @@ mosqueModal.style.display = "flex";
     }
 
 });
+document.addEventListener("click", (e) => {
+
+    if (!e.target.classList.contains("editMosque"))
+        return;
+
+    const mosqueId = e.target.dataset.id;
+
+    editMosque(mosqueId);
+
+});
+async function editMosque(mosqueId){
+
+    currentMosqueId = mosqueId;
+
+    const snapshot = await getDocs(
+        query(
+            collection(db,"Mosques"),
+            where("id","==",mosqueId)
+        )
+    );
+
+    if(snapshot.empty){
+        alert("المسجد غير موجود");
+        return;
+    }
+
+    const mosque = snapshot.docs[0].data();
+
+    const newName = prompt(
+        "اسم المسجد",
+        mosque.name
+);
+
+    if(newName===null)
+        return;
+
+    const newShort = prompt(
+        "الاسم المختصر",
+        mosque.shortName
+    );
+
+    if(newShort===null)
+        return;
+
+    await updateDoc(
+        snapshot.docs[0].ref,
+        {
+            name:newName,
+            shortName:newShort
+        }
+    );
+location.reload();
+
+}
