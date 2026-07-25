@@ -126,7 +126,7 @@ mosquesList.forEach(mosque=>{
                 doc.id
             );
 
-            location.href="admin.html";
+            location.href="mosque_login.html";
 
         };
 
