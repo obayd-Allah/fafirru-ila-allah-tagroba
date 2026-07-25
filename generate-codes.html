@@ -2173,66 +2173,37 @@ alert(`تم حذف ${deleted} كود من آخر دفعة.`);
     loadCodesTable();
 
 };
- document.getElementById("fixMosqueIdBtn").onclick = async () => {
-    alert("يعمل");
-    if (!confirm("سيتم إضافة mosqueId إلى جميع الأكواد القديمة. هل تريد المتابعة؟"))
+document.getElementById("fixCodes").onclick = async () => {
+
+    if (!confirm("سيتم ربط جميع الأكواد القديمة بالمسجد الحالي. هل تريد المتابعة؟"))
         return;
 
-    try {
-     showLoading("⏳ جارٍ إصلاح الأكواد...");
+    const snapshot = await getDocs(collection(db, "Codes"));
 
-        const snapshot = await getDocs(collection(db, "Codes"));
+    let count = 0;
 
-const totalCodes = snapshot.size; // إجمالي الأكواد
-let loadedCodes = 0;
+    for (const codeDoc of snapshot.docs) {
 
-const batch = writeBatch(db);
+        const data = codeDoc.data();
 
-let count = 0;
+        if (!data.mosqueId) {
 
-        snapshot.forEach(codeDoc => {
+            await updateDoc(
+                doc(db, "Codes", codeDoc.id),
+                {
+                    mosqueId: "mosque_001"
+                }
+);
 
-    loadedCodes++;
+            count++;
 
-    showLoading(
-        `⏳ جارٍ تحميل الأكواد... (${loadedCodes} / ${totalCodes})`
-    );
-
-    const data = codeDoc.data();
-
-    if (data.mosqueId) return;
-
-    batch.update(codeDoc.ref, {
-        mosqueId: "mosque_001"
-    });
-
-    count++;
-
-});
-
-        await batch.commit();
-
-        hideLoading();
-
-        showMessage(
-            `✅ تم إصلاح ${count} كود بنجاح`,
-            "success"
-        );
-
-        loadCodesTable();
-
-    } catch (err) {
-
-        hideLoading();
-
-        console.error(err);
-
-        showMessage(
-         "❌ حدث خطأ أثناء إصلاح الأكواد",
-            "error"
-        );
+        }
 
     }
+
+    alert(`تم تحديث ${count} كود بنجاح`);
+
+    loadMosques();
 
 };
  document.getElementById("addMosqueId").onclick = async () => {
