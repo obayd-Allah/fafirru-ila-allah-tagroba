@@ -188,8 +188,14 @@ placeholder="أدخل كلمة المرور">
 <script>
 
 
-const correctPassword = "الرحمن";
-
+const mosqueId =
+sessionStorage.getItem("currentMosqueId");
+const mosqueDoc =
+await getDoc(
+doc(db,"Mosques",mosqueId)
+);
+  const mosque =
+mosqueDoc.data();
 
 const password =
 document.getElementById("password");
@@ -211,7 +217,10 @@ document.getElementById("buttons");
 login.onclick = ()=>{
 
 
-if(password.value === correctPassword){
+if(
+password.value !==
+mosque.codesPassword
+){
 
 
 message.style.color="green";
