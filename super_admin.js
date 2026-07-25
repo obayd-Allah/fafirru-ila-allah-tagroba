@@ -6,7 +6,11 @@ getFirestore,
 
 collection,
 
-getDocs
+getDocs,
+
+query,
+
+where
 
 }
 
