@@ -157,7 +157,7 @@ if(
         doc.id
     );
 
-    location.href = "admin.html";
+    location.href = "admin-login.html";
 
 };
 
