@@ -407,19 +407,65 @@ codesSnapshot.size;
 
 }
 }
-document.addEventListener("click",(e)=>{
+document.addEventListener("click", async (e)=>{
 
-    if(!e.target.classList.contains("manageMosque"))
+    // إدارة المسجد
+    if(e.target.classList.contains("manageMosque")){
+
+        const mosqueId = e.target.dataset.id;
+
+        sessionStorage.setItem(
+            "currentMosqueId",
+            mosqueId
+        );
+
+        window.location.href = "admin.html";
+
         return;
 
-    const mosqueId = e.target.dataset.id;
+    }
 
-    sessionStorage.setItem(
-        "currentMosqueId",
-        mosqueId
-    );
+    // تعديل المسجد
+if(e.target.classList.contains("editMosque")){
 
-    window.location.href =
-        "admin.html";
+        const mosqueDoc = await getDocs(
+            query(
+                collection(db,"Mosques"),
+                where("id","==",e.target.dataset.id)
+            )
+        );
+
+        if(mosqueDoc.empty)
+            return;
+
+        const documentData = mosqueDoc.docs[0];
+
+        const mosque = documentData.data();
+
+        editingMosque = documentData.id;
+
+        modalTitle.textContent = "✏️ تعديل المسجد";
+mosqueName.value =
+            mosque.name || "";
+
+        mosqueShortName.value =
+            mosque.shortName || "";
+
+        mosqueLogo.value =
+            mosque.logo || "";
+
+        mosqueTitle.value =
+            mosque.title || "";
+
+        mosqueWhatsapp.value =
+            mosque.whatsapp || "";
+
+        mosqueColor.value =
+            mosque.primaryColor || "#1976d2";
+mosqueModal.style.display = "flex";
+
+        return;
+
+    }
 
 });
