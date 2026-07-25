@@ -747,7 +747,19 @@ from
 } from "./config.js";
  
  const mosqueId = getCurrentMosqueId();
- 
+ if(
+    sessionStorage.getItem("codesAuthorized")
+    !==
+    "true"
+){
+
+    location.href =
+    "codes-login.html";
+
+ }
+ sessionStorage.removeItem(
+    "codesAuthorized"
+);
 const firebaseConfig={
 
 apiKey:"AIzaSyCI3KykpatQW82_O5LuRoajP8oWhhMw4Zg",
