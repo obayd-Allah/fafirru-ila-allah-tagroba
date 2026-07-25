@@ -29,8 +29,12 @@ from
 
 "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
-import { APP_CONFIG } from "./config.js";
-
+import {
+    APP_CONFIG,
+    getCurrentMosqueId
+}
+from "./config.js";
+const mosqueId = getCurrentMosqueId();
 /*==================================
             Firebase
 ==================================*/
@@ -241,7 +245,7 @@ students=[];
 
 const q = query(
     collection(db, "Students"),
-    where("mosqueId", "==", APP_CONFIG.mosqueId)
+    where("mosqueId", "==", mosqueId)
 );
 
 const snapshot = await getDocs(q);
@@ -879,7 +883,7 @@ const duplicate = students.find(s => {
 
     return (
         (s.fullName || "").trim() === fullName &&
-        s.mosqueId === APP_CONFIG.mosqueId
+        s.mosqueId === mosqueId
     );
 
 });
@@ -942,7 +946,7 @@ points:points,
 
 gender:gender,
 
-mosqueId: APP_CONFIG.mosqueId,
+mosqueId: mosqueId,
 
 createdAt:
 serverTimestamp()
@@ -974,7 +978,7 @@ familyName:familyName,
 
 fullName:fullName,
 
-mosqueId: APP_CONFIG.mosqueId,
+mosqueId: mosqueId,
             
 name:fullName,
 
@@ -1113,7 +1117,7 @@ s=>s.id===id
 
 if(
 !student ||
-student.mosqueId !== APP_CONFIG.mosqueId
+student.mosqueId !== mosqueId
 ){
 return;
 }
@@ -1239,7 +1243,7 @@ s=>s.id===id
 
 if(
 !student ||
-student.mosqueId !== APP_CONFIG.mosqueId
+student.mosqueId !== mosqueId
 ){
 return;
 }
@@ -1399,7 +1403,7 @@ s=>s.id===id
 
 if(
 student &&
-student.mosqueId === APP_CONFIG.mosqueId
+student.mosqueId === mosqueId
 ){
 
 openStudentModal(
