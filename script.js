@@ -37,6 +37,7 @@ import {
 
 const mosqueId = getCurrentMosqueId();
 let mosqueData = null;
+let CURRENT_MOSQUE = null;
 /*====================================
         رسائل النجاح
 ====================================*/
@@ -634,7 +635,13 @@ id:doc.id,
 
 }
 
-loadStudents();
+(async()=>{
+
+    await loadMosqueConfig();
+
+    await loadStudents();
+
+})();
 
 async function getCodeDocument(code){
 
@@ -1512,3 +1519,24 @@ title.src =
     mosqueData.name;
 
 });
+async function loadMosqueConfig(){
+
+    const q = query(
+        collection(db,"Mosques"),
+        where("id","==",mosqueId),
+        limit(1)
+    );
+
+    const snap = await getDocs(q);
+
+    if(snap.empty){
+
+        alert("لم يتم العثور على بيانات المسجد");
+
+        return;
+
+    }
+
+    CURRENT_MOSQUE = snap.docs[0].data();
+
+}
