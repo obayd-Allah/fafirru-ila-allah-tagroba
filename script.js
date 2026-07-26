@@ -4,6 +4,7 @@ import {
     getFirestore,
     collection,
     getDocs,
+ getDoc,
     query,
     where,
     doc,
@@ -35,6 +36,7 @@ import {
 } from "./config.js";
 
 const mosqueId = getCurrentMosqueId();
+let mosqueData = null;
 /*====================================
         رسائل النجاح
 ====================================*/
@@ -602,17 +604,22 @@ document.getElementById("floatingRewardBtn");
 
 async function loadStudents(){
 
-    const snapshot =
-    await getDocs(collection(db,"Students"));
+    const snapshot = await getDocs(
 
+query(
+
+collection(db,"Students"),
+
+where("mosqueId","==",mosqueId)
+
+)
+
+);
     students = [];
 
     snapshot.forEach(doc=>{
 
 const data = doc.data();
-
-if(data.mosqueId !== mosqueId)
-    return;
 
 students.push({
 id:doc.id,
@@ -1428,51 +1435,80 @@ window.addEventListener("scroll", () => {
     }
 
 });
-window.addEventListener("DOMContentLoaded", () => {
- const whatsapp =
-document.getElementById("whatsappLink");
+window.addEventListener("DOMContentLoaded", async () => {
 
-if(whatsapp){
+    const snapshot = await getDocs(
+        query(
+            collection(db,"Mosques"),
+            where("id","==",mosqueId)
+        )
+    );
 
-    whatsapp.href =
-    CURRENT_MOSQUE.whatsapp;
+    if(snapshot.empty){
 
-}
-const subtitle = document.getElementById("pageSubtitle");
+        alert("المسجد غير موجود");
 
-if (subtitle) {
-
-    subtitle.textContent =
-CURRENT_MOSQUE.studentsPageTitle;
-
-}
- const footer = document.getElementById("footerText");
-
-if (footer) {
-
-    footer.textContent =
-        "© " + CURRENT_MOSQUE.name;
-
-}
-    const logo = document.querySelector(".logo");
-
-    if (logo) {
-
-        logo.src = CURRENT_MOSQUE.logo;
-
-        logo.alt = CURRENT_MOSQUE.name;
+        return;
 
     }
 
-    const title = document.querySelector(".hero-title");
+    mosqueData = snapshot.docs[0].data();
 
-    if (title) {
+    const whatsapp =
+    document.getElementById("whatsappLink");
 
-        title.src = CURRENT_MOSQUE.title;
-
-        title.alt = CURRENT_MOSQUE.name;
+    if(whatsapp){
+whatsapp.href =
+        mosqueData.whatsapp || "";
 
     }
-document.title = CURRENT_MOSQUE.name;
+
+    const subtitle =
+    document.getElementById("pageSubtitle");
+
+    if(subtitle){
+
+        subtitle.textContent =
+        mosqueData.studentsPageTitle ||
+        "لوحة نقاط التلاميذ";
+
+    }
+
+    const footer =
+    document.getElementById("footerText");
+
+    if(footer){
+footer.textContent =
+        "© " + mosqueData.name;
+
+    }
+
+    const logo =
+    document.querySelector(".logo");
+
+    if(logo){
+
+        logo.src =
+        mosqueData.logo;
+
+        logo.alt =
+        mosqueData.name;
+
+    }
+
+    const title =
+    document.querySelector(".hero-title");
+
+    if(title){
+title.src =
+        mosqueData.title;
+
+        title.alt =
+        mosqueData.name;
+
+    }
+
+    document.title =
+    mosqueData.name;
 
 });
