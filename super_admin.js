@@ -328,7 +328,8 @@ codesPassword.value.trim() || "codes",
 
     // ========= الثيم =========
 
-    theme: mosqueTheme.value,
+    theme:
+mosqueTheme.value.trim() || "theme1",
 
     // ========= الكروت =========
 
@@ -377,7 +378,8 @@ adminPassword.value.trim() || "admin",
 codesPassword:
 codesPassword.value.trim() || "codes",
 
-        theme: mosqueTheme.value,
+        theme:
+mosqueTheme.value.trim() || "theme1",
 
         cardsFolder:
 cardsFolder.value.trim(),
