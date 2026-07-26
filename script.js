@@ -1536,5 +1536,14 @@ async function loadMosqueConfig(){
     }
 
     CURRENT_MOSQUE = snap.docs[0].data();
+const themeLink = document.getElementById("themeStyle");
 
+if (themeLink) {
+
+    themeLink.href =
+        "themes/" +
+        (CURRENT_MOSQUE.theme || "theme1") +
+        ".css";
+
+}
 }
