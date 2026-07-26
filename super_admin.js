@@ -421,7 +421,7 @@ document.addEventListener("click", async (e)=>{
             mosqueId
         );
 
-        window.location.href = "admin-login.html";
+        window.location.href = "mosque_home.html";
 
         return;
 
