@@ -192,7 +192,14 @@ data-id="${mosque.id}">
 class="copyLink"
 data-id="${mosque.id}">
 
-🔗 رابط الطلاب
+🔗 رابط الطلاب نسخ
+
+</button>
+<button
+class="openSite"
+data-id="${mosque.id}">
+
+🔗 رابط الموقع
 
 </button>
 <button
@@ -602,6 +609,19 @@ mosqueModal.style.display = "flex";
         return;
 
     }
+    // فتح موقع الطلاب
+if(e.target.classList.contains("openSite")){
+
+    const mosqueId = e.target.dataset.id;
+
+    window.open(
+        `index.html?mosque=${mosqueId}`,
+        "_blank"
+    );
+
+    return;
+
+}
 // حذف المسجد
 if(e.target.classList.contains("deleteMosque")){
 
