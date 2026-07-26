@@ -58,7 +58,10 @@ async function loadMosques(){
 
     mosquesContainer.innerHTML="";
 
-    const q = query(
+    const snapshot = await getDocs(
+    collection(db,"Mosques")
+);
+    /*const q = query(
 
         collection(db,"Mosques"),
 
@@ -66,7 +69,7 @@ async function loadMosques(){
 
     );
 
-    const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);*/
 const mosquesList = [];
 
 snapshot.forEach(doc=>{
