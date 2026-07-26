@@ -528,9 +528,10 @@ if(e.target.classList.contains("copyLink")){
 
     const link =
         location.origin +
-        location.pathname
-            .replace("mosques.html","students/index.html")
-        +
+        location.pathname.replace(
+            "mosques.html",
+            "index.html"
+        ) +
         "?mosque=" +
         mosqueId;
 
