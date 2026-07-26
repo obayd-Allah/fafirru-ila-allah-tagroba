@@ -51,6 +51,24 @@ document.getElementById("mosqueShortName");
 const mosqueLogo =
 document.getElementById("mosqueLogo");
 
+const cardsFolder =
+document.getElementById("cardsFolder");
+
+const cardValues =
+document.getElementById("cardValues");
+
+const level1 =
+document.getElementById("level1");
+
+const level2 =
+document.getElementById("level2");
+
+const level3 =
+document.getElementById("level3");
+
+const level4 =
+document.getElementById("level4");
+
 const mosqueTitle =
 document.getElementById("mosqueTitle");
 
@@ -230,7 +248,25 @@ document.getElementById("saveMosque").onclick = async ()=>{
         return;
 
     }
+const values =
+cardValues.value
+.split(",")
+.map(x=>Number(x.trim()))
+.filter(x=>!isNaN(x));
 
+const celebrationLevels = {};
+
+if(values[0])
+celebrationLevels[values[0]] = level1.value;
+
+if(values[1])
+celebrationLevels[values[1]] = level2.value;
+
+if(values[2])
+celebrationLevels[values[2]] = level3.value;
+
+if(values[3])
+celebrationLevels[values[3]] = level4.value;
     try{
 if(editingMosque===null){
 
@@ -269,21 +305,14 @@ codesPassword: "codes",
 
     // ========= الكروت =========
 
-    cardsFolder: "cards/default/",
+    cardsFolder:
+cardsFolder.value.trim(),
 
-    cardValues: [5,10,15,20],
+cardValues:
+values,
 
-    celebrationLevels: {
-
-        5: "small",
-
-        10: "small",
-
-        15: "medium",
-
-20: "large"
-
-    },
+celebrationLevels:
+celebrationLevels,
 
     createdAt: serverTimestamp()
 }
@@ -321,21 +350,14 @@ codesPassword: "codes",
 
         theme: "theme1",
 
-        cardsFolder: "cards/default/",
+        cardsFolder:
+cardsFolder.value.trim(),
 
-        cardValues: [5,10,15,20],
+cardValues:
+values,
 
-        celebrationLevels: {
-
-            5:"small",
-
-            10:"small",
-
-15:"medium",
-
-            20:"large"
-
-        }
+celebrationLevels:
+celebrationLevels
 
     }
 
@@ -377,6 +399,23 @@ mosqueTitle.value = "";
 mosqueWhatsapp.value = "";
 
 mosqueColor.value = "#1976d2";
+    cardsFolder.value =
+"cards/default/";
+
+cardValues.value =
+"5,10,15,20";
+
+level1.value =
+"small";
+
+level2.value =
+"small";
+
+level3.value =
+"medium";
+
+level4.value =
+"large";
 mosqueModal.style.display = "flex";
 
 };
@@ -501,6 +540,31 @@ mosqueName.value =
 
         mosqueColor.value =
             mosque.primaryColor || "#1976d2";
+    cardsFolder.value =
+mosque.cardsFolder || "";
+
+cardValues.value =
+(mosque.cardValues || [])
+.join(",");
+
+const levels =
+mosque.celebrationLevels || {};
+
+const values =
+mosque.cardValues || [];
+
+level1.value =
+levels[values[0]] || "small";
+
+level2.value =
+levels[values[1]] || "small";
+
+level3.value =
+levels[values[2]] || "medium";
+
+level4.value =
+levels[values[3]] || "large";
+    
 mosqueModal.style.display = "flex";
 
     
