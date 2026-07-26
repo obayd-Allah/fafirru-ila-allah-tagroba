@@ -242,33 +242,51 @@ if(editingMosque===null){
                 collection(db,"Mosques"),
 
                 {
+    id: mosqueId,
 
-                    id: mosqueId,
+    name: name,
 
-                    name: name,
+    shortName: shortName || name,
 
-                    shortName:
-                    shortName || name,
+    logo: mosqueLogo.value.trim(),
 
-                    logo:
-mosqueLogo.value.trim(),
+    title: mosqueTitle.value.trim(),
 
-                    title:
-                    mosqueTitle.value.trim(),
+    whatsapp: mosqueWhatsapp.value.trim(),
 
-                    whatsapp:
-                    mosqueWhatsapp.value.trim(),
+    studentsPageTitle: "لوحة نقاط التلاميذ",
 
-                    studentsPageTitle:
-                    "لوحة نقاط التلاميذ",
+    primaryColor: mosqueColor.value,
 
-                    primaryColor:
-                    mosqueColor.value,
+    // ========= بيانات الدخول =========
 
-                    createdAt:
-                    serverTimestamp()
+    adminPassword: "admin",
+codesPassword: "codes",
 
-                }
+    // ========= الثيم =========
+
+    theme: "theme1",
+
+    // ========= الكروت =========
+
+    cardsFolder: "cards/default/",
+
+    cardValues: [5,10,15,20],
+
+    celebrationLevels: {
+
+        5: "small",
+
+        10: "small",
+
+        15: "medium",
+
+20: "large"
+
+    },
+
+    createdAt: serverTimestamp()
+}
 );
 
         }
