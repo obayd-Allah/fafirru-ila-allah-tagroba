@@ -197,3 +197,6 @@ font-family:Cairo;
 cursor:pointer;
 
 }
+#mosqueModal{
+    display:none;
+}
