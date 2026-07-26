@@ -72,11 +72,16 @@ async function loadMosques(){
     const snapshot = await getDocs(q);*/
 const mosquesList = [];
 
-snapshot.forEach(doc=>{
+snapshot.forEach(document=>{
+
+    const data = document.data();
 
     mosquesList.push({
-        id: doc.id,
-        ...doc.data()
+
+        firestoreId: document.id,
+
+        ...data
+
     });
 
 });
@@ -99,9 +104,9 @@ mosquesList.forEach(mosque=>{
     button.onclick = async ()=>{
 
     const mosqueDoc =
-    await getDoc(
-        doc(db,"Mosques",mosque.id)
-    );
+await getDoc(
+    doc(db,"Mosques",mosque.firestoreId)
+);
 
     const mosqueData =
     mosqueDoc.data();
