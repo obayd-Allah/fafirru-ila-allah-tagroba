@@ -190,13 +190,11 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 import {
-
 getFirestore,
-
-doc,
-
-getDoc
-
+collection,
+query,
+where,
+getDocs
 }
 
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
@@ -241,23 +239,22 @@ login.onclick = async ()=>{
 const mosqueId =
 sessionStorage.getItem("currentMosqueId");
 
-const mosqueDoc =
-await getDoc(
-doc(db,"Mosques",mosqueId)
+const q = query(
+    collection(db,"Mosques"),
+    where("id","==",mosqueId)
 );
 
-if(!mosqueDoc.exists()){
+const snapshot = await getDocs(q);
+
+if(snapshot.empty){
 
     message.style.color="red";
-
     message.textContent="المسجد غير موجود";
 
     return;
-
 }
 
-const mosque =
-mosqueDoc.data();
+const mosque = snapshot.docs[0].data();
 if(
 password.value ===
 mosque.codesPassword
