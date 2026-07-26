@@ -37,7 +37,6 @@ import {
 
 const mosqueId = getCurrentMosqueId();
 let mosqueData = null;
-let CURRENT_MOSQUE = null;
 /*====================================
         رسائل النجاح
 ====================================*/
