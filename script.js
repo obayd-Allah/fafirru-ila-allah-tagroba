@@ -1536,9 +1536,10 @@ async function loadMosqueConfig(){
     }
 
     CURRENT_MOSQUE = snap.docs[0].data();
-const themeLink = document.getElementById("themeStyle");
+const themeLink =
+document.getElementById("themeStyle");
 
-if (themeLink) {
+if(themeLink){
 
     themeLink.href =
         "themes/" +
