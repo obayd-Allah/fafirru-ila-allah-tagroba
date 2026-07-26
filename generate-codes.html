@@ -806,7 +806,7 @@ getFirestore(app);
 
  let studentsList = [];
 
- 
+ let currentMosque = null;
 const status=
 
 document.getElementById("status");
@@ -884,6 +884,27 @@ snapshot.forEach(doc=>{
 });
 
  }
+    async function loadMosque(){
+
+    const q = query(
+        collection(db,"Mosques"),
+        where("id","==",mosqueId)
+    );
+
+    const snapshot = await getDocs(q);
+
+    if(snapshot.empty){
+
+        alert("المسجد غير موجود");
+
+        return;
+
+    }
+
+    currentMosque =
+        snapshot.docs[0].data();
+
+    }
 async function loadExistingCodes(){
 
 const set=
