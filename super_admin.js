@@ -188,7 +188,13 @@ data-id="${mosque.id}">
 ⚙️ الإدارة
 
 </button>
+<button
+class="copyLink"
+data-id="${mosque.id}">
 
+🔗 رابط الطلاب
+
+</button>
 <button
 class="deleteMosque"
 data-id="${mosque.id}">
@@ -516,7 +522,25 @@ document.addEventListener("click", async (e)=>{
         return;
 
     }
+if(e.target.classList.contains("copyLink")){
 
+    const mosqueId = e.target.dataset.id;
+
+    const link =
+        location.origin +
+        location.pathname
+            .replace("mosques.html","students/index.html")
+        +
+        "?mosque=" +
+        mosqueId;
+
+    await navigator.clipboard.writeText(link);
+
+    alert("تم نسخ رابط الطلاب.");
+
+    return;
+
+}
     // تعديل المسجد
 if(e.target.classList.contains("editMosque")){
 
