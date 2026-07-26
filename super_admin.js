@@ -193,7 +193,7 @@ data-id="${mosque.id}">
 `;
 
 mosquesContainer.appendChild(card);
-loadStatistics(doc.id);
+loadStatistics(mosque.id);
 });
 
 }
