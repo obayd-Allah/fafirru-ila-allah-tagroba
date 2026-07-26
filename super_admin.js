@@ -295,32 +295,51 @@ codesPassword: "codes",
 
             await updateDoc(
 
-                doc(
-                    db,
-                    "Mosques",
-                    editingMosque
-                ),
+    doc(
+        db,
+        "Mosques",
+        editingMosque
+    ),
 
-                {
+    {
 
-                    name:name,
-shortName:shortName,
+        name: name,
 
-                    logo:
-                    mosqueLogo.value.trim(),
+        shortName: shortName,
 
-                    title:
-                    mosqueTitle.value.trim(),
+        logo: mosqueLogo.value.trim(),
 
-                    whatsapp:
-                    mosqueWhatsapp.value.trim(),
+        title: mosqueTitle.value.trim(),
 
-                    primaryColor:
-                    mosqueColor.value
+        whatsapp: mosqueWhatsapp.value.trim(),
 
-                }
+        primaryColor: mosqueColor.value,
 
-            );
+        adminPassword: "admin",
+
+        codesPassword: "codes",
+
+        theme: "theme1",
+
+        cardsFolder: "cards/default/",
+
+        cardValues: [5,10,15,20],
+
+        celebrationLevels: {
+
+            5:"small",
+
+            10:"small",
+
+15:"medium",
+
+            20:"large"
+
+        }
+
+    }
+
+);
 
         }
 mosqueModal.style.display = "none";
