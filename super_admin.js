@@ -57,20 +57,20 @@ document.getElementById("cardsFolder");
 const cardValues =
 document.getElementById("cardValues");
 
+cardValues.addEventListener("input", ()=>{
+
+    const values =
+    cardValues.value
+    .split(",")
+    .map(x=>Number(x.trim()))
+    .filter(x=>!isNaN(x));
+
+    renderCelebrationOptions(values);
+
+});
 const celebrationContainer =
 document.getElementById("celebrationContainer");
 
-const level1 =
-document.getElementById("level1");
-
-const level2 =
-document.getElementById("level2");
-
-const level3 =
-document.getElementById("level3");
-
-const level4 =
-document.getElementById("level4");
 
 const mosqueTitle =
 document.getElementById("mosqueTitle");
@@ -263,7 +263,7 @@ cardValues.value
 .map(x=>Number(x.trim()))
 .filter(x=>!isNaN(x));
     
-renderCelebrationOptions(values);
+
 const celebrationLevels = {};
 
 celebrationContainer
@@ -421,17 +421,15 @@ codesPassword.value = "codes";
 cardValues.value =
 "5,10,15,20";
 
-level1.value =
-"small";
-
-level2.value =
-"small";
-
-level3.value =
-"medium";
-
-level4.value =
-"large";
+renderCelebrationOptions(
+    [5,10,15,20],
+    {
+        5:"small",
+        10:"small",
+        15:"medium",
+        20:"large"
+    }
+);
 mosqueModal.style.display = "flex";
 
 };
@@ -568,24 +566,10 @@ cardValues.value =
 (mosque.cardValues || [])
 .join(",");
 
-const levels =
-mosque.celebrationLevels || {};
-
-const values =
-mosque.cardValues || [];
-
-    
-level1.value =
-levels[values[0]] || "small";
-
-level2.value =
-levels[values[1]] || "small";
-
-level3.value =
-levels[values[2]] || "medium";
-
-level4.value =
-levels[values[3]] || "large";
+renderCelebrationOptions(
+    mosque.cardValues || [],
+    mosque.celebrationLevels || {}
+);
     
 mosqueModal.style.display = "flex";
 
