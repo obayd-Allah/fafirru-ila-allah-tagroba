@@ -78,6 +78,12 @@ document.getElementById("mosqueWhatsapp");
 const mosqueColor =
 document.getElementById("mosqueColor");
 
+const adminPassword =
+document.getElementById("adminPassword");
+
+const codesPassword =
+document.getElementById("codesPassword");
+
 const modalTitle =
 document.getElementById("modalTitle");
 
@@ -296,8 +302,11 @@ if(editingMosque===null){
 
     // ========= بيانات الدخول =========
 
-    adminPassword: "admin",
-codesPassword: "codes",
+    adminPassword:
+adminPassword.value.trim() || "admin",
+
+codesPassword:
+codesPassword.value.trim() || "codes",
 
     // ========= الثيم =========
 
@@ -344,9 +353,11 @@ celebrationLevels,
 
         primaryColor: mosqueColor.value,
 
-        adminPassword: "admin",
+        adminPassword:
+adminPassword.value.trim() || "admin",
 
-        codesPassword: "codes",
+codesPassword:
+codesPassword.value.trim() || "codes",
 
         theme: "theme1",
 
@@ -399,6 +410,9 @@ mosqueTitle.value = "";
 mosqueWhatsapp.value = "";
 
 mosqueColor.value = "#1976d2";
+    adminPassword.value = "admin";
+
+codesPassword.value = "codes";
     cardsFolder.value =
 "cards/default/";
 
@@ -540,6 +554,11 @@ mosqueName.value =
 
         mosqueColor.value =
             mosque.primaryColor || "#1976d2";
+    adminPassword.value =
+mosque.adminPassword || "admin";
+
+codesPassword.value =
+mosque.codesPassword || "codes";
     cardsFolder.value =
 mosque.cardsFolder || "";
 
