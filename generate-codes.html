@@ -905,6 +905,39 @@ snapshot.forEach(doc=>{
         snapshot.docs[0].data();
 
     }
+    function buildCardsTemplates(){
+
+    const box =
+        document.getElementById("templates");
+
+    box.innerHTML = "";
+
+    const values =
+        currentMosque.cardValues || [];
+
+    const folder =
+        currentMosque.cardsFolder || "";
+
+    values.forEach((value,index)=>{
+
+        box.innerHTML += `
+
+<label class="cardOption">
+<input
+type="radio"
+name="template"
+value="${value}"
+${index==0?"checked":""}>
+
+<img src="${folder}${value}.jpg">
+
+</label>
+
+`;
+
+    });
+
+    }
 async function loadExistingCodes(){
 
 const set=
@@ -1581,9 +1614,13 @@ renderCodesTable();
 
     window.addEventListener("load", async()=>{
 
+    await loadMosque();
+
     await loadStudents();
 
     await loadCodesTable();
+
+    buildCardsTemplates();
 
 });
      
