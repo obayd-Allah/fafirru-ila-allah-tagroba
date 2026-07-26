@@ -37,6 +37,21 @@ export const CURRENT_MOSQUE =
     APP_CONFIG.mosques[getCurrentMosqueId()];
 export function getCurrentMosqueId() {
 
+    const params = new URLSearchParams(window.location.search);
+
+    const mosqueId = params.get("mosque");
+
+    if(mosqueId){
+
+        sessionStorage.setItem(
+            "currentMosqueId",
+            mosqueId
+        );
+
+        return mosqueId;
+
+    }
+
     return (
         sessionStorage.getItem("currentMosqueId")
         ||
