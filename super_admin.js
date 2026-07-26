@@ -57,6 +57,9 @@ document.getElementById("cardsFolder");
 const cardValues =
 document.getElementById("cardValues");
 
+const celebrationContainer =
+document.getElementById("celebrationContainer");
+
 const level1 =
 document.getElementById("level1");
 
@@ -259,20 +262,19 @@ cardValues.value
 .split(",")
 .map(x=>Number(x.trim()))
 .filter(x=>!isNaN(x));
-
+    
+renderCelebrationOptions(values);
 const celebrationLevels = {};
 
-if(values[0])
-celebrationLevels[values[0]] = level1.value;
+celebrationContainer
+.querySelectorAll("select")
+.forEach(select=>{
 
-if(values[1])
-celebrationLevels[values[1]] = level2.value;
+    celebrationLevels[
+        Number(select.dataset.card)
+    ] = select.value;
 
-if(values[2])
-celebrationLevels[values[2]] = level3.value;
-
-if(values[3])
-celebrationLevels[values[3]] = level4.value;
+});
     try{
 if(editingMosque===null){
 
@@ -572,6 +574,7 @@ mosque.celebrationLevels || {};
 const values =
 mosque.cardValues || [];
 
+    
 level1.value =
 levels[values[0]] || "small";
 
@@ -673,4 +676,39 @@ return;
 
     await loadMosques();
 
+}
+function renderCelebrationOptions(values, oldLevels = {}){
+
+    celebrationContainer.innerHTML = "";
+
+    values.forEach(value=>{
+
+        const row = document.createElement("div");
+
+        row.style.margin = "10px 0";
+
+        row.innerHTML = `
+            <label>
+            الكارت ${value}
+            </label>
+<select data-card="${value}">
+
+                <option value="small">صغير</option>
+
+                <option value="medium">متوسط</option>
+
+                <option value="large">كبير</option>
+
+            </select>
+        `;
+
+        const select =
+        row.querySelector("select");
+
+        select.value =
+        oldLevels[value] || "small";
+
+        celebrationContainer.appendChild(row);
+
+    });
 }
