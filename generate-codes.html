@@ -970,21 +970,16 @@ async function createCard(code){
 
 return new Promise((resolve)=>{
 
-const template=
-
+const template =
 document.querySelector(
-
 'input[name="template"]:checked'
-
 ).value;
 
-const img=
-
+const img =
 new Image();
 
-img.src=
-
-`${template}.jpg`;
+img.src =
+`${currentMosque.cardsFolder}${template}.jpg`;
 
 img.onload=()=>{
 
