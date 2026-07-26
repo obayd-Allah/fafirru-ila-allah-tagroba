@@ -30,13 +30,12 @@ let students = [];
 let currentFilter = "boys";
 let rewardSending = false;
 import {
-    APP_CONFIG,
-    CURRENT_MOSQUE,
     getCurrentMosqueId
 } from "./config.js";
 
 const mosqueId = getCurrentMosqueId();
 let mosqueData = null;
+let CURRENT_MOSQUE = null;
 /*====================================
         رسائل النجاح
 ====================================*/
