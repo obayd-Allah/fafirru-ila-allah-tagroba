@@ -148,7 +148,7 @@ ${mosque.shortName}
 <hr>
 <button
 class="editMosque"
-data-id="${doc.id}">
+data-id="${mosque.id}">
 
 ✏️ تعديل
 
@@ -156,7 +156,7 @@ data-id="${doc.id}">
 
 <button
 class="manageMosque"
-data-id="${doc.id}">
+data-id="${mosque.id}">
 
 ⚙️ الإدارة
 
@@ -164,7 +164,7 @@ data-id="${doc.id}">
 
 <button
 class="deleteMosque"
-data-id="${doc.id}">
+data-id="${mosque.id}">
 
 🗑 حذف
 
