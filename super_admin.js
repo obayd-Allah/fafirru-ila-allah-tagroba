@@ -57,6 +57,9 @@ document.getElementById("cardsFolder");
 const cardValues =
 document.getElementById("cardValues");
 
+const mosqueTheme =
+document.getElementById("mosqueTheme");
+
 cardValues.addEventListener("input", ()=>{
 
     const values =
@@ -325,7 +328,7 @@ codesPassword.value.trim() || "codes",
 
     // ========= الثيم =========
 
-    theme: "theme1",
+    theme: mosqueTheme.value,
 
     // ========= الكروت =========
 
@@ -374,7 +377,7 @@ adminPassword.value.trim() || "admin",
 codesPassword:
 codesPassword.value.trim() || "codes",
 
-        theme: "theme1",
+        theme: mosqueTheme.value,
 
         cardsFolder:
 cardsFolder.value.trim(),
@@ -425,12 +428,12 @@ mosqueTitle.value = "";
 mosqueWhatsapp.value = "";
 
 mosqueColor.value = "#1976d2";
-    adminPassword.value = "admin";
+    adminPassword.value = "الرحمن";
 
-codesPassword.value = "codes";
+codesPassword.value = "الرحمن";
     cardsFolder.value =
-"cards/default/";
-
+"cards/";
+mosqueTheme.value = "theme1";
 cardValues.value =
 "5,10,15,20";
 
@@ -586,6 +589,9 @@ mosqueName.value =
 
         mosqueColor.value =
             mosque.primaryColor || "#1976d2";
+    mosqueTheme.value =
+mosque.theme || "theme1";
+    
     adminPassword.value =
 mosque.adminPassword || "admin";
 
