@@ -762,7 +762,7 @@ from
 
 
  const mosqueId = getCurrentMosqueId();
-    let CURRENT_MOSQUE = null;
+    
  if(
     sessionStorage.getItem("codesAuthorized")
     !==
@@ -2299,27 +2299,7 @@ mosqueId: mosqueId
 
     alert(`تم تحديث ${updated} طالب بنجاح.`);
 };
-    async function loadMosqueConfig(){
-
-    const q = query(
-        collection(db,"Mosques"),
-        where("id","==",mosqueId),
-        limit(1)
-    );
-
-    const snap = await getDocs(q);
-
-    if(snap.empty){
-
-        alert("لم يتم العثور على بيانات المسجد");
-
-        return;
-
-    }
-
-    CURRENT_MOSQUE = snap.docs[0].data();
-
-    }
+    
 </script>
 
 </body>
