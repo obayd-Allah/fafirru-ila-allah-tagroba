@@ -1500,7 +1500,15 @@ footer.textContent =
         mosqueData.name;
 
     }
+const favicon =
+document.getElementById("favicon");
 
+if(favicon){
+
+    favicon.href =
+        mosqueData.logo + "?v=" + Date.now();
+
+}
     const title =
     document.querySelector(".hero-title");
 
