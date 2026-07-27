@@ -1641,4 +1641,4 @@ newGender = "أنثى";
     "success"
 );
 }
-fixStudentsGender();
+//fixStudentsGender();
