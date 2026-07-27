@@ -1577,3 +1577,68 @@ showMessage(
 }
 
 );
+async function fixStudentsGender() {
+
+    const q = query(
+        collection(db, "Students")
+    );
+
+    const snapshot = await getDocs(q);
+
+    let count = 0;
+
+    for (const documentSnapshot of snapshot.docs) {
+
+        const data = documentSnapshot.data();
+
+        let gender = (data.gender || "").trim().toLowerCase();
+
+        let newGender = null;
+
+        if (
+gender === "ذكر" ||
+            gender === "ولد" ||
+            gender === "male" ||
+            gender === "m"
+        ) {
+
+            newGender = "ذكر";
+
+        } else if (
+
+            gender === "أنثى" ||
+            gender === "انثى" ||
+            gender === "بنت" ||
+            gender === "female" ||
+            gender === "f" ||
+
+            // الفارغ يعتبر بنت
+            gender === ""
+
+        ) {
+newGender = "أنثى";
+
+        }
+
+        if (
+            newGender &&
+            newGender !== data.gender
+        ) {
+
+            await updateDoc(
+                doc(db, "Students", documentSnapshot.id),
+                {
+                    gender: newGender
+                }
+            );
+
+            count++;
+        }
+    }
+
+    showMessage(
+    `✅ تم تصحيح ${count} طالب`,
+    "success"
+);
+}
+fixStudentsGender();
