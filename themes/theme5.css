@@ -303,3 +303,472 @@ max-width:130px;
 }
 
 }
+.logo:hover{
+
+transform:
+
+rotate(-6deg)
+
+scale(1.10);
+
+}
+
+/*=========================
+      العنوان
+=========================*/
+
+.hero h1{
+
+font-size:58px;
+font-weight:900;
+line-height:1.15;
+
+background:linear-gradient(
+180deg,
+#ff6aa8 0%,
+#ff2f76 100%
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+-webkit-text-stroke:8px #ffffff;
+
+text-shadow:
+0 4px 0 #ff9dc4,
+0 8px 0 #e51d63,
+0 12px 18px rgba(0,0,0,.18);
+
+filter:
+drop-shadow(0 8px 10px rgba(0,0,0,.18));
+
+letter-spacing:1px;
+
+}
+.game-title{
+
+font-size:58px;
+font-weight:900;
+
+}
+
+.game-title span{
+
+display:inline-block;
+
+-webkit-text-stroke:8px white;
+
+text-shadow:
+0 4px 0 rgba(0,0,0,.12),
+0 8px 10px rgba(0,0,0,.18);
+
+margin:0 6px;
+
+}
+
+.pink{
+
+color:#ff3d83;
+
+}
+
+.green{
+
+color:#55d83a;
+
+}
+
+.blue{
+
+color:#2f7cff;
+
+}
+
+.subtitle{
+
+margin-top:18px;
+
+font-size:25px;
+
+font-weight:800;
+
+color:#fff34d;
+
+text-shadow:
+
+0 3px 0 #d97900,
+
+0 6px 15px rgba(0,0,0,.25);
+
+letter-spacing:.5px;
+
+animation:titleFloat 3s ease-in-out infinite;
+
+}
+
+@keyframes titleFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/*====================================================
+      الجزء الثاني
+      البحث + الأزرار + الإحصائيات
+====================================================*/
+
+
+/*=========================
+      صندوق البحث
+=========================*/
+
+.search-box{
+
+margin:30px auto;
+
+position:relative;
+
+}
+
+.search-box input{
+
+width:100%;
+
+padding:18px 24px;
+
+font-size:19px;
+
+font-weight:700;
+
+border:none;
+
+outline:none;
+
+border-radius:24px;
+
+background:#ffffff;
+
+color:#30506b;
+
+box-shadow:
+
+0 8px 0 #d6e7f5,
+
+0 15px 30px rgba(39,112,170,.18);
+
+transition:.25s;
+
+}
+
+.search-box input::placeholder{
+
+color:#89a3b8;
+
+font-weight:700;
+
+}
+
+.search-box input:focus{
+
+transform:translateY(-2px);
+
+box-shadow:
+
+0 10px 0 #c8ddf0,
+
+0 20px 35px rgba(52,143,214,.28);
+
+}
+
+
+/*=========================
+      الفلاتر
+=========================*/
+
+.filters{
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+flex-wrap:wrap;
+
+margin-bottom:35px;
+
+}
+
+
+/*=========================
+      أزرار الألعاب
+=========================*/
+
+.filter-btn{
+
+border:none;
+
+cursor:pointer;
+
+padding:16px 34px;
+
+font-size:18px;
+
+font-weight:800;
+
+border-radius:22px;
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#ffffff,
+
+#eaf5ff
+
+);
+
+color:#35607f;
+
+box-shadow:
+
+0 7px 0 #bfd6e8,
+
+0 14px 25px rgba(0,0,0,.12);
+
+transition:.18s;
+
+}
+
+.filter-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+.filter-btn:active{
+
+transform:translateY(4px);
+
+box-shadow:
+
+0 2px 0 #bfd6e8,
+
+0 8px 15px rgba(0,0,0,.12);
+
+}
+
+
+/* الزر النشط */
+
+.filter-btn.active{
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#46d96d,
+
+#27b955
+
+);
+
+color:#fff;
+
+box-shadow:
+
+0 7px 0 #1d8d40,
+
+0 15px 30px rgba(39,172,73,.32);
+
+}
+
+
+/*=========================
+      الإحصائيات
+=========================*/
+
+.statistics{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(240px,1fr));
+
+gap:25px;
+
+margin-bottom:45px;
+
+}
+
+
+/*=========================
+      بطاقة إحصائية
+=========================*/
+
+.stat-card{
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#ffffff,
+
+#eef9ff
+
+);
+
+border-radius:28px;
+
+padding:22px;
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+position:relative;
+
+overflow:hidden;
+
+box-shadow:
+
+0 8px 0 #d7e8f7,
+
+0 18px 30px rgba(0,0,0,.10);
+
+transition:.25s;
+
+}
+
+.stat-card:hover{
+
+transform:
+
+translateY(-5px)
+
+rotate(-1deg);
+
+}
+
+
+/* لمعان */
+
+.stat-card::before{
+
+content:"";
+
+position:absolute;
+
+top:-70px;
+
+left:-60px;
+
+width:160px;
+
+height:160px;
+
+background:
+
+rgba(255,255,255,.45);
+
+border-radius:50%;
+
+}
+
+
+/* أيقونة */
+
+.stat-icon{
+
+width:70px;
+
+height:70px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:34px;
+
+border-radius:50%;
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#ffd54d,
+
+#ffb300
+
+);
+
+box-shadow:
+
+0 5px 0 #d99100,
+
+0 10px 18px rgba(0,0,0,.15);
+
+flex-shrink:0;
+
+}
+
+
+/* العنوان */
+
+.stat-card h3{
+
+font-size:19px;
+
+font-weight:800;
+
+color:#2b5572;
+
+margin-bottom:6px;
+
+}
+
+
+/* الرقم */
+
+.stat-card p{
+
+font-size:34px;
+
+font-weight:900;
+
+color:#1b8b53;
+
+text-shadow:
+
+0 2px 0 #c8ffe0;
+
+}
