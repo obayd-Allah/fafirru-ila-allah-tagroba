@@ -216,8 +216,100 @@ box-shadow:
 0 14px 40px rgba(0,0,0,.15);
 
 }
+/*====================================
+        سحاب كلاسيكي هادئ
+====================================*/
 
-/* غيوم */
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:.9;
+
+background-repeat:no-repeat;
+
+background-image:
+
+/* السحابة الأولى */
+radial-gradient(circle at 14% 18%,rgba(255,255,255,.98) 0 32px,transparent 33px),
+radial-gradient(circle at 19% 16%,rgba(255,255,255,.98) 0 42px,transparent 43px),
+radial-gradient(circle at 25% 18%,rgba(255,255,255,.98) 0 34px,transparent 35px),
+linear-gradient(rgba(255,255,255,.98),rgba(255,255,255,.98)),
+
+/* السحابة الثانية */
+radial-gradient(circle at 74% 14%,rgba(255,255,255,.96) 0 28px,transparent 29px),
+radial-gradient(circle at 79% 12%,rgba(255,255,255,.96) 0 40px,transparent 41px),
+radial-gradient(circle at 85% 14%,rgba(255,255,255,.96) 0 30px,transparent 31px),
+linear-gradient(rgba(255,255,255,.96),rgba(255,255,255,.96)),
+
+/* سحابة صغيرة */
+radial-gradient(circle at 48% 9%,rgba(255,255,255,.88) 0 20px,transparent 21px),
+radial-gradient(circle at 52% 8%,rgba(255,255,255,.88) 0 28px,transparent 29px),
+radial-gradient(circle at 57% 9%,rgba(255,255,255,.88) 0 18px,transparent 19px),
+linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88));
+
+background-size:
+
+170px 90px,
+170px 90px,
+170px 90px,
+170px 32px,
+
+160px 85px,
+160px 85px,
+160px 85px,
+160px 30px,
+
+120px 65px,
+120px 65px,
+120px 65px,
+120px 24px;
+
+background-position:
+
+8% 16%,
+8% 16%,
+8% 16%,
+8% 37%,
+
+72% 12%,
+72% 12%,
+72% 12%,
+72% 30%,
+
+46% 5%,
+46% 5%,
+46% 5%,
+46% 20%;
+
+filter:drop-shadow(0 8px 10px rgba(0,0,0,.05));
+
+animation:cloudFloat 18s ease-in-out infinite;
+
+}
+
+@keyframes cloudFloat{
+
+0%{
+transform:translateX(0);
+}
+
+50%{
+transform:translateX(12px);
+}
+
+100%{
+transform:translateX(0);
+}
+
+	}
+/* غيوم 
 
 .hero::before{
 
@@ -246,7 +338,7 @@ opacity:.95;
 pointer-events:none;
 
 }
-
+*/
 /* لمعان */
 
 .hero::after{
