@@ -1674,3 +1674,12 @@ if(themeLink){
 
 }
 }
+// منع القائمة عند الضغط المطول
+document.addEventListener("contextmenu",e=>{
+    e.preventDefault();
+});
+
+// منع سحب الصور
+document.addEventListener("dragstart",e=>{
+    e.preventDefault();
+});
