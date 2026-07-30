@@ -598,7 +598,6 @@ const loading = document.getElementById("loading");
 const rewardBtn = document.getElementById("rewardBtn");
 const rewardModal = document.getElementById("rewardModal");
 const studentSelect = document.getElementById("studentSelect");
-const rewardCode = document.getElementById("rewardCode");
 const rewardMessage = document.getElementById("rewardMessage");
 const codeInputs =
 document.querySelectorAll(".code-digit");
@@ -1061,7 +1060,7 @@ ${getFullName(s)}
     });
 
     rewardMessage.textContent = "";
-    rewardCode.value = "";
+    const rewardCode = document.getElementById("rewardCode");
 
     rewardModal.style.display = "flex";
 
@@ -1244,7 +1243,7 @@ if (!student || student.mosqueId !== mosqueId) {
     
 // منع الضغط المتكرر وإخفاء عناصر الإدخال
 document.getElementById("sendReward").style.display = "none";
-rewardCode.style.display = "none";
+
 studentSelect.style.display = "none";
 
 // إخفاء عنوان الكود
@@ -1264,7 +1263,7 @@ document.getElementById("closeReward").style.display = "none";
 
 
      document.getElementById("sendReward").style.display = "";
-rewardCode.style.display = "";
+ 
 studentSelect.style.display = "";
 
 document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
@@ -1453,7 +1452,12 @@ document.querySelector(".modal-box")
 
 rewardModal.style.display="none";
 
-rewardCode.value="";
+codeInputs.forEach(input => {
+    input.value = "";
+    input.classList.remove("filled","complete");
+});
+
+codeInputs[0].focus();
 
 location.reload();
 
@@ -1477,7 +1481,7 @@ rewardCodeBox.classList.remove("shake");
 rewardSending = false;
 
 document.getElementById("sendReward").style.display = "";
-rewardCode.style.display = "";
+ 
 studentSelect.style.display = "";
 
 document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
@@ -1511,13 +1515,15 @@ rewardCodeBox.classList.remove("success");
 
 };
 // زر Enter داخل مربع الكود
-rewardCode.addEventListener("keydown", (e) => {
+codeInputs.forEach(input => {
 
-    if (e.key === "Enter") {
+    input.addEventListener("keydown",(e)=>{
 
-        document.getElementById("sendReward").click();
+        if(e.key==="Enter"){
+            document.getElementById("sendReward").click();
+        }
 
-    }
+    });
 
 });
 /*=========================
