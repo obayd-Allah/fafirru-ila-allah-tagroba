@@ -216,9 +216,59 @@ box-shadow:
 0 14px 40px rgba(0,0,0,.15);
 
 }
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:.45;
+
+background:
+
+radial-gradient(ellipse 180px 55px at 15% 20%,
+rgba(255,255,255,.95) 0%,
+rgba(255,255,255,.85) 45%,
+rgba(255,255,255,0) 75%),
+
+radial-gradient(ellipse 220px 65px at 82% 18%,
+rgba(255,255,255,.95) 0%,
+rgba(255,255,255,.82) 45%,
+rgba(255,255,255,0) 75%),
+
+radial-gradient(ellipse 160px 45px at 55% 10%,
+rgba(255,255,255,.9) 0%,
+rgba(255,255,255,.75) 45%,
+rgba(255,255,255,0) 75%);
+
+filter:blur(3px);
+
+animation:cloudFloat 25s ease-in-out infinite;
+
+}
+
+@keyframes cloudFloat{
+
+0%{
+transform:translateX(-12px);
+}
+
+50%{
+transform:translateX(12px);
+}
+
+100%{
+transform:translateX(-12px);
+}
+
+}
 /*====================================
         سحاب كلاسيكي هادئ
-====================================*/
+====================================
 
 .hero::before{
 
@@ -308,7 +358,7 @@ transform:translateX(12px);
 transform:translateX(0);
 }
 
-	}
+	}*/
 /* غيوم 
 
 .hero::before{
