@@ -2929,35 +2929,40 @@ margin:18px 0;
 
 .code-digit{
 
-width:52px;
+    width:58px;
+    height:68px;
 
-height:60px;
+    border:2px solid #d8d8d8;
+    border-radius:14px;
 
-border:2px solid #d8d8d8;
+    text-align:center;
 
-border-radius:14px;
+    font-family:"Cairo",sans-serif;
+    font-size:36px;
+    font-weight:800;
+    line-height:68px;
 
-text-align:center;
+    color:#111;
 
-font-size:28px;
+    transition:.22s;
+    outline:none;
+    background:#fff;
 
-font-weight:bold;
+    box-sizing:border-box;
 
-transition:.22s;
-
-outline:none;
-
-background:#fff;
+    -webkit-text-fill-color:#111;
+    caret-color:#2196f3;
 
 }
-
 .code-digit:focus{
 
-border-color:#2196f3;
+    border-color:#2196f3;
 
-transform:scale(1.08);
+    transform:scale(1.08);
 
-box-shadow:0 0 14px rgba(33,150,243,.25);
+    box-shadow:0 0 14px rgba(33,150,243,.25);
+
+    font-weight:900;
 
 }
 .code-digit.filled{
