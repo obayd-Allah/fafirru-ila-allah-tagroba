@@ -600,6 +600,11 @@ const rewardModal = document.getElementById("rewardModal");
 const studentSelect = document.getElementById("studentSelect");
 const rewardCode = document.getElementById("rewardCode");
 const rewardMessage = document.getElementById("rewardMessage");
+const codeInputs =
+document.querySelectorAll(".code-digit");
+
+const rewardCodeBox =
+document.getElementById("rewardCodeBox");
 
 const floatingRewardBtn =
 document.getElementById("floatingRewardBtn");
@@ -661,7 +666,90 @@ limit(1)
     return snap.docs[0];
 
 }
+codeInputs.forEach((input,index)=>{
 
+input.addEventListener("input",()=>{
+
+    // السماح بالأرقام فقط
+    input.value =
+    input.value.replace(/\D/g,"");
+
+    if(input.value){
+
+        input.classList.add("filled");
+
+        if(index<
+        codeInputs.length-1){
+
+            codeInputs[index+1].focus();
+
+        }
+
+    }else{
+input.classList.remove("filled");
+
+    }
+
+    updateCodeState();
+
+});
+
+input.addEventListener("keydown",(e)=>{
+
+    if(
+        e.key==="Backspace" &&
+        input.value==="" &&
+        index>0
+    ){
+
+        codeInputs[index-1].focus();
+
+    }
+
+});
+
+});
+rewardCodeBox.addEventListener("paste",(e)=>{
+
+e.preventDefault();
+
+const text=
+(e.clipboardData||window.clipboardData)
+.getData("text")
+.replace(/\D/g,"")
+.slice(0,6);
+
+text.split("").forEach((char,i)=>{
+
+if(codeInputs[i]){
+
+codeInputs[i].value=char;
+
+codeInputs[i].classList.add("filled");
+
+}
+
+});
+
+updateCodeState();
+
+});
+function updateCodeState(){
+
+const complete=
+[...codeInputs]
+.every(x=>x.value!=="");
+
+codeInputs.forEach(x=>{
+
+x.classList.toggle(
+"complete",
+complete
+);
+
+});
+
+}
 document.querySelectorAll(".filter-btn").forEach(btn=>{
 
     btn.onclick=()=>{
@@ -1113,8 +1201,12 @@ document.getElementById("sendReward").onclick = async ()=>{
 if (rewardSending) return;
 rewardSending = true;
  
-    const code = rewardCode.value.trim();
-
+    const code =
+[...codeInputs]
+.map(x=>x.value)
+.join("")
+.trim();  
+ 
     if(code===""){
 rewardSending = false;
         rewardMessage.style.color="red";
@@ -1274,7 +1366,7 @@ const messages =
 isBoy(student.gender)
 ? boyMessages
 : girlMessages;
-
+rewardCodeBox.classList.add("success");
 // اختيار رسالة عشوائية
 const randomMessage =
 parseMessage(
@@ -1370,7 +1462,13 @@ location.reload();
     }
 
     catch(error){
+rewardCodeBox.classList.add("shake");
 
+setTimeout(()=>{
+
+rewardCodeBox.classList.remove("shake");
+
+},350);
         rewardMessage.style.color="red";
 
         rewardMessage.textContent =
@@ -1391,7 +1489,18 @@ document.getElementById("closeReward").style.display = "";
 };
 // إغلاق النافذة عند الضغط خارجها
 window.onclick = (e) => {
+codeInputs.forEach(x=>{
 
+x.value="";
+
+x.classList.remove(
+"filled",
+"complete"
+);
+
+});
+
+rewardCodeBox.classList.remove("success");
     if(rewardSending) return;
 
     if (e.target === rewardModal) {
