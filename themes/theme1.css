@@ -3035,3 +3035,41 @@ transform:scale(1);
 }
 
 }
+/* منع تحديد النصوص */
+*{
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
+}
+
+/* السماح بالكتابة داخل حقول الإدخال */
+input,
+textarea{
+    -webkit-user-select:text;
+    user-select:text;
+}
+
+/* إزالة الوميض الأزرق عند اللمس */
+*{
+    -webkit-tap-highlight-color:transparent;
+}
+
+/* منع سحب الصور */
+img{
+    -webkit-user-drag:none;
+    user-drag:none;
+    pointer-events:none;
+}
+
+/* منع سحب الشعار والعنوان */
+.logo,
+.hero-title{
+    -webkit-user-drag:none;
+}
+
+/* منع التكبير بالإصبعين مع بقاء اللمس */
+html,
+body{
+    touch-action:manipulation;
+    overscroll-behavior:none;
+}
