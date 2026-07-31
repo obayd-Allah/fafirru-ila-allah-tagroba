@@ -2500,3 +2500,86 @@ body{
     }
 
 }
+/*====================================
+        Firefox Android Fix
+====================================*/
+
+/* إصلاح الشعار */
+
+.logo{
+    width:min(90%,220px) !important;
+    max-width:220px !important;
+    height:auto !important;
+    object-fit:contain;
+    display:block;
+    margin:15px auto;
+}
+
+/* إصلاح عنوان الصورة إن وجد */
+
+.hero-title{
+    width:min(92%,650px) !important;
+    max-width:650px;
+    height:auto !important;
+}
+
+/* إصلاح مربع البحث */
+
+.search-box input{
+
+    -webkit-appearance:none;
+    appearance:none;
+
+    color:#222 !important;
+    -webkit-text-fill-color:#222 !important;
+
+    font:700 18px "Cairo",sans-serif !important;
+
+    line-height:normal !important;
+
+    padding:18px 22px !important;
+
+    caret-color:#2196f3;
+
+}
+
+/* إصلاح الـ Placeholder */
+
+.search-box input::placeholder{
+
+    color:#8c98a5 !important;
+    opacity:1;
+
+}
+
+/* إصلاح مربعات الكود */
+
+.code-digit{
+
+    -webkit-appearance:none;
+    appearance:none;
+
+    width:60px;
+    height:70px;
+
+    padding:0 !important;
+
+    text-align:center;
+
+    color:#111 !important;
+    -webkit-text-fill-color:#111 !important;
+
+    font:900 36px/70px "Cairo",sans-serif !important;
+
+    box-sizing:border-box;
+
+    caret-color:#2196f3;
+
+}
+
+/* إصلاح خاص بفايرفوكس */
+
+.code-digit::-moz-focus-inner{
+    border:0;
+    padding:0;
+        }
