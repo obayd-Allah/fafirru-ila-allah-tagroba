@@ -434,7 +434,7 @@ mosqueColor.value = "#1976d2";
 
 codesPassword.value = "الرحمن";
     cardsFolder.value =
-"cards/";
+"cards/ebad-alrahman/";
 mosqueTheme.value = "theme1";
 cardValues.value =
 "5,10,15,20";
