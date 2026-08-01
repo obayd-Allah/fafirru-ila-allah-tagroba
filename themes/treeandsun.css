@@ -633,7 +633,7 @@ img{
 
 .search-box::before{
 
-    content:"🔎";
+
 
     position:absolute;
 
@@ -1516,7 +1516,7 @@ img{
 
 .reward-btn::before{
 
-    content:"🎁";
+    
 
     margin-left:10px;
 
@@ -2275,7 +2275,7 @@ footer{
 
 .code-digit{
 
-    width:60px;
+    width:740px;
 
     height:70px;
 
