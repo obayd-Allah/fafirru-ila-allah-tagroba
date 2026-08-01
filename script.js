@@ -1680,6 +1680,6 @@ document.addEventListener("contextmenu",e=>{
 });
 
 // منع سحب الصور
-document.addEventListener("dragstart",e=>{
-    e.preventDefault();
-});
+//document.addEventListener("dragstart",e=>{
+ // e.preventDefault();
+//});
