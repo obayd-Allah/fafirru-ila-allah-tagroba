@@ -616,31 +616,53 @@ document.getElementById("rewardCodeBox");
 const floatingRewardBtn =
 document.getElementById("floatingRewardBtn");
 
-async function loadStudents(){
+async function loadStudents() {
+
+    const cache = localStorage.getItem("studentsCache");
+    const cacheTime = Number(localStorage.getItem("studentsCacheTime"));
+
+    if (
+        cache &&
+        Date.now() - cacheTime < 5 * 60 * 1000
+    ) {
+
+        students = JSON.parse(cache);
+
+        loading.style.display = "none";
+
+        render();
+
+        return;
+
+    }
 
     const snapshot = await getDocs(
+        query(
+            collection(db, "Students"),
+            where("mosqueId", "==", mosqueId)
+        )
+    );
 
-query(
-
-collection(db,"Students"),
-
-where("mosqueId","==",mosqueId)
-
-)
-
-);
     students = [];
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(doc => {
 
-const data = doc.data();
+        students.push({
+            id: doc.id,
+            ...doc.data()
+        });
 
-students.push({
-id:doc.id,
-...data
-});
+    });
 
-});
+    localStorage.setItem(
+        "studentsCache",
+        JSON.stringify(students)
+    );
+
+    localStorage.setItem(
+        "studentsCacheTime",
+        Date.now()
+    );
 
     loading.style.display = "none";
 
@@ -1059,11 +1081,10 @@ getFullName(b),
 // إنشاء القائمة
     list.forEach(s=>{
 
-        studentSelect.innerHTML += `
-<option value="${s.id}">
-${getFullName(s)}
-</option>
-`;
+        const option = document.createElement("option");
+option.value = s.id;
+option.textContent = getFullName(s);
+studentSelect.appendChild(option);
 
     });
 
@@ -1467,7 +1488,12 @@ codeInputs.forEach(input => {
 
 codeInputs[0].focus();
 
-location.reload();
+student.points = totalPoints;
+
+render();
+localStorage.removeItem("studentsCache");
+localStorage.removeItem("studentsCacheTime");
+rewardSending = false;
 
 },9000);
 
@@ -1566,91 +1592,7 @@ window.addEventListener("scroll", () => {
     }
 
 });
-window.addEventListener("DOMContentLoaded", async () => {
 
-    const snapshot = await getDocs(
-        query(
-            collection(db,"Mosques"),
-            where("id","==",mosqueId)
-        )
-    );
-
-    if(snapshot.empty){
-
-        alert("المسجد غير موجود");
-
-        return;
-
-    }
-
-    mosqueData = snapshot.docs[0].data();
-
-    const whatsapp =
-    document.getElementById("whatsappLink");
-
-    if(whatsapp){
-whatsapp.href =
-        mosqueData.whatsapp || "";
-
-    }
-
-    const subtitle =
-    document.getElementById("pageSubtitle");
-
-    if(subtitle){
-
-        subtitle.textContent =
-        mosqueData.studentsPageTitle ||
-        "لوحة نقاط التلاميذ";
-
-    }
-
-    const footer =
-    document.getElementById("footerText");
-
-    if(footer){
-footer.textContent =
-        "© " + mosqueData.name;
-
-    }
-
-    const logo =
-    document.querySelector(".logo");
-
-    if(logo){
-
-        logo.src =
-        mosqueData.logo;
-
-        logo.alt =
-        mosqueData.name;
-
-    }
-const favicon =
-document.getElementById("favicon");
-
-if(favicon){
-
-    favicon.href =
-        mosqueData.logo + "?v=" + Date.now();
-
-}
-    const title =
-    document.querySelector(".hero-title");
-
-    if(title){
-title.src =
-        mosqueData.title;
-
-        title.alt =
-        mosqueData.name;
-
-    }
-
-    document.title =
-    mosqueData.name;
-
-});
 async function loadMosqueConfig(){
 
     const q = query(
@@ -1670,6 +1612,38 @@ async function loadMosqueConfig(){
     }
 
     CURRENT_MOSQUE = snap.docs[0].data();
+ mosqueData = CURRENT_MOSQUE;
+
+const whatsapp = document.getElementById("whatsappLink");
+if (whatsapp) whatsapp.href = mosqueData.whatsapp || "";
+
+const subtitle = document.getElementById("pageSubtitle");
+if (subtitle)
+    subtitle.textContent =
+        mosqueData.studentsPageTitle || "لوحة نقاط التلاميذ";
+
+const footer = document.getElementById("footerText");
+if (footer)
+    footer.textContent = "© " + mosqueData.name;
+
+const logo = document.querySelector(".logo");
+if (logo) {
+    logo.src = mosqueData.logo;
+    logo.alt = mosqueData.name;
+}
+
+const favicon = document.getElementById("favicon");
+if (favicon) {
+    favicon.href = mosqueData.logo + "?v=" + Date.now();
+}
+
+const title = document.querySelector(".hero-title");
+if (title) {
+    title.src = mosqueData.title;
+    title.alt = mosqueData.name;
+}
+
+document.title = mosqueData.name;
 const themeLink =
 document.getElementById("themeStyle");
 
