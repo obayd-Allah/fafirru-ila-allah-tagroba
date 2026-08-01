@@ -1,26 +1,22 @@
 /*====================================================
         THEME 7
-        STUDY QUEST
+        BACK TO SCHOOL
         الجزء الأول
-        Reset + Background + Hero
+        School Game UI
 ====================================================*/
 
 /*=========================
-        Reset
+      Reset
 =========================*/
 
 *{
-
     margin:0;
     padding:0;
     box-sizing:border-box;
-
 }
 
 html{
-
     scroll-behavior:smooth;
-
 }
 
 body{
@@ -29,27 +25,26 @@ body{
 
     font-family:"Cairo",sans-serif;
 
-    color:#26445d;
-
-    overflow-x:hidden;
+    color:#23435d;
 
     min-height:100vh;
 
-    background:
-
-    linear-gradient(
-        180deg,
-        #edf7ff 0%,
-        #dff1ff 45%,
-        #f8fcff 100%
-    );
+    overflow-x:hidden;
 
     position:relative;
+
+    background:
+    linear-gradient(
+        180deg,
+        #dff4ff 0%,
+        #edf9ff 45%,
+        #fffdf5 100%
+    );
 
 }
 
 /*=========================
-      خلفية تعليمية
+      خلفية مدرسية
 =========================*/
 
 body::before{
@@ -57,55 +52,67 @@ body::before{
     content:"";
 
     position:fixed;
-
     inset:0;
 
     pointer-events:none;
 
-    opacity:.28;
+    z-index:-2;
+
+    opacity:.22;
 
     background-image:
 
-    linear-gradient(rgba(80,140,200,.08) 1px,transparent 1px),
+    linear-gradient(#cfe9ff 1px,transparent 1px),
+    linear-gradient(90deg,#cfe9ff 1px,transparent 1px);
 
-    linear-gradient(90deg,rgba(80,140,200,.08) 1px,transparent 1px);
-
-    background-size:40px 40px;
-
-    z-index:-2;
+    background-size:
+    34px 34px,
+    34px 34px;
 
 }
 
-/* دوائر ملونة */
+/* زخارف بسيطة */
 
 body::after{
 
-    content:"";
+    content:"📚 ✏️ 📖 ✏️ 🎒 📚 ✏️ 📖";
 
     position:fixed;
 
     inset:0;
 
+    white-space:pre-wrap;
+
+    font-size:34px;
+
+    line-height:160px;
+
+    letter-spacing:60px;
+
+    opacity:.07;
+
     pointer-events:none;
-
-    opacity:.25;
-
-    background:
-
-    radial-gradient(circle at 10% 20%,#ffd54f 0 14px,transparent 15px),
-
-    radial-gradient(circle at 82% 15%,#66bb6a 0 12px,transparent 13px),
-
-    radial-gradient(circle at 75% 80%,#42a5f5 0 16px,transparent 17px),
-
-    radial-gradient(circle at 20% 75%,#ff8a65 0 10px,transparent 11px);
 
     z-index:-1;
 
 }
 
 /*=========================
-      Container
+      الروابط
+=========================*/
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:.25s;
+
+}
+
+/*=========================
+      الحاوية
 =========================*/
 
 .container{
@@ -114,12 +121,12 @@ body::after{
 
     margin:auto;
 
-    padding:24px 18px 55px;
+    padding:24px 18px 60px;
 
 }
 
 /*=========================
-        Hero
+      Hero
 =========================*/
 
 .hero{
@@ -128,9 +135,7 @@ body::after{
 
     overflow:hidden;
 
-    min-height:320px;
-
-    padding:35px 20px;
+    min-height:330px;
 
     display:flex;
 
@@ -140,25 +145,28 @@ body::after{
 
     text-align:center;
 
-    border-bottom-left-radius:38px;
-
-    border-bottom-right-radius:38px;
+    padding:35px;
 
     background:
 
     linear-gradient(
         180deg,
-        #4f8ef7,
-        #2f6ed9
+        #56b8ff,
+        #79cfff,
+        #bfeeff
     );
+
+    border-bottom-left-radius:38px;
+
+    border-bottom-right-radius:38px;
 
     box-shadow:
 
-    0 16px 40px rgba(0,70,160,.18);
+    0 15px 35px rgba(0,0,0,.14);
 
 }
 
-/* ورق */
+/* غيوم */
 
 .hero::before{
 
@@ -168,19 +176,21 @@ body::after{
 
     inset:0;
 
-    opacity:.12;
-
     pointer-events:none;
 
-    background-image:
+    opacity:.5;
 
-    linear-gradient(#ffffff 2px,transparent 2px);
+    background:
 
-    background-size:100% 34px;
+    radial-gradient(circle at 15% 18%,#fff 0 42px,transparent 43px),
+    radial-gradient(circle at 20% 20%,#fff 0 28px,transparent 29px),
+
+    radial-gradient(circle at 78% 15%,#fff 0 40px,transparent 41px),
+    radial-gradient(circle at 83% 17%,#fff 0 26px,transparent 27px);
 
 }
 
-/* لمعان */
+/* شريط ملون يشبه أدوات المدرسة */
 
 .hero::after{
 
@@ -188,17 +198,22 @@ body::after{
 
     position:absolute;
 
-    inset:0;
+    bottom:0;
+    left:0;
 
-    pointer-events:none;
+    width:100%;
+    height:10px;
 
     background:
 
-    linear-gradient(
+    repeating-linear-gradient(
+        90deg,
 
-        rgba(255,255,255,.25),
-
-        transparent 45%
+        #ff5d5d 0 50px,
+        #ffd93d 50px 100px,
+        #4ecb71 100px 150px,
+        #46a7ff 150px 200px,
+        #b66dff 200px 250px
 
     );
 
@@ -215,48 +230,48 @@ body::after{
 }
 
 /*=========================
-        الشعار
+      الشعار
 =========================*/
 
 .logo{
 
-    width:150px;
+    width:170px;
 
-    height:150px;
-
-    display:block;
-
-    margin:0 auto 18px;
-
-    object-fit:contain;
-
-    padding:10px;
-
-    background:#fff;
-
-    border-radius:50%;
-
-    box-shadow:
-
-    0 10px 24px rgba(0,0,0,.18);
-
-}
-
-/*=========================
-      الصورة أسفل الشعار
-=========================*/
-
-.hero-title{
-
-    width:min(92%,560px);
-
-    max-width:560px;
+    max-width:90%;
 
     height:auto;
 
     display:block;
 
-    margin:12px auto;
+    margin:0 auto 18px;
+
+    padding:10px;
+
+    background:#fff;
+
+    border-radius:28px;
+
+    box-shadow:
+
+    0 10px 22px rgba(0,0,0,.16);
+
+}
+
+/*=========================
+      صورة العنوان
+=========================*/
+
+.hero-title{
+
+    width:min(92%,620px);
+
+    max-width:620px;
+
+    display:block;
+
+    margin:10px auto;
+
+    height:auto;
 
 }
 
@@ -274,9 +289,9 @@ body::after{
 
     text-shadow:
 
-    0 4px 0 rgba(0,0,0,.15),
+    0 3px 0 #0b73b9,
 
-    0 10px 18px rgba(0,0,0,.22);
+    0 8px 18px rgba(0,0,0,.18);
 
 }
 
@@ -284,58 +299,47 @@ body::after{
 
     margin-top:18px;
 
-    color:#ffe96c;
-
     font-size:24px;
 
     font-weight:800;
 
+    color:#fffef0;
+
     text-shadow:
 
-    0 3px 8px rgba(0,0,0,.25);
+    0 2px 8px rgba(0,0,0,.25);
 
 }
 
 /*=========================
-      إصلاح Firefox
+      توافق Firefox
 =========================*/
 
+.logo,
 .hero-title{
 
-    max-width:560px !important;
+    object-fit:contain;
 
-    width:min(92%,560px) !important;
-
-    height:auto !important;
+    display:block;
 
 }
 
-.search-box input{
+.search-box input,
+.code-digit{
 
     appearance:none;
-
     -webkit-appearance:none;
+
+    font-family:"Cairo",sans-serif;
 
     color:#222;
 
     -webkit-text-fill-color:#222;
 
 }
-
-.code-digit{
-
-    appearance:none;
-
-    -webkit-appearance:none;
-
-    color:#111;
-
-    -webkit-text-fill-color:#111;
-
-}
 /*====================================================
         THEME 7
-        STUDY QUEST
+        BACK TO SCHOOL
         الجزء الثاني
         Search + Filters + Statistics
 ====================================================*/
@@ -354,11 +358,11 @@ body::after{
 
 .search-box::before{
 
-    content:"📖";
+    content:"🔍";
 
     position:absolute;
 
-    right:22px;
+    right:20px;
 
     top:50%;
 
@@ -366,9 +370,9 @@ body::after{
 
     font-size:22px;
 
-    z-index:2;
-
     pointer-events:none;
+
+    opacity:.7;
 
 }
 
@@ -384,11 +388,19 @@ body::after{
 
     outline:none;
 
-    border-radius:22px;
+    border-radius:20px;
 
-    background:#ffffff;
+    background:
 
-    color:#1e3952;
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #f8fcff
+    );
+
+    border:3px solid #cfe7ff;
+
+    color:#23435d;
 
     font-family:"Cairo",sans-serif;
 
@@ -396,40 +408,36 @@ body::after{
 
     font-weight:800;
 
+    line-height:64px;
+
     box-shadow:
 
-    0 8px 0 #d9e7f3,
-
-    0 16px 30px rgba(0,70,160,.10);
+    0 8px 18px rgba(0,0,0,.08);
 
     transition:.25s;
 
 }
 
-.search-box input:focus{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-
-    0 10px 0 #c9dcec,
-
-    0 22px 34px rgba(0,90,180,.16);
-
-}
-
 .search-box input::placeholder{
 
-    color:#8b9caf;
+    color:#7f98ad;
 
     opacity:1;
 
-    font-weight:700;
+}
+
+.search-box input:focus{
+
+    border-color:#59b7ff;
+
+    box-shadow:
+
+    0 0 18px rgba(89,183,255,.25);
 
 }
 
 /*=========================
-        الفلاتر
+      الفلاتر
 =========================*/
 
 .filters{
@@ -440,14 +448,14 @@ body::after{
 
     flex-wrap:wrap;
 
-    gap:16px;
+    gap:18px;
 
-    margin-bottom:38px;
+    margin-bottom:36px;
 
 }
 
 /*=========================
-      أزرار المواد
+      أزرار الأقلام
 =========================*/
 
 .filter-btn{
@@ -460,67 +468,67 @@ body::after{
 
     border-radius:18px;
 
-    background:
-
-    linear-gradient(
-
-        180deg,
-
-        #ffffff,
-
-        #edf6ff
-
-    );
-
-    color:#2d5776;
-
     font-size:18px;
 
     font-weight:900;
 
-    box-shadow:
-
-    0 6px 0 #d5e4ef,
-
-    0 14px 22px rgba(0,0,0,.08);
+    color:#fff;
 
     transition:.22s;
+
+    box-shadow:
+
+    0 7px 14px rgba(0,0,0,.12);
+
+}
+
+.filter-btn:nth-child(1){
+
+    background:#ff6b6b;
+
+}
+
+.filter-btn:nth-child(2){
+
+    background:#4dabf7;
+
+}
+
+.filter-btn:nth-child(3){
+
+    background:#51cf66;
+
+}
+
+.filter-btn:nth-child(4){
+
+    background:#fcc419;
+
+    color:#694500;
 
 }
 
 .filter-btn:hover{
 
-    transform:translateY(-3px);
+    transform:
+
+    translateY(-4px);
 
 }
 
 .filter-btn:active{
 
-    transform:translateY(4px);
+    transform:translateY(2px);
 
 }
 
 .filter-btn.active{
 
-    background:
-
-    linear-gradient(
-
-        180deg,
-
-        #6bcf63,
-
-        #39a84a
-
-    );
-
-    color:#fff;
+    transform:scale(1.08);
 
     box-shadow:
 
-    0 6px 0 #2f833c,
-
-    0 16px 24px rgba(46,150,70,.25);
+    0 0 18px rgba(0,0,0,.18);
 
 }
 
@@ -538,12 +546,12 @@ body::after{
 
     gap:24px;
 
-    margin-bottom:46px;
+    margin-bottom:42px;
 
 }
 
 /*=========================
-      البطاقة
+      بطاقة كتاب
 =========================*/
 
 .stat-card{
@@ -552,12 +560,6 @@ body::after{
 
     overflow:hidden;
 
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
     padding:22px;
 
     border-radius:24px;
@@ -565,20 +567,22 @@ body::after{
     background:
 
     linear-gradient(
-
         180deg,
-
         #ffffff,
-
-        #f7fbff
-
+        #f8fbff
     );
+
+    border-left:10px solid #46a7ff;
 
     box-shadow:
 
-    0 8px 0 #dae8f3,
+    0 10px 22px rgba(0,0,0,.08);
 
-    0 18px 30px rgba(0,0,0,.08);
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
 
     transition:.25s;
 
@@ -588,51 +592,39 @@ body::after{
 
     transform:
 
-    translateY(-6px);
+    translateY(-5px);
 
 }
 
-/* شريط ملون */
+.stat-card:nth-child(2){
 
-.stat-card::before{
+    border-left-color:#51cf66;
 
-    content:"";
+}
 
-    position:absolute;
+.stat-card:nth-child(3){
 
-    right:0;
+    border-left-color:#ff6b6b;
 
-    top:0;
+}
 
-    width:10px;
+.stat-card:nth-child(4){
 
-    height:100%;
-
-    background:
-
-    linear-gradient(
-
-        180deg,
-
-        #ffd34d,
-
-        #ff9800
-
-    );
+    border-left-color:#fcc419;
 
 }
 
 /*=========================
-      الأيقونة
+      أيقونة
 =========================*/
 
 .stat-icon{
 
-    width:68px;
+    width:70px;
 
-    height:68px;
+    height:70px;
 
-    border-radius:20px;
+    border-radius:18px;
 
     display:flex;
 
@@ -640,85 +632,71 @@ body::after{
 
     align-items:center;
 
-    flex-shrink:0;
-
     font-size:32px;
 
     background:
 
     linear-gradient(
-
         180deg,
-
-        #5ea9ff,
-
-        #2d77e8
-
+        #ffffff,
+        #eef7ff
     );
-
-    color:#fff;
 
     box-shadow:
 
-    0 6px 0 #245cb8;
+    inset 0 2px 5px rgba(255,255,255,.8),
+
+    0 5px 10px rgba(0,0,0,.08);
 
 }
 
 /*=========================
-      العنوان
+      النصوص
 =========================*/
 
 .stat-card h3{
 
-    font-size:18px;
+    font-size:19px;
 
     font-weight:900;
 
-    color:#2b5677;
+    color:#295070;
 
     margin-bottom:6px;
 
 }
 
-/*=========================
-      الرقم
-=========================*/
-
 .stat-card p{
 
-    font-size:34px;
+    font-size:32px;
 
     font-weight:900;
 
-    color:#2ca44d;
-
-    text-shadow:
-
-    0 2px 0 rgba(255,255,255,.7);
+    color:#1ea55c;
 
 }
 
 /*=========================
-      تحميل
+      التحميل
 =========================*/
 
 .loading{
 
     text-align:center;
 
-    padding:60px 20px;
+    padding:70px 20px;
 
     font-size:28px;
 
     font-weight:900;
 
-    color:#2c5f87;
+    color:#2c628a;
 
-    animation:loadingJump 1s infinite;
+    animation:schoolJump 1.2s infinite;
 
 }
 
-@keyframes loadingJump{
+@keyframes schoolJump{
 
     0%{
 
@@ -728,7 +706,7 @@ body::after{
 
     50%{
 
-        transform:translateY(-8px);
+        transform:translateY(-6px);
 
     }
 
@@ -741,13 +719,13 @@ body::after{
 }
 /*====================================================
         THEME 7
-        STUDY QUEST
+        BACK TO SCHOOL
         الجزء الثالث
         Student Cards
 ====================================================*/
 
 /*=========================
-      الحاوية
+      شبكة البطاقات
 =========================*/
 
 .cards{
@@ -755,7 +733,7 @@ body::after{
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fill,minmax(320px,1fr));
+    repeat(auto-fill,minmax(310px,1fr));
 
     gap:28px;
 
@@ -764,7 +742,7 @@ body::after{
 }
 
 /*=========================
-      بطاقة الطالب
+      البطاقة
 =========================*/
 
 .student-card{
@@ -780,33 +758,21 @@ body::after{
         #f8fcff
     );
 
-    border-radius:28px;
+    border-radius:24px;
 
-    padding:24px;
+    padding:26px 22px 22px;
 
-    border:3px solid #d8ecff;
-
-    box-shadow:
-    0 10px 0 #d8e8f5,
-    0 20px 32px rgba(0,0,0,.08);
-
-    transition:.28s;
-
-}
-
-.student-card:hover{
-
-    transform:
-    translateY(-8px);
+    border:2px solid #dceeff;
 
     box-shadow:
-    0 14px 0 #cfe3f3,
-    0 28px 38px rgba(0,0,0,.12);
+    0 10px 22px rgba(0,0,0,.08);
+
+    transition:.25s;
 
 }
 
 /*=========================
-      شريط جانبي
+      شريط الدفتر
 =========================*/
 
 .student-card::before{
@@ -815,58 +781,88 @@ body::after{
 
     position:absolute;
 
-    right:0;
-
     top:0;
+    left:0;
 
-    width:12px;
-
-    height:100%;
+    width:100%;
+    height:12px;
 
     background:
-    linear-gradient(
-        180deg,
-        #42a5f5,
-        #1565c0
+    repeating-linear-gradient(
+        90deg,
+
+        #ff6b6b 0 55px,
+        #ffd43b 55px 110px,
+        #51cf66 110px 165px,
+        #4dabf7 165px 220px,
+        #b197fc 220px 275px
+
     );
 
 }
 
 /*=========================
-      زخرفة علوية
+      ثقوب الدفتر
 =========================*/
 
 .student-card::after{
 
-    content:"📘";
+    content:"";
 
     position:absolute;
 
-    left:18px;
+    left:14px;
 
-    top:14px;
+    top:22px;
 
-    font-size:28px;
+    width:12px;
 
-    opacity:.12;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#d9d9d9;
+
+    box-shadow:
+
+    0 42px #d9d9d9,
+
+    0 84px #d9d9d9,
+
+    0 126px #d9d9d9;
 
 }
 
 /*=========================
-      اسم الطالب
+      حركة
+=========================*/
+
+.student-card:hover{
+
+    transform:
+    translateY(-8px)
+    rotate(-1deg);
+
+    box-shadow:
+    0 18px 34px rgba(0,0,0,.14);
+
+}
+
+/*=========================
+      الاسم
 =========================*/
 
 .student-name{
 
-    font-size:26px;
+    font-size:25px;
 
     font-weight:900;
 
-    color:#1f4d72;
+    color:#225c8f;
 
     margin-bottom:22px;
 
-    padding-left:36px;
+    padding-right:10px;
 
 }
 
@@ -882,15 +878,15 @@ body::after{
 
     align-items:center;
 
-    padding:13px 0;
+    padding:12px 0;
 
-    border-bottom:2px dashed #dbeaf6;
+    border-bottom:2px dashed #d6e8f8;
 
     font-size:18px;
 
     font-weight:800;
 
-    color:#48637b;
+    color:#44627b;
 
 }
 
@@ -900,23 +896,23 @@ body::after{
 
 .points{
 
+    min-width:70px;
+
     display:inline-flex;
 
     justify-content:center;
 
     align-items:center;
 
-    min-width:72px;
+    padding:8px 14px;
 
-    padding:8px 15px;
-
-    border-radius:18px;
+    border-radius:14px;
 
     background:
     linear-gradient(
         180deg,
-        #4fc3f7,
-        #2196f3
+        #51cf66,
+        #2f9e44
     );
 
     color:#fff;
@@ -924,9 +920,6 @@ body::after{
     font-size:24px;
 
     font-weight:900;
-
-    box-shadow:
-    0 5px 0 #1976d2;
 
 }
 
@@ -940,25 +933,17 @@ body::after{
 
     margin-top:18px;
 
-    padding:11px 22px;
+    padding:10px 18px;
 
-    border-radius:18px;
+    border-radius:14px;
 
-    background:
-    linear-gradient(
-        180deg,
-        #eef8ff,
-        #dcefff
-    );
+    background:#eef7ff;
 
-    color:#1d5f8f;
+    color:#25628d;
 
-    font-size:18px;
+    font-size:17px;
 
-    font-weight:900;
-
-    box-shadow:
-    0 5px 0 #bddcf6;
+    font-weight:800;
 
 }
 
@@ -971,32 +956,15 @@ body::after{
     background:
     linear-gradient(
         180deg,
-        #fff8fc,
-        #fff1f7
+        #fffafd,
+        #fff0f7
     );
-
-}
-
-.girl-card::before{
-
-    background:
-    linear-gradient(
-        180deg,
-        #ff8ec2,
-        #ec5da2
-    );
-
-}
-
-.girl-card::after{
-
-    content:"📖";
 
 }
 
 .girl-card .student-name{
 
-    color:#cb4d92;
+    color:#cf4f95;
 
 }
 
@@ -1005,30 +973,22 @@ body::after{
     background:
     linear-gradient(
         180deg,
-        #ff9bcc,
-        #ef5ea8
+        #ff8bc5,
+        #e056a2
     );
-
-    box-shadow:
-    0 5px 0 #cb4a8a;
 
 }
 
 .girl-card .rank{
 
-    background:
-    linear-gradient(
-        180deg,
-        #ffe7f3,
-        #ffd8eb
-    );
+    background:#ffe9f4;
 
-    color:#cb4b8d;
+    color:#d24f97;
 
 }
 
 /*=========================
-      المركز الأول
+      الأول
 =========================*/
 
 .gold{
@@ -1037,48 +997,15 @@ body::after{
     linear-gradient(
         180deg,
         #fffbe3,
-        #ffe28d
+        #ffe58f
     );
 
-    border-color:#f0c53b;
-
-}
-
-.gold::before{
-
-    background:
-    linear-gradient(
-        180deg,
-        #ffd54f,
-        #e5a800
-    );
-
-}
-
-.gold::after{
-
-    content:"🏆";
-
-    opacity:.18;
-
-}
-
-.gold .points{
-
-    background:
-    linear-gradient(
-        180deg,
-        #ffd54f,
-        #f4b400
-    );
-
-    box-shadow:
-    0 5px 0 #ca9300;
+    border-color:#f3c542;
 
 }
 
 /*=========================
-      المركز الثاني
+      الثاني
 =========================*/
 
 .silver{
@@ -1086,49 +1013,16 @@ body::after{
     background:
     linear-gradient(
         180deg,
-        #fbfcfd,
-        #e9eef3
+        #ffffff,
+        #edf3f8
     );
 
-    border-color:#bcc7d2;
-
-}
-
-.silver::before{
-
-    background:
-    linear-gradient(
-        180deg,
-        #d9e1e8,
-        #9ca7b2
-    );
-
-}
-
-.silver::after{
-
-    content:"🥈";
-
-    opacity:.18;
-
-}
-
-.silver .points{
-
-    background:
-    linear-gradient(
-        180deg,
-        #d8dfe6,
-        #9ca8b5
-    );
-
-    box-shadow:
-    0 5px 0 #7d8894;
+    border-color:#bfc8d2;
 
 }
 
 /*=========================
-      المركز الثالث
+      الثالث
 =========================*/
 
 .bronze{
@@ -1137,29 +1031,32 @@ body::after{
     linear-gradient(
         180deg,
         #fff5ea,
-        #e8be94
+        #efc08d
     );
 
-    border-color:#cb8a54;
+    border-color:#c8864c;
 
 }
 
-.bronze::before{
+.gold .points{
 
     background:
     linear-gradient(
         180deg,
-        #d69a63,
-        #9b5b2f
+        #ffd43b,
+        #d99d00
     );
 
 }
 
-.bronze::after{
+.silver .points{
 
-    content:"🥉";
-
-    opacity:.18;
+    background:
+    linear-gradient(
+        180deg,
+        #d7dde5,
+        #96a2af
+    );
 
 }
 
@@ -1168,22 +1065,20 @@ body::after{
     background:
     linear-gradient(
         180deg,
-        #d89b66,
-        #a55d2d
+        #d9975d,
+        #a55c25
     );
-
-    box-shadow:
-    0 5px 0 #7d4320;
 
 }
 /*====================================================
         THEME 7
-        STUDY QUEST
+        BACK TO SCHOOL
         الجزء الرابع والأخير
+        Rewards + Modal + Footer + Firefox
 ====================================================*/
 
 /*=========================
-      زر استلام المكافأة
+      زر استلام الجائزة
 =========================*/
 
 .reward-btn{
@@ -1196,7 +1091,7 @@ body::after{
 
     border:none;
 
-    border-radius:22px;
+    border-radius:18px;
 
     cursor:pointer;
 
@@ -1211,15 +1106,14 @@ body::after{
     background:
     linear-gradient(
         180deg,
-        #58c86c,
-        #2ea64c
+        #4dabf7,
+        #1971c2
     );
 
     box-shadow:
-    0 7px 0 #1f7d38,
-    0 16px 28px rgba(46,166,76,.28);
+    0 8px 18px rgba(25,113,194,.25);
 
-    transition:.22s;
+    transition:.25s;
 
 }
 
@@ -1231,10 +1125,7 @@ body::after{
 
 .reward-btn:active{
 
-    transform:translateY(4px);
-
-    box-shadow:
-    0 2px 0 #1f7d38;
+    transform:translateY(2px);
 
 }
 
@@ -1254,9 +1145,9 @@ body::after{
 
     align-items:center;
 
-    background:rgba(40,70,110,.45);
+    background:rgba(22,46,77,.45);
 
-    backdrop-filter:blur(5px);
+    backdrop-filter:blur(6px);
 
     z-index:99999;
 
@@ -1274,32 +1165,33 @@ body::after{
 
     padding:28px;
 
-    border-radius:28px;
+    border-radius:26px;
 
     background:
     linear-gradient(
         180deg,
         #ffffff,
-        #f8fcff
+        #f5fbff
     );
 
-    border:5px solid #ffffff;
+    border:3px solid #d7ecff;
 
     box-shadow:
-    0 12px 0 #dbe8f4,
-    0 22px 40px rgba(0,0,0,.16);
+    0 18px 40px rgba(0,0,0,.16);
 
-    animation:popup .35s ease;
+    animation:schoolPopup .3s ease;
 
 }
 
-@keyframes popup{
+@keyframes schoolPopup{
 
     from{
 
         opacity:0;
 
-        transform:translateY(35px) scale(.9);
+        transform:
+        translateY(30px)
+        scale(.92);
 
     }
 
@@ -1307,11 +1199,17 @@ body::after{
 
         opacity:1;
 
-        transform:translateY(0) scale(1);
+        transform:
+        translateY(0)
+        scale(1);
 
     }
 
 }
+
+/*=========================
+      الحقول
+=========================*/
 
 .modal-box input,
 .modal-box select{
@@ -1328,22 +1226,23 @@ body::after{
 
     outline:none;
 
-    border-radius:16px;
+    border-radius:14px;
 
     background:#fff;
 
-    font-family:"Cairo",sans-serif;
+    border:2px solid #d7ecff;
 
     font-size:17px;
 
-    font-weight:800;
+    font-weight:700;
 
-    color:#23435d;
-
-    box-shadow:
-    0 6px 0 #dce9f4;
+    font-family:"Cairo",sans-serif;
 
 }
+
+/*=========================
+      الأزرار
+=========================*/
 
 .modal-box button{
 
@@ -1355,13 +1254,15 @@ body::after{
 
     border:none;
 
-    border-radius:16px;
+    border-radius:14px;
 
     cursor:pointer;
 
     font-size:18px;
 
     font-weight:900;
+
+    font-family:"Cairo",sans-serif;
 
 }
 
@@ -1370,62 +1271,54 @@ body::after{
     background:
     linear-gradient(
         180deg,
-        #4fc96b,
-        #2da44c
+        #51cf66,
+        #2f9e44
     );
 
     color:#fff;
-
-    box-shadow:
-    0 6px 0 #20763a;
 
 }
 
 #closeReward{
 
-    background:#eceff3;
+    background:#edf2f7;
 
-    color:#45596d;
-
-    box-shadow:
-    0 6px 0 #cdd5dc;
+    color:#444;
 
 }
 
 /*=========================
-      الواتساب
+      واتساب
 =========================*/
 
 .whatsapp-box{
 
-    margin:45px auto;
+    margin:40px auto;
 
-    padding:32px;
+    padding:30px;
 
-    border-radius:28px;
+    border-radius:24px;
 
     text-align:center;
 
     background:
+
     linear-gradient(
         180deg,
         #ffffff,
-        #f5fffa
+        #f5fff9
     );
 
     box-shadow:
-    0 10px 0 #d9eee2,
-    0 22px 34px rgba(0,0,0,.08);
+    0 10px 20px rgba(0,0,0,.08);
 
 }
 
 .whatsapp-box h3{
 
-    color:#159a54;
+    color:#1a9b58;
 
-    font-size:28px;
-
-    font-weight:900;
+    font-size:27px;
 
     margin-bottom:12px;
 
@@ -1433,11 +1326,11 @@ body::after{
 
 .whatsapp-box p{
 
-    color:#5b7185;
-
     font-size:18px;
 
     line-height:1.8;
+
+    color:#5c7385;
 
 }
 
@@ -1449,25 +1342,17 @@ body::after{
 
     padding:15px 34px;
 
-    border-radius:20px;
+    border-radius:18px;
 
-    background:
-    linear-gradient(
-        180deg,
-        #41dc71,
-        #18b34b
-    );
+    background:#25D366;
 
     color:#fff;
 
-    font-size:20px;
+    font-size:19px;
 
     font-weight:900;
 
-    box-shadow:
-    0 6px 0 #147f37;
-
-    transition:.22s;
+    transition:.25s;
 
 }
 
@@ -1485,26 +1370,99 @@ body::after{
 
     max-width:360px;
 
-    margin:18px auto;
+    margin:20px auto;
 
     padding:16px;
 
     border-radius:18px;
 
-    background:#fffef7;
+    background:#fff;
 
-    border:3px solid #ffe18a;
+    border:2px solid #dfefff;
 
-    color:#1f8b49;
+    box-shadow:
+    0 8px 16px rgba(0,0,0,.08);
+
+    text-align:center;
 
     font-size:20px;
 
     font-weight:900;
 
-    text-align:center;
+    color:#24844d;
+
+}
+
+/*=========================
+      الزر العائم
+=========================*/
+
+.floating-reward-btn{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:22px;
+
+    transform:translate(-50%,80px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:14px 22px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffd43b,
+        #fab005
+    );
+
+    color:#4d3600;
+
+    font-size:18px;
+
+    font-weight:900;
 
     box-shadow:
-    0 8px 18px rgba(0,0,0,.08);
+    0 10px 22px rgba(0,0,0,.18);
+
+    transition:.3s;
+
+    z-index:9999;
+
+}
+
+.floating-reward-btn.show{
+
+    transform:translate(-50%,0);
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+.floating-reward-btn img{
+
+    width:28px;
+
+    height:28px;
 
 }
 
@@ -1514,9 +1472,9 @@ body::after{
 
 footer{
 
-    margin-top:55px;
+    margin-top:60px;
 
-    padding:28px;
+    padding:32px;
 
     text-align:center;
 
@@ -1524,13 +1482,14 @@ footer{
 
     font-size:18px;
 
-    font-weight:900;
+    font-weight:800;
 
     background:
+
     linear-gradient(
         180deg,
-        #3e86f6,
-        #225fc6
+        #4dabf7,
+        #1971c2
     );
 
     border-top-left-radius:34px;
@@ -1545,43 +1504,49 @@ footer{
 
 .hero-title{
 
-    display:block;
+    width:min(92%,620px);
 
-    width:min(92%,560px) !important;
+    max-width:620px;
 
-    max-width:560px !important;
-
-    height:auto !important;
+    height:auto;
 
 }
 
 .search-box input{
 
-    color:#22384f !important;
-
-    -webkit-text-fill-color:#22384f !important;
-
     appearance:none;
-
     -webkit-appearance:none;
+
+    color:#23435d;
+
+    -webkit-text-fill-color:#23435d;
+
+    line-height:normal;
+
+}
+
+.search-box input::placeholder{
+
+    color:#7f98ad;
+
+    opacity:1;
 
 }
 
 .code-digit{
 
-    color:#222 !important;
+    appearance:none;
+    -webkit-appearance:none;
 
-    -webkit-text-fill-color:#222 !important;
+    color:#222;
 
-    font-family:"Cairo",sans-serif;
-
-    font-weight:900;
+    -webkit-text-fill-color:#222;
 
     line-height:70px;
 
-    appearance:none;
+    text-align:center;
 
-    -webkit-appearance:none;
+    font-weight:900;
 
 }
 
@@ -1591,88 +1556,52 @@ footer{
 
 @media(max-width:768px){
 
-.hero{
+    .hero{
 
-    min-height:250px;
+        min-height:290px;
 
-    border-bottom-left-radius:24px;
+    }
 
-    border-bottom-right-radius:24px;
+    .hero h1{
 
-}
+        font-size:36px;
 
-.logo{
+    }
 
-    width:95px;
+    .subtitle{
 
-    height:95px;
+        font-size:20px;
 
-}
+    }
 
-.hero-title{
+    .statistics{
 
-    width:95% !important;
+        grid-template-columns:1fr;
 
-}
+    }
 
-.hero h1{
+    .cards{
 
-    font-size:34px;
+        grid-template-columns:1fr;
 
-}
+    }
 
-.subtitle{
+    .filter-btn{
 
-    font-size:20px;
+        width:100%;
 
-}
+    }
 
-.cards{
+    .whatsapp-btn{
 
-    grid-template-columns:1fr;
+        width:100%;
 
-}
+    }
 
-.statistics{
+    .floating-reward-btn{
 
-    grid-template-columns:1fr;
+        width:calc(100% - 28px);
 
-}
-
-.filter-btn{
-
-    width:100%;
-
-}
-
-.search-box input{
-
-    font-size:17px;
-
-}
-
-.student-name{
-
-    font-size:22px;
-
-}
-
-.student-info{
-
-    font-size:17px;
-
-}
-
-.points{
-
-    font-size:20px;
-
-}
-
-.whatsapp-btn{
-
-    width:100%;
-
-}
+    }
 
 }
