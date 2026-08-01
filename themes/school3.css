@@ -1,1 +1,2399 @@
+/*====================================================
+        THEME 7
+        BACK TO SCHOOL
+        الجزء الأول
+        الأساسيات + الخلفية + Hero
+====================================================*/
 
+/*=========================
+      Reset
+=========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    direction:rtl;
+
+    font-family:'Cairo',sans-serif;
+
+    color:#26435b;
+
+    overflow-x:hidden;
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        180deg,
+        #89d2ff 0%,
+        #bfe8ff 35%,
+        #dff7ff 70%,
+        #eefcff 100%
+    );
+
+    position:relative;
+
+}
+
+/*=========================
+      سماء المدرسة
+=========================*/
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-2;
+
+    opacity:.9;
+
+    background:
+
+    radial-gradient(circle at 12% 18%,rgba(255,255,255,.95) 0 26px,transparent 27px),
+
+    radial-gradient(circle at 18% 17%,rgba(255,255,255,.95) 0 38px,transparent 39px),
+
+    radial-gradient(circle at 23% 18%,rgba(255,255,255,.95) 0 26px,transparent 27px),
+
+    radial-gradient(circle at 76% 16%,rgba(255,255,255,.95) 0 24px,transparent 25px),
+
+    radial-gradient(circle at 82% 14%,rgba(255,255,255,.95) 0 36px,transparent 37px),
+
+    radial-gradient(circle at 88% 16%,rgba(255,255,255,.95) 0 24px,transparent 25px);
+
+    animation:cloudMove 28s ease-in-out infinite;
+
+}
+
+@keyframes cloudMove{
+
+    0%{
+        transform:translateX(-10px);
+    }
+
+    50%{
+        transform:translateX(12px);
+    }
+
+    100%{
+        transform:translateX(-10px);
+    }
+
+}
+
+/*=========================
+      أدوات مدرسية بالخلفية
+=========================*/
+
+body::after{
+
+    content:"📚 ✏️ 📐 ✂️ 📝 📖 🎒 📚 ✏️ 📖 📐";
+
+    position:fixed;
+
+    inset:0;
+
+    white-space:pre-wrap;
+
+    line-height:120px;
+
+    font-size:38px;
+
+    opacity:.08;
+
+    text-align:center;
+
+    pointer-events:none;
+
+    animation:schoolFloat 20s linear infinite;
+
+    z-index:-1;
+
+}
+
+@keyframes schoolFloat{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(-40px);
+
+    }
+
+}
+
+/*=========================
+      الحاوية
+=========================*/
+
+.container{
+
+    max-width:1180px;
+
+    margin:auto;
+
+    padding:25px 18px 45px;
+
+}
+
+/*=========================
+      Hero
+=========================*/
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    min-height:380px;
+
+    padding:40px;
+
+    border-bottom-left-radius:42px;
+
+    border-bottom-right-radius:42px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #3da6ff,
+        #63c5ff,
+        #8ad9ff
+    );
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.15);
+
+}
+
+/*=========================
+      أرض المدرسة
+=========================*/
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:80px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #77d85d,
+        #3fb648
+    );
+
+}
+
+/*=========================
+      زخارف المدرسة
+=========================*/
+
+.hero::after{
+
+    content:"🎒     📚     ✏️     🏫     📖";
+
+    position:absolute;
+
+    top:25px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:48px;
+
+    animation:bounceIcons 3.5s ease-in-out infinite;
+
+    opacity:.95;
+
+}
+
+@keyframes bounceIcons{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================
+      المحتوى
+=========================*/
+
+.overlay{
+
+    position:relative;
+
+    z-index:5;
+
+    width:100%;
+
+}
+
+/*=========================
+      الشعار
+=========================*/
+
+.logo{
+
+    width:170px;
+
+    height:170px;
+
+    display:block;
+
+    object-fit:contain;
+
+    margin:0 auto 25px;
+
+    padding:10px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    border:8px solid #ffe15b;
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.18);
+
+    animation:logoJump 2.8s ease-in-out infinite;
+
+}
+
+@keyframes logoJump{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================
+      عنوان اللعبة
+=========================*/
+
+.hero h1{
+
+    font-size:60px;
+
+    font-weight:900;
+
+    color:#ffffff;
+
+    text-shadow:
+
+    0 5px 0 #2f6aa7,
+
+    0 10px 18px rgba(0,0,0,.22);
+
+}
+
+/*=========================
+      العنوان الفرعي
+=========================*/
+
+.subtitle{
+
+    margin-top:18px;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    color:#fff45c;
+
+    text-shadow:
+
+    0 3px 0 #c07b00,
+
+    0 8px 12px rgba(0,0,0,.2);
+
+    animation:subtitleGlow 2.5s infinite;
+
+}
+
+@keyframes subtitleGlow{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.03);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+/*====================================================
+        THEME 7
+        BACK TO SCHOOL
+        الجزء الثاني
+        البحث + الفلاتر + الإحصائيات
+====================================================*/
+
+/*=========================
+      صندوق البحث
+=========================*/
+
+.search-box{
+
+    position:relative;
+
+    max-width:900px;
+
+    margin:30px auto 35px;
+
+}
+
+.search-box::before{
+
+    content:"🔍";
+
+    position:absolute;
+
+    top:50%;
+
+    right:22px;
+
+    transform:translateY(-50%);
+
+    font-size:24px;
+
+    z-index:2;
+
+    pointer-events:none;
+
+}
+
+.search-box::after{
+
+    content:"📖";
+
+    position:absolute;
+
+    left:20px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:28px;
+
+    opacity:.9;
+
+    pointer-events:none;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    height:72px;
+
+    padding:0 70px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:24px;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#2d4f68;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #f9fcff
+    );
+
+    border:4px solid #ffd95a;
+
+    box-shadow:
+
+    0 8px 0 #e0c149,
+
+    0 18px 35px rgba(0,0,0,.12);
+
+    transition:.25s;
+
+}
+
+.search-box input:focus{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+    0 10px 0 #e0c149,
+
+    0 22px 38px rgba(0,0,0,.16);
+
+}
+
+.search-box input::placeholder{
+
+    color:#6d8ba0;
+
+    font-weight:800;
+
+}
+
+/*=========================
+      الفلاتر
+=========================*/
+
+.filters{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:18px;
+
+    margin-bottom:40px;
+
+}
+
+/*=========================
+      الأزرار
+=========================*/
+
+.filter-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:18px 32px;
+
+    border-radius:20px;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:#31516a;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #eef8ff
+    );
+
+    border:3px solid #ffd95b;
+
+    box-shadow:
+
+    0 6px 0 #d5b13c,
+
+    0 14px 25px rgba(0,0,0,.10);
+
+    transition:.22s;
+
+}
+
+.filter-btn::before{
+
+    content:"📚";
+
+    margin-left:8px;
+
+}
+
+.filter-btn:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.filter-btn:active{
+
+    transform:translateY(4px);
+
+}
+
+.filter-btn.active{
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #58cf5c,
+        #2ea83e
+    );
+
+    border-color:#2d9f3c;
+
+    box-shadow:
+
+    0 6px 0 #247e31,
+
+    0 16px 28px rgba(35,140,60,.25);
+
+}
+
+/*=========================
+      الإحصائيات
+=========================*/
+
+.statistics{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(240px,1fr));
+
+    gap:24px;
+
+    margin-bottom:45px;
+
+}
+
+/*=========================
+      البطاقة
+=========================*/
+
+.stat-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:24px;
+
+    border-radius:26px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #fffdf5
+    );
+
+    border:4px solid #ffe47d;
+
+    box-shadow:
+
+    0 8px 0 #e2c75a,
+
+    0 18px 32px rgba(0,0,0,.10);
+
+    transition:.25s;
+
+}
+
+.stat-card:hover{
+
+    transform:
+
+    translateY(-6px)
+
+    rotate(-1deg);
+
+}
+
+/*=========================
+      نجمة التقدير
+=========================*/
+
+.stat-card::before{
+
+    content:"⭐";
+
+    position:absolute;
+
+    left:18px;
+
+    top:14px;
+
+    font-size:24px;
+
+    animation:starTwinkle 2.5s infinite;
+
+}
+
+@keyframes starTwinkle{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.25);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/*=========================
+      الأيقونة
+=========================*/
+
+.stat-icon{
+
+    width:74px;
+
+    height:74px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffd857,
+        #ffbf26
+    );
+
+    box-shadow:
+
+    0 6px 0 #d99b00;
+
+    flex-shrink:0;
+
+}
+
+/*=========================
+      النص
+=========================*/
+
+.stat-card h3{
+
+    font-size:19px;
+
+    font-weight:900;
+
+    color:#2d5575;
+
+    margin-bottom:8px;
+
+}
+
+.stat-card p{
+
+    font-size:34px;
+
+    font-weight:900;
+
+    color:#27a748;
+
+}
+
+/*=========================
+      بطاقات متنوعة
+=========================*/
+
+.stat-card:nth-child(2){
+
+    border-color:#8fd3ff;
+
+}
+
+.stat-card:nth-child(2) .stat-icon{
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #62c7ff,
+        #299df1
+    );
+
+}
+
+.stat-card:nth-child(3){
+
+    border-color:#ffb7d5;
+
+}
+
+.stat-card:nth-child(3) .stat-icon{
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ff9fd0,
+        #f16db0
+    );
+
+}
+
+.stat-card:nth-child(4){
+
+    border-color:#98e28f;
+
+}
+
+.stat-card:nth-child(4) .stat-icon{
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #74dd74,
+        #34b84a
+    );
+
+}
+/*====================================================
+        THEME 7
+        BACK TO SCHOOL
+        الجزء الثالث
+        Student Cards
+====================================================*/
+
+/*=========================
+      حاوية البطاقات
+=========================*/
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(320px,1fr));
+
+    gap:28px;
+
+    margin-bottom:45px;
+
+}
+
+/*=========================
+      بطاقة الطالب
+=========================*/
+
+.student-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:26px;
+
+    border-radius:26px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #fffdf8
+    );
+
+    border:3px solid #f1df9a;
+
+    box-shadow:
+
+    0 10px 26px rgba(0,0,0,.10);
+
+    transition:.28s;
+
+}
+
+/*=========================
+      خطوط الدفتر
+=========================*/
+
+.student-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
+
+        to bottom,
+
+        transparent 0,
+
+        transparent 36px,
+
+        rgba(120,180,255,.18) 37px,
+
+        rgba(120,180,255,.18) 38px
+
+    );
+
+    pointer-events:none;
+
+}
+
+/*=========================
+      شريط الدفتر
+=========================*/
+
+.student-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    right:0;
+
+    width:14px;
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #ff5959,
+
+        #ffb13b,
+
+        #52c95a,
+
+        #4ab8ff,
+
+        #8b6dff
+
+    );
+
+}
+
+/*=========================
+      دبوس
+=========================*/
+
+.student-card .student-name::before{
+
+    content:"📌";
+
+    margin-left:8px;
+
+}
+
+/*=========================
+      حركة البطاقة
+=========================*/
+
+.student-card:hover{
+
+    transform:
+
+    translateY(-10px)
+
+    rotate(-1deg);
+
+    box-shadow:
+
+    0 20px 36px rgba(0,0,0,.16);
+
+}
+
+/*=========================
+      اسم الطالب
+=========================*/
+
+.student-name{
+
+    position:relative;
+
+    font-size:26px;
+
+    font-weight:900;
+
+    color:#275d82;
+
+    margin-bottom:24px;
+
+}
+
+/*=========================
+      المعلومات
+=========================*/
+
+.student-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:
+
+    2px dashed #cdddf3;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#4b657d;
+
+}
+
+/*=========================
+      النقاط
+=========================*/
+
+.points{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-width:72px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #43d56b,
+        #28a843
+    );
+
+    box-shadow:
+
+    0 5px 0 #208536;
+
+}
+
+/*=========================
+      الرتبة
+=========================*/
+
+.rank{
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    color:#2f6287;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #eef8ff,
+        #d9efff
+    );
+
+    box-shadow:
+
+    0 5px 0 #c0ddf3;
+
+}
+
+/*=========================
+      بطاقات البنات
+=========================*/
+
+.girl-card{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #fff9fc,
+
+        #fff1f8
+
+    );
+
+}
+
+.girl-card::after{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #ff8dbf,
+
+        #f06ca9,
+
+        #d94c8e
+
+    );
+
+}
+
+.girl-card .student-name{
+
+    color:#c63b87;
+
+}
+
+.girl-card .points{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #ff8ec8,
+
+        #ea63a8
+
+    );
+
+    box-shadow:
+
+    0 5px 0 #c54788;
+
+}
+
+.girl-card .rank{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #fff6fc,
+
+        #ffe5f4
+
+    );
+
+    color:#c8428d;
+
+}
+
+/*=========================
+      المركز الأول
+=========================*/
+
+.gold{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #fff9da,
+
+        #ffe98a
+
+    );
+
+    border-color:#f0cd58;
+
+}
+
+.gold .points{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #ffd84d,
+
+        #d79f00
+
+    );
+
+}
+
+/*=========================
+      المركز الثاني
+=========================*/
+
+.silver{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #ffffff,
+
+        #edf2f7
+
+    );
+
+    border-color:#cfd5dc;
+
+}
+
+.silver .points{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #d7dde4,
+
+        #98a3b2
+
+    );
+
+}
+
+/*=========================
+      المركز الثالث
+=========================*/
+
+.bronze{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #fff5ea,
+
+        #efbf8c
+
+    );
+
+    border-color:#cb8a4d;
+
+}
+
+.bronze .points{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #d89c66,
+
+        #a65b27
+
+    );
+
+}
+
+/*=========================
+      التحميل
+=========================*/
+
+.loading{
+
+    text-align:center;
+
+    padding:65px 20px;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    color:#2c5b81;
+
+    animation:loadingSchool 1.3s infinite;
+
+}
+
+@keyframes loadingSchool{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+/*====================================================
+        THEME 7
+        BACK TO SCHOOL
+        الجزء الرابع
+        Rewards + Modal + Footer
+====================================================*/
+
+/*=========================
+      زر المكافآت
+=========================*/
+
+.reward-btn{
+
+    width:100%;
+
+    margin:22px 0;
+
+    padding:18px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:22px;
+
+    font-size:21px;
+
+    font-weight:900;
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffb347,
+        #ff8c00
+    );
+
+    box-shadow:
+
+    0 7px 0 #d97700,
+
+    0 18px 30px rgba(255,140,0,.28);
+
+    transition:.22s;
+
+}
+
+.reward-btn:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.reward-btn:active{
+
+    transform:translateY(4px);
+
+}
+
+/*=========================
+      الزر العائم
+=========================*/
+
+.floating-reward-btn{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:22px;
+
+    transform:translate(-50%,80px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px 26px;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffb347,
+        #ff8c00
+    );
+
+    box-shadow:
+
+    0 10px 22px rgba(0,0,0,.25);
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+.floating-reward-btn.show{
+
+    transform:translate(-50%,0);
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+.floating-reward-btn img{
+
+    width:28px;
+
+    height:28px;
+
+}
+
+/*=========================
+      النافذة
+=========================*/
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(45,70,100,.45);
+
+    backdrop-filter:blur(8px);
+
+    z-index:99999;
+
+}
+
+/*=========================
+      الصندوق
+=========================*/
+
+.modal-box{
+
+    width:92%;
+
+    max-width:430px;
+
+    padding:28px;
+
+    border-radius:28px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #fffdf4
+    );
+
+    border:5px solid #ffe26c;
+
+    box-shadow:
+
+    0 18px 38px rgba(0,0,0,.18);
+
+    animation:popupSchool .35s ease;
+
+}
+
+@keyframes popupSchool{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(30px)
+
+        scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0)
+
+        scale(1);
+
+    }
+
+}
+
+/*=========================
+      الحقول
+=========================*/
+
+.modal-box input,
+.modal-box select{
+
+    width:100%;
+
+    margin:12px 0;
+
+    padding:15px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:#2d5673;
+
+    background:#fff;
+
+    border:2px solid #dfefff;
+
+}
+
+/*=========================
+      الأزرار
+=========================*/
+
+.modal-box button{
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:16px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    font-weight:900;
+
+}
+
+#sendReward{
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #59cf5d,
+        #2da63b
+    );
+
+}
+
+#closeReward{
+
+    background:#eef4f8;
+
+    color:#40637d;
+
+}
+
+/*=========================
+      بطاقة الصلاة
+=========================*/
+
+.salawat-card{
+
+    max-width:370px;
+
+    margin:22px auto;
+
+    padding:18px;
+
+    text-align:center;
+
+    border-radius:22px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #fffbea
+    );
+
+    border:3px solid #ffe17a;
+
+    box-shadow:
+
+    0 10px 20px rgba(0,0,0,.08);
+
+    color:#2e8d3f;
+
+    font-size:20px;
+
+    font-weight:900;
+
+}
+
+/*=========================
+      صندوق الواتساب
+=========================*/
+
+.whatsapp-box{
+
+    margin:45px auto;
+
+    padding:34px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #f7fff8
+    );
+
+    border:3px solid #9be3af;
+
+    box-shadow:
+
+    0 12px 24px rgba(0,0,0,.08);
+
+}
+
+.whatsapp-box h3{
+
+    color:#169c54;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    margin-bottom:15px;
+
+}
+
+.whatsapp-box p{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:#567185;
+
+}
+
+/*=========================
+      زر الواتساب
+=========================*/
+
+.whatsapp-btn{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:16px 36px;
+
+    border-radius:999px;
+
+    color:#fff;
+
+    font-size:19px;
+
+    font-weight:900;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #39d96c,
+        #189d45
+    );
+
+    box-shadow:
+
+    0 6px 0 #117438;
+
+    transition:.22s;
+
+}
+
+.whatsapp-btn:hover{
+
+    transform:translateY(-4px);
+
+}
+
+/*=========================
+      مجموع الجواهر
+=========================*/
+
+.reward-total{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    color:#27a747;
+
+}
+
+/*=========================
+      شرارات النجاح
+=========================*/
+
+.reward-spark{
+
+    position:fixed;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:100000;
+
+    animation:rewardSpark .6s ease-out forwards;
+
+}
+
+@keyframes rewardSpark{
+
+    from{
+
+        opacity:1;
+
+        transform:
+        translate(0,0)
+        scale(1);
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:
+        translate(var(--dx),var(--dy))
+        scale(.2);
+
+    }
+
+}
+
+/*=========================
+      الجواهر الطائرة
+=========================*/
+
+.flying-gem{
+
+    position:fixed;
+
+    font-size:30px;
+
+    pointer-events:none;
+
+    z-index:100000;
+
+    animation:flyGem 1.3s ease-out forwards;
+
+}
+
+@keyframes flyGem{
+
+    from{
+
+        opacity:1;
+
+        transform:
+        translate(0,0)
+        scale(.6);
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:
+        translate(var(--x),var(--y))
+        scale(1.4)
+        rotate(540deg);
+
+    }
+
+}
+
+/*=========================
+      الفوتر
+=========================*/
+
+footer{
+
+    margin-top:55px;
+
+    padding:34px;
+
+    text-align:center;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #3aa7ff,
+        #1977d5
+    );
+
+    border-top-left-radius:40px;
+
+    border-top-right-radius:40px;
+
+    box-shadow:
+
+    0 -8px 24px rgba(0,0,0,.15);
+
+}
+/*====================================================
+        THEME 7
+        BACK TO SCHOOL
+        الجزء الخامس والأخير
+        Effects + Code Boxes + Responsive
+====================================================*/
+
+/*=========================
+      حقول الكود
+=========================*/
+
+.code-boxes{
+
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    direction:ltr;
+    margin:22px 0;
+
+}
+
+.code-digit{
+
+    width:60px;
+    height:70px;
+
+    border:none;
+    outline:none;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    font-family:"Cairo",sans-serif;
+
+    font-size:34px;
+    font-weight:900;
+
+    color:#28597d;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #f7fbff
+    );
+
+    border:3px solid #ffd85f;
+
+    box-shadow:
+
+    0 6px 16px rgba(0,0,0,.10);
+
+    transition:.25s;
+
+}
+
+.code-digit:focus{
+
+    border-color:#3caeff;
+
+    background:#ffffff;
+
+    transform:scale(1.08);
+
+    box-shadow:
+
+    0 0 18px rgba(60,174,255,.35);
+
+}
+
+.code-digit.filled{
+
+    transform:scale(1.06);
+
+}
+
+.code-digit.complete{
+
+    border-color:#37c45d;
+
+    box-shadow:
+
+    0 0 18px rgba(55,196,93,.35);
+
+}
+
+/*=========================
+      اهتزاز الخطأ
+=========================*/
+
+.code-boxes.shake{
+
+    animation:shake .35s;
+
+}
+
+@keyframes shake{
+
+    0%{transform:translateX(0);}
+    20%{transform:translateX(-6px);}
+    40%{transform:translateX(6px);}
+    60%{transform:translateX(-6px);}
+    80%{transform:translateX(6px);}
+    100%{transform:translateX(0);}
+
+}
+
+/*=========================
+      نجاح
+=========================*/
+
+.code-boxes.success .code-digit{
+
+    animation:successPop .45s;
+
+}
+
+@keyframes successPop{
+
+    0%{
+
+        transform:scale(.85);
+
+    }
+
+    50%{
+
+        transform:scale(1.12);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/*=========================
+      العنصر العائم
+=========================*/
+
+.floating-reward{
+
+    position:fixed;
+
+    z-index:999999;
+
+    pointer-events:auto;
+
+    user-select:none;
+
+    cursor:pointer;
+
+    font-size:42px;
+
+    transform:translate(-50%,-50%);
+
+    animation:floatSchool 3s ease-in-out infinite;
+
+}
+
+@keyframes floatSchool{
+
+    0%{
+
+        transform:
+        translate(-50%,-50%);
+
+    }
+
+    50%{
+
+        transform:
+        translate(-50%,-60%);
+
+    }
+
+    100%{
+
+        transform:
+        translate(-50%,-50%);
+
+    }
+
+}
+
+.floating-reward.tap{
+
+    transform:
+
+    translate(-50%,-50%)
+
+    scale(1.22);
+
+}
+
+/*=========================
+      إخفاء الواجهة
+=========================*/
+
+.hide-ui{
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:translateY(-10px);
+
+    transition:.25s;
+
+}
+
+/*=========================
+      ظهور البطاقات
+=========================*/
+
+.student-card{
+
+    animation:studentAppear .45s ease both;
+
+}
+
+@keyframes studentAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(25px)
+
+        scale(.96);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0)
+
+        scale(1);
+
+    }
+
+}
+
+/*=========================
+      لمعان عند المرور
+=========================*/
+
+.student-card:hover{
+
+    filter:brightness(1.02);
+
+}
+
+.filter-btn:hover{
+
+    filter:brightness(1.05);
+
+}
+
+.reward-btn:hover{
+
+    filter:brightness(1.05);
+
+}
+
+/*=========================
+      Canvas
+=========================*/
+
+canvas.confetti-canvas{
+
+    z-index:1000000 !important;
+
+}
+
+/*=========================
+      منع التحديد
+=========================*/
+
+*{
+
+    -webkit-user-select:none;
+    user-select:none;
+
+    -webkit-touch-callout:none;
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+input,
+textarea,
+select{
+
+    -webkit-user-select:text;
+    user-select:text;
+
+}
+
+img{
+
+    -webkit-user-drag:none;
+    user-drag:none;
+
+    pointer-events:none;
+
+}
+
+.logo,
+.hero-title{
+
+    -webkit-user-drag:none;
+
+}
+
+html,
+body{
+
+    touch-action:manipulation;
+
+    overscroll-behavior:none;
+
+}
+
+/*=========================
+      الهاتف
+=========================*/
+
+@media(max-width:768px){
+
+    .hero{
+
+        min-height:310px;
+
+        padding:25px;
+
+        border-bottom-left-radius:28px;
+
+        border-bottom-right-radius:28px;
+
+    }
+
+    .hero::after{
+
+        font-size:34px;
+
+        top:18px;
+
+    }
+
+    .logo{
+
+        width:120px;
+
+        height:120px;
+
+    }
+
+    .hero h1{
+
+        font-size:36px;
+
+    }
+
+    .subtitle{
+
+        font-size:20px;
+
+    }
+
+    .statistics{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+    }
+
+    .student-name{
+
+        font-size:22px;
+
+    }
+
+    .student-info{
+
+        font-size:16px;
+
+    }
+
+    .points{
+
+        min-width:66px;
+
+        font-size:20px;
+
+    }
+
+    .search-box input{
+
+        height:62px;
+
+        font-size:17px;
+
+    }
+
+    .filter-btn{
+
+        width:100%;
+
+    }
+
+    .reward-btn{
+
+        font-size:18px;
+
+    }
+
+    .whatsapp-btn{
+
+        width:100%;
+
+    }
+
+    .floating-reward-btn{
+
+        width:calc(100% - 30px);
+
+        justify-content:center;
+
+    }
+
+    .code-digit{
+
+        width:50px;
+
+        height:60px;
+
+        font-size:28px;
+
+    }
+
+}
