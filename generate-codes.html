@@ -1303,7 +1303,21 @@ function renderCodesTable() {
 
     const tbody = document.querySelector("#codesTable tbody");
 
-    tbody.innerHTML = "";
+if(allCodes.length===0){
+
+    tbody.innerHTML = `
+        <tr>
+            <td colspan="8">
+                اضغط زر "تحديث الجدول" لتحميل الأكواد.
+            </td>
+        </tr>
+    `;
+
+    return;
+
+}
+
+tbody.innerHTML = "";
 
     const search = document
         .getElementById("searchCode")
@@ -1628,7 +1642,11 @@ renderCodesTable();
 });
     if(document.getElementById("searchCode")){
 
-    document.getElementById("refreshTable").onclick = loadCodesTable;
+    document.getElementById("refreshTable").onclick = async()=>{
+
+        await loadCodesTable();
+
+    };
 
     document.getElementById("searchCode").oninput = renderCodesTable;
 
@@ -1636,15 +1654,16 @@ renderCodesTable();
 
     window.addEventListener("load", async()=>{
 
-    await loadMosque();
+        await loadMosque();
+        await loadStudents();
 
-    await loadStudents();
+        // لا يحمل الجدول تلقائياً
 
-    await loadCodesTable();
+        buildCardsTemplates();
 
-    buildCardsTemplates();
+    });
 
-});
+}
      
 document.getElementById("selectAll").onclick = () => {
 
