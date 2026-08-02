@@ -236,18 +236,24 @@ status.textContent="";
 async function loadStudents() {
 
     const cache = localStorage.getItem(`adminStudentsCache_${mosqueId}`);
-            const cacheTime = Number(localStorage.getItem("adminStudentsCacheTime"));
+            const cacheTime = Number(
+    localStorage.getItem(`adminStudentsCacheTime_${mosqueId}`)
+);
+    if (
+    cache &&
+    cacheTime &&
+    Date.now() - cacheTime < 24 * 60 * 60 * 1000
+) {
 
-    if (cache) {
+    students = JSON.parse(cache);
 
-        students = JSON.parse(cache);
+    hideLoading();
 
-        hideLoading();
+    renderStudents();
 
-        renderStudents();
+    return;
 
-        return;
-    }
+}
 
     try {
 
