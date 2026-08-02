@@ -1696,21 +1696,25 @@ if (title) {
 document.title = mosqueData.name;
 const themeLink = document.getElementById("themeStyle");
 
-themeLink.onload = () => {
-    document.body.style.visibility = "visible";
-};
+if (themeLink) {
 
-themeLink.href =
-    "themes/" +
-    (CURRENT_MOSQUE.theme || "theme1") +
-    ".css";
+    themeLink.onload = () => {
+        document.body.style.visibility = "visible";
+    };
+
+    themeLink.href =
+        "themes/" +
+        (CURRENT_MOSQUE.theme || "theme1") +
+        ".css";
+
+    setTimeout(() => {
+        document.body.style.visibility = "visible";
+    }, 1500);
+
 }
-// منع القائمة عند الضغط المطول
-document.addEventListener("contextmenu",e=>{
-    e.preventDefault();
-});
 
 // منع سحب الصور
 //document.addEventListener("dragstart",e=>{
  // e.preventDefault();
 //});
+ 
