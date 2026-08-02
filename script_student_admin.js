@@ -1219,15 +1219,7 @@ points:newPoints
 student.points = newPoints;
 
 renderStudents();
-const student = students.find(s => s.id === currentStudent);
-
-student.firstName = firstName;
-student.familyName = familyName;
-student.fullName = fullName;
-student.name = fullName;
-student.nicknames = nicknames;
-student.points = points;
-student.gender = gender;
+student.points = newPoints;
 
 localStorage.setItem(
     "adminStudentsCache",
