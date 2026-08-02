@@ -41,7 +41,8 @@ export function getCurrentMosqueId() {
 
     const mosqueId = params.get("mosque");
 
-    if(mosqueId){
+    // إذا وُجد في الرابط
+    if (mosqueId) {
 
         sessionStorage.setItem(
             "currentMosqueId",
@@ -49,13 +50,17 @@ export function getCurrentMosqueId() {
         );
 
         return mosqueId;
-
     }
 
-    return (
-        sessionStorage.getItem("currentMosqueId")
-        ||
-        APP_CONFIG.mosqueId
-    );
+    // إذا كانت الصفحة الرئيسية بدون أي بارامتر
+    if (
+        location.pathname.endsWith("/fafirru-ila-allah-tagroba/") ||
+        location.pathname.endsWith("/fafirru-ila-allah-tagroba/index.html")
+    ) {
+        return "mosque_001";
+    }
+
+    // باقي الصفحات تعتمد على الجلسة فقط
+    return sessionStorage.getItem("currentMosqueId");
 
 }
