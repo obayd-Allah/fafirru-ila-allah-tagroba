@@ -1258,8 +1258,8 @@ if (!student || student.mosqueId !== mosqueId) {
     rewardMessage.textContent = "الطالب غير موجود.";
 
     document.getElementById("sendReward").style.display = "";
-    rewardCode.style.display = "";
-    studentSelect.style.display = "";
+rewardCodeBox.style.display = "";
+ studentSelect.style.display = "";
 
     document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
     document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
@@ -1554,31 +1554,7 @@ rewardSending = false;
 
 }
 };
-// إغلاق النافذة عند الضغط خارجها
-window.onclick = (e) => {
 
-if(rewardSending) return;
-
-if (e.target === rewardModal) {
-
-    codeInputs.forEach(x=>{
-
-        x.value="";
-
-        x.classList.remove(
-            "filled",
-            "complete"
-        );
-
-    });
-
-    rewardCodeBox.classList.remove("success");
-
-    rewardModal.style.display = "none";
-
-}
-
-};
 
 
 // زر Enter داخل مربع الكود
