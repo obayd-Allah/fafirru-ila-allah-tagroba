@@ -1473,7 +1473,15 @@ closeBtn.onclick = () => {
     rewardCodeBox.classList.remove("success");
 
     codeInputs[0].focus();
+document.getElementById("sendReward").style.display = "";
+studentSelect.style.display = "";
 
+document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
+document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
+
+document.querySelector(".modal-box h3").style.display = "";
+
+closeBtn.style.display = "none";
     rewardSending = false;
 };
 // تشغيل العداد بعد نصف ثانية
@@ -1533,6 +1541,15 @@ localStorage.setItem(
     "studentsCacheTime",
     Date.now()
 );
+ document.getElementById("sendReward").style.display = "";
+studentSelect.style.display = "";
+
+document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
+document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
+
+document.querySelector(".modal-box h3").style.display = "";
+
+document.getElementById("closeReward").style.display = "none";
 rewardSending = false;
 
 },9000);
