@@ -1530,9 +1530,10 @@ rewardSending = false;
     msg.includes("resource-exhausted") ||
     msg.includes("resource exhausted") ||
     msg.includes("quota") ||
+    msg.includes("quota exceeded") ||
     msg.includes("429")
 ) {
-        rewardMessage.style.color = "#d32f2f";
+        rewardMessage.style.color = "#14BA1A";
         rewardMessage.textContent =
              "احتفظ بالكود وحاول مرة أخرى غدًا.";
     }else{
