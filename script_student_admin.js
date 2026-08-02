@@ -1026,18 +1026,21 @@ gender:gender
 }
 
 
+if (currentStudent !== null) {
 
-closeStudentModal();
+    const student = students.find(s => s.id === currentStudent);
 
-const student = students.find(s => s.id === currentStudent);
+    if (student) {
+        student.firstName = firstName;
+        student.familyName = familyName;
+        student.fullName = fullName;
+        student.name = fullName;
+        student.nicknames = nicknames;
+        student.points = points;
+        student.gender = gender;
+    }
 
-student.firstName = firstName;
-student.familyName = familyName;
-student.fullName = fullName;
-student.name = fullName;
-student.nicknames = nicknames;
-student.points = points;
-student.gender = gender;
+}
 
 localStorage.setItem(
     `adminStudentsCache_${mosqueId}`,
@@ -1049,18 +1052,15 @@ localStorage.setItem(
     Date.now()
 );
 
+closeStudentModal();
+
 renderStudents();
 
 hideLoading();
 
-
-
 showMessage(
-
-"✅ تمت العملية بنجاح",
-
-"success"
-
+    "✅ تمت العملية بنجاح",
+    "success"
 );
 
 
