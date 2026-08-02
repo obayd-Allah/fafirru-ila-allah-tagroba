@@ -238,10 +238,7 @@ async function loadStudents() {
     const cache = localStorage.getItem("adminStudentsCache");
     const cacheTime = Number(localStorage.getItem("adminStudentsCacheTime"));
 
-    if (
-        cache &&
-        Date.now() - cacheTime < 5 * 60 * 1000
-    ) {
+    if (cache) {
 
         students = JSON.parse(cache);
 
@@ -281,10 +278,7 @@ async function loadStudents() {
             JSON.stringify(students)
         );
 
-        localStorage.setItem(
-            "adminStudentsCacheTime",
-            Date.now()
-        );
+        
 
         hideLoading();
 
