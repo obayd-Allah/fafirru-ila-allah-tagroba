@@ -235,8 +235,8 @@ status.textContent="";
 
 async function loadStudents() {
 
-    const cache = localStorage.getItem("adminStudentsCache");
-    const cacheTime = Number(localStorage.getItem("adminStudentsCacheTime"));
+    const cache = localStorage.getItem(`adminStudentsCache_${mosqueId}`);
+            const cacheTime = Number(localStorage.getItem("adminStudentsCacheTime"));
 
     if (cache) {
 
@@ -274,9 +274,9 @@ async function loadStudents() {
         });
 
         localStorage.setItem(
-            "adminStudentsCache",
-            JSON.stringify(students)
-        );
+    `adminStudentsCache_${mosqueId}`,
+    JSON.stringify(students)
+);
 
         
 
@@ -965,12 +965,12 @@ students.push({
     mosqueId
 });
 localStorage.setItem(
-    "adminStudentsCache",
+    `adminStudentsCache_${mosqueId}`,
     JSON.stringify(students)
 );
 
 localStorage.setItem(
-    "adminStudentsCacheTime",
+    `adminStudentsCacheTime_${mosqueId}`,
     Date.now()
 );
 closeStudentModal();
@@ -1034,12 +1034,12 @@ student.points = points;
 student.gender = gender;
 
 localStorage.setItem(
-    "adminStudentsCache",
+    `adminStudentsCache_${mosqueId}`,
     JSON.stringify(students)
 );
 
 localStorage.setItem(
-    "adminStudentsCacheTime",
+    `adminStudentsCacheTime_${mosqueId}`,
     Date.now()
 );
 
@@ -1218,16 +1218,13 @@ points:newPoints
 
 student.points = newPoints;
 
-renderStudents();
-student.points = newPoints;
-
 localStorage.setItem(
-    "adminStudentsCache",
+    `adminStudentsCache_${mosqueId}`,
     JSON.stringify(students)
 );
 
 localStorage.setItem(
-    "adminStudentsCacheTime",
+    `adminStudentsCacheTime_${mosqueId}`,
     Date.now()
 );
 
@@ -1341,12 +1338,12 @@ students = students.filter(s => s.id !== studentId);
 renderStudents();
 
 localStorage.setItem(
-    "adminStudentsCache",
+    `adminStudentsCache_${mosqueId}`,
     JSON.stringify(students)
 );
 
 localStorage.setItem(
-    "adminStudentsCacheTime",
+    `adminStudentsCacheTime_${mosqueId}`,
     Date.now()
 );
 
