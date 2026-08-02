@@ -1526,11 +1526,12 @@ rewardSending = false;
 
     const msg = String(error.message || "").toLowerCase();
 
-    if(
-        msg.includes("resource-exhausted") ||
-        msg.includes("quota") ||
-        msg.includes("429")
-    ){
+    if (
+    msg.includes("resource-exhausted") ||
+    msg.includes("resource exhausted") ||
+    msg.includes("quota") ||
+    msg.includes("429")
+) {
         rewardMessage.style.color = "#d32f2f";
         rewardMessage.textContent =
              "احتفظ بالكود وحاول مرة أخرى غدًا.";
@@ -1578,16 +1579,7 @@ if (e.target === rewardModal) {
 
 };
 
-rewardCodeBox.classList.remove("success");
-    if(rewardSending) return;
 
-    if (e.target === rewardModal) {
-
-        rewardModal.style.display = "none";
-
-    }
-
-};
 // زر Enter داخل مربع الكود
 codeInputs.forEach(input => {
 
