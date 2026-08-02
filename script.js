@@ -1272,7 +1272,7 @@ if (!student || student.mosqueId !== mosqueId) {
     
 // منع الضغط المتكرر وإخفاء عناصر الإدخال
 document.getElementById("sendReward").style.display = "none";
-
+rewardCodeBox.style.display = "none";
 studentSelect.style.display = "none";
 
 // إخفاء عنوان الكود
@@ -1478,7 +1478,8 @@ setTimeout(()=>{
 
 document.querySelector(".modal-box")
 .classList.remove("success");
-
+rewardCodeBox.style.display = "";
+ 
 rewardModal.style.display="none";
 
 codeInputs.forEach(input => {
@@ -1516,43 +1517,66 @@ rewardSending = false;
     }
 
     catch(error){
-rewardCodeBox.classList.add("shake");
 
-setTimeout(()=>{
+    rewardCodeBox.classList.add("shake");
 
-rewardCodeBox.classList.remove("shake");
+    setTimeout(()=>{
+        rewardCodeBox.classList.remove("shake");
+    },350);
 
-},350);
-        rewardMessage.style.color="red";
+    const msg = String(error.message || "").toLowerCase();
 
+    if(
+        msg.includes("resource-exhausted") ||
+        msg.includes("quota") ||
+        msg.includes("429")
+    ){
+        rewardMessage.style.color = "#d32f2f";
         rewardMessage.textContent =
-            error.message ||
-            "حدث خطأ أثناء استلام الجواهر.";
-rewardSending = false;
+             "احتفظ بالكود وحاول مرة أخرى غدًا.";
+    }else{
+        rewardMessage.style.color = "red";
+        rewardMessage.textContent =
+            error.message || "حدث خطأ أثناء استلام الجواهر.";
+    }
 
-document.getElementById("sendReward").style.display = "";
- 
-studentSelect.style.display = "";
+    rewardSending = false;
 
-document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
-document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
-     document.querySelector(".modal-box h3").style.display = "";
-document.getElementById("closeReward").style.display = "";
-                        
-} 
+    document.getElementById("sendReward").style.display = "";
+    studentSelect.style.display = "";
+
+    document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
+    document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
+    document.querySelector(".modal-box h3").style.display = "";
+    document.getElementById("closeReward").style.display = "";
+
+}
 };
 // إغلاق النافذة عند الضغط خارجها
 window.onclick = (e) => {
-codeInputs.forEach(x=>{
 
-x.value="";
+if(rewardSending) return;
 
-x.classList.remove(
-"filled",
-"complete"
-);
+if (e.target === rewardModal) {
 
-});
+    codeInputs.forEach(x=>{
+
+        x.value="";
+
+        x.classList.remove(
+            "filled",
+            "complete"
+        );
+
+    });
+
+    rewardCodeBox.classList.remove("success");
+
+    rewardModal.style.display = "none";
+
+}
+
+};
 
 rewardCodeBox.classList.remove("success");
     if(rewardSending) return;
