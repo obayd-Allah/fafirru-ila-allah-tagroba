@@ -233,59 +233,75 @@ status.textContent="";
           تحميل الطلاب
 ==================================*/
 
-async function loadStudents(){
+async function loadStudents() {
 
-try{
+    const cache = localStorage.getItem("adminStudentsCache");
+    const cacheTime = Number(localStorage.getItem("adminStudentsCacheTime"));
 
-showLoading("⏳ جار تحميل بيانات الطلاب...");
+    if (
+        cache &&
+        Date.now() - cacheTime < 5 * 60 * 1000
+    ) {
 
-clearStatus();
+        students = JSON.parse(cache);
 
-students.length=0;
+        hideLoading();
 
-const q = query(
-    collection(db, "Students"),
-    where("mosqueId", "==", mosqueId)
-);
+        renderStudents();
 
-const snapshot = await getDocs(q);
+        return;
+    }
 
-snapshot.forEach(document=>{
+    try {
 
-const data = document.data();
+        showLoading("⏳ جار تحميل بيانات الطلاب...");
 
+        clearStatus();
 
-students.push({
+        students.length = 0;
 
-id:document.id,
+        const q = query(
+            collection(db, "Students"),
+            where("mosqueId", "==", mosqueId)
+        );
 
-...data
+        const snapshot = await getDocs(q);
 
-});
+        snapshot.forEach(document => {
 
-});
+            students.push({
+                id: document.id,
+                ...document.data()
+            });
 
-hideLoading();
+        });
 
-renderStudents();
+        localStorage.setItem(
+            "adminStudentsCache",
+            JSON.stringify(students)
+        );
 
-}
+        localStorage.setItem(
+            "adminStudentsCacheTime",
+            Date.now()
+        );
 
-catch(error){
+        hideLoading();
 
-hideLoading();
+        renderStudents();
 
-setStatus(
+    } catch (error) {
 
-"❌ حدث خطأ أثناء تحميل الطلاب.",
+        hideLoading();
 
-"#d32f2f"
+        setStatus(
+            "❌ حدث خطأ أثناء تحميل الطلاب.",
+            "#d32f2f"
+        );
 
-);
+        console.error(error);
 
-console.error(error);
-
-}
+    }
 
 }
 
@@ -954,7 +970,15 @@ students.push({
     gender,
     mosqueId
 });
+localStorage.setItem(
+    "adminStudentsCache",
+    JSON.stringify(students)
+);
 
+localStorage.setItem(
+    "adminStudentsCacheTime",
+    Date.now()
+);
 closeStudentModal();
 
 renderStudents();
@@ -1005,7 +1029,27 @@ gender:gender
 
 closeStudentModal();
 
-await loadStudents();
+const student = students.find(s => s.id === currentStudent);
+
+student.firstName = firstName;
+student.familyName = familyName;
+student.fullName = fullName;
+student.name = fullName;
+student.nicknames = nicknames;
+student.points = points;
+student.gender = gender;
+
+localStorage.setItem(
+    "adminStudentsCache",
+    JSON.stringify(students)
+);
+
+localStorage.setItem(
+    "adminStudentsCacheTime",
+    Date.now()
+);
+
+renderStudents();
 
 hideLoading();
 
@@ -1181,7 +1225,27 @@ points:newPoints
 student.points = newPoints;
 
 renderStudents();
+const student = students.find(s => s.id === currentStudent);
 
+student.firstName = firstName;
+student.familyName = familyName;
+student.fullName = fullName;
+student.name = fullName;
+student.nicknames = nicknames;
+student.points = points;
+student.gender = gender;
+
+localStorage.setItem(
+    "adminStudentsCache",
+    JSON.stringify(students)
+);
+
+localStorage.setItem(
+    "adminStudentsCacheTime",
+    Date.now()
+);
+
+renderStudents();
 
 
 hideLoading();
@@ -1290,7 +1354,15 @@ students = students.filter(s => s.id !== studentId);
 
 renderStudents();
 
+localStorage.setItem(
+    "adminStudentsCache",
+    JSON.stringify(students)
+);
 
+localStorage.setItem(
+    "adminStudentsCacheTime",
+    Date.now()
+);
 
 hideLoading();
 
