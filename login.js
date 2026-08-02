@@ -2,19 +2,13 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 import {
-
-getFirestore,
-
-collection,
-
-getDocs,
-
-query,
-doc,
-    getDoc,
-where
-
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where
 }
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
@@ -103,13 +97,7 @@ mosquesList.forEach(mosque=>{
 
     button.onclick = async ()=>{
 
-    const mosqueDoc =
-await getDoc(
-    doc(db,"Mosques",mosque.firestoreId)
-);
-
-    const mosqueData =
-    mosqueDoc.data();
+    const mosqueData = mosque;
 
     const enteredPassword = prompt(
         "أدخل كلمة مرور المسجد"
