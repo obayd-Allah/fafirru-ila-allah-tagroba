@@ -534,13 +534,8 @@ document.addEventListener("click", async (e)=>{
 
         const mosqueId = e.target.dataset.id;
 
-        sessionStorage.setItem(
-            "currentMosqueId",
-            mosqueId
-        );
-
-        window.location.href = "mosque_home.html";
-
+        window.location.href =
+    `mosque_home.html?mosque=${mosqueId}`;
         return;
 
     }
