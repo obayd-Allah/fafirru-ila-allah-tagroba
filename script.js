@@ -623,7 +623,7 @@ async function loadStudents() {
 
     if (
         cache &&
-        Date.now() - cacheTime < 5 * 60 * 1000
+        Date.now() - cacheTime < 24 * 60 * 60 * 1000
     ) {
 
         students = JSON.parse(cache);
@@ -1491,8 +1491,24 @@ codeInputs[0].focus();
 student.points = totalPoints;
 
 render();
-localStorage.removeItem("studentsCache");
-localStorage.removeItem("studentsCacheTime");
+
+ const cache = JSON.parse(localStorage.getItem("studentsCache") || "[]");
+
+const index = cache.findIndex(s => s.id === student.id);
+
+if (index !== -1) {
+    cache[index].points = totalPoints;
+}
+
+localStorage.setItem(
+    "studentsCache",
+    JSON.stringify(cache)
+);
+
+localStorage.setItem(
+    "studentsCacheTime",
+    Date.now()
+);
 rewardSending = false;
 
 },9000);
