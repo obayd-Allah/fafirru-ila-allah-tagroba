@@ -293,13 +293,11 @@ console.error(error);
          بداية الصفحة
 ==================================*/
 
-window.addEventListener(
+window.addEventListener("load", async()=>{
 
-"load",
+    await loadStudents();
 
-loadStudents
-
-);
+});
 /*==================================
         تحديد نوع الطالب
 ==================================*/
@@ -927,32 +925,41 @@ if(currentStudent===null){
 
 /* إضافة */
 
-await addDoc(
+const ref = await addDoc(
 
 collection(db,"Students"),
 
 {
 firstName:firstName,
-
 familyName:familyName,
-
 fullName:fullName,
-
 name:fullName,
-
 nicknames:nicknames,
-
 points:points,
-
 gender:gender,
-
 mosqueId: mosqueId,
-
-createdAt:
-serverTimestamp()
+createdAt: serverTimestamp()
 }
 
 );
+
+students.push({
+    id: ref.id,
+    firstName,
+    familyName,
+    fullName,
+    name: fullName,
+    nicknames,
+    points,
+    gender,
+    mosqueId
+});
+
+closeStudentModal();
+
+renderStudents();
+
+hideLoading();
 
 
 
