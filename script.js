@@ -1697,20 +1697,10 @@ document.title = mosqueData.name;
 const themeLink = document.getElementById("themeStyle");
 
 if (themeLink) {
-
-    themeLink.onload = () => {
-        document.body.style.visibility = "visible";
-    };
-
     themeLink.href =
         "themes/" +
         (CURRENT_MOSQUE.theme || "theme1") +
         ".css";
-
-    setTimeout(() => {
-        document.body.style.visibility = "visible";
-    }, 1500);
-
 }
 
 // منع سحب الصور
