@@ -52,9 +52,41 @@ async function loadMosques(){
 
     mosquesContainer.innerHTML="";
 
+    const cache = localStorage.getItem("mosquesCache");
+const cacheTime = Number(localStorage.getItem("mosquesCacheTime"));
+
+let mosquesList = [];
+
+if (cache && Date.now() - cacheTime < 10 * 60 * 1000) {
+
+    mosquesList = JSON.parse(cache);
+
+} else {
+
     const snapshot = await getDocs(
-    collection(db,"Mosques")
-);
+        collection(db, "Mosques")
+    );
+
+    snapshot.forEach(document => {
+
+        mosquesList.push({
+            firestoreId: document.id,
+            ...document.data()
+        });
+
+    });
+
+    localStorage.setItem(
+        "mosquesCache",
+        JSON.stringify(mosquesList)
+    );
+
+    localStorage.setItem(
+        "mosquesCacheTime",
+        Date.now()
+    );
+
+}
     /*const q = query(
 
         collection(db,"Mosques"),
@@ -64,21 +96,7 @@ async function loadMosques(){
     );
 
     const snapshot = await getDocs(q);*/
-const mosquesList = [];
 
-snapshot.forEach(document=>{
-
-    const data = document.data();
-
-    mosquesList.push({
-
-        firestoreId: document.id,
-
-        ...data
-
-    });
-
-});
 
 mosquesList.sort((a,b)=>
     a.name.localeCompare(b.name,"ar")
