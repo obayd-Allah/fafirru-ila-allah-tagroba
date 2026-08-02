@@ -218,9 +218,9 @@ data-id="${mosque.id}">
 `;
 
 mosquesContainer.appendChild(card);
-loadStatistics(mosque.id);
-});
 
+});
+await loadStatistics();
 }
 
 window.onload=loadMosques;
@@ -404,7 +404,6 @@ mosqueModal.style.display = "none";
     }
 
     catch(error){
-
         console.error(error);
 
         alert("حدث خطأ أثناء حفظ المسجد");
@@ -457,65 +456,76 @@ mosqueModal.style.display = "none";
 
 };
 
-async function loadStatistics(mosqueId){
+async function loadStatistics(){
 
-const studentsQuery = query(
+    const studentsCount = {};
+    const codesCount = {};
 
-collection(db,"Students"),
+    // تحميل جميع الطلاب مرة واحدة
+    const studentsSnapshot =
+    await getDocs(
+        collection(db,"Students")
+    );
 
-where("mosqueId","==",mosqueId)
+    studentsSnapshot.forEach(doc=>{
 
-);
+        const data = doc.data();
 
-const studentsSnapshot = await getDocs(
+        if(!data.mosqueId)
+            return;
 
-studentsQuery
+        studentsCount[data.mosqueId] =
+            (studentsCount[data.mosqueId] || 0) + 1;
 
-);
+    });
 
-const codesQuery = query(
-collection(db,"Codes"),
+    // تحميل جميع الأكواد مرة واحدة
+    const codesSnapshot =
+    await getDocs(
+        collection(db,"Codes")
+    );
 
-where("mosqueId","==",mosqueId)
+    codesSnapshot.forEach(doc=>{
 
-);
+        const data = doc.data();
 
-const codesSnapshot = await getDocs(
+        if(!data.mosqueId)
+            return;
 
-codesQuery
+        codesCount[data.mosqueId] =
+            (codesCount[data.mosqueId] || 0) + 1;
 
-);
+    });
 
-const studentsElement =
+    // تعبئة الإحصائيات
+    Object.keys(studentsCount).forEach(id=>{
 
-document.getElementById(
+        const element =
+        document.getElementById(`students_${id}`);
 
-`students_${mosqueId}`
+        if(element){
 
-);
+            element.textContent =
+            studentsCount[id];
 
-const codesElement =
-document.getElementById(
+        }
 
-`codes_${mosqueId}`
+    });
 
-);
+    Object.keys(codesCount).forEach(id=>{
 
-if(studentsElement){
+        const element =
+        document.getElementById(`codes_${id}`);
 
-studentsElement.textContent =
+        if(element){
 
-studentsSnapshot.size;
+            element.textContent =
+            codesCount[id];
 
-}
+        }
 
-if(codesElement){
+    });
 
-codesElement.textContent =
-
-codesSnapshot.size;
-
-}
 }
 document.addEventListener("click", async (e)=>{
 
