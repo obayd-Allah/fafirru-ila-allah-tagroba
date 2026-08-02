@@ -1292,7 +1292,7 @@ document.getElementById("closeReward").style.display = "none";
 
 
      document.getElementById("sendReward").style.display = "";
- 
+rewardCodeBox.style.display = "";
 studentSelect.style.display = "";
 
 document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
@@ -1453,7 +1453,6 @@ color:#00a0ff;
 </div>
 `;
 const closeBtn = document.getElementById("closeReward");
-
 closeBtn.style.display = "";
 closeBtn.disabled = false;
 
@@ -1569,7 +1568,8 @@ rewardSending = false;
     rewardSending = false;
 
     document.getElementById("sendReward").style.display = "";
-    studentSelect.style.display = "";
+rewardCodeBox.style.display = "";
+studentSelect.style.display = "";
 
     document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display");
     document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
