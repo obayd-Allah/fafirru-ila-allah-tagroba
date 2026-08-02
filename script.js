@@ -618,9 +618,8 @@ document.getElementById("floatingRewardBtn");
 
 async function loadStudents() {
 
-    const cache = localStorage.getItem("studentsCache");
-    const cacheTime = Number(localStorage.getItem("studentsCacheTime"));
-
+    const cache = localStorage.getItem(`studentsCache_${mosqueId}`);
+const cacheTime = Number(localStorage.getItem(`studentsCacheTime_${mosqueId}`));
     if (
         cache &&
         Date.now() - cacheTime < 24 * 60 * 60 * 1000
@@ -655,14 +654,14 @@ async function loadStudents() {
     });
 
     localStorage.setItem(
-        "studentsCache",
-        JSON.stringify(students)
-    );
+    `studentsCache_${mosqueId}`,
+    JSON.stringify(students)
+);
 
-    localStorage.setItem(
-        "studentsCacheTime",
-        Date.now()
-    );
+localStorage.setItem(
+    `studentsCacheTime_${mosqueId}`,
+    Date.now()
+);
 
     loading.style.display = "none";
 
@@ -1524,8 +1523,9 @@ student.points = totalPoints;
 
 render();
 
- const cache = JSON.parse(localStorage.getItem("studentsCache") || "[]");
-
+ const cache = JSON.parse(
+    localStorage.getItem(`studentsCache_${mosqueId}`) || "[]"
+);
 const index = cache.findIndex(s => s.id === student.id);
 
 if (index !== -1) {
@@ -1533,12 +1533,12 @@ if (index !== -1) {
 }
 
 localStorage.setItem(
-    "studentsCache",
+    `studentsCache_${mosqueId}`,
     JSON.stringify(cache)
 );
 
 localStorage.setItem(
-    "studentsCacheTime",
+    `studentsCacheTime_${mosqueId}`,
     Date.now()
 );
  document.getElementById("sendReward").style.display = "";
