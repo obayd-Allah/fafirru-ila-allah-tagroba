@@ -133,7 +133,11 @@ alert("كلمة المرور غير صحيحة");
         "currentMosqueId",
         mosque.id
     );
-
+history.replaceState(
+    null,
+    "",
+    "?mosque=" + mosque.id
+);
     location.href = "mosque_home.html";
 
 };
