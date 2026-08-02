@@ -1654,14 +1654,14 @@ renderCodesTable();
 
     window.addEventListener("load", async()=>{
 
-        await loadMosque();
-        await loadStudents();
+    await loadMosque();
+    await loadStudents();
 
-        // لا يحمل الجدول تلقائياً
+    buildCardsTemplates();
 
-        buildCardsTemplates();
+    renderCodesTable();
 
-    });
+});
 
 }
      
