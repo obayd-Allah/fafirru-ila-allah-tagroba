@@ -1452,7 +1452,31 @@ color:#00a0ff;
 0 💎
 </div>
 `;
+const closeBtn = document.getElementById("closeReward");
 
+closeBtn.style.display = "";
+closeBtn.disabled = false;
+
+closeBtn.onclick = () => {
+
+    document.querySelector(".modal-box")
+        .classList.remove("success");
+
+    rewardModal.style.display = "none";
+
+    rewardCodeBox.style.display = "";
+
+    codeInputs.forEach(input => {
+        input.value = "";
+        input.classList.remove("filled", "complete");
+    });
+
+    rewardCodeBox.classList.remove("success");
+
+    codeInputs[0].focus();
+
+    rewardSending = false;
+};
 // تشغيل العداد بعد نصف ثانية
 setTimeout(()=>{
 
