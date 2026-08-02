@@ -241,7 +241,7 @@ showLoading("⏳ جار تحميل بيانات الطلاب...");
 
 clearStatus();
 
-students=[];
+students.length=0;
 
 const q = query(
     collection(db, "Students"),
@@ -998,11 +998,7 @@ gender:gender
 
 closeStudentModal();
 
-
-
 await loadStudents();
-
-
 
 hideLoading();
 
@@ -1175,7 +1171,9 @@ points:newPoints
 
 
 
-await loadStudents();
+student.points = newPoints;
+
+renderStudents();
 
 
 
@@ -1280,7 +1278,10 @@ studentId
 
 
 
-await loadStudents();
+
+students = students.filter(s => s.id !== studentId);
+
+renderStudents();
 
 
 
@@ -1642,3 +1643,26 @@ newGender = "أنثى";
 );
 }
 //fixStudentsGender();
+async function loadStudentsLocal(){
+
+    const q = query(
+        collection(db,"Students"),
+        where("mosqueId","==",mosqueId)
+    );
+
+    const snapshot = await getDocs(q);
+
+    students.length = 0;
+
+    snapshot.forEach(doc=>{
+
+        students.push({
+            id:doc.id,
+            ...doc.data()
+        });
+
+    });
+
+    renderStudents();
+
+}
