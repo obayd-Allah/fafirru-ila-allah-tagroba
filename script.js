@@ -1694,17 +1694,16 @@ if (title) {
 }
 
 document.title = mosqueData.name;
-const themeLink =
-document.getElementById("themeStyle");
+const themeLink = document.getElementById("themeStyle");
 
-if(themeLink){
+themeLink.onload = () => {
+    document.body.style.visibility = "visible";
+};
 
-    themeLink.href =
-        "themes/" +
-        (CURRENT_MOSQUE.theme || "theme1") +
-        ".css";
-
-}
+themeLink.href =
+    "themes/" +
+    (CURRENT_MOSQUE.theme || "theme1") +
+    ".css";
 }
 // منع القائمة عند الضغط المطول
 document.addEventListener("contextmenu",e=>{
