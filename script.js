@@ -622,7 +622,7 @@ async function loadStudents() {
 const cacheTime = Number(localStorage.getItem(`studentsCacheTime_${mosqueId}`));
     if (
         cache &&
-        Date.now() - cacheTime < 24 * 60 * 60 * 1000
+        Date.now() - cacheTime < 3 * 60 * 1000
     ) {
 
         students = JSON.parse(cache);
