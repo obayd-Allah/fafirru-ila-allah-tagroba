@@ -247,16 +247,16 @@ async function loadStudents(force = false) {
     !force &&
     cache &&
     cacheTime
-) { {
+) {
 
-        students = JSON.parse(cache);
+    students = JSON.parse(cache);
 
-        hideLoading();
+    hideLoading();
 
-        renderStudents();
+    renderStudents();
 
-        return;
-    }
+    return;
+}
 
     try {
 
