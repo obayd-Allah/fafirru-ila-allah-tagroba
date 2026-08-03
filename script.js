@@ -637,21 +637,15 @@ const cacheTime = Number(localStorage.getItem(`studentsCacheTime_${mosqueId}`));
 
     try {
 
-    const snapshot = await getDocs(
-        query(
-            collection(db, "Students"),
-            where("mosqueId", "==", mosqueId)
-        )
-    );
+    const mosqueStudentsDoc = await getDoc(
+    doc(db, "MosqueStudents", mosqueId)
+);
 
-    students = [];
+if (!mosqueStudentsDoc.exists()) {
+    throw new Error("لم يتم العثور على بيانات الطلاب.");
+}
 
-    snapshot.forEach(doc => {
-        students.push({
-            id: doc.id,
-            ...doc.data()
-        });
-    });
+students = mosqueStudentsDoc.data().students || [];
 
     localStorage.setItem(
         `studentsCache_${mosqueId}`,
@@ -1328,24 +1322,28 @@ document.getElementById("closeReward").style.display = "";
     }
 
     const codeRef = codeDoc.ref;
-    const studentRef = doc(db,"Students",student.id);
-let rewardValue = 0;
+    const mosqueStudentsRef = doc(
+    db,
+    "MosqueStudents",
+    mosqueId
+);
+ let rewardValue = 0;
 let totalPoints = 0;
     try{
 
         await runTransaction(db,async(transaction)=>{
 
-            const studentSnap =
-            await transaction.get(studentRef);
+            const mosqueStudentsSnap =
+await transaction.get(mosqueStudentsRef);
 
             const rewardSnap =
             await transaction.get(codeRef);
 
-            if(!studentSnap.exists()){
+            if(!mosqueStudentsSnap.exists()){
 
-                throw new Error("الطالب غير موجود");
+    throw new Error("بيانات الطلاب غير موجودة");
 
-            }
+}
 
             if(!rewardSnap.exists()){
 
@@ -1366,20 +1364,45 @@ rewardValue = Number(rewardData.points || 0);
 
             }
 
-            const studentData = studentSnap.data();
+            const mosqueStudentsData =
+mosqueStudentsSnap.data();
+
+const studentsArray =
+mosqueStudentsData.students || [];
+
+const studentIndex =
+studentsArray.findIndex(
+s => s.id === student.id
+);
+
+if(studentIndex === -1){
+
+    throw new Error("الطالب غير موجود");
+
+}
+
+const studentData =
+studentsArray[studentIndex];
 
 if (studentData.mosqueId !== mosqueId) {
     throw new Error("الطالب غير موجود");
 }
-
 const newPoints =
     Number(studentData.points || 0) + rewardValue;
 
 totalPoints = newPoints;
 
-            transaction.update(studentRef,{
-                points:newPoints
-            });
+// تحديث الطالب داخل المصفوفة
+studentsArray[studentIndex].points = newPoints;
+
+// حفظ المصفوفة كاملة
+transaction.update(
+    mosqueStudentsRef,
+    {
+        students: studentsArray,
+        updatedAt: serverTimestamp()
+    }
+);
 
             transaction.update(codeRef,{
     used: true,
