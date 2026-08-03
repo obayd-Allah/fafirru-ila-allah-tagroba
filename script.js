@@ -635,6 +635,8 @@ const cacheTime = Number(localStorage.getItem(`studentsCacheTime_${mosqueId}`));
 
     }
 
+    try {
+
     const snapshot = await getDocs(
         query(
             collection(db, "Students"),
@@ -645,27 +647,47 @@ const cacheTime = Number(localStorage.getItem(`studentsCacheTime_${mosqueId}`));
     students = [];
 
     snapshot.forEach(doc => {
-
         students.push({
             id: doc.id,
             ...doc.data()
         });
-
     });
 
     localStorage.setItem(
-    `studentsCache_${mosqueId}`,
-    JSON.stringify(students)
-);
+        `studentsCache_${mosqueId}`,
+        JSON.stringify(students)
+    );
 
-localStorage.setItem(
-    `studentsCacheTime_${mosqueId}`,
-    Date.now()
-);
+    localStorage.setItem(
+        `studentsCacheTime_${mosqueId}`,
+        Date.now()
+    );
 
-    loading.style.display = "none";
+} catch (error) {
 
-    render();
+    const msg = String(error.message || "").toLowerCase();
+
+    if (
+        cache &&
+        (
+            msg.includes("quota") ||
+            msg.includes("resource-exhausted") ||
+            msg.includes("429")
+        )
+    ) {
+
+        students = JSON.parse(cache);
+
+    } else {
+
+        throw error;
+
+    }
+
+}
+
+loading.style.display = "none";
+render();
 
 }
 
