@@ -236,7 +236,7 @@ status.textContent="";
           تحميل الطلاب
 ==================================*/
 
-async function loadStudents() {
+async function loadStudents(force = false) {
 
     const cache = localStorage.getItem(`adminStudentsCache_${mosqueId}`);
     const cacheTime = Number(
@@ -244,10 +244,10 @@ async function loadStudents() {
     );
 
     if (
-        cache &&
-        cacheTime &&
-        Date.now() - cacheTime < 24 * 60 * 60 * 1000
-    ) {
+    !force &&
+    cache &&
+    cacheTime
+) { {
 
         students = JSON.parse(cache);
 
@@ -312,6 +312,18 @@ window.addEventListener("load", async()=>{
     await loadStudents();
 
 });
+document
+.getElementById("refreshStudents")
+.onclick = async () => {
+
+    await loadStudents(true);
+
+    showMessage(
+        "✅ تم تحديث البيانات",
+        "success"
+    );
+
+};
 /*==================================
         تحديد نوع الطالب
 ==================================*/
