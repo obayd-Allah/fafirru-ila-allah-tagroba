@@ -567,7 +567,11 @@ style="background:#ff5722;color:white">
  <button id="addMosqueId" style="background:#1565c0;color:white;display:none">
 إضافة mosqueId لجميع الطلاب
  </button>
- 
+ <button
+id="migrateStudents"
+style="background:#4caf50;color:white;display:none">
+ترحيل الطلاب إلى MosqueStudents
+ </button>
  <button id="fixCodes" class="smallBtn" style="background:#1565c0;color:white;display:none">
 🔧 ربط الأكواد القديمة بالمسجد الحالي
 </button>
@@ -2345,7 +2349,56 @@ mosqueId: mosqueId
 
     alert(`تم تحديث ${updated} طالب بنجاح.`);
 };
-    
+    document.getElementById("migrateStudents").onclick = async () => {
+
+    if(!confirm("سيتم ترحيل جميع طلاب المسجد الحالي إلى MosqueStudents، هل تريد المتابعة؟"))
+        return;
+
+    const studentsQuery = query(
+        collection(db,"Students"),
+        where("mosqueId","==",mosqueId)
+    );
+
+    const snapshot = await getDocs(studentsQuery);
+
+    if(snapshot.empty){
+        alert("لا يوجد طلاب.");
+        return;
+    }
+
+    const batch = writeBatch(db);
+
+    const mosqueDoc = doc(
+        db,
+        "MosqueStudents",
+        mosqueId
+    );
+
+    const students = [];
+
+    snapshot.forEach(student=>{
+
+        const data = student.data();
+
+        students.push({
+            id: student.id,
+            ...data
+        });
+
+    });
+
+    batch.set(
+        mosqueDoc,
+        {
+            students: students,
+            updatedAt: serverTimestamp()
+        }
+    );
+
+    await batch.commit();
+
+    alert(`تم ترحيل ${students.length} طالب بنجاح.`);
+};
 </script>
 
 </body>
