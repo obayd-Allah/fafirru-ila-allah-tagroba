@@ -1383,11 +1383,10 @@ totalPoints = newPoints;
 
             transaction.update(codeRef,{
     used: true,
-    student: studentData.name,
+    student: getFullName(studentData),
     studentId: student.id,
     usedAt: serverTimestamp()
 });
-
         });
 
         
