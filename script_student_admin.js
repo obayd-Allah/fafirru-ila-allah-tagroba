@@ -9,8 +9,9 @@ getFirestore,
 collection,
 
 getDocs,
+getDoc,
 
-            query,
+query,
 where,
             
 addDoc,
@@ -20,6 +21,8 @@ updateDoc,
 deleteDoc,
 
 doc,
+
+writeBatch,
 
 serverTimestamp
 
@@ -236,55 +239,50 @@ status.textContent="";
 async function loadStudents() {
 
     const cache = localStorage.getItem(`adminStudentsCache_${mosqueId}`);
-            const cacheTime = Number(
-    localStorage.getItem(`adminStudentsCacheTime_${mosqueId}`)
-);
+    const cacheTime = Number(
+        localStorage.getItem(`adminStudentsCacheTime_${mosqueId}`)
+    );
+
     if (
-    cache &&
-    cacheTime &&
-    Date.now() - cacheTime < 24 * 60 * 60 * 1000
-) {
+        cache &&
+        cacheTime &&
+        Date.now() - cacheTime < 24 * 60 * 60 * 1000
+    ) {
 
-    students = JSON.parse(cache);
+        students = JSON.parse(cache);
 
-    hideLoading();
+        hideLoading();
 
-    renderStudents();
+        renderStudents();
 
-    return;
-
-}
+        return;
+    }
 
     try {
 
         showLoading("⏳ جار تحميل بيانات الطلاب...");
 
-        clearStatus();
-
-        students.length = 0;
-
-        const q = query(
-            collection(db, "Students"),
-            where("mosqueId", "==", mosqueId)
+        const mosqueDoc = await getDoc(
+            doc(db, "MosqueStudents", mosqueId)
         );
 
-        const snapshot = await getDocs(q);
+        students = [];
 
-        snapshot.forEach(document => {
+        if (mosqueDoc.exists()) {
 
-            students.push({
-                id: document.id,
-                ...document.data()
-            });
+            students = mosqueDoc.data().students || [];
 
-        });
+        }
 
         localStorage.setItem(
-    `adminStudentsCache_${mosqueId}`,
-    JSON.stringify(students)
-);
+            `adminStudentsCache_${mosqueId}`,
+            JSON.stringify(students)
+        );
 
-        
+        localStorage.setItem(
+            `adminStudentsCacheTime_${mosqueId}`,
+            Date.now()
+        );
 
         hideLoading();
 
@@ -941,35 +939,47 @@ if(currentStudent===null){
 
 /* إضافة */
 
-const ref = await addDoc(
+const newStudent = {
 
-collection(db,"Students"),
+    id: crypto.randomUUID(),
 
-{
-firstName:firstName,
-familyName:familyName,
-fullName:fullName,
-name:fullName,
-nicknames:nicknames,
-points:points,
-gender:gender,
-mosqueId: mosqueId,
-createdAt: serverTimestamp()
-}
+    firstName: firstName,
+
+    familyName: familyName,
+
+    fullName: fullName,
+
+    name: fullName,
+
+    nicknames: nicknames,
+
+    points: points,
+
+    gender: gender,
+
+    mosqueId: mosqueId
+
+};
+
+students.push(newStudent);
+
+const batch = writeBatch(db);
+
+batch.set(
+
+    doc(db,"MosqueStudents",mosqueId),
+
+    {
+
+        students: students,
+
+        updatedAt: serverTimestamp()
+
+    }
 
 );
 
-students.push({
-    id: ref.id,
-    firstName,
-    familyName,
-    fullName,
-    name: fullName,
-    nicknames,
-    points,
-    gender,
-    mosqueId
-});
+await batch.commit();
 localStorage.setItem(
     `adminStudentsCache_${mosqueId}`,
     JSON.stringify(students)
@@ -991,46 +1001,12 @@ hideLoading();
 
 else{
 
+    const student = students.find(
+        s => s.id === currentStudent
+    );
 
-/* تعديل */
+    if(student){
 
-await updateDoc(
-
-doc(
-db,
-"Students",
-currentStudent
-),
-
-{
-firstName:firstName,
-
-familyName:familyName,
-
-fullName:fullName,
-
-mosqueId: mosqueId,
-            
-name:fullName,
-
-nicknames:nicknames,
-
-points:points,
-
-gender:gender
-}
-
-);
-
-
-}
-
-
-if (currentStudent !== null) {
-
-    const student = students.find(s => s.id === currentStudent);
-
-    if (student) {
         student.firstName = firstName;
         student.familyName = familyName;
         student.fullName = fullName;
@@ -1038,9 +1014,31 @@ if (currentStudent !== null) {
         student.nicknames = nicknames;
         student.points = points;
         student.gender = gender;
+
     }
 
+    const batch = writeBatch(db);
+
+    batch.set(
+
+        doc(db,"MosqueStudents",mosqueId),
+
+        {
+
+            students: students,
+
+            updatedAt: serverTimestamp()
+
+        }
+
+    );
+
+    await batch.commit();
+
 }
+
+
+
 
 localStorage.setItem(
     `adminStudentsCache_${mosqueId}`,
@@ -1204,25 +1202,28 @@ newPoints=0;
 
 
 
-await updateDoc(
+student.points = newPoints;
 
-doc(
-db,
-"Students",
-studentId
-),
+const batch = writeBatch(db);
 
-{
+batch.set(
 
-points:newPoints
+    doc(db,"MosqueStudents",mosqueId),
 
-}
+    {
+
+        students: students,
+
+        updatedAt: serverTimestamp()
+
+    }
 
 );
 
+await batch.commit();
 
 
-student.points = newPoints;
+
 
 localStorage.setItem(
     `adminStudentsCache_${mosqueId}`,
@@ -1326,16 +1327,27 @@ showLoading(
 
 
 
-await deleteDoc(
+students = students.filter(
+    s => s.id !== studentId
+);
 
-doc(
-db,
-"Students",
-studentId
-)
+const batch = writeBatch(db);
+
+batch.set(
+
+    doc(db,"MosqueStudents",mosqueId),
+
+    {
+
+        students: students,
+
+        updatedAt: serverTimestamp()
+
+    }
 
 );
 
+await batch.commit();
 
 
 
