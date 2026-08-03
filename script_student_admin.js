@@ -246,7 +246,7 @@ async function loadStudents(force = false) {
     if (
     !force &&
     cache &&
-    cacheTime
+    cacheTime > 0
 ) {
 
     students = JSON.parse(cache);
