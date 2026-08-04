@@ -236,19 +236,18 @@ status.textContent="";
           تحميل الطلاب
 ==================================*/
 
-async function loadStudents(force = false) {
-
+async function loadStudents(force = false, useCache = true) {
     const cache = localStorage.getItem(`adminStudentsCache_${mosqueId}`);
     const cacheTime = Number(
         localStorage.getItem(`adminStudentsCacheTime_${mosqueId}`)
     );
 
     if (
+    useCache &&
     !force &&
     cache &&
     cacheTime > 0
 ) {
-
     students = JSON.parse(cache);
 
     hideLoading();
@@ -939,7 +938,7 @@ return;
 
 try{
 
-
+await loadStudents(false, false);
 showLoading(
 "⏳ جار حفظ البيانات..."
 );
@@ -1192,7 +1191,7 @@ async()=>{
 
 try{
 
-
+await loadStudents(false, false);
 showLoading(
 "⏳ جار تحديث الجواهر..."
 );
@@ -1332,7 +1331,7 @@ async()=>{
 
 try{
 
-
+await loadStudents(false, false);
 showLoading(
 "⏳ جار حذف الطالب..."
 );
