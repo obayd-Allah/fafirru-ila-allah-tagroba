@@ -1279,7 +1279,7 @@ rewardSending = true;
     if(code===""){
 rewardSending = false;
         rewardMessage.style.color="red";
-        rewardMessage.textContent="اكتب الكود أولاً.";
+        rewardMessage.textContent="اكتب الكود أولاً";
 
         return;
 
@@ -1297,7 +1297,7 @@ if(
     rewardMessage.style.color="red";
 
     rewardMessage.textContent =
-    "⬇️ اختر اسم الطالب أولاً.";
+    "اختر اسم الطالب أولاً";
 
     return;
 }
@@ -1320,7 +1320,7 @@ if (!student || student.mosqueId !== mosqueId) {
     rewardSending = false;
 
     rewardMessage.style.color = "red";
-    rewardMessage.textContent = "الطالب غير موجود.";
+    rewardMessage.textContent = "الطالب غير موجود";
 
     document.getElementById("sendReward").style.display = "";
 rewardCodeBox.style.display = "";
@@ -1364,7 +1364,7 @@ document.querySelector('label[for="rewardCode"]')?.style.removeProperty("display
 document.querySelector('label[for="studentSelect"]')?.style.removeProperty("display");
 rewardSending = false;
         rewardMessage.style.color="red";
-        rewardMessage.textContent="الكود غير موجود.";
+        rewardMessage.textContent="الكود غير موجود";
 document.querySelector(".modal-box h3").style.display = "";
 document.getElementById("closeReward").style.display = "";
         return;
