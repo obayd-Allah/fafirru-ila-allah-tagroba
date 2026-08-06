@@ -1850,24 +1850,18 @@ Math.floor(Math.random()*introMessages.length)
 
 function finishIntro(){
 
-    const loader=document.getElementById("introLoader");
+const loader=document.getElementById("introLoader");
 
-    if(!loader) return;
-
-
-    loader.style.transition=
-    "opacity 1s ease, transform 1s ease";
+if(!loader) return;
 
 
-    loader.style.opacity="0";
-
-    loader.style.transform="scale(1.15)";
+loader.classList.add("loader-hide");
 
 
-    setTimeout(()=>{
+setTimeout(()=>{
 
-        loader.remove();
+    loader.remove();
 
-    },1200);
+},1200);
 
 }
