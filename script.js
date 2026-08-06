@@ -1091,6 +1091,12 @@ rewardBtn.onclick = ()=>{
 
     studentSelect.innerHTML = "";
 
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "⬇️ اختر اسمك أولاً";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    studentSelect.appendChild(defaultOption);
     // اختيار الطلاب حسب الفلتر الحالي
     let list =
         currentFilter === "boys"
@@ -1274,7 +1280,16 @@ rewardSending = false;
 
     rewardMessage.style.color="#555";
     rewardMessage.textContent="⏳ جارٍ التحقق...";
+if(!studentSelect.value){
 
+    rewardSending = false;
+
+    rewardMessage.style.color="red";
+    rewardMessage.textContent =
+    "اختر اسم الطالب أولاً..";
+
+    return;
+}
     const student = students.find(
     s=>s.id===studentSelect.value
 );
