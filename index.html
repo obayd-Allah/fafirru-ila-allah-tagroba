@@ -31,320 +31,226 @@ href="">
   <style>
 
 #introLoader{
-position:fixed;
-inset:0;
-z-index:999999;
-overflow:hidden;
-background:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:Cairo, sans-serif;
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    overflow:hidden;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Cairo,sans-serif;
 }
 
+
+/* =========================
+   الدوائر
+========================= */
 
 .loader-circle{
-position:absolute;
-width:65vw;
-height:65vw;
-max-width:600px;
-max-height:600px;
-border-radius:50%;
-opacity:.95;
+
+    position:absolute;
+
+    width:150vw;
+    height:150vw;
+
+    max-width:none;
+    max-height:none;
+
+    border-radius:50%;
+
+    opacity:.96;
+
+    will-change:transform;
+
 }
 
+
+
+/* الوردي */
 
 .c1{
-background:#E61C77;
-left:-70%;
-top:-20%;
-animation:
-circleIn1 2s ease forwards,
-waterMove 5s infinite ease-in-out 2s;
+
+    background:#E61C77;
+
+    left:-120vw;
+    top:-90vw;
+
+    animation:
+    circleIn1 .9s cubic-bezier(.22,.8,.25,1) forwards,
+    waterMove 2.2s ease-in-out infinite 1s;
+
 }
 
+
+/* الأحمر */
 
 .c2{
-background:#FF3700;
-right:-70%;
-top:-20%;
-animation:
-circleIn2 2s ease forwards,
-waterMove 6s infinite ease-in-out 2s;
+
+    background:#FF3700;
+
+    right:-120vw;
+    top:-90vw;
+
+    animation:
+    circleIn2 .95s cubic-bezier(.22,.8,.25,1) forwards,
+    waterMove 2.5s ease-in-out infinite 1s;
+
 }
 
+
+/* البرتقالي */
 
 .c3{
-background:#FF5500;
-left:-70%;
-bottom:-20%;
-animation:
-circleIn3 2s ease forwards,
-waterMove 7s infinite ease-in-out 2s;
+
+    background:#FF5500;
+
+    left:-120vw;
+    bottom:-90vw;
+
+    animation:
+    circleIn3 1s cubic-bezier(.22,.8,.25,1) forwards,
+    waterMove 2.8s ease-in-out infinite 1s;
+
 }
 
+
+/* السماوي */
 
 .c4{
-background:#00D0FF;
-right:-70%;
-bottom:-20%;
-animation:
-circleIn4 2s ease forwards,
-waterMove 8s infinite ease-in-out 2s;
+
+    background:#00D0FF;
+
+    right:-120vw;
+    bottom:-90vw;
+
+    animation:
+    circleIn4 .9s cubic-bezier(.22,.8,.25,1) forwards,
+    waterMove 2.3s ease-in-out infinite 1s;
+
 }
 
+
+
+/* =========================
+   دخول الدوائر
+========================= */
 
 
 @keyframes circleIn1{
 
-to{
-left:-15%;
-top:-10%;
-}
+    to{
 
-}
+        left:-25vw;
+        top:-25vw;
 
-@keyframes circleIn2{
+    }
 
-to{
-right:-15%;
-.loader-circle{
-
-position:absolute;
-
-width:150vw;
-height:150vw;
-
-max-width:none;
-max-height:none;
-
-border-radius:50%;
-
-opacity:.96;
-
-will-change:transform;
-
-}
-
-
-
-.c1{
-
-background:#E61C77;
-
-left:-120vw;
-top:-80vw;
-
-animation:
-circleIn1 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 2.8s ease-in-out infinite .9s;
-
-}
-
-
-
-.c2{
-
-background:#FF3700;
-
-right:-120vw;
-top:-80vw;
-
-animation:
-circleIn2 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 3.2s ease-in-out infinite .9s;
-
-}
-
-
-
-.c3{
-
-background:#FF5500;
-
-left:-120vw;
-bottom:-80vw;
-
-animation:
-circleIn3 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 3.6s ease-in-out infinite .9s;
-
-}
-
-
-
-.c4{
-
-background:#00D0FF;
-
-right:-120vw;
-bottom:-80vw;
-
-animation:
-circleIn4 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 3s ease-in-out infinite .9s;
-
-}
-
-
-
-
-
-@keyframes circleIn1{
-
-to{
-
-<style>
-
-#introLoader{
-position:fixed;
-inset:0;
-z-index:999999;
-overflow:hidden;
-background:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:Cairo,sans-serif;
-}
-
-
-.loader-circle{
-
-position:absolute;
-
-width:150vw;
-height:150vw;
-
-border-radius:50%;
-
-opacity:.96;
-
-will-change:transform;
-
-}
-
-
-
-.c1{
-background:#E61C77;
-left:-120vw;
-top:-80vw;
-
-animation:
-circleIn1 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 2.8s ease-in-out infinite 1s;
-
-}
-
-
-
-.c2{
-background:#FF3700;
-right:-120vw;
-top:-80vw;
-
-animation:
-circleIn2 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 3.2s ease-in-out infinite 1s;
-
-}
-
-
-
-.c3{
-background:#FF5500;
-left:-120vw;
-bottom:-80vw;
-
-animation:
-circleIn3 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 3.5s ease-in-out infinite 1s;
-
-}
-
-
-
-.c4{
-background:#00D0FF;
-right:-120vw;
-bottom:-80vw;
-
-animation:
-circleIn4 .9s cubic-bezier(.22,.8,.25,1) forwards,
-waterMove 3s ease-in-out infinite 1s;
-
-}
-
-
-
-@keyframes circleIn1{
-to{
-left:-25vw;
-top:-25vw;
-}
 }
 
 
 @keyframes circleIn2{
-to{
-right:-25vw;
-top:-25vw;
-}
+
+    to{
+
+        right:-25vw;
+        top:-25vw;
+
+    }
+
 }
 
 
 @keyframes circleIn3{
-to{
-left:-25vw;
-bottom:-25vw;
-}
+
+    to{
+
+        left:-25vw;
+        bottom:-25vw;
+
+    }
+
 }
 
 
 @keyframes circleIn4{
-to{
-right:-25vw;
-bottom:-25vw;
-}
+
+    to{
+
+        right:-25vw;
+        bottom:-25vw;
+
+    }
+
 }
 
+
+
+/* =========================
+   تردد الماء
+========================= */
 
 
 @keyframes waterMove{
 
+
 0%,100%{
-transform:translate(0,0) scale(1);
+
+    transform:
+    translate(0,0)
+    scale(1);
+
 }
 
 
 25%{
-transform:translate(15px,-20px) scale(1.04);
+
+    transform:
+    translate(18px,-18px)
+    scale(1.045);
+
 }
 
 
 50%{
-transform:translate(-12px,15px) scale(.98);
+
+    transform:
+    translate(-15px,15px)
+    scale(.98);
+
 }
 
 
 75%{
-transform:translate(10px,10px) scale(1.03);
-}
+
+    transform:
+    translate(12px,10px)
+    scale(1.03);
 
 }
 
+
+}
+
+
+
+/* =========================
+   النصوص
+========================= */
 
 
 .intro-content{
 
-position:relative;
-z-index:5;
-text-align:center;
-color:white;
+    position:relative;
 
-text-shadow:
-0 5px 20px rgba(0,0,0,.3);
+    z-index:5;
+
+    text-align:center;
+
+    color:white;
+
+    text-shadow:
+    0 5px 20px rgba(0,0,0,.35);
 
 }
 
@@ -352,15 +258,18 @@ text-shadow:
 
 #introTitle{
 
-font-size:clamp(45px,10vw,90px);
+    font-size:
+    clamp(45px,10vw,90px);
 
-font-weight:900;
+    font-weight:900;
 
-opacity:0;
+    opacity:0;
 
-animation:
-dropWater 1s forwards .8s,
-softPulse 2s infinite 2s;
+    animation:
+
+    dropWater 1s forwards .8s,
+
+    softPulse 2s infinite 2s;
 
 }
 
@@ -368,82 +277,127 @@ softPulse 2s infinite 2s;
 
 #introSub{
 
-font-size:clamp(35px,8vw,75px);
+    font-size:
+    clamp(32px,8vw,70px);
 
-font-weight:900;
+    font-weight:900;
 
-margin-top:20px;
+    margin-top:20px;
 
-opacity:0;
+    opacity:0;
 
-animation:
-zoomShow .8s forwards 1.8s,
-softPulse 2s infinite 3s;
+
+    animation:
+
+    zoomShow .8s forwards 1.8s,
+
+    softPulse 2s infinite 3s;
 
 }
+
 
 
 
 #introMessage{
 
-margin-top:30px;
+    margin-top:35px;
 
-font-size:clamp(20px,4vw,38px);
+    font-size:
+    clamp(20px,4vw,38px);
 
-font-weight:700;
+    font-weight:700;
 
-opacity:0;
+    opacity:0;
 
-animation:
-fadeMessage 1s forwards 3s;
+    animation:
+
+    fadeMessage 1s forwards 3s;
 
 }
 
 
 
+/* نزول كقطرة ماء */
+
 @keyframes dropWater{
 
+
 0%{
+
 opacity:0;
-transform:translateY(-120px) scale(.7);
+
+transform:
+translateY(-150px)
+scale(.7);
+
 }
 
 
 70%{
-transform:translateY(15px) scale(1.05);
+
+transform:
+translateY(15px)
+scale(1.06);
+
 }
 
 
 100%{
+
 opacity:1;
-transform:translateY(0) scale(1);
-}
+
+transform:
+translateY(0)
+scale(1);
 
 }
 
 
+}
+
+
+
+/* زوم */
 
 @keyframes zoomShow{
 
+
 from{
+
 opacity:0;
-transform:scale(.4);
+
+transform:
+scale(.35);
+
 }
+
 
 to{
+
 opacity:1;
-transform:scale(1);
-}
+
+transform:
+scale(1);
 
 }
 
 
+}
+
+
+
+/* نبضة ناعمة */
 
 @keyframes softPulse{
 
+
 50%{
-transform:scale(1.04);
+
+transform:
+scale(1.045);
+
 }
+
 
 }
 
@@ -452,8 +406,24 @@ transform:scale(1.04);
 @keyframes fadeMessage{
 
 to{
+
 opacity:1;
+
 }
+
+}
+
+
+
+/* =========================
+   الخروج
+========================= */
+
+
+.loader-hide{
+
+    animation:
+    loaderFade 1s forwards;
 
 }
 
@@ -461,20 +431,65 @@ opacity:1;
 
 .loader-hide .loader-circle{
 
-animation:
-circleExit .9s forwards;
+    animation:
+
+    circleExit .9s cubic-bezier(.22,.8,.25,1) forwards;
 
 }
 
 
 
+.loader-hide .intro-content{
+
+    animation:
+
+    contentExit .8s forwards;
+
+}
+
+
+
+
 @keyframes circleExit{
+
 
 to{
 
-transform:scale(0);
+    transform:
+    scale(.15);
 
-opacity:0;
+    opacity:0;
+
+}
+
+
+}
+
+
+
+@keyframes contentExit{
+
+
+to{
+
+    opacity:0;
+
+    transform:
+    scale(.8);
+
+}
+
+
+}
+
+
+
+@keyframes loaderFade{
+
+
+to{
+
+    background:transparent;
 
 }
 
@@ -483,6 +498,22 @@ opacity:0;
 
 
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <body>
 <div id="introLoader">
