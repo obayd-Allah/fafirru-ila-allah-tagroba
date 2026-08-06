@@ -28,11 +28,301 @@ user-scalable=no">
 id="themeStyle"
 rel="stylesheet"
 href="">
-  
+  <style>
+
+#introLoader{
+position:fixed;
+inset:0;
+z-index:999999;
+overflow:hidden;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Cairo, sans-serif;
+}
+
+
+.loader-circle{
+position:absolute;
+width:65vw;
+height:65vw;
+max-width:600px;
+max-height:600px;
+border-radius:50%;
+opacity:.95;
+}
+
+
+.c1{
+background:#E61C77;
+left:-70%;
+top:-20%;
+animation:
+circleIn1 2s ease forwards,
+waterMove 5s infinite ease-in-out 2s;
+}
+
+
+.c2{
+background:#FF3700;
+right:-70%;
+top:-20%;
+animation:
+circleIn2 2s ease forwards,
+waterMove 6s infinite ease-in-out 2s;
+}
+
+
+.c3{
+background:#FF5500;
+left:-70%;
+bottom:-20%;
+animation:
+circleIn3 2s ease forwards,
+waterMove 7s infinite ease-in-out 2s;
+}
+
+
+.c4{
+background:#00D0FF;
+right:-70%;
+bottom:-20%;
+animation:
+circleIn4 2s ease forwards,
+waterMove 8s infinite ease-in-out 2s;
+}
+
+
+
+@keyframes circleIn1{
+
+to{
+left:-15%;
+top:-10%;
+}
+
+}
+
+@keyframes circleIn2{
+
+to{
+right:-15%;
+top:-10%;
+}
+
+}
+
+
+@keyframes circleIn3{
+
+to{
+left:-15%;
+bottom:-10%;
+}
+
+}
+
+
+@keyframes circleIn4{
+
+to{
+right:-15%;
+bottom:-10%;
+}
+
+}
+
+
+
+@keyframes waterMove{
+
+50%{
+transform:
+translateY(-18px)
+scale(1.03);
+}
+
+100%{
+transform:
+translateY(0)
+scale(1);
+}
+
+}
+
+
+
+.intro-content{
+position:relative;
+z-index:5;
+text-align:center;
+color:white;
+text-shadow:
+0 5px 20px rgba(0,0,0,.25);
+}
+
+
+#introTitle{
+
+font-size:clamp(45px,9vw,90px);
+font-weight:900;
+
+opacity:0;
+
+animation:
+dropWater 1.4s ease forwards 1.5s,
+softPulse 3s infinite 3s;
+
+}
+
+
+
+#introSub{
+
+font-size:clamp(32px,7vw,70px);
+font-weight:900;
+
+margin-top:25px;
+
+opacity:0;
+
+animation:
+zoomShow 1.3s ease forwards 2.7s,
+softPulse 3s infinite 4s;
+
+}
+
+
+
+#introMessage{
+
+margin-top:35px;
+
+font-size:clamp(20px,4vw,38px);
+
+font-weight:700;
+
+opacity:0;
+
+animation:
+fadeMessage 1s forwards 4s;
+
+}
+
+
+
+@keyframes dropWater{
+
+0%{
+opacity:0;
+transform:
+translateY(-120px)
+scale(.7);
+}
+
+
+70%{
+transform:
+translateY(15px)
+scale(1.05);
+}
+
+
+100%{
+opacity:1;
+transform:
+translateY(0)
+scale(1);
+}
+
+}
+
+
+
+@keyframes zoomShow{
+
+0%{
+opacity:0;
+transform:scale(.4);
+}
+
+
+100%{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+
+
+@keyframes softPulse{
+
+50%{
+transform:
+scale(1.04);
+}
+
+}
+
+
+
+@keyframes fadeMessage{
+
+to{
+opacity:1;
+}
+
+}
+
+
+.loader-hide{
+
+animation:
+loaderOut 1.2s forwards;
+}
+
+
+
+@keyframes loaderOut{
+
+to{
+
+opacity:0;
+transform:scale(1.15);
+
+}
+
+}
+
+
+</style>
 </head>
 
 <body>
+<div id="introLoader">
 
+    <div class="loader-circle c1"></div>
+    <div class="loader-circle c2"></div>
+    <div class="loader-circle c3"></div>
+    <div class="loader-circle c4"></div>
+
+    <div class="intro-content">
+
+        <div id="introTitle">
+            مسابقة القرآن
+        </div>
+
+        <div id="introSub">
+            تنافس على الجنة 🏆
+        </div>
+
+        <div id="introMessage"></div>
+
+    </div>
+
+</div>
 <header class="hero">
 
 <div class="overlay">
