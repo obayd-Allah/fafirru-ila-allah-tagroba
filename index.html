@@ -108,27 +108,134 @@ top:-10%;
 
 to{
 right:-15%;
-top:-10%;
+.loader-circle{
+
+position:absolute;
+
+width:150vw;
+height:150vw;
+
+max-width:none;
+max-height:none;
+
+border-radius:50%;
+
+opacity:.96;
+
+will-change:transform;
+
+}
+
+
+
+.c1{
+
+background:#E61C77;
+
+left:-120vw;
+top:-80vw;
+
+animation:
+circleIn1 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 2.8s ease-in-out infinite .9s;
+
+}
+
+
+
+.c2{
+
+background:#FF3700;
+
+right:-120vw;
+top:-80vw;
+
+animation:
+circleIn2 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 3.2s ease-in-out infinite .9s;
+
+}
+
+
+
+.c3{
+
+background:#FF5500;
+
+left:-120vw;
+bottom:-80vw;
+
+animation:
+circleIn3 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 3.6s ease-in-out infinite .9s;
+
+}
+
+
+
+.c4{
+
+background:#00D0FF;
+
+right:-120vw;
+bottom:-80vw;
+
+animation:
+circleIn4 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 3s ease-in-out infinite .9s;
+
+}
+
+
+
+
+
+@keyframes circleIn1{
+
+to{
+
+left:-25vw;
+top:-25vw;
+
 }
 
 }
+
+
+
+@keyframes circleIn2{
+
+to{
+
+right:-25vw;
+top:-25vw;
+
+}
+
+}
+
 
 
 @keyframes circleIn3{
 
 to{
-left:-15%;
-bottom:-10%;
+
+left:-25vw;
+bottom:-25vw;
+
 }
 
 }
+
 
 
 @keyframes circleIn4{
 
 to{
-right:-15%;
-bottom:-10%;
+
+right:-25vw;
+bottom:-25vw;
+
 }
 
 }
@@ -137,21 +244,53 @@ bottom:-10%;
 
 @keyframes waterMove{
 
-50%{
+
+0%{
+
 transform:
-translateY(-18px)
-scale(1.03);
+translate(0,0)
+scale(1);
+
 }
+
+
+25%{
+
+transform:
+translate(12px,-15px)
+scale(1.04);
+
+}
+
+
+50%{
+
+transform:
+translate(-10px,12px)
+scale(.98);
+
+}
+
+
+75%{
+
+transform:
+translate(8px,8px)
+scale(1.03);
+
+}
+
 
 100%{
+
 transform:
-translateY(0)
+translate(0,0)
 scale(1);
-}
 
 }
 
 
+}
 
 .intro-content{
 position:relative;
@@ -163,33 +302,21 @@ text-shadow:
 }
 
 
+
 #introTitle{
 
-font-size:clamp(45px,9vw,90px);
-font-weight:900;
-
-opacity:0;
-
 animation:
-dropWater 1.4s ease forwards 1.5s,
-softPulse 3s infinite 3s;
+dropWater .9s ease forwards .8s,
+softPulse 2s infinite 2s;
 
 }
 
 
-
 #introSub{
 
-font-size:clamp(32px,7vw,70px);
-font-weight:900;
-
-margin-top:25px;
-
-opacity:0;
-
 animation:
-zoomShow 1.3s ease forwards 2.7s,
-softPulse 3s infinite 4s;
+zoomShow .8s ease forwards 1.7s,
+softPulse 2s infinite 3s;
 
 }
 
@@ -295,7 +422,26 @@ transform:scale(1.15);
 }
 
 }
+.loader-hide .loader-circle{
 
+animation:
+circleExit .9s cubic-bezier(.22,.8,.25,1) forwards;
+
+}
+
+
+@keyframes circleExit{
+
+to{
+
+transform:
+scale(0);
+
+opacity:0;
+
+}
+
+}
 
 </style>
 </head>
