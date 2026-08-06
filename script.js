@@ -707,40 +707,26 @@ render();
 
 (async()=>{
 
-
 startIntro();
 
+try{
 
-await loadMosqueConfig();
+    await loadMosqueConfig();
 
-await loadStudents();
+    await loadStudents();
 
-
-// انتظار تحميل ملف الثيم
-const theme=document.getElementById("themeStyle");
-
-
-if(theme && theme.href){
-
-await new Promise(resolve=>{
-
-if(theme.sheet){
-
-resolve();
-
-}else{
-
-theme.onload=resolve;
-
-setTimeout(resolve,1000);
+    // أعط المتصفح فرصة لرسم الثيم والصور
+    await new Promise(r=>setTimeout(r,500));
 
 }
+catch(e){
 
-});
+    console.error(e);
 
 }
 
 
+// خروج الشاشة دائماً
 finishIntro();
 
 
@@ -1856,15 +1842,24 @@ Math.floor(Math.random()*introMessages.length)
 
 function finishIntro(){
 
-const loader=document.getElementById("introLoader");
+    const loader=document.getElementById("introLoader");
 
-loader.classList.add("loader-hide");
+    if(!loader) return;
 
 
-setTimeout(()=>{
+    loader.style.transition=
+    "opacity 1s ease, transform 1s ease";
 
-loader.remove();
 
-},1200);
+    loader.style.opacity="0";
+
+    loader.style.transform="scale(1.15)";
+
+
+    setTimeout(()=>{
+
+        loader.remove();
+
+    },1200);
 
 }
