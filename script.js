@@ -96,7 +96,6 @@ const rewardEmojis = [
 "☑️",
 "✅",
 "⭐",
-"💎",
 "",
 "🎁",
  "🎈",
@@ -205,6 +204,8 @@ const rewardSparkColors={
 "⭐":"#ffd43b",
 
 "✨":"#ffffff",
+
+"🌟":"F58B27",
 
 "🍉":"#ff5b45",
 
