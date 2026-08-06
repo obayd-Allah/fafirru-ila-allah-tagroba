@@ -2488,33 +2488,3 @@ body{
     border:0;
     padding:0;
 }
-/* تأثير الضغط العام */
-
-button,
-.student-card,
-.filter-btn,
-.reward-btn,
-.whatsapp-btn{
-
-    transition:
-    transform .15s ease,
-    box-shadow .15s ease;
-
-}
-
-
-button:active,
-.student-card:active,
-.filter-btn:active,
-.reward-btn:active,
-.whatsapp-btn:active{
-
-    transform:
-    scale(.94)
-    translateY(3px);
-
-    box-shadow:
-
-    0 2px 8px rgba(0,0,0,.25);
-
-}
