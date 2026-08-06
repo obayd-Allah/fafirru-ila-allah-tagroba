@@ -706,14 +706,14 @@ render();
 }
 
 (async()=>{
-(async()=>{
 
-    startIntro();
+startIntro();
 
-    const introMinimumTime = new Promise(resolve=>{
-        setTimeout(resolve,6000); // مدة المشهد الدنيا 6 ثواني
-    });
+const introMinimumTime = new Promise(resolve=>{
+    setTimeout(resolve,6000);
+});
 
+try{
 
     const dataLoading = (async()=>{
 
@@ -721,22 +721,27 @@ render();
 
         await loadStudents();
 
-        // فرصة للمتصفح لرسم الصور و CSS
         await new Promise(r=>setTimeout(r,300));
 
     })();
 
 
-    // ينتظر الاثنين:
-    // البيانات + انتهاء المشهد
     await Promise.all([
         introMinimumTime,
         dataLoading
     ]);
 
+}
+catch(error){
+
+    console.error("Intro loading error:", error);
+
+}
+finally{
 
     finishIntro();
 
+}
 
 })();
 
