@@ -1092,11 +1092,15 @@ rewardBtn.onclick = ()=>{
     studentSelect.innerHTML = "";
 
     const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "⬇️ اختر اسمك أولاً";
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    studentSelect.appendChild(defaultOption);
+
+defaultOption.value = "";
+
+defaultOption.textContent = "⬇️ اختر اسمك أولاً";
+
+defaultOption.selected = true;
+
+studentSelect.appendChild(defaultOption);
+    studentSelect.value = "";
     // اختيار الطلاب حسب الفلتر الحالي
     let list =
         currentFilter === "boys"
