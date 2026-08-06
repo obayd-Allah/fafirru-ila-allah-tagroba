@@ -444,7 +444,7 @@ a{
 
 .search-box::before{
 
-    content:"🔎";
+    content:"";
 
     position:absolute;
 
