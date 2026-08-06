@@ -24,6 +24,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+document.body.classList.add("intro-loading");
 const db = getFirestore(app);
 
 let students = [];
@@ -34,6 +35,63 @@ import {
 } from "./config.js";
 
 const mosqueId = getCurrentMosqueId();
+// ==========================
+// نظام شاشة البداية
+// ==========================
+
+let introReady = false;
+let introMinimumTime = false;
+
+
+// مدة المشهد 최소ية
+setTimeout(()=>{
+
+    introMinimumTime = true;
+
+    closeIntroIfReady();
+
+},3000);
+
+
+
+function closeIntroIfReady(){
+
+    if(!introReady || !introMinimumTime)
+        return;
+
+
+    const intro = document.getElementById("introScreen");
+    const circle = document.querySelector(".intro-circle");
+
+
+    if(!intro || !circle)
+        return;
+
+
+    // فتح دائرة السينما
+
+    circle.classList.add("open");
+
+
+    setTimeout(()=>{
+
+        intro.classList.add("hide");
+
+document.body.classList.remove("intro-loading");
+
+
+        setTimeout(()=>{
+
+            intro.remove();
+
+        },600);
+
+
+    },700);
+
+
+}
+
 let mosqueData = null;
 let CURRENT_MOSQUE = null;
 /*====================================
@@ -700,9 +758,42 @@ render();
 
 (async()=>{
 
-    await loadMosqueConfig();
 
-    await loadStudents();
+    try{
+
+
+        await loadMosqueConfig();
+
+
+        await loadStudents();
+
+
+        // كل البيانات وصلت
+
+        introReady = true;
+
+
+        closeIntroIfReady();
+
+
+
+    }
+
+    catch(error){
+
+
+        console.error(error);
+
+
+        // حتى لو حدث خطأ لا تبقى الشاشة للأبد
+
+        introReady = true;
+
+        closeIntroIfReady();
+
+
+    }
+
 
 })();
 
