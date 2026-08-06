@@ -706,28 +706,36 @@ render();
 }
 
 (async()=>{
+(async()=>{
 
-startIntro();
+    startIntro();
 
-try{
-
-    await loadMosqueConfig();
-
-    await loadStudents();
-
-    // أعط المتصفح فرصة لرسم الثيم والصور
-    await new Promise(r=>setTimeout(r,500));
-
-}
-catch(e){
-
-    console.error(e);
-
-}
+    const introMinimumTime = new Promise(resolve=>{
+        setTimeout(resolve,6000); // مدة المشهد الدنيا 6 ثواني
+    });
 
 
-// خروج الشاشة دائماً
-finishIntro();
+    const dataLoading = (async()=>{
+
+        await loadMosqueConfig();
+
+        await loadStudents();
+
+        // فرصة للمتصفح لرسم الصور و CSS
+        await new Promise(r=>setTimeout(r,300));
+
+    })();
+
+
+    // ينتظر الاثنين:
+    // البيانات + انتهاء المشهد
+    await Promise.all([
+        introMinimumTime,
+        dataLoading
+    ]);
+
+
+    finishIntro();
 
 
 })();
