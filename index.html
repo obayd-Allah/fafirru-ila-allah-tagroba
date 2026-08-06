@@ -194,128 +194,190 @@ waterMove 3s ease-in-out infinite .9s;
 
 to{
 
+<style>
+
+#introLoader{
+position:fixed;
+inset:0;
+z-index:999999;
+overflow:hidden;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Cairo,sans-serif;
+}
+
+
+.loader-circle{
+
+position:absolute;
+
+width:150vw;
+height:150vw;
+
+border-radius:50%;
+
+opacity:.96;
+
+will-change:transform;
+
+}
+
+
+
+.c1{
+background:#E61C77;
+left:-120vw;
+top:-80vw;
+
+animation:
+circleIn1 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 2.8s ease-in-out infinite 1s;
+
+}
+
+
+
+.c2{
+background:#FF3700;
+right:-120vw;
+top:-80vw;
+
+animation:
+circleIn2 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 3.2s ease-in-out infinite 1s;
+
+}
+
+
+
+.c3{
+background:#FF5500;
+left:-120vw;
+bottom:-80vw;
+
+animation:
+circleIn3 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 3.5s ease-in-out infinite 1s;
+
+}
+
+
+
+.c4{
+background:#00D0FF;
+right:-120vw;
+bottom:-80vw;
+
+animation:
+circleIn4 .9s cubic-bezier(.22,.8,.25,1) forwards,
+waterMove 3s ease-in-out infinite 1s;
+
+}
+
+
+
+@keyframes circleIn1{
+to{
 left:-25vw;
 top:-25vw;
-
 }
-
 }
-
 
 
 @keyframes circleIn2{
-
 to{
-
 right:-25vw;
 top:-25vw;
-
 }
-
 }
-
 
 
 @keyframes circleIn3{
-
 to{
-
 left:-25vw;
 bottom:-25vw;
-
 }
-
 }
-
 
 
 @keyframes circleIn4{
-
 to{
-
 right:-25vw;
 bottom:-25vw;
-
 }
-
 }
 
 
 
 @keyframes waterMove{
 
-
-0%{
-
-transform:
-translate(0,0)
-scale(1);
-
+0%,100%{
+transform:translate(0,0) scale(1);
 }
 
 
 25%{
-
-transform:
-translate(12px,-15px)
-scale(1.04);
-
+transform:translate(15px,-20px) scale(1.04);
 }
 
 
 50%{
-
-transform:
-translate(-10px,12px)
-scale(.98);
-
+transform:translate(-12px,15px) scale(.98);
 }
 
 
 75%{
-
-transform:
-translate(8px,8px)
-scale(1.03);
+transform:translate(10px,10px) scale(1.03);
+}
 
 }
 
 
-100%{
-
-transform:
-translate(0,0)
-scale(1);
-
-}
-
-
-}
 
 .intro-content{
+
 position:relative;
 z-index:5;
 text-align:center;
 color:white;
+
 text-shadow:
-0 5px 20px rgba(0,0,0,.25);
+0 5px 20px rgba(0,0,0,.3);
+
 }
 
 
 
 #introTitle{
 
+font-size:clamp(45px,10vw,90px);
+
+font-weight:900;
+
+opacity:0;
+
 animation:
-dropWater .9s ease forwards .8s,
+dropWater 1s forwards .8s,
 softPulse 2s infinite 2s;
 
 }
 
 
+
 #introSub{
 
+font-size:clamp(35px,8vw,75px);
+
+font-weight:900;
+
+margin-top:20px;
+
+opacity:0;
+
 animation:
-zoomShow .8s ease forwards 1.7s,
+zoomShow .8s forwards 1.8s,
 softPulse 2s infinite 3s;
 
 }
@@ -324,7 +386,7 @@ softPulse 2s infinite 3s;
 
 #introMessage{
 
-margin-top:35px;
+margin-top:30px;
 
 font-size:clamp(20px,4vw,38px);
 
@@ -333,7 +395,7 @@ font-weight:700;
 opacity:0;
 
 animation:
-fadeMessage 1s forwards 4s;
+fadeMessage 1s forwards 3s;
 
 }
 
@@ -343,24 +405,18 @@ fadeMessage 1s forwards 4s;
 
 0%{
 opacity:0;
-transform:
-translateY(-120px)
-scale(.7);
+transform:translateY(-120px) scale(.7);
 }
 
 
 70%{
-transform:
-translateY(15px)
-scale(1.05);
+transform:translateY(15px) scale(1.05);
 }
 
 
 100%{
 opacity:1;
-transform:
-translateY(0)
-scale(1);
+transform:translateY(0) scale(1);
 }
 
 }
@@ -369,13 +425,12 @@ scale(1);
 
 @keyframes zoomShow{
 
-0%{
+from{
 opacity:0;
 transform:scale(.4);
 }
 
-
-100%{
+to{
 opacity:1;
 transform:scale(1);
 }
@@ -387,8 +442,7 @@ transform:scale(1);
 @keyframes softPulse{
 
 50%{
-transform:
-scale(1.04);
+transform:scale(1.04);
 }
 
 }
@@ -404,38 +458,21 @@ opacity:1;
 }
 
 
-.loader-hide{
 
-animation:
-loaderOut 1.2s forwards;
-}
-
-
-
-@keyframes loaderOut{
-
-to{
-
-opacity:0;
-transform:scale(1.15);
-
-}
-
-}
 .loader-hide .loader-circle{
 
 animation:
-circleExit .9s cubic-bezier(.22,.8,.25,1) forwards;
+circleExit .9s forwards;
 
 }
+
 
 
 @keyframes circleExit{
 
 to{
 
-transform:
-scale(0);
+transform:scale(0);
 
 opacity:0;
 
@@ -443,8 +480,9 @@ opacity:0;
 
 }
 
+
+
 </style>
-</head>
 
 <body>
 <div id="introLoader">
