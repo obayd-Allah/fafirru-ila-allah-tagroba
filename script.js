@@ -1093,14 +1093,17 @@ rewardBtn.onclick = ()=>{
 
     const defaultOption = document.createElement("option");
 
-defaultOption.value = "";
+defaultOption.value = "choose";
 
-defaultOption.textContent = "⬇️ اختر اسمك أولاً";
+defaultOption.textContent = "⬇️ اختر اسم الطالب أولاً";
+
+defaultOption.disabled = true;
 
 defaultOption.selected = true;
 
 studentSelect.appendChild(defaultOption);
-    studentSelect.value = "";
+
+studentSelect.value = "choose";
     // اختيار الطلاب حسب الفلتر الحالي
     let list =
         currentFilter === "boys"
@@ -1284,19 +1287,34 @@ rewardSending = false;
 
     rewardMessage.style.color="#555";
     rewardMessage.textContent="⏳ جارٍ التحقق...";
-if(!studentSelect.value){
+if(
+    !studentSelect.value ||
+    studentSelect.value === "choose"
+){
 
     rewardSending = false;
 
     rewardMessage.style.color="red";
+
     rewardMessage.textContent =
-    "اختر اسم الطالب أولاً..";
+    "⬇️ اختر اسم الطالب أولاً.";
 
     return;
 }
     const student = students.find(
     s=>s.id===studentSelect.value
 );
+    if(!student){
+
+    rewardSending = false;
+
+    rewardMessage.style.color="red";
+
+    rewardMessage.textContent =
+    "اختر طالبًا صحيحًا من القائمة.";
+
+    return;
+    }
 if (!student || student.mosqueId !== mosqueId) {
 
     rewardSending = false;
