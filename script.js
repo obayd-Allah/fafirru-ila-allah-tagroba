@@ -39,7 +39,14 @@ let CURRENT_MOSQUE = null;
 /*====================================
         رسائل النجاح
 ====================================*/
-
+const introMessages=[
+"وفي ذلك فليتنافس المتنافسون",
+"خيركم من تعلم القرآن وعلمه",
+"أهل القرآن هم أهل الله وخاصته",
+"بالقرآن نحيا وبالجنة نرتقي",
+"كل حرف من القرآن حسنة",
+"نافس اليوم لتفوز غداً"
+];
 const boyMessages = [
 
 "بارك الله فيك يا {nickname} يا عسل",
@@ -700,9 +707,42 @@ render();
 
 (async()=>{
 
-    await loadMosqueConfig();
 
-    await loadStudents();
+startIntro();
+
+
+await loadMosqueConfig();
+
+await loadStudents();
+
+
+// انتظار تحميل ملف الثيم
+const theme=document.getElementById("themeStyle");
+
+
+if(theme && theme.href){
+
+await new Promise(resolve=>{
+
+if(theme.sheet){
+
+resolve();
+
+}else{
+
+theme.onload=resolve;
+
+setTimeout(resolve,1000);
+
+}
+
+});
+
+}
+
+
+finishIntro();
+
 
 })();
 
@@ -1801,4 +1841,30 @@ if (themeLink) {
 //document.addEventListener("dragstart",e=>{
  // e.preventDefault();
 //});
+}
+function startIntro(){
+
+const msg=document.getElementById("introMessage");
+
+msg.textContent =
+introMessages[
+Math.floor(Math.random()*introMessages.length)
+];
+
+}
+
+
+function finishIntro(){
+
+const loader=document.getElementById("introLoader");
+
+loader.classList.add("loader-hide");
+
+
+setTimeout(()=>{
+
+loader.remove();
+
+},1200);
+
 }
