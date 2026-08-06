@@ -893,6 +893,10 @@ a{
 
     border-radius:30px;
 
+    transform-style:preserve-3d;
+
+    perspective:900px;
+
     background:
 
     linear-gradient(
@@ -968,32 +972,7 @@ a{
     width:12px;
 
     height:100%;
-.student-card{
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:26px;
-
-    transform-style:preserve-3d;
-
-    perspective:900px;
-    background:
-
-    linear-gradient(
-
-        180deg,
-
-        #47d9ff,
-
-        #0f9fd8,
-
-        #066f9f
-
-    );
-
-}
+} 
 
 /*=========================
       الحركة
@@ -1208,8 +1187,7 @@ a{
         180deg,
 
         #fff7fd,
-
-        #ffe3f4
+I         #ffe3f4
 
     );
 
@@ -1230,7 +1208,6 @@ a{
         #fffbd7,
 
         #ffe88a
-
     );
 
     border-color:#f1d35b;
@@ -2487,4 +2464,32 @@ body{
 .code-digit::-moz-focus-inner{
     border:0;
     padding:0;
+}
+/*=========================
+   تأثير اللمس
+=========================*/
+
+button,
+.student-card,
+.filter-btn,
+.reward-btn,
+.whatsapp-btn{
+
+    transition:
+    transform .15s ease,
+    box-shadow .15s ease;
+
+}
+
+
+button:active,
+.student-card:active,
+.filter-btn:active,
+.reward-btn:active,
+.whatsapp-btn:active{
+
+    transform:
+    scale(.95)
+    translateY(3px);
+
 }
