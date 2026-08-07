@@ -1961,3 +1961,93 @@ cards.innerHTML = `
 `;
 
 }
+function showStudentsError(){
+
+    const cards = document.getElementById("cards");
+    const loading = document.getElementById("loading");
+
+    if (loading) {
+        loading.style.display = "none";
+    }
+
+    cards.innerHTML = `
+        <div style="
+            width:min(92%,420px);
+            margin:30px auto;
+            padding:28px 20px;
+            border-radius:28px;
+            text-align:center;
+            background:linear-gradient(180deg,#ffffff,#fff8e8);
+            box-shadow:0 14px 35px rgba(0,0,0,.12);
+            border:2px solid rgba(243,156,18,.18);
+            font-family:Cairo,sans-serif;
+            animation: kidsErrorPop .45s ease;
+        ">
+            <div style="
+                font-size:72px;
+                line-height:1;
+                margin-bottom:12px;
+                animation: kidsErrorFloat 2s ease-in-out infinite;
+            ">🧭</div>
+
+            <h2 style="
+                margin:0 0 12px;
+                color:#f39c12;
+                font-size:clamp(22px,5vw,30px);
+                font-weight:900;
+                line-height:1.5;
+            ">
+                الرحلة تعطلت قليلًا! 💎
+            </h2>
+
+            <p style="
+                margin:0 0 8px;
+                color:#5b5b5b;
+                font-size:clamp(16px,3.7vw,20px);
+                line-height:1.8;
+                font-weight:700;
+            ">
+                يبدو أن الطريق يحتاج اتصالاً بالإنترنت..
+            </p>
+
+            <p style="
+                margin:0 0 18px;
+                color:#7a7a7a;
+                font-size:clamp(15px,3.4vw,18px);
+                line-height:1.8;
+            ">
+              فَصَبْرٌ جَمِيلٌ.. وَاللَّهُ الْمُسْتَعَان.. ⏳
+            </p>
+
+            <button onclick="location.reload()" style="
+                border:none;
+                padding:14px 28px;
+                border-radius:999px;
+                background:linear-gradient(135deg,#4caf50,#2ecc71);
+                color:#fff;
+                font-size:18px;
+                font-weight:800;
+                font-family:Cairo,sans-serif;
+                cursor:pointer;
+                box-shadow:0 10px 22px rgba(46,204,113,.28);
+            ">
+                🔄 المحاولة مرة أخرى
+            </button>
+        </div>
+    `;
+
+    if (!document.getElementById("kidsErrorStyles")) {
+        const style = document.createElement("style");
+        style.id = "kidsErrorStyles";
+        style.textContent = `
+            @keyframes kidsErrorPop{
+                from{transform:scale(.86);opacity:0}
+                to{transform:scale(1);opacity:1}
+            }
+            @keyframes kidsErrorFloat{
+                50%{transform:translateY(-10px) rotate(4deg)}
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
