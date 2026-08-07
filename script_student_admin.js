@@ -250,8 +250,8 @@ async function loadStudents() {
 
         if (mosqueDoc.exists()) {
 
-            students = mosqueDoc.data().students || [];
-
+            students = (mosqueDoc.data().students || [])
+.filter(student => student.mosqueId === mosqueId);
         }
 
         hideLoading();
@@ -974,12 +974,13 @@ if(currentStudent===null){
 
 
             transaction.set(
-                mosqueRef,
-                {
-                    students: currentStudents,
-                    updatedAt: serverTimestamp()
-                }
-            );
+    mosqueRef,
+    {
+        students: currentStudents,
+        updatedAt: serverTimestamp()
+    },
+    { merge: true }
+);
 
 
         }
@@ -1054,12 +1055,13 @@ else{
 
 
             transaction.set(
-                mosqueRef,
-                {
-                    students: currentStudents,
-                    updatedAt: serverTimestamp()
-                }
-            );
+    mosqueRef,
+    {
+        students: currentStudents,
+        updatedAt: serverTimestamp()
+    },
+    { merge: true }
+);
 
 
         }
@@ -1182,8 +1184,8 @@ confirmAction=null;
     }
 
     askConfirm(
-        `إضافة ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,
-        async()=>{
+    `${value > 0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,  
+                async()=>{
 
             try{
 
@@ -1236,12 +1238,13 @@ confirmAction=null;
 
 
                         transaction.set(
-                            mosqueRef,
-                            {
-                                students:list,
-                                updatedAt:serverTimestamp()
-                            }
-                        );
+    mosqueRef,
+    {
+        students: currentStudents,
+        updatedAt: serverTimestamp()
+    },
+    { merge: true }
+);
 
 
                     }
@@ -1349,12 +1352,13 @@ async function deleteStudent(id){
 
 
                         transaction.set(
-                            mosqueRef,
-                            {
-                                students: updatedStudents,
-                                updatedAt: serverTimestamp()
-                            }
-                        );
+    mosqueRef,
+    {
+        students: currentStudents,
+        updatedAt: serverTimestamp()
+    },
+    { merge: true }
+);
 
 
                     }
