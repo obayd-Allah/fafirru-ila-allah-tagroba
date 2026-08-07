@@ -23,7 +23,7 @@ deleteDoc,
 doc,
 
 writeBatch,
-
+runTransaction,
 serverTimestamp
 
 }
@@ -971,41 +971,155 @@ hideLoading();
 
 }
 
-else{
+if(currentStudent===null){
 
-    const student = students.find(
-        s => s.id === currentStudent
+    const newStudent = {
+
+        id: crypto.randomUUID(),
+
+        firstName: firstName,
+
+        familyName: familyName,
+
+        fullName: fullName,
+
+        name: fullName,
+
+        nicknames: nicknames,
+
+        points: points,
+
+        gender: gender,
+
+        mosqueId: mosqueId
+
+    };
+
+
+    const mosqueRef = doc(
+        db,
+        "MosqueStudents",
+        mosqueId
     );
 
-    if(student){
 
-        student.firstName = firstName;
-        student.familyName = familyName;
-        student.fullName = fullName;
-        student.name = fullName;
-        student.nicknames = nicknames;
-        student.points = points;
-        student.gender = gender;
+    await runTransaction(
+        db,
+        async(transaction)=>{
 
-    }
 
-    const batch = writeBatch(db);
+            const snapshot =
+                await transaction.get(mosqueRef);
 
-    batch.set(
 
-        doc(db,"MosqueStudents",mosqueId),
+            let currentStudents = [];
 
-        {
 
-            students: students,
+            if(snapshot.exists()){
 
-            updatedAt: serverTimestamp()
+                currentStudents =
+                    snapshot.data().students || [];
+
+            }
+
+
+            currentStudents.push(
+                newStudent
+            );
+
+
+            transaction.set(
+                mosqueRef,
+                {
+                    students: currentStudents,
+                    updatedAt: serverTimestamp()
+                }
+            );
+
 
         }
-
     );
 
-    await batch.commit();
+
+}
+
+
+else{
+
+
+    const mosqueRef = doc(
+        db,
+        "MosqueStudents",
+        mosqueId
+    );
+
+
+    await runTransaction(
+        db,
+        async(transaction)=>{
+
+
+            const snapshot =
+                await transaction.get(mosqueRef);
+
+
+            if(!snapshot.exists()){
+
+                throw new Error(
+                    "MosqueStudents not found"
+                );
+
+            }
+
+
+            const currentStudents =
+                snapshot.data().students || [];
+
+
+            const student =
+                currentStudents.find(
+                    s=>s.id===currentStudent
+                );
+
+
+            if(student){
+
+                student.firstName =
+                    firstName;
+
+                student.familyName =
+                    familyName;
+
+                student.fullName =
+                    fullName;
+
+                student.name =
+                    fullName;
+
+                student.nicknames =
+                    nicknames;
+
+                student.points =
+                    points;
+
+                student.gender =
+                    gender;
+
+            }
+
+
+            transaction.set(
+                mosqueRef,
+                {
+                    students: currentStudents,
+                    updatedAt: serverTimestamp()
+                }
+            );
+
+
+        }
+    );
+
 
 }
 
@@ -1144,7 +1258,7 @@ async()=>{
 
 try{
 
-await loadStudents();
+
 showLoading(
     "⏳ جار تحديث الجواهر..."
 );
@@ -1178,65 +1292,128 @@ batch.set(
         students: students,
 
         updatedAt: serverTimestamp()
+async function changePoints(id, value) {
 
+    const student = students.find(
+        s => s.id === id
+    );
+
+    if (
+        !student ||
+        student.mosqueId !== mosqueId
+    ) {
+        return;
     }
 
-);
+    askConfirm(
 
-await batch.commit();
+        `${value > 0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,
 
+        async () => {
 
+            try {
 
+                showLoading(
+                    "⏳ جار تحديث الجواهر..."
+                );
 
+                const mosqueRef = doc(
+                    db,
+                    "MosqueStudents",
+                    mosqueId
+                );
 
-renderStudents();
+                await runTransaction(
+                    db,
+                    async (transaction) => {
 
+                        const mosqueSnapshot =
+                            await transaction.get(mosqueRef);
 
-hideLoading();
+                        if (!mosqueSnapshot.exists()) {
 
+                            throw new Error(
+                                "MosqueStudents document does not exist"
+                            );
 
+                        }
 
-showMessage(
+                        const data =
+                            mosqueSnapshot.data();
 
-"✅ تم تحديث الجواهر بنجاح",
+                        const currentStudents =
+                            data.students || [];
 
-"success"
+                        const targetStudent =
+                            currentStudents.find(
+                                s => s.id === id
+                            );
 
-);
+                        if (!targetStudent) {
 
+                            throw new Error(
+                                "Student not found"
+                            );
 
+                        }
 
-}
+                        let newPoints =
+                            Number(targetStudent.points || 0)
+                            + value;
 
-catch(error){
+                        if (newPoints < 0) {
+                            newPoints = 0;
+                        }
 
+                        targetStudent.points =
+                            newPoints;
 
-hideLoading();
+                        transaction.set(
+                            mosqueRef,
+                            {
+                                students: currentStudents,
+                                updatedAt: serverTimestamp()
+                            }
+                        );
 
+                    }
+                );
 
+                /*
+                 * بعد نجاح المعاملة
+                 * نعيد تحميل أحدث البيانات
+                 */
 
-showMessage(
+                await loadStudents();
 
-"❌ حدث خطأ أثناء تحديث الجواهر",
+                hideLoading();
 
-"error"
+                showMessage(
+                    "✅ تم تحديث الجواهر بنجاح",
+                    "success"
+                );
 
-);
+            }
 
+            catch (error) {
 
+                hideLoading();
 
-console.error(error);
+                console.error(
+                    "changePoints error:",
+                    error
+                );
 
+                showMessage(
+                    "❌ حدث خطأ أثناء تحديث الجواهر",
+                    "error"
+                );
 
-}
+            }
 
+        }
 
-
-}
-
-
-);
-
+    );
 
 }
 
@@ -1248,113 +1425,130 @@ console.error(error);
 
 async function deleteStudent(id){
 
-
-const student =
-students.find(
-s=>s.id===id
-);
-
-if(
-!student ||
-student.mosqueId !== mosqueId
-){
-return;
-}
-
-const studentId = student.id;
+    const student =
+        students.find(
+            s => s.id === id
+        );
 
 
-
-askConfirm(
-            
-`هل تريد حذف الطالب ${student.fullName || student.name} نهائياً؟`,
-            
-async()=>{
-
-
-try{
-
-await loadStudents();
-showLoading(
-    "⏳ جار حذف الطالب..."
-);
-
-
-
-students = students.filter(
-    s => s.id !== studentId
-);
-
-const batch = writeBatch(db);
-
-batch.set(
-
-    doc(db,"MosqueStudents",mosqueId),
-
-    {
-
-        students: students,
-
-        updatedAt: serverTimestamp()
-
+    if(
+        !student ||
+        student.mosqueId !== mosqueId
+    ){
+        return;
     }
 
-);
 
-await batch.commit();
+    askConfirm(
 
+        `هل تريد حذف الطالب ${student.fullName || student.name} نهائياً؟`,
 
-
-students = students.filter(s => s.id !== studentId);
-
-renderStudents();
+        async()=>{
 
 
-hideLoading();
+            try{
 
 
+                showLoading(
+                    "⏳ جار حذف الطالب..."
+                );
 
-showMessage(
 
-"✅ تم حذف الطالب بنجاح",
+                const mosqueRef = doc(
+                    db,
+                    "MosqueStudents",
+                    mosqueId
+                );
 
-"success"
 
-);
+                await runTransaction(
+                    db,
+                    async(transaction)=>{
 
+
+                        const snapshot =
+                            await transaction.get(
+                                mosqueRef
+                            );
+
+
+                        if(!snapshot.exists()){
+
+                            throw new Error(
+                                "MosqueStudents not found"
+                            );
+
+                        }
+
+
+                        const currentStudents =
+                            snapshot.data().students || [];
+
+
+                        const updatedStudents =
+                            currentStudents.filter(
+                                s => s.id !== id
+                            );
+
+
+                        transaction.set(
+                            mosqueRef,
+                            {
+                                students: updatedStudents,
+                                updatedAt: serverTimestamp()
+                            }
+                        );
+
+
+                    }
+                );
+
+
+                await loadStudents();
+
+
+                hideLoading();
+
+
+                showMessage(
+                    "✅ تم حذف الطالب بنجاح",
+                    "success"
+                );
+
+
+            }
+
+
+            catch(error){
+
+
+                hideLoading();
+
+
+                console.error(
+                    "deleteStudent error:",
+                    error
+                );
+
+
+                showMessage(
+                    "❌ حدث خطأ أثناء الحذف",
+                    "error"
+                );
+
+
+            }
+
+
+        }
+
+    );
 
 
 }
 
-catch(error){
 
 
-hideLoading();
-
-
-showMessage(
-
-"❌ حدث خطأ أثناء الحذف",
-
-"error"
-
-);
-
-
-
-console.error(error);
-
-
-}
-
-
-}
-
-
-);
-
-
-}
 
 
 
