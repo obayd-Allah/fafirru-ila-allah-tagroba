@@ -32,6 +32,7 @@ let rewardSending = false;
 import {
     getCurrentMosqueId
 } from "./config.js";
+import { DEFAULT_MOSQUE } from "./mosqueFallback.js";
 
 const mosqueId = getCurrentMosqueId();
 let mosqueData = null;
@@ -1777,7 +1778,9 @@ window.addEventListener("scroll", () => {
 });
 
 async function loadMosqueConfig(){
+const cacheKey = `mosqueConfig_${mosqueId}`;
 
+    try{ 
     const q = query(
         collection(db,"Mosques"),
         where("id","==",mosqueId),
@@ -1787,14 +1790,14 @@ async function loadMosqueConfig(){
     const snap = await getDocs(q);
 
     if(snap.empty){
-
-        alert("لم يتم العثور على بيانات المسجد");
-
-        return;
-
-    }
+    throw new Error("mosque-not-found");
+}
 
     CURRENT_MOSQUE = snap.docs[0].data();
+    localStorage.setItem(
+    cacheKey,
+    JSON.stringify(CURRENT_MOSQUE)
+);
  mosqueData = CURRENT_MOSQUE;
 
 const whatsapp = document.getElementById("whatsappLink");
@@ -1840,6 +1843,63 @@ if (themeLink) {
 //document.addEventListener("dragstart",e=>{
  // e.preventDefault();
 //});
+   } catch(error){
+
+    const cache = localStorage.getItem(cacheKey);
+
+    if(cache){
+
+        CURRENT_MOSQUE = JSON.parse(cache);
+
+    }else{
+
+        CURRENT_MOSQUE = DEFAULT_MOSQUE;
+
+    }
+
+    mosqueData = CURRENT_MOSQUE;
+
+    // إعادة تطبيق البيانات على الصفحة
+
+    const whatsapp = document.getElementById("whatsappLink");
+    if (whatsapp) whatsapp.href = mosqueData.whatsapp || "";
+
+    const subtitle = document.getElementById("pageSubtitle");
+    if (subtitle)
+        subtitle.textContent =
+            mosqueData.studentsPageTitle || "لوحة نقاط التلاميذ";
+
+    const footer = document.getElementById("footerText");
+    if (footer)
+        footer.textContent = "© " + mosqueData.name;
+
+    const logo = document.querySelector(".logo");
+    if (logo){
+        logo.src = mosqueData.logo;
+        logo.alt = mosqueData.name;
+    }
+
+    const favicon = document.getElementById("favicon");
+    if (favicon){
+        favicon.href = mosqueData.logo;
+    }
+
+    const title = document.querySelector(".hero-title");
+    if (title){
+        title.src = mosqueData.title;
+        title.alt = mosqueData.name;
+    }
+
+    document.title = mosqueData.name;
+
+    const themeLink = document.getElementById("themeStyle");
+    if(themeLink){
+        themeLink.href =
+            "themes/" +
+            (CURRENT_MOSQUE.theme || "theme1") +
+            ".css";
+    }
+    }
 }
 function startIntro(){
 
