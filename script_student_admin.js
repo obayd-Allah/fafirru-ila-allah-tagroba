@@ -1093,14 +1093,10 @@ catch(error){
 
 
 hideLoading();
-
-
+closeStudentModal();
 showMessage(
-
-"❌ حدث خطأ أثناء حفظ البيانات",
-
-"error"
-
+    "❌ حدث خطأ أثناء حفظ البيانات",
+    "error"
 );
 
 
