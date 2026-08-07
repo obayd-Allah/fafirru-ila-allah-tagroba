@@ -4,6 +4,6 @@ export const DEFAULT_MOSQUE = {
     studentsPageTitle: "لوحة نقاط التلاميذ",
     logo: "images/default-logo.png",
     title: "images/default-title.png",
-    theme: "theme1",
+    theme: "error",
     whatsapp: ""
 };
