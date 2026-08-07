@@ -914,62 +914,7 @@ showLoading(
     "⏳ جار حفظ البيانات..."
 );
 
-if(currentStudent===null){
 
-
-/* إضافة */
-
-const newStudent = {
-
-    id: crypto.randomUUID(),
-
-    firstName: firstName,
-
-    familyName: familyName,
-
-    fullName: fullName,
-
-    name: fullName,
-
-    nicknames: nicknames,
-
-    points: points,
-
-    gender: gender,
-
-    mosqueId: mosqueId
-
-};
-
-students.push(newStudent);
-
-const batch = writeBatch(db);
-
-batch.set(
-
-    doc(db,"MosqueStudents",mosqueId),
-
-    {
-
-        students: students,
-
-        updatedAt: serverTimestamp()
-
-    }
-
-);
-
-await batch.commit();
-
-closeStudentModal();
-
-renderStudents();
-
-hideLoading();
-
-
-
-}
 
 if(currentStudent===null){
 
@@ -1230,92 +1175,23 @@ confirmAction=null;
         تغيير الجواهر
 ==================================*/
 
-async function changePoints(id,value){
-
-
-const student =
-students.find(
-s=>s.id===id
-);
-
-if(
-!student ||
-student.mosqueId !== mosqueId
-){
-return;
-}
-
-const studentId = student.id;
-
-
-
-askConfirm(
-
-`${value>0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,
-
-async()=>{
-
-
-try{
-
-
-showLoading(
-    "⏳ جار تحديث الجواهر..."
-);
-
-
-let newPoints =
-Number(student.points||0)
-+
-value;
-
-
-
-if(newPoints<0){
-
-newPoints=0;
-
-}
-
-
-
-student.points = newPoints;
-
-const batch = writeBatch(db);
-
-batch.set(
-
-    doc(db,"MosqueStudents",mosqueId),
-
-    {
-
-        students: students,
-
-        updatedAt: serverTimestamp()
-async function changePoints(id, value) {
+    async function changePoints(id, value) {
 
     const student = students.find(
         s => s.id === id
     );
 
-    if (
-        !student ||
-        student.mosqueId !== mosqueId
-    ) {
+    if(!student || student.mosqueId !== mosqueId){
         return;
     }
 
     askConfirm(
+        `إضافة ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,
+        async()=>{
 
-        `${value > 0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,
+            try{
 
-        async () => {
-
-            try {
-
-                showLoading(
-                    "⏳ جار تحديث الجواهر..."
-                );
+                showLoading("⏳ جار تحديث الجواهر...");
 
                 const mosqueRef = doc(
                     db,
@@ -1323,102 +1199,87 @@ async function changePoints(id, value) {
                     mosqueId
                 );
 
+
                 await runTransaction(
                     db,
-                    async (transaction) => {
+                    async(transaction)=>{
 
-                        const mosqueSnapshot =
+                        const snapshot =
                             await transaction.get(mosqueRef);
 
-                        if (!mosqueSnapshot.exists()) {
 
+                        if(!snapshot.exists()){
                             throw new Error(
-                                "MosqueStudents document does not exist"
+                                "MosqueStudents not found"
                             );
-
                         }
 
-                        const data =
-                            mosqueSnapshot.data();
 
-                        const currentStudents =
-                            data.students || [];
+                        const list =
+                            snapshot.data().students || [];
 
-                        const targetStudent =
-                            currentStudents.find(
-                                s => s.id === id
+
+                        const target =
+                            list.find(
+                                s=>s.id===id
                             );
 
-                        if (!targetStudent) {
 
+                        if(!target){
                             throw new Error(
                                 "Student not found"
                             );
-
                         }
 
-                        let newPoints =
-                            Number(targetStudent.points || 0)
-                            + value;
 
-                        if (newPoints < 0) {
-                            newPoints = 0;
-                        }
+                        target.points =
+                            Math.max(
+                                0,
+                                Number(target.points||0)+value
+                            );
 
-                        targetStudent.points =
-                            newPoints;
 
                         transaction.set(
                             mosqueRef,
                             {
-                                students: currentStudents,
-                                updatedAt: serverTimestamp()
+                                students:list,
+                                updatedAt:serverTimestamp()
                             }
                         );
+
 
                     }
                 );
 
-                /*
-                 * بعد نجاح المعاملة
-                 * نعيد تحميل أحدث البيانات
-                 */
 
                 await loadStudents();
 
                 hideLoading();
 
                 showMessage(
-                    "✅ تم تحديث الجواهر بنجاح",
+                    "✅ تم تحديث الجواهر",
                     "success"
                 );
 
-            }
 
-            catch (error) {
+            }catch(error){
 
                 hideLoading();
 
-                console.error(
-                    "changePoints error:",
-                    error
-                );
+                console.error(error);
 
                 showMessage(
-                    "❌ حدث خطأ أثناء تحديث الجواهر",
+                    "❌ فشل تحديث الجواهر",
                     "error"
                 );
 
             }
 
         }
-
     );
 
 }
-
-
-
+                        
 /*==================================
         حذف الطالب
 ==================================*/
