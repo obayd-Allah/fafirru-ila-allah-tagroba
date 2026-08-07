@@ -695,9 +695,11 @@ students = mosqueStudentsDoc.data().students || [];
 
     } else {
 
-        throw error;
+    showStudentsError();
 
-    }
+    return;
+
+}
 
 }
 
