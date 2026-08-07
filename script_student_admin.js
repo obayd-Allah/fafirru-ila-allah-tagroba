@@ -908,13 +908,11 @@ return;
 
 
 try{
-
-await loadStudents(false, false);
+            
+await loadStudents();
 showLoading(
-"⏳ جار حفظ البيانات..."
+    "⏳ جار حفظ البيانات..."
 );
-
-
 
 if(currentStudent===null){
 
@@ -1146,11 +1144,10 @@ async()=>{
 
 try{
 
-await loadStudents(false, false);
+await loadStudents();
 showLoading(
-"⏳ جار تحديث الجواهر..."
+    "⏳ جار تحديث الجواهر..."
 );
-
 
 
 let newPoints =
@@ -1277,9 +1274,9 @@ async()=>{
 
 try{
 
-await loadStudents(false, false);
+await loadStudents();
 showLoading(
-"⏳ جار حذف الطالب..."
+    "⏳ جار حذف الطالب..."
 );
 
 
@@ -1671,26 +1668,3 @@ newGender = "أنثى";
 );
 }
 //fixStudentsGender();
-async function loadStudentsLocal(){
-
-    const q = query(
-        collection(db,"Students"),
-        where("mosqueId","==",mosqueId)
-    );
-
-    const snapshot = await getDocs(q);
-
-    students.length = 0;
-
-    snapshot.forEach(doc=>{
-
-        students.push({
-            id:doc.id,
-            ...doc.data()
-        });
-
-    });
-
-    renderStudents();
-
-}
