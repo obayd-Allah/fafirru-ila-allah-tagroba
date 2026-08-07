@@ -3,7 +3,7 @@ export const DEFAULT_MOSQUE = {
     name: "مسابقة القرآن",
     studentsPageTitle: "لوحة نقاط التلاميذ",
     logo: "error.jpg",
-    title: "",
+    title: "errortitle.png",
     theme: "error",
     whatsapp: ""
 };
