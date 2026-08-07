@@ -909,7 +909,7 @@ return;
 
 try{
             
-await loadStudents();
+
 showLoading(
     "⏳ جار حفظ البيانات..."
 );
