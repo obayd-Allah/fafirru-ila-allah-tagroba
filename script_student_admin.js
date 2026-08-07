@@ -236,26 +236,7 @@ status.textContent="";
           تحميل الطلاب
 ==================================*/
 
-async function loadStudents(force = false, useCache = true) {
-    const cache = localStorage.getItem(`adminStudentsCache_${mosqueId}`);
-    const cacheTime = Number(
-        localStorage.getItem(`adminStudentsCacheTime_${mosqueId}`)
-    );
-
-    if (
-    useCache &&
-    !force &&
-    cache &&
-    cacheTime > 0
-) {
-    students = JSON.parse(cache);
-
-    hideLoading();
-
-    renderStudents();
-
-    return;
-}
+async function loadStudents() {
 
     try {
 
@@ -272,16 +253,6 @@ async function loadStudents(force = false, useCache = true) {
             students = mosqueDoc.data().students || [];
 
         }
-
-        localStorage.setItem(
-            `adminStudentsCache_${mosqueId}`,
-            JSON.stringify(students)
-        );
-
-        localStorage.setItem(
-            `adminStudentsCacheTime_${mosqueId}`,
-            Date.now()
-        );
 
         hideLoading();
 
@@ -315,7 +286,7 @@ document
 .getElementById("refreshStudents")
 .onclick = async () => {
 
-    await loadStudents(true);
+    await loadStudents();
 
     showMessage(
         "✅ تم تحديث البيانات",
@@ -991,15 +962,7 @@ batch.set(
 );
 
 await batch.commit();
-localStorage.setItem(
-    `adminStudentsCache_${mosqueId}`,
-    JSON.stringify(students)
-);
 
-localStorage.setItem(
-    `adminStudentsCacheTime_${mosqueId}`,
-    Date.now()
-);
 closeStudentModal();
 
 renderStudents();
@@ -1051,15 +1014,7 @@ else{
 
 
 
-localStorage.setItem(
-    `adminStudentsCache_${mosqueId}`,
-    JSON.stringify(students)
-);
 
-localStorage.setItem(
-    `adminStudentsCacheTime_${mosqueId}`,
-    Date.now()
-);
 
 closeStudentModal();
 
@@ -1236,15 +1191,6 @@ await batch.commit();
 
 
 
-localStorage.setItem(
-    `adminStudentsCache_${mosqueId}`,
-    JSON.stringify(students)
-);
-
-localStorage.setItem(
-    `adminStudentsCacheTime_${mosqueId}`,
-    Date.now()
-);
 
 renderStudents();
 
@@ -1366,15 +1312,6 @@ students = students.filter(s => s.id !== studentId);
 
 renderStudents();
 
-localStorage.setItem(
-    `adminStudentsCache_${mosqueId}`,
-    JSON.stringify(students)
-);
-
-localStorage.setItem(
-    `adminStudentsCacheTime_${mosqueId}`,
-    Date.now()
-);
 
 hideLoading();
 
