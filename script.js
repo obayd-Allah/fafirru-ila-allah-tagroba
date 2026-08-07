@@ -1932,35 +1932,7 @@ setTimeout(()=>{
 },1200);
 
 }
-function showStudentsError(){
 
-const cards = document.getElementById("cards");
-
-cards.innerHTML = `
-
-<div class="error-card">
-
-    <div class="error-icon">
-        ⏳ 
-    </div>
-
-    <h2>
-        الرحلة تعطلت قليلًا! 💎 
-    </h2>
-
-    <p>
-        يبدو أن الطريق يحتاج اتصالاً بالإنترنت..
-    </p>
-
-    <button onclick="location.reload()">
-        🔄 المحاولة مرة أخرى
-    </button>
-
-</div>
-
-`;
-
-}
 function showStudentsError(){
 
     const cards = document.getElementById("cards");
