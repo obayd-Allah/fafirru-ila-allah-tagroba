@@ -1230,26 +1230,88 @@ confirmAction=null;
                         }
 
 
+/*==================================
+        تغيير الجواهر
+==================================*/
+
+async function changePoints(id, value) {
+
+    const student = students.find(
+        s => s.id === id
+    );
+
+    if (
+        !student ||
+        student.mosqueId !== mosqueId
+    ) {
+        return;
+    }
+
+    askConfirm(
+        `${value > 0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,
+        
+        async () => {
+
+            try {
+
+                showLoading(
+                    "⏳ جار تحديث الجواهر..."
+                );
+
+                const mosqueRef = doc(
+                    db,
+                    "MosqueStudents",
+                    mosqueId
+                );
+
+                await runTransaction(
+                    db,
+                    async (transaction) => {
+
+                        const snapshot =
+                            await transaction.get(
+                                mosqueRef
+                            );
+
+                        if (!snapshot.exists()) {
+                            throw new Error(
+                                "MosqueStudents not found"
+                            );
+                        }
+
+                        const currentStudents =
+                            snapshot.data().students || [];
+
+                        const target =
+                            currentStudents.find(
+                                s => s.id === id
+                            );
+
+                        if (!target) {
+                            throw new Error(
+                                "Student not found"
+                            );
+                        }
+
                         target.points =
                             Math.max(
                                 0,
-                                Number(target.points||0)+value
+                                Number(target.points || 0) + value
                             );
 
-
                         transaction.set(
-    mosqueRef,
-    {
-        students: currentStudents,
-        updatedAt: serverTimestamp()
-    },
-    { merge: true }
-);
-
+                            mosqueRef,
+                            {
+                                students: currentStudents,
+                                updatedAt: serverTimestamp()
+                            },
+                            {
+                                merge: true
+                            }
+                        );
 
                     }
                 );
-
 
                 await loadStudents();
 
@@ -1260,23 +1322,22 @@ confirmAction=null;
                     "success"
                 );
 
-
-            }catch(error){
+            } catch (error) {
 
                 hideLoading();
 
-                console.error(error);
+                console.error(
+                    "changePoints error:",
+                    error
+                );
 
                 showMessage(
                     "❌ فشل تحديث الجواهر",
                     "error"
                 );
-
             }
-
         }
     );
-
 }
                         
 /*==================================
@@ -1346,18 +1407,19 @@ async function deleteStudent(id){
 
 
                         const updatedStudents =
-                            currentStudents.filter(
-                                s => s.id !== id
-                            );
+    currentStudents.filter(
+        s => s.id !== id
+    );
 
-
-                        transaction.set(
+transaction.set(
     mosqueRef,
     {
-        students: currentStudents,
+        students: updatedStudents,
         updatedAt: serverTimestamp()
     },
-    { merge: true }
+    {
+        merge: true
+    }
 );
 
 
