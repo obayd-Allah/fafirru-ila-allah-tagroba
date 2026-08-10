@@ -1173,63 +1173,7 @@ confirmAction=null;
         تغيير الجواهر
 ==================================*/
 
-    async function changePoints(id, value) {
-
-    const student = students.find(
-        s => s.id === id
-    );
-
-    if(!student || student.mosqueId !== mosqueId){
-        return;
-    }
-
-    askConfirm(
-    `${value > 0 ? "إضافة" : "خصم"} ${Math.abs(value)} جواهر للطالب ${student.fullName || student.name}؟`,  
-                async()=>{
-
-            try{
-
-                showLoading("⏳ جار تحديث الجواهر...");
-
-                const mosqueRef = doc(
-                    db,
-                    "MosqueStudents",
-                    mosqueId
-                );
-
-
-                await runTransaction(
-                    db,
-                    async(transaction)=>{
-
-                        const snapshot =
-                            await transaction.get(mosqueRef);
-
-
-                        if(!snapshot.exists()){
-                            throw new Error(
-                                "MosqueStudents not found"
-                            );
-                        }
-
-
-                        const list =
-                            snapshot.data().students || [];
-
-
-                        const target =
-                            list.find(
-                                s=>s.id===id
-                            );
-
-
-                        if(!target){
-                            throw new Error(
-                                "Student not found"
-                            );
-                        }
-
-
+    
 /*==================================
         تغيير الجواهر
 ==================================*/
