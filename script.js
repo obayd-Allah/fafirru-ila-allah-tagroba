@@ -979,26 +979,27 @@ function getAllNames(student){
 }
 
 
-function parseMessage(message, student){
-
+function parseMessage(message, student, rewardValue, totalPoints){
     return message
-
-        // الاسم الحقيقي فقط
         .replaceAll(
             "{name}",
             student.firstName || student.name || ""
         )
-
-        // اسم تدليل فقط، أو الاسم الحقيقي إذا لم يوجد تدليل
         .replaceAll(
             "{nickname}",
             getNickname(student)
         )
-
-        // عشوائي بين الاسم الحقيقي وأسماء التدليل
         .replaceAll(
             "{allnames}",
             getAllNames(student)
+        )
+        .replaceAll(
+            "{addpoints}",
+            String(rewardValue)
+        )
+        .replaceAll(
+            "{allpoints}",
+            String(totalPoints)
         );
 }
 function render(){
@@ -1582,16 +1583,16 @@ rewardCodeBox.classList.add("success");
 // اختيار رسالة عشوائية
 const randomMessage =
 parseMessage(
-
-messages[
-Math.floor(
-Math.random()*messages.length
-)],
-
-student
-
+    messages[
+        Math.floor(
+            Math.random()*messages.length
+        )
+    ],
+    student,
+    rewardValue,
+    totalPoints
 );
-     
+        
 // اختيار إيموجي عشوائي
 const randomEmoji =
 rewardEmojis[Math.floor(Math.random() * rewardEmojis.length)];
