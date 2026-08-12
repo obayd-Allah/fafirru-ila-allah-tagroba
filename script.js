@@ -930,41 +930,77 @@ function getFullName(student){
 
 }
 
+
+
 function getNickname(student){
 
-    const names =
-    student.nicknames || [];
+    const names = Array.isArray(student.nicknames)
+        ? student.nicknames.filter(Boolean)
+        : [];
 
-    if(names.length>0){
-
-        return names[
-            Math.floor(
-                Math.random()*names.length
-            )
-        ];
-
+    // إذا لا توجد أسماء تدليل → الاسم الحقيقي
+    if(names.length === 0){
+        return student.firstName || student.name;
     }
 
-    return student.firstName || student.name;
-
+    // اختيار اسم تدليل عشوائي
+    return names[
+        Math.floor(Math.random() * names.length)
+    ];
 }
 
-function parseMessage(message,student){
+
+function getAllNames(student){
+
+    const realName =
+        student.firstName ||
+        student.name ||
+        "";
+
+    const nicknames = Array.isArray(student.nicknames)
+        ? student.nicknames.filter(Boolean)
+        : [];
+
+    // لا توجد أسماء تدليل
+    if(nicknames.length === 0){
+        return realName;
+    }
+
+    // الاسم الحقيقي + أسماء التدليل
+    const allNames = [
+        realName,
+        ...nicknames
+    ];
+
+    // اختيار عشوائي
+    return allNames[
+        Math.floor(Math.random() * allNames.length)
+    ];
+}
+
+
+function parseMessage(message, student){
 
     return message
 
-    .replaceAll(
-        "{name}",
-        student.firstName || student.name
-    )
+        // الاسم الحقيقي فقط
+        .replaceAll(
+            "{name}",
+            student.firstName || student.name || ""
+        )
 
-    .replaceAll(
-        "{nickname}",
-        getNickname(student)
-    );
+        // اسم تدليل فقط، أو الاسم الحقيقي إذا لم يوجد تدليل
+        .replaceAll(
+            "{nickname}",
+            getNickname(student)
+        )
 
+        // عشوائي بين الاسم الحقيقي وأسماء التدليل
+        .replaceAll(
+            "{allnames}",
+            getAllNames(student)
+        );
 }
-
 function render(){
 
     let boys = students.filter(s => isBoy(s.gender));
