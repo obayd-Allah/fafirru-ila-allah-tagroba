@@ -69,6 +69,7 @@ const boyMessages = [
     "تمام جدًا تمام جدًا 👍 ربنا يبارك فيك يا {name}", 
    "بتحب النبيﷺ يا {name}؟ النبيﷺ قال: (خيرُكُم مَن تعلَّمَ القرآنَ وعلَّمَهُ)", 
    "{nickname}؛ إياك تنسى إننا بنتسابق على الجنة.. مش عالجواهر💎 ", 
+   
 
    
 
@@ -1155,6 +1156,8 @@ defaultOption.selected = true;
 
 studentSelect.appendChild(defaultOption);
 
+    document.getElementById("closeReward").style.display = "";
+    
 studentSelect.value = "choose";
     // اختيار الطلاب حسب الفلتر الحالي
     let list =
