@@ -2073,3 +2073,443 @@ function showStudentsError(){
         document.head.appendChild(style);
     }
 }
+/* =========================================================
+   RANDOM INTRO SYSTEM
+========================================================= */
+
+function startIntro(){
+
+    const loader =
+        document.getElementById("introLoader");
+
+    const circles = [
+        document.querySelector(".c1"),
+        document.querySelector(".c2"),
+        document.querySelector(".c3"),
+        document.querySelector(".c4")
+    ];
+
+
+    /* =====================================================
+       🎨 الألوان
+    ===================================================== */
+
+    const colors = [
+
+        "#CDB7FF", // بنفسجي
+        "#FFE709", // أصفر
+        "#FE3F09", // أحمر برتقالي
+        "#08D2FE", // سماوي
+        "#13DF37", // أخضر
+        "#FF6BCE", // وردي
+        "#7C5CFF", // بنفسجي قوي
+        "#00E5A0", // أخضر نعناعي
+        "#FF9F1C", // برتقالي
+        "#4D96FF"  // أزرق
+
+    ];
+
+
+    /* =====================================================
+       🔀 خلط
+    ===================================================== */
+
+    function shuffle(array){
+
+        const result = [...array];
+
+        for(let i = result.length - 1; i > 0; i--){
+
+            const j =
+                Math.floor(
+                    Math.random() * (i + 1)
+                );
+
+            [
+                result[i],
+                result[j]
+            ] = [
+                result[j],
+                result[i]
+            ];
+
+        }
+
+        return result;
+    }
+
+
+    /* =====================================================
+       🎨 اختيار 4 ألوان مختلفة
+    ===================================================== */
+
+    const selectedColors =
+        shuffle(colors).slice(0,4);
+
+
+    /* =====================================================
+       🛡️ خلفية احتياطية
+    ===================================================== */
+
+    loader.style.background =
+        selectedColors[
+            Math.floor(
+                Math.random() *
+                selectedColors.length
+            )
+        ];
+
+
+    /* =====================================================
+       📐 الأنماط الخمسة
+       
+       كل نمط له توزيع مختلف للدوائر.
+    ===================================================== */
+
+    const patterns = [
+
+        /* =========================
+           النمط 1
+           أربع زوايا
+        ========================= */
+
+        [
+
+            {left:"-72vw", top:"-72vw"},
+            {left:"42vw",  top:"-72vw"},
+            {left:"-72vw", top:"42vh"},
+            {left:"42vw",  top:"42vh"}
+
+        ],
+
+
+        /* =========================
+           النمط 2
+           متداخل
+        ========================= */
+
+        [
+
+            {left:"-78vw", top:"-48vw"},
+            {left:"28vw",  top:"-76vw"},
+            {left:"-55vw", top:"28vh"},
+            {left:"32vw",  top:"25vh"}
+
+        ],
+
+
+        /* =========================
+           النمط 3
+           قطري
+        ========================= */
+
+        [
+
+            {left:"-78vw", top:"-78vw"},
+            {left:"25vw",  top:"-52vw"},
+            {left:"-52vw", top:"35vh"},
+            {left:"40vw",  top:"30vh"}
+
+        ],
+
+
+        /* =========================
+           النمط 4
+           توزيع معكوس
+        ========================= */
+
+        [
+
+            {left:"38vw",  top:"-75vw"},
+            {left:"-75vw", top:"-35vw"},
+            {left:"35vw",  top:"35vh"},
+            {left:"-65vw", top:"32vh"}
+
+        ],
+
+
+        /* =========================
+           النمط 5
+           توزيع غير متماثل
+        ========================= */
+
+        [
+
+            {left:"-80vw", top:"-60vw"},
+            {left:"20vw",  top:"-80vw"},
+            {left:"-75vw", top:"30vh"},
+            {left:"28vw",  top:"20vh"}
+
+        ]
+
+    ];
+
+
+    /* =====================================================
+     اختيار نمط عشوائي
+    ===================================================== */
+
+    const pattern =
+        patterns[
+            Math.floor(
+                Math.random() *
+                patterns.length
+            )
+        ];
+
+
+    /* =====================================================
+       🔀 ترتيب الدوائر عشوائيًا
+       
+       هذا يعني أن:
+       c1 ليست دائمًا أول دائرة.
+    ===================================================== */
+
+    const shuffledCircles =
+        shuffle(circles);
+
+
+    /* =====================================================
+       🧱 Z-INDEX عشوائي
+    ===================================================== */
+
+    const zIndexes =
+        shuffle([
+            40,
+            55,
+            70,
+            85
+        ]);
+
+
+    /* =====================================================
+       🎯 إعداد كل دائرة
+    ===================================================== */
+
+    shuffledCircles.forEach(
+        (circle,index)=>{
+
+            const position =
+                pattern[index];
+
+
+            /* =========================
+               اللون
+            ========================= */
+
+            circle.style.background =
+                selectedColors[index];
+
+
+            /* =========================
+               الطبقة
+            ========================= */
+
+            circle.style.zIndex =
+                zIndexes[index];
+
+
+            /* =========================
+               المكان
+            ========================= */
+
+            circle.style.left =
+                position.left;
+
+            circle.style.top =
+                position.top;
+
+
+            /* =========================
+               الحجم العشوائي
+               
+               تغير بسيط حتى لا تكون
+               كل الدوائر متطابقة.
+            ========================= */
+
+            const size =
+                170 +
+                Math.random() * 18;
+
+            circle.style.width =
+                size + "vw";
+
+            circle.style.height =
+                size + "vw";
+
+
+            /* =========================
+               سرعة الدخول
+            ========================= */
+
+            const enterDuration =
+                0.80 +
+                Math.random() * 0.35;
+
+            circle.style.setProperty(
+                "--enter-duration",
+                enterDuration + "s"
+            );
+
+
+            /* =========================
+               تأخير الدخول
+            ========================= */
+
+            const enterDelay =
+                Math.random() * 0.30;
+
+            circle.style.setProperty(
+                "--enter-delay",
+                enterDelay + "s"
+            );
+
+
+            /* =========================
+               حركة الماء
+            ========================= */
+
+            const waterDuration =
+                2.0 +
+                Math.random() * 1.4;
+
+            circle.style.setProperty(
+                "--water-duration",
+                waterDuration + "s"
+            );
+
+
+            /* =========================
+               اندفاع الدخول
+               
+               اختلاف بسيط كل مرة.
+            ========================= */
+
+            circle.style.setProperty(
+                "--start-x",
+                (Math.random() * 26 - 13) + "vw"
+            );
+
+            circle.style.setProperty(
+                "--start-y",
+                (Math.random() * 26 - 13) + "vw"
+            );
+
+
+            /* =========================
+               حركة X
+            ========================= */
+
+            circle.style.setProperty(
+                "--move-x1",
+                (Math.random() * 50 - 25) + "px"
+            );
+
+            circle.style.setProperty(
+                "--move-x2",
+                (Math.random() * 50 - 25) + "px"
+            );
+
+            circle.style.setProperty(
+                "--move-x3",
+                (Math.random() * 50 - 25) + "px"
+            );
+
+
+            /* =========================
+               حركة Y
+            ========================= */
+
+            circle.style.setProperty(
+                "--move-y1",
+                (Math.random() * 50 - 25) + "px"
+            );
+
+            circle.style.setProperty(
+                "--move-y2",
+                (Math.random() * 50 - 25) + "px"
+            );
+
+            circle.style.setProperty(
+                "--move-y3",
+                (Math.random() * 50 - 25) + "px"
+            );
+
+
+            /* =========================
+               Scale
+            ========================= */
+
+            circle.style.setProperty(
+                "--scale1",
+                0.985 + Math.random() * 0.055
+            );
+
+            circle.style.setProperty(
+                "--scale2",
+                0.975 + Math.random() * 0.065
+            );
+
+            circle.style.setProperty(
+                "--scale3",
+                0.985 + Math.random() * 0.055
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       📝 العناوين
+    ===================================================== */
+
+    const titles = [
+
+        "مسابقة القرآن",
+        
+
+    ];
+
+
+    const subtitles = [
+
+        "تنافس على الجنة 🏆",
+        
+
+    ];
+
+
+    document.getElementById("introTitle")
+        .textContent =
+        titles[
+            Math.floor(
+                Math.random() *
+                titles.length
+            )
+        ];
+
+
+    document.getElementById("introSub")
+        .textContent =
+        subtitles[
+            Math.floor(
+                Math.random() *
+                subtitles.length
+            )
+        ];
+
+
+    /* =====================================================
+       📖 رسالة من القرآن والسنة
+    ===================================================== */
+
+    document.getElementById("introMessage")
+        .textContent =
+        introMessages[
+            Math.floor(
+                Math.random() *
+                introMessages.length
+            )
+        ];
+
+        }
