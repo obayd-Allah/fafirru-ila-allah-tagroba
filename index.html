@@ -30,486 +30,522 @@ rel="stylesheet"
 href="">
   <style>
 
+      /* =========================================================
+   INTRO RANDOM SYSTEM
+========================================================= */
+
 #introLoader{
+
     position:fixed;
+
     inset:0;
+
     z-index:999999;
+
     overflow:hidden;
-    background:#fff;
+
+    /*
+       سيتم تغييره بواسطة JavaScript
+       إلى أحد ألوان الدوائر
+    */
+    background:#ffffff;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     font-family:Cairo,sans-serif;
+
+    isolation:isolate;
 }
 
 
-/* =========================
+/* =========================================================
    الدوائر
-========================= */
+========================================================= */
 
 .loader-circle{
 
     position:absolute;
 
-    width:150vw;
-    height:150vw;
-
-    max-width:none;
-    max-height:none;
-
     border-radius:50%;
 
-    opacity:.96;
+    opacity:.97;
+
+    /*
+       مهم جدًا:
+       لا نستخدم transform في البداية
+       من أجل أن يستطيع JavaScript
+       التحكم في موضع الدائرة بسهولة.
+    */
 
     will-change:transform;
 
-}
+    /*
+       منع أي حدود غريبة
+    */
 
+    border:none;
 
+    outline:none;
 
-/* الوردي */
+    /*
+       يمنع ظهور الدائرة خارج النظام
+    */
 
-.c1{
+    pointer-events:none;
 
-    background:#FFE600;
-
-    left:-120vw;
-    top:-90vw;
-
-    animation:
-    circleIn1 .9s cubic-bezier(.22,.8,.25,1) forwards,
-    waterMove 2.2s ease-in-out infinite 1s;
-
-}
-
-
-/* الأحمر */
-
-.c2{
-
-    background:#FF3700;
-
-    right:-120vw;
-    top:-90vw;
+    /*
+       الأنيميشن
+    */
 
     animation:
-    circleIn2 .95s cubic-bezier(.22,.8,.25,1) forwards,
-    waterMove 2.5s ease-in-out infinite 1s;
+
+        circleEnter
+        var(--enter-duration)
+        cubic-bezier(.18,.82,.25,1)
+        var(--enter-delay)
+        both,
+
+        circleWater
+        var(--water-duration)
+        ease-in-out
+        calc(
+            var(--enter-delay)
+            +
+            var(--enter-duration)
+        )
+        infinite;
 
 }
 
 
-/* البرتقالي */
+/* =========================================================
+   دخول الدائرة
+========================================================= */
 
-.c3{
+@keyframes circleEnter{
 
-    background:#09DE2F;
+    0%{
 
-    left:-120vw;
-    bottom:-90vw;
+        opacity:.95;
 
-    animation:
-    circleIn3 1s cubic-bezier(.22,.8,.25,1) forwards,
-    waterMove 2.8s ease-in-out infinite 1s;
+        transform:
 
-}
+            translate(
+                var(--start-x),
+                var(--start-y)
+            )
 
+            scale(.72);
 
-/* السماوي */
-
-.c4{
-
-    background:#00D0FF;
-
-    right:-120vw;
-    bottom:-90vw;
-
-    animation:
-    circleIn4 .9s cubic-bezier(.22,.8,.25,1) forwards,
-    waterMove 2.3s ease-in-out infinite 1s;
-
-}
+    }
 
 
+    55%{
 
-/* =========================
-   دخول الدوائر
-========================= */
+        opacity:.98;
+
+        transform:
+
+            translate(
+                calc(var(--start-x) * -.06),
+                calc(var(--start-y) * -.06)
+            )
+
+            scale(1.035);
+
+    }
 
 
-@keyframes circleIn1{
+    100%{
 
-    to{
+        opacity:.97;
 
-        left:-25vw;
-        top:-25vw;
+        transform:
+
+            translate(0,0)
+
+            scale(1);
 
     }
 
 }
 
 
-@keyframes circleIn2{
+/* =========================================================
+   حركة الماء
+========================================================= */
 
-    to{
+@keyframes circleWater{
 
-        right:-25vw;
-        top:-25vw;
+    0%,100%{
+
+        transform:
+
+            translate(0,0)
+
+            scale(1);
+
+    }
+
+
+    25%{
+
+        transform:
+
+            translate(
+                var(--move-x1),
+                var(--move-y1)
+            )
+
+            scale(var(--scale1));
+
+    }
+
+
+    50%{
+
+        transform:
+
+            translate(
+                var(--move-x2),
+                var(--move-y2)
+            )
+
+            scale(var(--scale2));
+
+    }
+
+
+    75%{
+
+        transform:
+
+            translate(
+                var(--move-x3),
+                var(--move-y3)
+            )
+
+            scale(var(--scale3));
 
     }
 
 }
 
 
-@keyframes circleIn3{
-
-    to{
-
-        left:-25vw;
-        bottom:-25vw;
-
-    }
-
-}
-
-
-@keyframes circleIn4{
-
-    to{
-
-        right:-25vw;
-        bottom:-25vw;
-
-    }
-
-}
-
-
-
-/* =========================
-   تردد الماء
-========================= */
-
-
-@keyframes waterMove{
-
-
-0%,100%{
-
-    transform:
-    translate(0,0)
-    scale(1);
-
-}
-
-
-25%{
-
-    transform:
-    translate(18px,-18px)
-    scale(1.045);
-
-}
-
-
-50%{
-
-    transform:
-    translate(-15px,15px)
-    scale(.98);
-
-}
-
-
-75%{
-
-    transform:
-    translate(12px,10px)
-    scale(1.03);
-
-}
-
-
-}
-
-
-
-/* =========================
-   النصوص
-========================= */
-
+/* =========================================================
+   محتوى النص
+========================================================= */
 
 .intro-content{
 
     position:relative;
 
-    z-index:5;
+    z-index:100000;
 
     text-align:center;
 
     color:white;
 
+    pointer-events:none;
+
+    padding:20px;
+
+    width:100%;
+
+    box-sizing:border-box;
+
     text-shadow:
-    0 5px 20px rgba(0,0,0,.35);
+        0 5px 20px rgba(0,0,0,.35);
 
 }
 
 
+/* =========================================================
+   العنوان
+========================================================= */
 
 #introTitle{
 
     font-size:
-    clamp(45px,10vw,90px);
+        clamp(45px,10vw,90px);
 
     font-weight:900;
+
+    line-height:1.2;
 
     opacity:0;
 
     animation:
 
-    dropWater 1s forwards .8s,
+        dropWater
+        1s
+        forwards
+        .8s,
 
-    softPulse 2s infinite 2s;
+        softPulse
+        2s
+        infinite
+        2s;
 
 }
 
 
+/* =========================================================
+   العنوان الفرعي
+========================================================= */
 
 #introSub{
 
     font-size:
-    clamp(32px,8vw,70px);
+        clamp(32px,8vw,70px);
 
     font-weight:900;
+
+    line-height:1.3;
 
     margin-top:20px;
 
     opacity:0;
 
-
     animation:
 
-    zoomShow .8s forwards 1.8s,
+        zoomShow
+        .8s
+        forwards
+        1.8s,
 
-    softPulse 2s infinite 3s;
+        softPulse
+        2s
+        infinite
+        3s;
 
 }
 
 
-
+/* =========================================================
+   الرسالة
+========================================================= */
 
 #introMessage{
 
     margin-top:35px;
 
     font-size:
-    clamp(20px,4vw,38px);
+        clamp(20px,4vw,38px);
 
     font-weight:700;
+
+    line-height:1.7;
 
     opacity:0;
 
     animation:
 
-    fadeMessage 1s forwards 3s;
+        fadeMessage
+        1s
+        forwards
+        3s;
 
 }
 
 
-
-/* نزول كقطرة ماء */
+/* =========================================================
+   نزول العنوان
+========================================================= */
 
 @keyframes dropWater{
 
+    0%{
 
-0%{
+        opacity:0;
 
-opacity:0;
+        transform:
+            translateY(-150px)
+            scale(.7);
 
-transform:
-translateY(-150px)
-scale(.7);
-
-}
-
-
-70%{
-
-transform:
-translateY(15px)
-scale(1.06);
-
-}
+    }
 
 
-100%{
+    70%{
 
-opacity:1;
+        transform:
+            translateY(15px)
+            scale(1.06);
 
-transform:
-translateY(0)
-scale(1);
+    }
 
-}
 
+    100%{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
 
 }
 
 
-
-/* زوم */
+/* =========================================================
+   ظهور العنوان الفرعي
+========================================================= */
 
 @keyframes zoomShow{
 
+    from{
 
-from{
+        opacity:0;
 
-opacity:0;
+        transform:
+            scale(.35);
 
-transform:
-scale(.35);
-
-}
+    }
 
 
-to{
+    to{
 
-opacity:1;
+        opacity:1;
 
-transform:
-scale(1);
+        transform:
+            scale(1);
 
-}
-
+    }
 
 }
 
 
-
-/* نبضة ناعمة */
+/* =========================================================
+   نبضة
+========================================================= */
 
 @keyframes softPulse{
 
+    50%{
 
-50%{
+        transform:
+            scale(1.045);
 
-transform:
-scale(1.045);
-
-}
-
+    }
 
 }
 
 
+/* =========================================================
+   ظهور الرسالة
+========================================================= */
 
 @keyframes fadeMessage{
 
-to{
+    to{
 
-opacity:1;
+        opacity:1;
+
+    }
 
 }
 
-}
 
-
-
-/* =========================
-   الخروج
-========================= */
-
+/* =========================================================
+   خروج الـIntro
+========================================================= */
 
 .loader-hide{
 
     animation:
-    loaderFade 1s forwards;
+
+        loaderFade
+        1s
+        forwards;
 
 }
 
 
+/*
+   عندما يبدأ الخروج:
+   كل الدوائر تتقلص وتختفي.
+*/
 
 .loader-hide .loader-circle{
 
     animation:
 
-    circleExit .9s cubic-bezier(.22,.8,.25,1) forwards;
+        circleExit
+        .9s
+        cubic-bezier(.22,.8,.25,1)
+        forwards;
 
 }
 
 
+/* =========================================================
+   خروج الدوائر
+========================================================= */
+
+@keyframes circleExit{
+
+    to{
+
+        transform:
+            scale(.15);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* =========================================================
+   خروج النص
+========================================================= */
 
 .loader-hide .intro-content{
 
     animation:
 
-    contentExit .8s forwards;
+        contentExit
+        .8s
+        forwards;
 
 }
-
-
-
-
-@keyframes circleExit{
-
-
-to{
-
-    transform:
-    scale(.15);
-
-    opacity:0;
-
-}
-
-
-}
-
 
 
 @keyframes contentExit{
 
+    to{
 
-to{
+        opacity:0;
 
-    opacity:0;
+        transform:
+            scale(.8);
 
-    transform:
-    scale(.8);
-
-}
-
+    }
 
 }
 
 
+/* =========================================================
+   اختفاء الخلفية
+========================================================= */
 
 @keyframes loaderFade{
 
+    to{
 
-to{
+        background:
+            transparent;
 
-    background:transparent;
+    }
 
 }
-
-}
-
-
-
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
+      
+  </style>
 
 
 
