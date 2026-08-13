@@ -2397,3 +2397,73 @@ body{
     }
 
 }
+/*====================================
+        Firefox Android Fix
+====================================*/
+
+/* الصورة الموجودة تحت الشعار */
+
+.hero-title{
+
+    display:block;
+
+    width:min(92%,650px) !important;
+
+    max-width:650px !important;
+
+    height:auto !important;
+
+    object-fit:contain;
+
+}
+
+/* مربع البحث */
+
+.search-box input{
+
+    appearance:none;
+    -webkit-appearance:none;
+
+    color:#222 !important;
+    -webkit-text-fill-color:#222 !important;
+
+    font-family:"Cairo",sans-serif !important;
+    font-size:18px !important;
+    font-weight:800 !important;
+
+    line-height:normal !important;
+
+    caret-color:#2196f3;
+
+}
+
+.search-box input::placeholder{
+
+    color:#8c98a5 !important;
+    opacity:1;
+
+}
+
+/* مربعات الكود */
+
+.code-digit{
+
+    appearance:none;
+    -webkit-appearance:none;
+
+    color:#111 !important;
+    -webkit-text-fill-color:#111 !important;
+
+    font-family:"Cairo",sans-serif !important;
+    font-size:36px !important;
+    font-weight:900 !important;
+
+    line-height:70px !important;
+
+    text-align:center;
+
+    padding:0 !important;
+
+    caret-color:#2196f3;
+
+}
