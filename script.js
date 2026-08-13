@@ -1953,16 +1953,6 @@ if (themeLink) {
     }
     }
 }
-function startIntro(){
-
-const msg=document.getElementById("introMessage");
-
-msg.textContent =
-introMessages[
-Math.floor(Math.random()*introMessages.length)
-];
-
-}
 
 
 function finishIntro(){
