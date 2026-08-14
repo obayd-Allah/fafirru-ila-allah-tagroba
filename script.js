@@ -100,7 +100,35 @@ const girlMessages = [
 
 ];
 
+/* ====================================
+   الرسائل الخاصة بالطلاب
+==================================== */
 
+const specialStudentMessages = {
+
+    /*
+    مثال:
+
+    "MOSQUE_ID": {
+
+        "STUDENT_ID": [
+
+            "يا {name} أنا عارف إن عليك تمرين النهاردة ❤️",
+
+            "حمد لله على السلامة يا {name} حبيبي.. دا بقى معاك {addpoints} جواهر زيادة 💎",
+
+            "ما شاء الله يا {nickname}.. بقيت تملك {allpoints} جوهرة 🌟",
+
+            "أحسنت يا {name}.. ربنا يفتح عليك 🏆",
+
+            "ربنا يجعلك من أهل القرآن يا {name} ❤️"
+
+        ]
+
+    }
+    */
+
+};
 /*====================================
           الإيموجي
 ====================================*/
@@ -977,7 +1005,63 @@ function getAllNames(student){
         Math.floor(Math.random() * allNames.length)
     ];
 }
+/* ====================================
+   نظام الرسائل الخاصة بالطلاب
+==================================== */
 
+function getSpecialMessage(student, rewardValue = 0, oldPoints = 0){
+
+    // لا يوجد طالب
+    if(!student || !student.id){
+        return null;
+    }
+
+    // البحث عن رسائل هذا المسجد
+    const mosqueMessages =
+        specialStudentMessages[mosqueId];
+
+    if(!mosqueMessages){
+        return null;
+    }
+
+    // البحث عن رسائل هذا الطالب
+    const messages =
+        mosqueMessages[student.id];
+
+    if(!Array.isArray(messages) || messages.length === 0){
+        return null;
+    }
+
+    // مفتاح حفظ تقدم هذا الطالب
+    const storageKey =
+        `specialMessageIndex_${mosqueId}_${student.id}`;
+
+    // الرسالة التي سيأتي دورها
+    let index =
+        Number(localStorage.getItem(storageKey) || 0);
+
+    // إذا انتهت الرسائل الخاصة
+    if(index >= messages.length){
+        return null;
+    }
+
+    // أخذ الرسالة الحالية
+    const message = messages[index];
+
+    // الانتقال للرسالة التالية
+    localStorage.setItem(
+        storageKey,
+        String(index + 1)
+    );
+
+    // تطبيق المتغيرات الموجودة عندك
+    return parseMessage(
+        message,
+        student,
+        rewardValue,
+        oldPoints
+    );
+            }
 function parseMessage(message, student, rewardValue = 0, oldPoints = 0){
     return message
         .replaceAll(
@@ -1583,25 +1667,49 @@ launchGems();
 
  launchFloatingRewards(rewardValue);
 
-// رسالة النجاح
-// اختيار الرسائل حسب الجنس
-const messages =
-isBoy(student.gender)
-? boyMessages
-: girlMessages;
-rewardCodeBox.classList.add("success");
-// اختيار رسالة عشوائية
-const randomMessage =
-parseMessage(
-    messages[
-        Math.floor(
-            Math.random()*messages.length
-        )
-    ],
-    student,
-    rewardValue,
-    oldPoints
-);
+// ====================================
+// اختيار رسالة النجاح
+// ====================================
+
+// محاولة الحصول على رسالة خاصة بالطالب
+const specialMessage =
+    getSpecialMessage(
+        student,
+        rewardValue,
+        oldPoints
+    );
+
+let randomMessage;
+
+// إذا كانت هناك رسالة خاصة
+if(specialMessage){
+
+    randomMessage = specialMessage;
+
+}
+
+// إذا لم توجد رسالة خاصة
+// نعود إلى الرسائل العادية العشوائية
+else{
+
+    const messages =
+        isBoy(student.gender)
+        ? boyMessages
+        : girlMessages;
+
+    randomMessage =
+        parseMessage(
+            messages[
+                Math.floor(
+                    Math.random() * messages.length
+                )
+            ],
+            student,
+            rewardValue,
+            oldPoints
+        );
+
+}
         
 // اختيار إيموجي عشوائي
 const randomEmoji =
