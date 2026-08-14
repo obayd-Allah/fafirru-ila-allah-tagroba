@@ -978,8 +978,7 @@ function getAllNames(student){
     ];
 }
 
-
-function parseMessage(message, student, rewardValue, totalPoints){
+function parseMessage(message, student, rewardValue = 0, oldPoints = 0){
     return message
         .replaceAll(
             "{name}",
@@ -999,9 +998,18 @@ function parseMessage(message, student, rewardValue, totalPoints){
         )
         .replaceAll(
             "{allpoints}",
-            String(totalPoints)
+            String(oldPoints + rewardValue)
+        )
+        .replaceAll(
+            "{rank}",
+            String(student.rank || "")
+        )
+        .replaceAll(
+            "{oldpoints}",
+            String(oldPoints)
         );
-}
+                       }
+
 function render(){
 
     let boys = students.filter(s => isBoy(s.gender));
@@ -1471,6 +1479,7 @@ document.getElementById("closeReward").style.display = "";
 );
  let rewardValue = 0;
 let totalPoints = 0;
+let oldPoints = 0;
     try{
 
         await runTransaction(db,async(transaction)=>{
@@ -1525,7 +1534,8 @@ if(studentIndex === -1){
 
 const studentData =
 studentsArray[studentIndex];
-
+oldPoints = Number(studentData.points || 0);
+            
 if (studentData.mosqueId !== mosqueId) {
     throw new Error("الطالب غير موجود");
 }
@@ -1590,7 +1600,7 @@ parseMessage(
     ],
     student,
     rewardValue,
-    totalPoints
+    oldPoints
 );
         
 // اختيار إيموجي عشوائي
