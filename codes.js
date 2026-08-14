@@ -1997,3 +1997,155 @@ async () => {
     );
 
 };
+// ====================================
+// نسخ معرفات الطلاب للمساعدة في إعداد
+// الرسائل الخاصة
+// ====================================
+
+document.getElementById(
+    "copyStudentsIds"
+).onclick = async () => {
+
+    const button =
+        document.getElementById(
+            "copyStudentsIds"
+        );
+
+    try {
+
+        button.disabled = true;
+
+        button.textContent =
+            "⏳ جارٍ القراءة...";
+
+        /*
+         * قراءة Students مرة واحدة فقط
+         * للمسجد الحالي
+         */
+
+        const q = query(
+            collection(db, "Students"),
+            where(
+                "mosqueId",
+                "==",
+                mosqueId
+            )
+        );
+
+        const snapshot =
+            await getDocs(q);
+
+        if (snapshot.empty) {
+
+            alert(
+                "لا يوجد طلاب لهذا المسجد."
+            );
+
+            return;
+
+        }
+
+        /*
+         * تجهيز البيانات
+         */
+
+        const students = [];
+
+        snapshot.forEach(
+            studentDoc => {
+
+                const data =
+                    studentDoc.data();
+
+                students.push({
+
+                    id:
+                        studentDoc.id,
+
+                    name:
+                        data.fullName ||
+                        data.name ||
+                        data.firstName ||
+                        "",
+
+                    mosqueId:
+                        data.mosqueId ||
+                        mosqueId
+
+                });
+
+            }
+        );
+
+        /*
+         * ترتيب الطلاب أبجديًا
+         */
+
+        students.sort(
+            (a, b) =>
+                a.name.localeCompare(
+                    b.name,
+                    "ar"
+                )
+        );
+
+        /*
+         * تحويل البيانات إلى نص
+         * سهل النسخ واللصق
+         */
+
+        let text =
+            `المسجد: ${mosqueId}\n\n`;
+
+        text +=
+            `عدد الطلاب: ${students.length}\n\n`;
+
+        students.forEach(
+            (student, index) => {
+
+                text +=
+                    `${index + 1}. ${student.name}\n`;
+
+                text +=
+                    `studentId: ${student.id}\n`;
+
+                text +=
+                    `mosqueId: ${student.mosqueId}\n\n`;
+
+            }
+        );
+
+        /*
+         * النسخ إلى الحافظة
+         */
+
+        await navigator.clipboard.writeText(
+            text
+        );
+
+        alert(
+            `✅ تم نسخ بيانات ${students.length} طالب إلى الحافظة.`
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "❌ تعذر نسخ البيانات. تأكد من السماح للمتصفح بالوصول إلى الحافظة."
+        );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "📋 نسخ معرفات الطلاب";
+
+    }
+
+};
