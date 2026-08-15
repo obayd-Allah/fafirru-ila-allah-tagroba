@@ -1376,7 +1376,7 @@ function getSpecialMessage(student, rewardValue = 0, oldPoints = 0){
 
     // البحث عن رسائل هذا المسجد
     const mosqueMessages =
-        specialStudentMessages[mosqueId];
+        studentMessages[mosqueId];
 
     if(!mosqueMessages){
         return null;
