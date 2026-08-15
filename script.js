@@ -372,7 +372,7 @@ const studentMessages = {
 
     "0ST5k0XacnZwkMslO1pb": [], // عبد المنعم مبروك | mosque_002 | ولد
 
-    "5XWqdEm33lhELhe1F6bf": ["آسفين يا علي عالكروت اللي مش شغالة 💙"], // علي محمد | mosque_002 | ولد
+    "5XWqdEm33lhELhe1F6bf": [], // علي محمد | mosque_002 | ولد
 
     "m05JttwRXRMGhb4G2M0X": [], // عمار عبد العاطي | mosque_002 | ولد
 
