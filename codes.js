@@ -2022,7 +2022,48 @@ document.getElementById(
          * قراءة Students مرة واحدة فقط
          * للمسجد الحالي
          */
+const allStudentsSnapshot =
+    await getDocs(
+        collection(db, "Students")
+    );
 
+let totalStudents = 0;
+let currentMosqueStudents = 0;
+let withoutMosqueId = 0;
+let otherMosqueStudents = 0;
+
+allStudentsSnapshot.forEach(studentDoc => {
+
+    const data = studentDoc.data();
+
+    totalStudents++;
+
+    if (!data.mosqueId) {
+
+        withoutMosqueId++;
+
+    } else if (
+        data.mosqueId === mosqueId
+    ) {
+
+        currentMosqueStudents++;
+
+    } else {
+
+        otherMosqueStudents++;
+
+    }
+
+});
+
+alert(
+    "تشخيص الطلاب:\n\n" +
+    "المسجد الحالي: " + mosqueId + "\n\n" +
+    "إجمالي الطلاب في Students: " + totalStudents + "\n" +
+    "طلاب المسجد الحالي: " + currentMosqueStudents + "\n" +
+    "طلاب بدون mosqueId: " + withoutMosqueId + "\n" +
+    "طلاب مرتبطون بمسجد آخر: " + otherMosqueStudents
+);
         const q = query(
             collection(db, "Students"),
             where(
