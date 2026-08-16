@@ -136,7 +136,7 @@ const studentMessages = {
 
     "LtxnG4AZq6oGa5tNu067": [], // أنس محمد خلف | mosque_001 | ولد
 
-    "a2MyUvxLbuinhy55URH1": [], // إياد أحمد فتحي | mosque_001 | ولد
+    "a2MyUvxLbuinhy55URH1": ["حمد الله على السلامة يا ديدو وحشتنا يا عم.. كنت بتحفظ عند جدوو؟"], // إياد أحمد فتحي | mosque_001 | ولد
 
     "8znHpXevmBnCy59ViDkF": [], // أيسل حافظ | mosque_001 | بنت
 
@@ -172,7 +172,7 @@ const studentMessages = {
 
     "qVuDeN7472BKFKyrEILg": [], // زهرة يحيى | mosque_001 | بنت
 
-    "PMEmBBnhMorr495jqq3r": [], // زياد أحمد فتحي | mosque_001 | ولد
+    "PMEmBBnhMorr495jqq3r": ["يا زوز كمل صلاة الفجر بقى مش عند جدو بس 👍"], // زياد أحمد فتحي | mosque_001 | ولد
 
     "U31OvDYfmSXAfn7QZyMM": [], // زيد إسلام أحمد | mosque_001 | ولد
 
@@ -260,8 +260,7 @@ const studentMessages = {
 
     "4wW1nquzSdqZ6kxd0f5d": [], // يوسف عبد الرحيم محمد | mosque_001 | ولد
 
-    "gKg2MWB2HIQZJoIXKjHI": [], // يوسف عبد الله حسين | mosque_001 | ولد
-
+    "gKg2MWB2HIQZJoIXKjHI": [], // يوووووسف عبدالله حسين
     "SXJAkMGHScaptchZIf7u": [], // يوسف عمرو حسن | mosque_001 | ولد
 
     "KmRl0Ws8Mq3RzqRJlnVi": [], // يوسف محمد | mosque_001 | ولد
@@ -2214,7 +2213,7 @@ document.querySelector(".modal-box h3").style.display = "";
 document.getElementById("closeReward").style.display = "none";
 rewardSending = false;
 
-},9000);
+},12000);
 
     }
 
@@ -2927,7 +2926,7 @@ function startIntro(){
 
     const titles = [
 
-        "مسابقة القرآن",
+        "مسابقة فالقرآن الكريم",
         
 
     ];
@@ -2935,7 +2934,7 @@ function startIntro(){
 
     const subtitles = [
 
-        "تنافس على الجنة 🏆",
+        "تنافس على الجنة 💎",
         
 
     ];
