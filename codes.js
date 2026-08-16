@@ -2001,6 +2001,9 @@ async () => {
 // نسخ معرفات الطلاب للمساعدة في إعداد
 // الرسائل الخاصة
 // ====================================
+// ====================================
+// نسخ معرفات الطلاب من MosqueStudents
+// ====================================
 
 document.getElementById(
     "copyStudentsIds"
@@ -2019,67 +2022,53 @@ document.getElementById(
             "⏳ جارٍ القراءة...";
 
         /*
-         * قراءة Students مرة واحدة فقط
-         * للمسجد الحالي
+         * قراءة مستند المسجد من MosqueStudents
+         *
+         * البنية:
+         *
+         * MosqueStudents
+         *   └── mosqueId
+         *        └── students: [...]
          */
-const allStudentsSnapshot =
-    await getDocs(
-        collection(db, "Students")
-    );
 
-let totalStudents = 0;
-let currentMosqueStudents = 0;
-let withoutMosqueId = 0;
-let otherMosqueStudents = 0;
-
-allStudentsSnapshot.forEach(studentDoc => {
-
-    const data = studentDoc.data();
-
-    totalStudents++;
-
-    if (!data.mosqueId) {
-
-        withoutMosqueId++;
-
-    } else if (
-        data.mosqueId === mosqueId
-    ) {
-
-        currentMosqueStudents++;
-
-    } else {
-
-        otherMosqueStudents++;
-
-    }
-
-});
-
-alert(
-    "تشخيص الطلاب:\n\n" +
-    "المسجد الحالي: " + mosqueId + "\n\n" +
-    "إجمالي الطلاب في Students: " + totalStudents + "\n" +
-    "طلاب المسجد الحالي: " + currentMosqueStudents + "\n" +
-    "طلاب بدون mosqueId: " + withoutMosqueId + "\n" +
-    "طلاب مرتبطون بمسجد آخر: " + otherMosqueStudents
-);
-        const q = query(
-            collection(db, "Students"),
-            where(
-                "mosqueId",
-                "==",
+        const mosqueStudentsRef =
+            doc(
+                db,
+                "MosqueStudents",
                 mosqueId
-            )
-        );
+            );
 
         const snapshot =
-            await getDocs(q);
+            await getDoc(
+                mosqueStudentsRef
+            );
 
-        if (snapshot.empty) {
+        if (
+            !snapshot.exists()
+        ) {
 
             alert(
-                "لا يوجد طلاب لهذا المسجد."
+                "❌ لا يوجد مستند طلاب لهذا المسجد في MosqueStudents."
+            );
+
+            return;
+
+        }
+
+        const data =
+            snapshot.data();
+
+        const students =
+            Array.isArray(data.students)
+                ? data.students
+                : [];
+
+        if (
+            students.length === 0
+        ) {
+
+            alert(
+                "❌ لا يوجد طلاب داخل MosqueStudents لهذا المسجد."
             );
 
             return;
@@ -2087,52 +2076,7 @@ alert(
         }
 
         /*
-         * تجهيز البيانات
-         */
-
-        const students = [];
-
-        snapshot.forEach(
-            studentDoc => {
-
-                const data =
-                    studentDoc.data();
-
-                students.push({
-
-                    id:
-                        studentDoc.id,
-
-                    name:
-                        data.fullName ||
-                        data.name ||
-                        data.firstName ||
-                        "",
-
-                    mosqueId:
-                        data.mosqueId ||
-                        mosqueId
-
-                });
-
-            }
-        );
-
-        /*
-         * ترتيب الطلاب أبجديًا
-         */
-
-        students.sort(
-            (a, b) =>
-                a.name.localeCompare(
-                    b.name,
-                    "ar"
-                )
-        );
-
-        /*
-         * تحويل البيانات إلى نص
-         * سهل النسخ واللصق
+         * نسخ البيانات
          */
 
         let text =
@@ -2144,14 +2088,24 @@ alert(
         students.forEach(
             (student, index) => {
 
-                text +=
-                    `${index + 1}. ${student.name}\n`;
+                const studentName =
+                    student.fullName ||
+                    student.name ||
+                    student.firstName ||
+                    "";
+
+                const studentId =
+                    student.id ||
+                    "";
 
                 text +=
-                    `studentId: ${student.id}\n`;
+                    `${index + 1}. ${studentName}\n`;
 
                 text +=
-                    `mosqueId: ${student.mosqueId}\n\n`;
+                    `studentId: ${studentId}\n`;
+
+                text +=
+                    `mosqueId: ${mosqueId}\n\n`;
 
             }
         );
@@ -2170,12 +2124,12 @@ alert(
 
     }
 
-    catch(error) {
+    catch (error) {
 
         console.error(error);
 
         alert(
-            "❌ تعذر نسخ البيانات. تأكد من السماح للمتصفح بالوصول إلى الحافظة."
+            "❌ تعذر نسخ البيانات."
         );
 
     }
@@ -2190,3 +2144,4 @@ alert(
     }
 
 };
+
