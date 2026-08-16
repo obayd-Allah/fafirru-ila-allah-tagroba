@@ -103,7 +103,6 @@ const girlMessages = [
 /* ====================================
    الرسائل الخاصة بالطلاب
 ==================================== */
-
 const studentMessages = {
 
   // ============================================================
@@ -112,160 +111,161 @@ const studentMessages = {
 
   "mosque_001": {
 
-    "rtQ7Z32wXs2TF7skJ5bw": [], // آدم أحمد عبد المنعم | mosque_001 | ولد
+    "xDaRawYamKZJIs9h7eO7": [], // آمن محمد أحمد صالح
 
-    "oUkLbfH6MRABDuFQ3yUL": [], // آدم عمرو | mosque_001 | ولد
+    "UMz6oyvcGTP6nHpSrI3c": [], // أحمد محمد جابر
 
-    "xDaRawYamKZJIs9h7eO7": [], // آمن محمد أحمد صالح | mosque_001 | ولد
+    "86BJwuNiyq64itdOPcxB": [], // ألين حافظ
 
-    "75kbeeXIR80x9SU6vdzg": [], // أبرار أشرف | mosque_001 | بنت
+    "8znHpXevmBnCy59ViDkF": [], // أيسل حافظ
 
-    "jNJA6r49bmsbgzAAtMMO": [], // إبراهيم إسلام أحمد | mosque_001 | ولد
+    "ofzOvH61GFyNfVlzKc43": [], // أيسل محمد عثمان
 
-    "ugwmFdHDM7CbrN8tUUtn": [], // إبراهيم عبد اللطيف أحمد | mosque_001 | ولد
+    "fwOBmrCwFjfRfkVvOlXQ": [], // أدهم حسام الدين سالم
 
-    "UMz6oyvcGTP6nHpSrI3c": [], // أحمد محمد جابر | mosque_001 | ولد
+    "jNJA6r49bmsbgzAAtMMO": [], // إبراهيم إسلام أحمد
 
-    "fwOBmrCwFjfRfkVvOlXQ": [], // أدهم حسام الدين سالم | mosque_001 | ولد
+    "ugwmFdHDM7CbrN8tUUtn": [], // إبراهيم عبد اللطيف أحمد
 
-    "jhA9vdWyu5BJ6CGI7zio": [], // أروى حافظ | mosque_001 | بنت
+    "75kbeeXIR80x9SU6vdzg": [], // أبرار أشرف
 
-    "86BJwuNiyq64itdOPcxB": [], // ألين حافظ | mosque_001 | بنت
+    "jhA9vdWyu5BJ6CGI7zio": [], // أروى حافظ
 
-    "Kdfcdr07MduxzWrMkmSm": [], // أمير مصطفى شافعي | mosque_001 | ولد
+    "Kdfcdr07MduxzWrMkmSm": [], // أمير مصطفى شافعي
 
-    "LtxnG4AZq6oGa5tNu067": [], // أنس محمد خلف | mosque_001 | ولد
+    "LtxnG4AZq6oGa5tNu067": [], // أنس محمد خلف
 
-    "a2MyUvxLbuinhy55URH1": ["حمد الله على السلامة يا ديدو وحشتنا يا عم.. كنت بتحفظ عند جدوو؟"], // إياد أحمد فتحي | mosque_001 | ولد
+    "7VfpFBFQhpD7U1eCbOEx": [], // عهد عبدُ الله فضل
 
-    "8znHpXevmBnCy59ViDkF": [], // أيسل حافظ | mosque_001 | بنت
+    "bV4B7tbjp0Tws8BypXAm": [], // عادل رضا أحمد
 
-    "ofzOvH61GFyNfVlzKc43": [], // أيسل محمد عثمان | mosque_001 | بنت
+    "QOFKRhvFXiwEMekzsUxL": [], // عبد الله سعد محمد
 
-    "LEb7yltEtNRVNlwfTUh7": [], // بلال محمد عبد المنعم | mosque_001 | ولد
+    "Um1rhYaFSxKqsBQzxYVX": [], // عبد الله محمود خلف
 
-    "ht0MJkkCSMUsSlr27rMB": [], // تميم محمد جابر | mosque_001 | ولد
+    "1T2OaGXn7kFYlL3BBomW": [], // علي علي عبد الحميد
 
-    "2QeM6bUTUqM6jklLUqiQ": [], // جنى صلاح محمد | mosque_001 | بنت
+    "reJJazJws05FFhl4RCFl": [], // علاء محمد محمد
 
-    "wuGtZeVNlTD8EkCjUNdJ": [], // حبيبة المعتز بالله | mosque_001 | بنت
+    "qVuDeN7472BKFKyrEILg": [], // زهرة يحيى
 
-    "Vyd8cu9Gn233eI5Y0GRJ": [], // حسن أيمن حسن | mosque_001 | ولد
+    "3f7e9c25-d6a7-4ed0-bec6-5c7d3d9186a3": [], // سجدة سعد
 
-    "RflsYHtuVFV9fDg4l8ay": [], // حمزة أحمد خلف | mosque_001 | ولد
+    "aT45WPwzOM9ZCnlrcEPD": [], // سجدة علي عبد الحميد
 
-    "Eb1NtE2rLxbmYubJu3ib": [], // حمزة أشرف رمضان | mosque_001 | ولد
+    "wSbj2yVjo4ttfYwjB71K": [], // سما عبد الرحيم محمد
 
-    "yUzZktjMy7RB80zM2nOg": [], // حمزة حسن عبد الشافي | mosque_001 | ولد
+    "8X13ZP6SPg3wo2YJ68ix": [], // سما عبد القادر
 
-    "8dN6AqI0AKWQ7YzVpSd6": [], // حمزة رامي سيد | mosque_001 | ولد
+    "yfrHKBmiky04Nrt7TOoR": [], // سيف أحمد موسى
 
-    "lD2a2sLqAhtFUuCJGgEh": [], // حمزة سعد محمد | mosque_001 | ولد
+    "1ff3184d-f6f7-4f88-b046-ba6bac38434a": [], // شيخ أسامة (مميز جدًا 🌟)
 
-    "K293oUVjkEbk51wpmbfZ": [], // حنين رضا احمد | mosque_001 | بنت
+    "3eb28761-9f13-4cae-9ccc-b906a1717dab": [], // رودينا محمد
 
-    "xRfC9WEtp4GAjox41Y0G": [], // رهف صالح | mosque_001 | بنت
+    "xRfC9WEtp4GAjox41Y0G": [], // رهف صالح
 
-    "gTKbbridJxv6IUzIwK4Y": [], // ريتاج علي عبد الحميد | mosque_001 | بنت
+    "gTKbbridJxv6IUzIwK4Y": [], // ريتاج علي عبد الحميد
 
-    "QYiLzwX13keyFsCMqJRk": [], // ريتال أحمد موسى | mosque_001 | بنت
+    "QYiLzwX13keyFsCMqJRk": [], // ريتال أحمد موسى
 
-    "qVuDeN7472BKFKyrEILg": [], // زهرة يحيى | mosque_001 | بنت
+    "2QeM6bUTUqM6jklLUqiQ": [], // جنى صلاح محمد
 
-    "PMEmBBnhMorr495jqq3r": ["يا زوز كمل صلاة الفجر بقى مش عند جدو بس 👍"], // زياد أحمد فتحي | mosque_001 | ولد
+    "wBRzIAtkXIwcjFaGdZMD": [], // عمر أحمد لولي
 
-    "U31OvDYfmSXAfn7QZyMM": [], // زيد إسلام أحمد | mosque_001 | ولد
+    "LZ2h96PuYKy3O223k0yg": [], // عمر أسامة أحمد
 
-    "aT45WPwzOM9ZCnlrcEPD": [], // سجدة علي عبد الحميد | mosque_001 | بنت
+    "8r4cbsx06PJKd58Jc0vL": [], // عمر إسلام علي
 
-    "wSbj2yVjo4ttfYwjB71K": [], // سما عبد الرحيم محمد | mosque_001 | بنت
+    "a2MyUvxLbuinhy55URH1": [
+      "حمد الله على السلامة يا ديدو وحشتنا يا عم.. كنت بتحفظ عند جدوو؟"
+    ], // إياد أحمد فتحي
 
-    "8X13ZP6SPg3wo2YJ68ix": [], // سما عبد القادر | mosque_001 | بنت
+    "Eb1NtE2rLxbmYubJu3ib": [], // حمزة أشرف رمضان
 
-    "yfrHKBmiky04Nrt7TOoR": [], // سيف أحمد موسى | mosque_001 | ولد
+    "RflsYHtuVFV9fDg4l8ay": [], // حمزة أحمد خلف
 
-    "bV4B7tbjp0Tws8BypXAm": [], // عادل رضا أحمد | mosque_001 | ولد
+    "yUzZktjMy7RB80zM2nOg": [], // حمزة حسن عبد الشافي
 
-    "QOFKRhvFXiwEMekzsUxL": [], // عبد الله سعد محمد | mosque_001 | ولد
+    "8dN6AqI0AKWQ7YzVpSd6": [], // حمزة رامي سيد
 
-    "Um1rhYaFSxKqsBQzxYVX": [], // عبد الله محمود خلف | mosque_001 | ولد
+    "lD2a2sLqAhtFUuCJGgEh": [], // حمزة سعد محمد
 
-    "reJJazJws05FFhl4RCFl": [], // علاء محمد محمد | mosque_001 | ولد
+    "85f579fb-9bfd-40a3-b348-45829fe64981": [], // بشري احمد
 
-    "1T2OaGXn7kFYlL3BBomW": [], // علي علي عبد الحميد | mosque_001 | ولد
+    "qScb4lS96MPFiQ2ofs3o": [], // كندا
 
-    "wBRzIAtkXIwcjFaGdZMD": [], // عمر أحمد لولي | mosque_001 | ولد
+    "y6PgTAoWuYnryp8WYUlk": [], // كرمة صلاح محمد
 
-    "LZ2h96PuYKy3O223k0yg": [], // عمر أسامة أحمد | mosque_001 | ولد
+    "SI0BnQUq03HdB7srA4dm": [], // كرمة عاطف
 
-    "8r4cbsx06PJKd58Jc0vL": [], // عمر إسلام علي | mosque_001 | ولد
+    "aqfhyYKegci6L6Sh5XpD": [], // ليلى عاطف
 
-    "7VfpFBFQhpD7U1eCbOEx": [], // عهد عبد الله فضل | mosque_001 | بنت
+    "7lXoSrKlBBPj2j7N7plh": [], // هبة خالد
 
-    "y6PgTAoWuYnryp8WYUlk": [], // كرمة صلاح محمد | mosque_001 | بنت
+    "bCuidIG4V9FrZkuYJQmm": [], // نور علي عبد الحميد
 
-    "SI0BnQUq03HdB7srA4dm": [], // كرمة عاطف | mosque_001 | بنت
+    "V30rytKiolz341LLH27K": [], // مريم عبدُ الله رمضان
 
-    "qScb4lS96MPFiQ2ofs3o": [], // كندا | mosque_001 | بنت
+    "F2vyXpjkPvAfc8GrjXNp": [], // مصطفى عبد الرحيم محمد
 
-    "aqfhyYKegci6L6Sh5XpD": [], // ليلى عاطف | mosque_001 | بنت
+    "rgU0dd7cFciiW0Qb9LGt": [], // مصطفى نبيل مصطفى
 
-    "ZQOYW3u4rshTAWkTdgfA": [], // مالك وليد محمود | mosque_001 | ولد
+    "bzB5rx93E60bw6H1TGCi": [], // منة أحمد حمدان
 
-    "FrsKMrLqoRwnjNpgxT0h": [], // محمد أيمن حسن | mosque_001 | ولد
+    "5qOowAGHYiDwH6eBdbCT": [], // ميان محمد عثمان
 
-    "HlaCCH1ahr9NWu48HIMz": [], // محمد صلاح محمد | mosque_001 | ولد
+    "JQ950nUxuyfVwWP5fUQD": [], // ميرال علاء
 
-    "2W8LHSefoV7i5DhFeyg7": [], // محمد علي ممدوح | mosque_001 | ولد
+    "oIJrDvp7P3NmgMBmbaSa": [], // محمود ياسر محمد
 
-    "Y3WeQVSDFN8lGbPphDLN": [], // محمد عمر محمد | mosque_001 | ولد
+    "BuZrRWI4s7IIfYemyOZC": [], // مروان نبيل مصطفى
 
-    "oIJrDvp7P3NmgMBmbaSa": [], // محمود ياسر محمد | mosque_001 | ولد
+    "6df8cb88-00af-40ca-8dc3-3da1bd2172bd": [], // محمد أحمد لولي
 
-    "BuZrRWI4s7IIfYemyOZC": [], // مروان نبيل مصطفى | mosque_001 | ولد
+    "FrsKMrLqoRwnjNpgxT0h": [], // محمد أيمن حسن
 
-    "V30rytKiolz341LLH27K": [], // مريم عبد الله رمضان | mosque_001 | بنت
+    "2W8LHSefoV7i5DhFeyg7": [], // محمد علي ممدوح
 
-    "F2vyXpjkPvAfc8GrjXNp": [], // مصطفى عبد الرحيم محمد | mosque_001 | ولد
+    "Y3WeQVSDFN8lGbPphDLN": [], // محمد عمر محمد
 
-    "rgU0dd7cFciiW0Qb9LGt": [], // مصطفى نبيل مصطفى | mosque_001 | ولد
+    "HlaCCH1ahr9NWu48HIMz": [], // محمد صلاح محمد
 
-    "bzB5rx93E60bw6H1TGCi": [], // منة أحمد حمدان | mosque_001 | بنت
+    "K293oUVjkEbk51wpmbfZ": [], // حنين رضا احمد
 
-    "5qOowAGHYiDwH6eBdbCT": [], // ميان محمد عثمان | mosque_001 | بنت
+    "Zwb6sAOujCmqBarCB9vI": [], // يسٓ إبراهيم محمد
 
-    "JQ950nUxuyfVwWP5fUQD": [], // ميرال علاء | mosque_001 | بنت
+    "hsebagwkB945v1oaMI5l": [], // يسٓ سيد ماهر
 
-    "bCuidIG4V9FrZkuYJQmm": [], // نور علي عبد الحميد | mosque_001 | بنت
+    "f2y8jq7oPiSSwe6B2bEz": [], // يسٓ علي عبد الحميد
 
-    "7lXoSrKlBBPj2j7N7plh": [], // هبة خالد | mosque_001 | بنت
+    "jK4Awm85CMuEHry7fPv2": [], // يسٓ علي ممدوح
 
-    "vvHF5glfINPWazboMgjI": [], // يامن علاء محمد | mosque_001 | ولد
+    "YDKDFpD2KSjvj2ep2zXU": [], // يسٓ ماجد جمال
 
-    "qHQofwaTxbrHnbJ3PMI3": [], // يحيى عمر محمود | mosque_001 | ولد
+    "1w6GcN4fyoZjEQ23sgjI": [], // يحيى محمد حامد
 
-    "1w6GcN4fyoZjEQ23sgjI": [], // يحيى محمد حامد | mosque_001 | ولد
+    "qHQofwaTxbrHnbJ3PMI3": [], // يحيى عمر محمود
 
-    "qJSdGfvfUXBOBOxKEVmN": [], // يحيى محمود أحمد | mosque_001 | ولد
+    "qJSdGfvfUXBOBOxKEVmN": [], // يحيى محمود أحمد
 
-    "Zwb6sAOujCmqBarCB9vI": [], // يسٓ إبراهيم محمد | mosque_001 | ولد
+    "vvHF5glfINPWazboMgjI": [], // يامن علاء محمد
 
-    "hsebagwkB945v1oaMI5l": [], // يسٓ سيد ماهر | mosque_001 | ولد
+    "gKg2MWB2HIQZJoIXKjHI": [], // يوسف عبد الله حسين
 
-    "f2y8jq7oPiSSwe6B2bEz": [], // يسٓ علي عبد الحميد | mosque_001 | ولد
+    "4wW1nquzSdqZ6kxd0f5d": [], // يوسف عبد الرحيم محمد
 
-    "jK4Awm85CMuEHry7fPv2": [], // يسٓ علي ممدوح | mosque_001 | ولد
+    "SXJAkMGHScaptchZIf7u": [], // يوسف عمرو حسن
 
-    "YDKDFpD2KSjvj2ep2zXU": [], // يسٓ ماجد جمال | mosque_001 | ولد
+    "zDy1bzRLlVWQ0H3rM8Kq": [], // يوسف محمد حامد
 
-    "4wW1nquzSdqZ6kxd0f5d": [], // يوسف عبد الرحيم محمد | mosque_001 | ولد
+    "V6u62RW4EHvfv19lMBpu": [], // يونس رامي سيد
 
-    "gKg2MWB2HIQZJoIXKjHI": [], // يوووووسف عبدالله حسين
-    "SXJAkMGHScaptchZIf7u": [], // يوسف عمرو حسن | mosque_001 | ولد
+    "PMEmBBnhMorr495jqq3r": [
+      "يا زوز كمل صلاة الفجر بقى مش عند جدو بس 👍"
+    ], // زياد أحمد فتحي
 
-    "KmRl0Ws8Mq3RzqRJlnVi": [], // يوسف محمد | mosque_001 | ولد
-
-    "V6u62RW4EHvfv19lMBpu": [] // يونس رامي سيد | mosque_001 | ولد
+    "U31OvDYfmSXAfn7QZyMM": [], // زيد إسلام أحمد
   },
 
 
@@ -275,185 +275,205 @@ const studentMessages = {
 
   "mosque_002": {
 
-    "Yu3V9yzgIhzDsxYr19r1": [], // آدم محمود | mosque_002 | ولد
+    "Yu3V9yzgIhzDsxYr19r1": [], // آدم محمود
 
-    "4lhts9Q94OM3hUGzfwNZ": [], // آيسل علاء | mosque_002 | بنت
+    "ecb4a09e-30d1-41f3-ba7c-ec759443c654": [], // آدم مبارك فؤاد
 
-    "KYXXibal1KTlIw5IqsKq": [], // إبراهيم سيد منير | mosque_002 | ولد
+    "1032f8a5-be3b-41a9-becb-905161f2b3ae": [], // آدم سيد ماهر
 
-    "W2rxYxfoTm46725qy0Z9": [], // أحمد حسين | mosque_002 | ولد
+    "1K2xNCREMtJAuHJrC2iS": [], // أدهم محمد عبد المحسن
 
-    "etVBwzJkXXK7llYlmVgu": [], // أحمد سمير | mosque_002 | ولد
+    "KYXXibal1KTlIw5IqsKq": [], // إبراهيم سيد منير
 
-    "mBWTllAY6mccLw4930S4": [], // أحمد محمد علي | mosque_002 | ولد
+    "W2rxYxfoTm46725qy0Z9": [], // أحمد حسين
 
-    "1K2xNCREMtJAuHJrC2iS": [], // أدهم محمد عبد المحسن | mosque_002 | ولد
+    "etVBwzJkXXK7llYlmVgu": [], // أحمد سمير
 
-    "MLRvTj2odlj6MoG8Vrdn": [], // أمير عصام | mosque_002 | ولد
+    "mBWTllAY6mccLw4930S4": [], // أحمد محمد علي
 
-    "UoIFTV4yuEXVSG5IoZoe": [], // أنس أحمد | mosque_002 | ولد
+    "MLRvTj2odlj6MoG8Vrdn": [], // أمير عصام
 
-    "P4F1MQY6NK11Aa0p63lg": [], // أنس حامد حامد | mosque_002 | ولد
+    "UoIFTV4yuEXVSG5IoZoe": [], // أنس أحمد
 
-    "QlFz2VagW9ouOoz5I4JJ": [], // أنس عمرو | mosque_002 | ولد
+    "P4F1MQY6NK11Aa0p63lg": [], // أنس حامد حامد
 
-    "vA6R8tuaLEx8LqeXNfzk": [], // أنس محمد | mosque_002 | ولد
+    "QlFz2VagW9ouOoz5I4JJ": [], // أنس عمرو
 
-    "anu4ngQUyVcQiOOwmAQf": [], // براء رضا | mosque_002 | ولد
+    "vA6R8tuaLEx8LqeXNfzk": [], // أنس محمد
 
-    "p3GIJwDfZeHZZmLYaUtw": [], // بلال هيثم | mosque_002 | ولد
+    "anu4ngQUyVcQiOOwmAQf": [], // براء رضا
 
-    "NSRtuuti6BN8XTXlesuO": [], // تميم ضياء | mosque_002 | ولد
+    "p3GIJwDfZeHZZmLYaUtw": [], // بلال هيثم
 
-    "WB23bytiFs7PAj5nz9pJ": [], // تميم عامر | mosque_002 | ولد
+    "d75c7a67-6ecd-47af-9f2b-cc291f729228": [], // بلال مدحت
 
-    "zVDaMDZLsavHC8G2CpIj": [], // جنى شعبان | mosque_002 | بنت
+    "NSRtuuti6BN8XTXlesuO": [], // تميم ضياء
 
-    "2aphlwdEPEHDymIIjZ61": [], // حذيفة علي | mosque_002 | ولد
+    "WB23bytiFs7PAj5nz9pJ": [], // تميم عامر
 
-    "fCeVKLMVtsXacohDnwrI": [], // حسناء وائل | mosque_002 | بنت
+    "zVDaMDZLsavHC8G2CpIj": [], // جنى شعبان
 
-    "dyJEcuqQdWujDCzGgdx7": [], // حمزة رضا | mosque_002 | ولد
+    "A3rB9YcLV9TzwP3IN2MZ": [], // خديجة عبد الفتاح
 
-    "dfUeFNLjiLcUAYgFf4Fw": [], // حمزة عبد الله | mosque_002 | ولد
+    "Yj0yqMk5CLPZPWcZbHOW": [], // خديجة سيد
 
-    "QfRaNeQ99poiSCSoJ47K": [], // حمودة محمد | mosque_002 | ولد
+    "VquqB7hlZinjZzdeRhG2": [], // خديجة سامح
 
-    "1xJ0vqS86SjLooRrPxX8": [], // حور مصطفى | mosque_002 | بنت
+    "oGqs1JfIqHO1wcQWOv6x": [], // خديجة محمد حمدي
 
-    "VquqB7hlZinjZzdeRhG2": [], // خديجة سامح | mosque_002 | بنت
+    "fCeVKLMVtsXacohDnwrI": [], // حسناء وائل
 
-    "Yj0yqMk5CLPZPWcZbHOW": [], // خديجة سيد | mosque_002 | بنت
+    "0aa4ba76-b019-43e3-93b0-dd6de5aed2e5": [], // حسن أيمن حسن
 
-    "A3rB9YcLV9TzwP3IN2MZ": [], // خديجة عبد الفتاح | mosque_002 | بنت
+    "dyJEcuqQdWujDCzGgdx7": [], // حمزة رضا
 
-    "oGqs1JfIqHO1wcQWOv6x": [], // خديجة محمد حمدي | mosque_002 | بنت
+    "dfUeFNLjiLcUAYgFf4Fw": [], // حمزة عبد الله
 
-    "CcazIUt2YePLVlJG4b5k": [], // رجب عطية | mosque_002 | ولد
+    "QfRaNeQ99poiSCSoJ47K": [], // حمودة محمد
 
-    "2fr0nb5bqwcixFSV7lBV": [], // رقية حامد حامد | mosque_002 | بنت
+    "2aphlwdEPEHDymIIjZ61": [], // حذيفة علي
 
-    "zjuYlJxFBkU4V6yKyux3": [], // روان أحمد محمد | mosque_002 | بنت
+    "1xJ0vqS86SjLooRrPxX8": [], // حور مصطفى
 
-    "msAklUv0vHEciWzz6pmm": [], // زياد حمدي | mosque_002 | ولد
+    "4lhts9Q94OM3hUGzfwNZ": [], // آيسل علاء
 
-    "UodI0NWPaiAFOi258gbA": [], // سدرة صالح الرفاعي | mosque_002 | بنت
+    "CcazIUt2YePLVlJG4b5k": [], // رجب عطية
 
-    "YGQPuta4aUb3I9pR8ryk": [], // سعد مصطفى سعد | mosque_002 | ولد
+    "2fr0nb5bqwcixFSV7lBV": [], // رقية حامد حامد
 
-    "5WqobKk1XdWpJ6AY5JVc": [], // سلمى سامي | mosque_002 | بنت
+    "zjuYlJxFBkU4V6yKyux3": [], // روان أحمد محمد
 
-    "cjwUcuyx5oD9feN2JZ3p": [], // سليم أحمد سعد | mosque_002 | ولد
+    "msAklUv0vHEciWzz6pmm": [], // زياد حمدي
 
-    "VMrBkNWjHQkYM2fF2Kwz": [], // سليم منصور | mosque_002 | ولد
+    "47503965-bdad-4f99-8c30-faf995557384": [], // زياد محمد
 
-    "wGaFgvOPFBr7rvWgglvb": [], // سليم وجدي | mosque_002 | ولد
+    "UodI0NWPaiAFOi258gbA": [], // سدرة صالح الرفاعي
 
-    "ijtptPbqkXlTNMKo0VPU": [], // عاصم منصور | mosque_002 | ولد
+    "YGQPuta4aUb3I9pR8ryk": [], // سعد مصطفى سعد
 
-    "Paat0YSXFsQ5Eo3Cecjp": [], // عبد الرحمن أحمد | mosque_002 | ولد
+    "5WqobKk1XdWpJ6AY5JVc": [], // سلمى سامي
 
-    "GQbMVsdVXGtgOIdFoZX9": [], // عبد الرحمن جمال عبد القادر | mosque_002 | ولد
+    "cjwUcuyx5oD9feN2JZ3p": [], // سليم أحمد سعد
 
-    "ase0IGxPbIzwOhHuSUQS": [], // عبد الرحمن ضياء | mosque_002 | ولد
+    "VMrBkNWjHQkYM2fF2Kwz": [], // سليم منصور
 
-    "xhj7gHxdMD8KXQYEoRKO": [], // عبد الرحمن عصام | mosque_002 | ولد
+    "wGaFgvOPFBr7rvWgglvb": [], // سليم وجدي
 
-    "By5JZjPnoqdenUQqdpmh": [], // عبد الرحمن محمد | mosque_002 | ولد
+    "ijtptPbqkXlTNMKo0VPU": [], // عاصم منصور
 
-    "ZJEuY4N4fLmhAvZ4J6dV": [], // عبد العزيز تامر | mosque_002 | ولد
+    "Paat0YSXFsQ5Eo3Cecjp": [], // عبد الرحمن أحمد
 
-    "7OeMQ1DbGYFzprzAtjAi": [], // عبد الله تامر | mosque_002 | ولد
+    "GQbMVsdVXGtgOIdFoZX9": [], // عبد الرحمن جمال عبد القادر
 
-    "KXoO8IynNss82nOtDneI": [], // عبد الله علي | mosque_002 | ولد
+    "ase0IGxPbIzwOhHuSUQS": [], // عبد الرحمن ضياء
 
-    "O6RZWcc3a3Z8QEuwWv0a": [], // عبد الله عمر كمال | mosque_002 | ولد
+    "xhj7gHxdMD8KXQYEoRKO": [], // عبد الرحمن عصام
 
-    "0ST5k0XacnZwkMslO1pb": [], // عبد المنعم مبروك | mosque_002 | ولد
+    "By5JZjPnoqdenUQqdpmh": [], // عبد الرحمن محمد
 
-    "5XWqdEm33lhELhe1F6bf": [], // علي محمد | mosque_002 | ولد
+    "ZJEuY4N4fLmhAvZ4J6dV": [], // عبد العزيز تامر
 
-    "m05JttwRXRMGhb4G2M0X": [], // عمار عبد العاطي | mosque_002 | ولد
+    "7OeMQ1DbGYFzprzAtjAi": [], // عبد الله تامر
 
-    "Z5JvdGFJoXLYOGjkw3uu": [], // عمر جمال عبد القادر | mosque_002 | ولد
+    "KXoO8IynNss82nOtDneI": [], // عبد الله علي
 
-    "V0k52gW8sJaNMgGyQtQT": [], // عمر سامح | mosque_002 | ولد
+    "O6RZWcc3a3Z8QEuwWv0a": [], // عبد الله عمر كمال
 
-    "tb3gMAxqKS5JWbjvhMCA": [], // عمر محمد | mosque_002 | ولد
+    "0ST5k0XacnZwkMslO1pb": [], // عبد المنعم مبروك
 
-    "CLGSGsoJO037fQ5R6Z5Z": [], // عمرو خالد | mosque_002 | ولد
+    "5683186a-f329-4218-b231-0f1e8de7f580": [], // علي السيد علي
 
-    "uO8WdXqPuGGFmSZG08b1": [], // فاطمة وجدي | mosque_002 | بنت
+    "5XWqdEm33lhELhe1F6bf": [], // علي محمد
 
-    "cLhImQVo96TiM65qehuc": [], // فريدة محمد حمدي | mosque_002 | بنت
+    "m05JttwRXRMGhb4G2M0X": [], // عمار عبد العاطي
 
-    "nwwQby8qTvzblxoA43aG": [], // فريدة مصطفى | mosque_002 | بنت
+    "64a86f3a-1b5a-4643-ab06-82722a2cf653": [], // عمرو السيد علي
 
-    "d9Dgq3KqB4zEtGXrFDzf": [], // كارما تامر | mosque_002 | بنت
+    "CLGSGsoJO037fQ5R6Z5Z": [], // عمرو خالد
 
-    "gHnOUfBxDKQIep4LvOJH": [], // كيان محمد مكرم | mosque_002 | بنت
+    "Z5JvdGFJoXLYOGjkw3uu": [], // عمر جمال عبد القادر
 
-    "lAHjl5THUsoWX5ajOuKh": [], // ليان أحمد أمين | mosque_002 | بنت
+    "V0k52gW8sJaNMgGyQtQT": [], // عمر سامح
 
-    "6SOHiIrOoxTBmknWQTZR": [], // مازن أبو بكر | mosque_002 | ولد
+    "tb3gMAxqKS5JWbjvhMCA": [], // عمر محمد
 
-    "CvHNp8zsxuoTsTkBqWxF": [], // مازن هيثم | mosque_002 | ولد
+    "uO8WdXqPuGGFmSZG08b1": [], // فاطمة وجدي
 
-    "YkpvfQB8gvhadkiTOkfG": [], // مالك | mosque_002 | ولد
+    "cLhImQVo96TiM65qehuc": [], // فريدة محمد حمدي
 
-    "xZk8xXsVdB6x1YGJEsWJ": [], // مؤمن سيد | mosque_002 | ولد
+    "nwwQby8qTvzblxoA43aG": [], // فريدة مصطفى
 
-    "80OqFp5og8XZquxM85RH": [], // مؤيد خالد محمد | mosque_002 | ولد
+    "c9bab946-641f-4a54-936d-daabf6f93161": [], // فضل محمد
 
-    "soD6FrYHcZlWYmBcmcMS": [], // مجيب الرحمن خالد محمد | mosque_002 | ولد
+    "d9Dgq3KqB4zEtGXrFDzf": [], // كارما تامر
 
-    "P5GeEeET8klqqhs0y6pI": [], // محمد أبو بكر محمود | mosque_002 | ولد
+    "gHnOUfBxDKQIep4LvOJH": [], // كيان محمد مكرم
 
-    "VQr3iXKPzZaU3rfp3RTW": [], // محمد أحمد محمد | mosque_002 | ولد
+    "lAHjl5THUsoWX5ajOuKh": [], // ليان أحمد أمين
 
-    "yngX0VXEBRJyn0QQSlwg": [], // محمد حمدي | mosque_002 | ولد
+    "6SOHiIrOoxTBmknWQTZR": [], // مازن أبو بكر
 
-    "39td15ttujTpOthZxqaC": [], // محمد خالد محمد | mosque_002 | ولد
+    "CvHNp8zsxuoTsTkBqWxF": [], // مازن هيثم
 
-    "KgFguyBDwbf6IlMmNKUE": [], // محمد سامي | mosque_002 | ولد
+    "YkpvfQB8gvhadkiTOkfG": [], // مالك جهاد الهادي
 
-    "ncPXXKgvSnfAlmMXYUZt": [], // محمد عاطف سعد | mosque_002 | ولد
+    "a69b5390-f632-4168-a4bf-e7aa4ffc8001": [], // محمد مبارك فؤاد
 
-    "ZuYHpFqVzifQ2K3AgRvx": [], // محمود | mosque_002 | ولد
+    "P5GeEeET8klqqhs0y6pI": [], // محمد أبو بكر محمود
 
-    "B3zNJ1em5RLeTj8Fdv1l": [], // محمود حمادة | mosque_002 | ولد
+    "VQr3iXKPzZaU3rfp3RTW": [], // محمد أحمد محمد
 
-    "QGklfaaSWguFcWSXw7Z9": [], // مريم عبد الله | mosque_002 | بنت
+    "e595199b-2c66-4271-92cd-d9a08511694b": [], // محمد أيمن حسن
 
-    "f4NQpaTQdHmnJuwUy6TK": [], // مريم عبد الله رمضان | mosque_002 | بنت
+    "yngX0VXEBRJyn0QQSlwg": [], // محمد حمدي
 
-    "ZFPIKypaVFe2KzCQnxQV": [], // مصطفى أحمد محمد | mosque_002 | ولد
+    "39td15ttujTpOthZxqaC": [], // محمد خالد محمد
 
-    "yzZTAixrzhyDt17339wO": [], // معاذ حمدي | mosque_002 | ولد
+    "KgFguyBDwbf6IlMmNKUE": [], // محمد سامي
 
-    "9MTRYrQt7MxkPGlpDwI4": [], // معاذ رضا | mosque_002 | ولد
+    "ncPXXKgvSnfAlmMXYUZt": [], // محمد عاطف سعد
 
-    "SR27Y8439Q6PYWziLozw": [], // معاذ رضا | mosque_002 | ولد
+    "ZuYHpFqVzifQ2K3AgRvx": [], // محمود عمر
 
-    "HIcwOOGZf3cvX3ajTUZn": [], // نادية أحمد سليمان | mosque_002 | بنت
+    "B3zNJ1em5RLeTj8Fdv1l": [], // محمود حمادة
 
-    "r8fGOSQZJqCrj4YmC48n": [], // نور يحيى | mosque_002 | بنت
+    "QGklfaaSWguFcWSXw7Z9": [], // مريم عبد الله
 
-    "h5C0QkaLoVpKehld1gsE": [], // وردة أحمد سليمان | mosque_002 | بنت
+    "f4NQpaTQdHmnJuwUy6TK": [], // مريم عبد الله رمضان
 
-    "k12jM6Nj94ZnN3mxBgvf": [], // وليد حمادة | mosque_002 | ولد
+    "ZFPIKypaVFe2KzCQnxQV": [], // مصطفى أحمد محمد
 
-    "px0WmECWMBPIoC67zmvr": [], // ياسين كريم | mosque_002 | ولد
+    "yzZTAixrzhyDt17339wO": [], // معاذ حمدي
 
-    "1Pf1dYSCf07YzmYmqQd3": [], // ياسين محمد عبد المحسن | mosque_002 | ولد
+    "9MTRYrQt7MxkPGlpDwI4": [], // معاذ رضا
 
-    "H0WENg9hA05jp4K7Kfqj": [], // ياسين ياسر | mosque_002 | ولد
+    "SR27Y8439Q6PYWziLozw": [], // معاذ رضا
 
-    "CVOHkTpAHh7t46g4CbxG": [], // يمنى منصور | mosque_002 | بنت
+    "soD6FrYHcZlWYmBcmcMS": [], // مجيب الرحمن خالد محمد
 
-    "IrgVkBw5fHKGFIFIg8AT": [], // يوسف محمود | mosque_002 | ولد
+    "80OqFp5og8XZquxM85RH": [], // مؤيد خالد محمد
 
-    "NDYKgFeK1XqFLdgCYpAq": [] // يونس أحمد | mosque_002 | ولد
+    "xZk8xXsVdB6x1YGJEsWJ": [], // مؤمن سيد
+
+    "HIcwOOGZf3cvX3ajTUZn": [], // نادية أحمد سليمان
+
+    "r8fGOSQZJqCrj4YmC48n": [], // نور يحيى
+
+    "h5C0QkaLoVpKehld1gsE": [], // وردة أحمد سليمان
+
+    "k12jM6Nj94ZnN3mxBgvf": [], // وليد حمادة
+
+    "px0WmECWMBPIoC67zmvr": [], // ياسين كريم
+
+    "1Pf1dYSCf07YzmYmqQd3": [], // ياسين محمد عبد المحسن
+
+    "H0WENg9hA05jp4K7Kfqj": [], // ياسين ياسر
+
+    "CVOHkTpAHh7t46g4CbxG": [], // يمنى منصور
+
+    "IrgVkBw5fHKGFIFIg8AT": [], // يوسف محمود
+
+    "NDYKgFeK1XqFLdgCYpAq": [] // يونس أحمد
   },
 
 
@@ -463,29 +483,35 @@ const studentMessages = {
 
   "mosque_003": {
 
-    "9hEMtTPnFn44o2L0e8Ov": [], // آسيا | mosque_003 | بنت
+    "9hEMtTPnFn44o2L0e8Ov": [], // آسيا
 
-    "XBG3draYdwdiLXEAuKbW": ["الله يسامحك بقيت فالمركز {rank}","{oldpoints} {addpoints} {allpoints}"], // أسامة | mosque_003 | ولد
+    "whzQ5yufT04fCb8uTpFj": [], // عبد الله
 
-    "DfmmccwMg9Af2W6JK2k2": [], // عائشة | mosque_003 | بنت
+    "id68R3DZws6nUrOB1PpV": [], // عبد الرحمن
 
-    "id68R3DZws6nUrOB1PpV": [], // عبد الرحمن | mosque_003 | ولد
+    "DfmmccwMg9Af2W6JK2k2": [], // عائشة
 
-    "whzQ5yufT04fCb8uTpFj": [], // عبد الله | mosque_003 | ولد
+    "XBG3draYdwdiLXEAuKbW": [
+      "الله يسامحك بقيت فالمركز {rank}",
+      "{oldpoints} {addpoints} {allpoints}"
+    ], // أسامة
 
-    "dyaF3aEyx04aJ6GmgVYf": [], // محمد | mosque_003 | ولد
+    "iJCi2XphhZIVtVU5cqkV": [], // خديجة
 
-    "iZneQqscFKWMfdtsSqBo": [], // مريم | mosque_003 | بنت
+    "rt2yZ7U2SSeMzfDfM0A7": [], // زينب
 
-    "iJCi2XphhZIVtVU5cqkV": [], // خديجة | mosque_003 | بنت
+    "iZneQqscFKWMfdtsSqBo": [], // مريم
 
-    "rt2yZ7U2SSeMzfDfM0A7": [], // زينب | mosque_003 | بنت
+    "dyaF3aEyx04aJ6GmgVYf": [], // محمد
 
-    "X8YqfOPCxYyLu7ZUbTrl": [] // طارق | mosque_003 | ولد
+    "X8YqfOPCxYyLu7ZUbTrl": [] // طارق
   }
 
 };
-                
+    
+
+
+        
 /*====================================
           الإيموجي
 ====================================*/
