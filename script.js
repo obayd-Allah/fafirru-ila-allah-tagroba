@@ -367,7 +367,7 @@ const studentMessages = {
 
     "ase0IGxPbIzwOhHuSUQS": [], // عبد الرحمن ضياء
 
-    "xhj7gHxdMD8KXQYEoRKO": ["مبروك ال١٠٠ جنيه يا عبد الرحمن"], // عبد الرحمن عصام
+    "xhj7gHxdMD8KXQYEoRKO": ["مبروك ال١٠٠ جنيه يا عبد الرحمن تستاهلها يا جميل"], // عبد الرحمن عصام
 
     "By5JZjPnoqdenUQqdpmh": [], // عبد الرحمن محمد
 
@@ -526,7 +526,6 @@ const rewardEmojis = [
 "☑️",
 "✅",
 "⭐",
-"",
 "🎁",
  "🎈",
  "🏅"
