@@ -336,6 +336,8 @@ const studentMessages = {
     "1xJ0vqS86SjLooRrPxX8": [], // حور مصطفى
 
     "4lhts9Q94OM3hUGzfwNZ": [], // آيسل علاء
+      
+    "e1d62486-9102-4301-a7f1-9e1a4cd9bac6": ["أهلا أهلا بيكِ يا دارين بأول كود ليكِ فالموقع.. شدي حيلك بقى عشان تكسبي"], //  دارين
 
     "CcazIUt2YePLVlJG4b5k": [], // رجب عطية
 
