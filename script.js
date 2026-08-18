@@ -306,7 +306,7 @@ const studentMessages = {
 
     "P4F1MQY6NK11Aa0p63lg": [], // أنس حامد حامد
 
-    "QlFz2VagW9ouOoz5I4JJ": [], // أنس عمرو
+    "QlFz2VagW9ouOoz5I4JJ": ["ممتاز يا أنوس.. شد حيلك عشان تفضل المركز الأول وتختم القرآن"], // أنس عمرو
 
     "vA6R8tuaLEx8LqeXNfzk": [], // أنس محمد
 
@@ -346,7 +346,7 @@ const studentMessages = {
 
     "4lhts9Q94OM3hUGzfwNZ": [], // آيسل علاء
       
-    "e1d62486-9102-4301-a7f1-9e1a4cd9bac6": ["أهلا أهلا بيكِ يا دارين بأول كود ليكِ فالموقع.. شدي حيلك بقى عشان تكسبي"], //  دارين
+    "e1d62486-9102-4301-a7f1-9e1a4cd9bac6": ["ممتازة بارك الله فيكِ يا دارين"], //  دارين
 
     "CcazIUt2YePLVlJG4b5k": [], // رجب عطية
 
@@ -378,7 +378,7 @@ const studentMessages = {
 
     "ase0IGxPbIzwOhHuSUQS": [], // عبد الرحمن ضياء
 
-    "xhj7gHxdMD8KXQYEoRKO": ["مبروك ال١٠٠ جنيه يا عبد الرحمن تستاهلها يا جميل"], // عبد الرحمن عصام
+    "xhj7gHxdMD8KXQYEoRKO": ["ربنا يبارك فيك يا عبّود"], // عبد الرحمن عصام
 
     "By5JZjPnoqdenUQqdpmh": [], // عبد الرحمن محمد
 
