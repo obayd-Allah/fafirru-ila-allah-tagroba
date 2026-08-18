@@ -69,6 +69,10 @@ const boyMessages = [
     "تمام جدًا تمام جدًا 👍 ربنا يبارك فيك يا {allnames}", 
    "بتحب النبيﷺ يا {allnames}؟ النبيﷺ قال: (خيرُكُم مَن تعلَّمَ القرآنَ وعلَّمَهُ)", 
    "{allnames}؛ إياك تنسى إننا بنتسابق على الجنة.. مش عالجواهر💎 ", 
+
+   "{allnames}؛ تعرف بقيت المركز الكام؟ بقيت فالمركز الـ{rank}.. كمل عشان الجنة", 
+   "كنت {oldpoints} جواهر 💎 وزدت {addpoints}.. ممم حلو حلو ربنا يتقبل", 
+
    
 
    
@@ -95,7 +99,12 @@ const girlMessages = [
 
     "تمام جدًا تمام جدًا 👍 ربنا يبارك فيكِ يا {allnames}", 
    "بتحبي النبيﷺ يا {allnames}؟ النبيﷺ قال: (خيرُكُم مَن تعلَّمَ القرآنَ وعلَّمَهُ)", 
-    "{nickname}؛ إياكِ تنسي إننا بنتسابق على الجنة.. مش عالجواهر💎 "
+    "{nickname}؛ إياكِ تنسي إننا بنتسابق على الجنة.. مش عالجواهر💎 ", 
+
+    "{allnames}؛ تعرفي بقيتِ المركز الكام؟ بقيتِ فالمركز الـ{rank}.. كملي عشان الجنة", 
+     "كنتِ {oldpoints} جواهر 💎 وزدت {addpoints}.. ممم حلو حلو ربنا يتقبل", 
+ 
+    
  
 
 ];
@@ -2106,9 +2115,12 @@ rewardColors[Math.floor(Math.random() * rewardColors.length)];
 const len = randomMessage.length;
 
 const messageSize =
-len > 40 ? "24px" :
-len > 28 ? "25px" :
-"26px";
+    len > 90 ? "17px" :
+    len > 70 ? "18px" :
+    len > 55 ? "19px" :
+    len > 40 ? "21px" :
+    len > 28 ? "23px" :
+    "25px";
      
 rewardMessage.innerHTML = `
 <div
