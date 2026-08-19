@@ -206,7 +206,7 @@ const studentMessages = {
 
     "RflsYHtuVFV9fDg4l8ay": [], // حمزة أحمد خلف
 
-    "yUzZktjMy7RB80zM2nOg": [], // حمزة حسن عبد الشافي
+    "yUzZktjMy7RB80zM2nOg": ["حمد الله على السلامة يا بطل وحشتنا.. يا رب الرحلة كانت ممتعة؟؟"], // حمزة حسن عبد الشافي
 
     "8dN6AqI0AKWQ7YzVpSd6": [], // حمزة رامي سيد
 
