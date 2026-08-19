@@ -173,7 +173,7 @@ const studentMessages = {
 
     "yfrHKBmiky04Nrt7TOoR": [], // سيف أحمد موسى
 
-    "1ff3184d-f6f7-4f88-b046-ba6bac38434a": [], // شيخ أسامة (مميز جدًا 🌟)
+    "1ff3184d-f6f7-4f88-b046-ba6bac38434a": [], // (عبيد الله أسامة)
 
     "3eb28761-9f13-4cae-9ccc-b906a1717dab": [], // رودينا محمد
 
@@ -311,7 +311,7 @@ const studentMessages = {
 
     "P4F1MQY6NK11Aa0p63lg": [], // أنس حامد حامد
 
-    "QlFz2VagW9ouOoz5I4JJ": ["ممتاز يا أنوس.. شد حيلك عشان تفضل المركز الأول وتختم القرآن"], // أنس عمرو
+    "QlFz2VagW9ouOoz5I4JJ": ["ممتاز يا أنوس"], // أنس عمرو
 
     "vA6R8tuaLEx8LqeXNfzk": [], // أنس محمد
 
