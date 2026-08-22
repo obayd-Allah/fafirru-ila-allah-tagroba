@@ -3141,7 +3141,7 @@ const secondaryIntroThemes = {
         className: "secondary-underwater"
     },
 
-    study: {
+    school4: {
         title: "أهلًا بالدراسة",
         subtitle: "عام دراسي سعيد!",
         duration: 2000,
