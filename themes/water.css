@@ -2486,6 +2486,25 @@ button:active,
     translateY(3px);
 
 }
+
+/* =====================================================
+   منع الإيموجي العائم من النزول عند الضغط
+   ===================================================== */
+
+.floating-reward,
+.floating-reward:active,
+.floating-reward-btn,
+.floating-reward-btn:active{
+
+    transform:none !important;
+    translate:none !important;
+}
+
+/* لا نريد تأثير الضغط العام على الإيموجي العائم */
+.floating-reward:active{
+
+    margin-top:0;
+}
 /*====================================
         Firefox Android Fix
 ====================================*/
