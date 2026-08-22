@@ -2109,50 +2109,59 @@ linear-gradient(
 
     font-size:42px;
 
+    line-height:1;
+
     user-select:none;
 
     cursor:pointer;
 
     pointer-events:auto;
 
-    transform:translate(-50%,-50%);
-
     z-index:999999;
 
-    animation:floatReward 3.5s ease-in-out infinite;
+    will-change:top;
 
 }
 
-@keyframes floatReward{
+
+/* الحركة الصاعدة */
+.floating-reward.float-up{
+
+    animation:
+        floatingRewardUp
+        3.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes floatingRewardUp{
 
     0%{
 
-        transform:
-        translate(-50%,-50%);
+        top:calc(var(--reward-top) + 0px);
 
     }
 
     50%{
 
-        transform:
-        translate(-50%,-62%);
+        top:calc(var(--reward-top) - 10px);
 
     }
 
     100%{
 
-        transform:
-        translate(-50%,-50%);
+        top:calc(var(--reward-top) + 0px);
 
     }
 
 }
 
+
 .floating-reward.tap{
 
-    transform:
-    translate(-50%,-50%)
-    scale(1.2);
+    scale:1.2;
 
 }
 
