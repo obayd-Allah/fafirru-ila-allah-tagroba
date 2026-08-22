@@ -2433,27 +2433,20 @@ document.title = mosqueData.name;
 const themeLink = document.getElementById("themeStyle");
 
 if (themeLink) {
+
     const currentTheme =
-    CURRENT_MOSQUE.theme
-    ||
-    "theme1";
+        CURRENT_MOSQUE.theme || "theme1";
 
-const themeLink =
-    document.getElementById(
-        "themeStyle"
-    );
-
-if(themeLink){
     themeLink.href =
         "themes/" +
         currentTheme +
         ".css";
-}
 
-/* تجهيز الانترو الثانوي إن وجد */
-prepareSecondaryIntro(
-    currentTheme
-);
+    /* تجهيز الانترو الثانوي إن وجد */
+    prepareSecondaryIntro(
+        currentTheme
+    );
+}
 
 // منع سحب الصور
 //document.addEventListener("dragstart",e=>{
