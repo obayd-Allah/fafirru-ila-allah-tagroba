@@ -3144,7 +3144,7 @@ const secondaryIntroThemes = {
         title: "أهلًا بالدراسة",
         subtitle: "عام دراسي سعيد!",
         duration: 2000,
-        className: "secondary-study"
+        className: "secondary-school4"
     }
 
 };
