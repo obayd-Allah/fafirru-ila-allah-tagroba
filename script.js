@@ -2015,7 +2015,7 @@ await transaction.get(mosqueStudentsRef);
             }
 
             const rewardData = rewardSnap.data();
-٩
+
 if (rewardData.mosqueId !== mosqueId) {
     throw new Error("الكود غير موجود");
 }
