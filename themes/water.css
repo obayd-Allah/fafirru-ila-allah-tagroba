@@ -2109,43 +2109,50 @@ linear-gradient(
 
     font-size:42px;
 
-    line-height:1;
-
     user-select:none;
 
     cursor:pointer;
 
     pointer-events:auto;
 
+    transform:translate(-50%,-50%);
+
     z-index:999999;
 
     animation:floatReward 3.5s ease-in-out infinite;
 
-    will-change:transform;
-
 }
-
 
 @keyframes floatReward{
 
     0%{
-        margin-top:0;
+
+        transform:
+        translate(-50%,-50%);
+
     }
 
     50%{
-        margin-top:-10px;
+
+        transform:
+        translate(-50%,-62%);
+
     }
 
     100%{
-        margin-top:0;
+
+        transform:
+        translate(-50%,-50%);
+
     }
 
 }
 
-
 .floating-reward.tap{
 
-    scale:1.2;
+    transform:
+    translate(-50%,-50%)
+    scale(1.2);
 
 }
 
