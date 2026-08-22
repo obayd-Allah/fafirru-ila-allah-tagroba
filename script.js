@@ -3130,6 +3130,9 @@ function startIntro(){
 /* =========================================================
    SECONDARY INTRO THEMES
 ========================================================= */
+/* =========================================================
+   SECONDARY INTRO THEMES
+========================================================= */
 
 const secondaryIntroThemes = {
 
@@ -3148,6 +3151,8 @@ const secondaryIntroThemes = {
     }
 
 };
+
+
 /* =========================================================
    PREPARE SECONDARY INTRO
 ========================================================= */
@@ -3162,7 +3167,9 @@ function prepareSecondaryIntro(theme){
     const config =
         secondaryIntroThemes[theme];
 
+
     /* إذا لم يكن للثيم انترو ثانوي */
+
     if(!config){
 
         intro.hidden = true;
@@ -3173,16 +3180,22 @@ function prepareSecondaryIntro(theme){
         return;
     }
 
+
     /* تنظيف كلاسات الثيمات القديمة */
+
     intro.className =
         "secondary-intro";
 
+
     /* إضافة كلاس الثيم الحالي */
+
     intro.classList.add(
         config.className
     );
 
+
     /* وضع النصوص */
+
     const title =
         intro.querySelector(
             ".secondary-intro-title"
@@ -3193,23 +3206,109 @@ function prepareSecondaryIntro(theme){
             ".secondary-intro-subtitle"
         );
 
+
     if(title){
+
         title.textContent =
             config.title;
+
     }
+
 
     if(subtitle){
+
         subtitle.textContent =
             config.subtitle;
+
     }
 
+
     /* حفظ مدة الظهور */
+
     intro.dataset.duration =
         config.duration;
+
 
     /*
        يصبح جاهزًا وموجودًا بالفعل
        تحت الانترو الأساسي
     */
+
     intro.hidden = false;
+
 }
+
+
+/* =========================================================
+   START APPLICATION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    /*
+       تشغيل الانترو الأساسي فورًا.
+
+       هذا هو المسؤول عن:
+       - الألوان
+       - الدوائر
+       - الحركة
+       - العنوان
+       - الآية أو الحديث
+    */
+
+    startIntro();
+
+
+    /*
+       نبدأ تحميل إعدادات المسجد وFirebase.
+
+       الانترو الأساسي يعمل في نفس الوقت،
+       لذلك لن تبقى الصفحة فارغة أثناء التحميل.
+    */
+
+    try{
+
+        await loadMosqueConfig();
+
+    }catch(error){
+
+        console.error(
+            "حدث خطأ أثناء تحميل إعدادات المسجد:",
+            error
+        );
+
+    }
+
+
+    /*
+       الانتظار قليلًا حتى يظهر الانترو الأساسي.
+
+       Firebase لا يتحكم في مدة ظهور الانترو.
+    */
+
+    setTimeout(() => {
+
+
+        /*
+           إنهاء الانترو الأساسي
+        */
+
+        finishIntro();
+
+
+        /*
+           إذا كان هناك انترو ثانوي،
+           نشغّل عداد انتهائه بعد بدء خروج
+           الانترو الأساسي.
+        */
+
+        setTimeout(() => {
+
+            finishSecondaryIntro();
+
+        }, 900);
+
+
+    }, 3500);
+
+});
