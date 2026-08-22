@@ -544,7 +544,646 @@ href="">
     }
 
 }
-      
+
+      /* =========================================================
+   SECONDARY INTRO - BASE
+========================================================= */
+
+.secondary-intro{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999998;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    isolation:isolate;
+
+    font-family:Cairo,sans-serif;
+
+}
+
+
+.secondary-intro[hidden]{
+
+    display:none;
+
+}
+
+
+/* الخلفية */
+
+.secondary-intro-bg{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+}
+
+
+/* المحتوى */
+
+.secondary-intro-content{
+
+    position:relative;
+
+    z-index:5;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+
+/* الأيقونة */
+
+.secondary-intro-icon{
+
+    font-size:clamp(70px,18vw,150px);
+
+    line-height:1;
+
+    margin-bottom:20px;
+
+}
+
+
+/* النص */
+
+.secondary-intro-text{
+
+    color:white;
+
+}
+
+
+/* العنوان */
+
+.secondary-intro-title{
+
+    font-size:clamp(38px,9vw,80px);
+
+    font-weight:900;
+
+    line-height:1.25;
+
+}
+
+
+/* العنوان الفرعي */
+
+.secondary-intro-subtitle{
+
+    margin-top:12px;
+
+    font-size:clamp(20px,5vw,40px);
+
+    font-weight:800;
+
+}
+
+
+/* الديكورات */
+
+.secondary-intro-decor{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================================
+   خروج الانترو
+========================================================= */
+
+.secondary-intro-hide{
+
+    animation:
+        secondaryIntroExit
+        .7s
+        ease-in
+        forwards;
+
+}
+
+
+@keyframes secondaryIntroExit{
+
+    to{
+
+        opacity:0;
+
+        transform:scale(1.08);
+
+    }
+
+        }
+      /* =========================================================
+   UNDERWATER THEME
+========================================================= */
+
+.secondary-underwater{
+
+    background:
+        linear-gradient(
+            180deg,
+            #0077b6,
+            #0096c7,
+            #00b4d8,
+            #023e8a
+        );
+
+}
+
+
+.secondary-underwater
+.secondary-intro-bg{
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.28),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(0,255,255,.18),
+            transparent 30%
+        );
+
+    animation:
+        underwaterGlow
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* الأيقونة */
+
+.secondary-underwater
+.secondary-intro-icon{
+
+    font-size:clamp(90px,22vw,180px);
+
+    animation:
+        fishFloat
+        2.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+.secondary-underwater
+.secondary-intro-icon::before{
+
+    content:"🐠";
+
+}
+
+
+/* النص */
+
+.secondary-underwater
+.secondary-intro-text{
+
+    text-shadow:
+
+        0 5px 15px rgba(0,0,0,.35),
+
+        0 0 30px rgba(0,220,255,.8);
+
+}
+
+
+.secondary-underwater
+.secondary-intro-title{
+
+    animation:
+        underwaterTitle
+        .8s
+        cubic-bezier(.2,.9,.3,1)
+        forwards;
+
+}
+
+
+.secondary-underwater
+.secondary-intro-subtitle{
+
+    opacity:0;
+
+    animation:
+
+        underwaterSubtitle
+        .8s
+        ease
+        .4s
+        forwards;
+
+}
+
+
+/* الفقاعات */
+
+.secondary-underwater
+.secondary-intro-decor{
+
+    background-image:
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.6) 0 4px,
+            transparent 5px
+        ),
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.4) 0 6px,
+            transparent 7px
+        ),
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.5) 0 3px,
+            transparent 4px
+        );
+
+    background-size:
+
+        120px 180px,
+        180px 250px,
+        90px 140px;
+
+    animation:
+        bubblesMove
+        6s
+        linear
+        infinite;
+
+}
+
+
+@keyframes fishFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            rotate(-4deg);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-20px)
+            rotate(4deg);
+
+    }
+
+}
+
+
+@keyframes underwaterGlow{
+
+    0%,100%{
+
+        transform:
+            scale(1);
+
+        opacity:.7;
+
+    }
+
+    50%{
+
+        transform:
+            scale(1.15);
+
+        opacity:1;
+
+    }
+
+}
+
+
+@keyframes bubblesMove{
+
+    from{
+
+        background-position:
+
+            0 100vh,
+            50px 120vh,
+            20px 110vh;
+
+    }
+
+    to{
+
+        background-position:
+
+            0 -200px,
+            50px -250px,
+            20px -180px;
+
+    }
+
+}
+
+
+@keyframes underwaterTitle{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(-60px)
+            scale(.6);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+@keyframes underwaterSubtitle{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+      /* =========================================================
+   SCHOOL 4 THEME
+========================================================= */
+
+.secondary-school4{
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffb703,
+            #fb8500,
+            #ff9f1c
+        );
+
+}
+
+
+.secondary-school4
+.secondary-intro-bg{
+
+    background:
+
+        linear-gradient(
+            rgba(255,255,255,.12),
+            rgba(255,255,255,.04)
+        );
+
+}
+
+
+/* الأيقونة */
+
+.secondary-school4
+.secondary-intro-icon::before{
+
+    content:"📚";
+
+}
+
+
+.secondary-school4
+.secondary-intro-icon{
+
+    font-size:clamp(90px,22vw,180px);
+
+    animation:
+        schoolBounce
+        1.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* النص */
+
+.secondary-school4
+.secondary-intro-text{
+
+    text-shadow:
+
+        0 5px 0 rgba(120,60,0,.2),
+
+        0 10px 25px rgba(0,0,0,.2);
+
+}
+
+
+/* دخول العنوان */
+
+.secondary-school4
+.secondary-intro-title{
+
+    animation:
+
+        schoolTitle
+        .8s
+        cubic-bezier(.2,1.5,.5,1)
+        forwards;
+
+}
+
+
+/* العنوان الفرعي */
+
+.secondary-school4
+.secondary-intro-subtitle{
+
+    opacity:0;
+
+    animation:
+
+        schoolSubtitle
+        .7s
+        ease
+        .45s
+        forwards;
+
+}
+
+
+/* زخارف */
+
+.secondary-school4
+.secondary-intro-decor{
+
+    background-image:
+
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.35) 0 5px,
+            transparent 6px
+        );
+
+    background-size:
+        80px 80px;
+
+    animation:
+        schoolDecor
+        8s
+        linear
+        infinite;
+
+}
+
+
+@keyframes schoolBounce{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            rotate(-5deg);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-18px)
+            rotate(5deg);
+
+    }
+
+}
+
+
+@keyframes schoolTitle{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            rotate(-8deg)
+            scale(.4);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            rotate(0)
+            scale(1);
+
+    }
+
+}
+
+
+@keyframes schoolSubtitle{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes schoolDecor{
+
+    from{
+
+        background-position:
+            0 0;
+
+    }
+
+    to{
+
+        background-position:
+            80px 80px;
+
+    }
+
+}
   </style>
 
 
