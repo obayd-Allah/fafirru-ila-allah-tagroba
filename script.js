@@ -1203,6 +1203,13 @@ catch(error){
 }
 finally{
 
+    /* =================================================
+       5️⃣ بعد تحقق الشروط:
+       تجهيز الانترو الثانوي ثم إنهاء الانترو الأساسي
+    ================================================= */
+
+    startSecondaryIntro();
+
     finishIntro();
 
 }
@@ -1987,7 +1994,6 @@ document.getElementById("closeReward").style.display = "";
 let totalPoints = 0;
 let oldPoints = 0;
     try{
-
         await runTransaction(db,async(transaction)=>{
 
             const mosqueStudentsSnap =
@@ -2009,7 +2015,7 @@ await transaction.get(mosqueStudentsRef);
             }
 
             const rewardData = rewardSnap.data();
-
+٩
 if (rewardData.mosqueId !== mosqueId) {
     throw new Error("الكود غير موجود");
 }
@@ -2428,11 +2434,27 @@ document.title = mosqueData.name;
 const themeLink = document.getElementById("themeStyle");
 
 if (themeLink) {
+    const currentTheme =
+    CURRENT_MOSQUE.theme
+    ||
+    "theme1";
+
+const themeLink =
+    document.getElementById(
+        "themeStyle"
+    );
+
+if(themeLink){
     themeLink.href =
         "themes/" +
-        (CURRENT_MOSQUE.theme || "theme1") +
+        currentTheme +
         ".css";
 }
+
+/* تجهيز الانترو الثانوي إن وجد */
+prepareSecondaryIntro(
+    currentTheme
+);
 
 // منع سحب الصور
 //document.addEventListener("dragstart",e=>{
@@ -2487,17 +2509,81 @@ if (themeLink) {
 
     document.title = mosqueData.name;
 
-    const themeLink = document.getElementById("themeStyle");
-    if(themeLink){
-        themeLink.href =
-            "themes/" +
-            (CURRENT_MOSQUE.theme || "theme1") +
-            ".css";
-    }
+    const currentTheme =
+    CURRENT_MOSQUE.theme
+    ||
+    "theme1";
+
+const themeLink =
+    document.getElementById(
+        "themeStyle"
+    );
+
+if(themeLink){
+    themeLink.href =
+        "themes/" +
+        currentTheme +
+        ".css";
+}
+
+/* تجهيز الانترو الثانوي إن وجد */
+prepareSecondaryIntro(
+    currentTheme
+);
     }
 }
 
+/* =========================================================
+   FINISH SECONDARY INTRO
+========================================================= */
 
+function finishSecondaryIntro(){
+
+    const intro =
+        document.getElementById(
+            "secondaryIntro"
+        );
+
+    if(
+        !intro ||
+        intro.hidden
+    ){
+        return;
+    }
+
+    const duration =
+        Number(
+            intro.dataset.duration
+        )
+        ||
+        2000;
+
+    /*
+       الانترو موجود بالفعل
+       والكلام ظاهر.
+       ننتظر فقط مدته.
+    */
+    setTimeout(()=>{
+
+        /*
+           بدء حركة الخروج
+        */
+        intro.classList.add(
+            "secondary-intro-hide"
+        );
+
+        /*
+           بعد انتهاء الخروج
+           نحذفه تمامًا
+        */
+        setTimeout(()=>{
+
+            intro.remove();
+
+        },700);
+
+    },duration);
+}
 function finishIntro(){
 
 const loader=document.getElementById("introLoader");
@@ -3042,3 +3128,89 @@ function startIntro(){
         ];
 
         }
+/* =========================================================
+   SECONDARY INTRO THEMES
+========================================================= */
+
+const secondaryIntroThemes = {
+
+    underwater: {
+        title: "تحت البحر",
+        subtitle: "لفترة محدودة..!",
+        duration: 2000,
+        className: "secondary-underwater"
+    },
+
+    study: {
+        title: "أهلًا بالدراسة",
+        subtitle: "عام دراسي سعيد!",
+        duration: 2000,
+        className: "secondary-study"
+    }
+
+};
+/* =========================================================
+   PREPARE SECONDARY INTRO
+========================================================= */
+
+function prepareSecondaryIntro(theme){
+
+    const intro =
+        document.getElementById("secondaryIntro");
+
+    if(!intro) return;
+
+    const config =
+        secondaryIntroThemes[theme];
+
+    /* إذا لم يكن للثيم انترو ثانوي */
+    if(!config){
+
+        intro.hidden = true;
+
+        intro.className =
+            "secondary-intro";
+
+        return;
+    }
+
+    /* تنظيف كلاسات الثيمات القديمة */
+    intro.className =
+        "secondary-intro";
+
+    /* إضافة كلاس الثيم الحالي */
+    intro.classList.add(
+        config.className
+    );
+
+    /* وضع النصوص */
+    const title =
+        intro.querySelector(
+            ".secondary-intro-title"
+        );
+
+    const subtitle =
+        intro.querySelector(
+            ".secondary-intro-subtitle"
+        );
+
+    if(title){
+        title.textContent =
+            config.title;
+    }
+
+    if(subtitle){
+        subtitle.textContent =
+            config.subtitle;
+    }
+
+    /* حفظ مدة الظهور */
+    intro.dataset.duration =
+        config.duration;
+
+    /*
+       يصبح جاهزًا وموجودًا بالفعل
+       تحت الانترو الأساسي
+    */
+    intro.hidden = false;
+}
