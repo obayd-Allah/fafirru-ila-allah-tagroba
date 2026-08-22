@@ -3130,15 +3130,15 @@ function startIntro(){
 const secondaryIntroThemes = {
 
     water: {
-        title: "تـحـت الـبـحـر",
+        title: "تـحـت الـبـحـر 🌊",
         subtitle: "لفترة محدودة..!",
         duration: 2000,
         className: "secondary-underwater"
     },
 
     school4: {
-        title: "أهلًا بالدراسة",
-        subtitle: "عام دراسي سعيد!",
+        title: "أهـلًا بـالـدراسـة 🏫",
+        subtitle: "عام دراسي سعيد! 🎒",
         duration: 2000,
         className: "secondary-school4"
     }
