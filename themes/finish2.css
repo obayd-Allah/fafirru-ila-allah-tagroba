@@ -1,0 +1,5099 @@
+/*====================================================
+        Theme 4
+        Celebration Honors UI
+        الجزء الأول
+====================================================*/
+
+/*=========================
+        Reset
+=========================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+
+    direction:rtl;
+
+    font-family:"Cairo",sans-serif;
+
+    color:#44385c;
+
+    overflow-x:hidden;
+
+    min-height:100vh;
+
+    position:relative;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #eaf2ff 0%,
+        #f7edff 34%,
+        #fff7e8 62%,
+        #ffeecf 100%
+    );
+
+}
+
+
+/*=========================
+        خلفية التكريم
+=========================*/
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-2;
+
+    background:
+
+    /* هالة احتفالية */
+
+    radial-gradient(
+        circle at 82% 12%,
+        rgba(255,220,117,.72) 0 70px,
+        rgba(255,220,117,.18) 71px,
+        transparent 135px
+    ),
+
+    /* بالون ناعم */
+
+    radial-gradient(
+        ellipse at 12% 16%,
+        rgba(163,137,255,.22) 0 34px,
+        transparent 35px
+    ),
+
+    radial-gradient(
+        ellipse at 18% 10%,
+        rgba(255,158,202,.20) 0 28px,
+        transparent 29px
+    ),
+
+    /* نقاط احتفالية */
+
+    radial-gradient(
+        circle at 28% 24%,
+        rgba(255,255,255,.82) 0 4px,
+        transparent 5px
+    ),
+
+    radial-gradient(
+        circle at 68% 31%,
+        rgba(255,255,255,.75) 0 5px,
+        transparent 6px
+    ),
+
+    radial-gradient(
+        circle at 92% 48%,
+        rgba(255,212,102,.55) 0 4px,
+        transparent 5px
+    ),
+
+    radial-gradient(
+        circle at 8% 62%,
+        rgba(177,148,255,.45) 0 5px,
+        transparent 6px
+    ),
+
+    radial-gradient(
+        circle at 52% 78%,
+        rgba(255,173,208,.38) 0 4px,
+        transparent 5px
+    );
+
+
+    animation:
+    celebrationSky
+    18s
+    ease-in-out
+    infinite;
+
+}
+
+
+/*=========================
+        أرضية احتفالية
+=========================*/
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:34vh;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    background:
+
+    radial-gradient(
+        ellipse at 8% 100%,
+        #e7d7ff 0 180px,
+        transparent 182px
+    ),
+
+    radial-gradient(
+        ellipse at 32% 100%,
+        #ffe2ba 0 230px,
+        transparent 232px
+    ),
+
+    radial-gradient(
+        ellipse at 60% 100%,
+        #d9e6ff 0 210px,
+        transparent 212px
+    ),
+
+    radial-gradient(
+        ellipse at 90% 100%,
+        #f8d9e9 0 240px,
+        transparent 242px
+    );
+
+    opacity:.82;
+
+}
+
+
+/*=========================
+        الروابط
+=========================*/
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+
+a:hover{
+
+    opacity:.92;
+
+}
+
+
+/*=========================
+        الصور
+=========================*/
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+    -webkit-user-drag:none;
+
+}
+
+
+/*=========================
+        الحاوية
+=========================*/
+
+.container{
+
+    width:min(1180px,94%);
+
+    margin:auto;
+
+    padding:
+
+    30px
+
+    0
+
+    65px;
+
+}
+
+
+/*=========================
+        زخارف إضافية
+=========================*/
+
+.world-bg{
+
+    display:none;
+
+}
+
+
+/*====================================================
+        الحركات
+====================================================*/
+
+
+/* حركة الخلفية */
+
+@keyframes celebrationSky{
+
+    0%{
+
+        transform:
+        translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:
+        translateY(-10px);
+
+    }
+
+
+    100%{
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+
+/* حركة طفو هادئة */
+
+@keyframes float{
+
+    0%{
+
+        transform:
+        translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:
+        translateY(-8px);
+
+    }
+
+
+    100%{
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+
+/* حركة النجمة */
+
+@keyframes sparkle{
+
+    0%,
+    100%{
+
+        transform:
+        scale(.8)
+        rotate(0deg);
+
+        opacity:.55;
+
+    }
+
+
+    50%{
+
+        transform:
+        scale(1.15)
+        rotate(12deg);
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ظهور احتفالي */
+
+@keyframes softPop{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(18px)
+
+        scale(.96);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0)
+
+        scale(1);
+
+    }
+
+}
+
+
+/* لمعان */
+
+@keyframes shineMove{
+
+    from{
+
+        transform:
+        translateX(-160%)
+        rotate(22deg);
+
+    }
+
+
+    to{
+
+        transform:
+        translateX(260%)
+        rotate(22deg);
+
+    }
+
+}
+/*====================================================
+        Theme 4
+        Celebration Honors UI
+        Hero
+====================================================*/
+
+/*=========================
+        Hero
+=========================*/
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    min-height:410px;
+
+    padding:
+
+    48px
+
+    20px
+
+    72px;
+
+    border-bottom-left-radius:60px;
+
+    border-bottom-right-radius:60px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #7666d8 0%,
+        #9988ed 32%,
+        #c6b7ff 62%,
+        #f4dfff 100%
+    );
+
+    box-shadow:
+
+    inset 0 -8px 0
+    rgba(255,255,255,.14),
+
+    0 20px 45px
+    rgba(72,54,120,.25);
+
+}
+
+
+/*=========================
+        الإضاءة الاحتفالية
+=========================*/
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+    /* هالة ذهبية */
+
+    radial-gradient(
+        circle at 50% 5%,
+        rgba(255,235,158,.55),
+        transparent 25%
+    ),
+
+    /* إضاءة جانبية */
+
+    radial-gradient(
+        circle at 8% 28%,
+        rgba(255,255,255,.16),
+        transparent 18%
+    ),
+
+    radial-gradient(
+        circle at 92% 35%,
+        rgba(255,222,140,.20),
+        transparent 19%
+    ),
+
+    /* نجوم صغيرة */
+
+    radial-gradient(
+        circle at 18% 18%,
+        rgba(255,255,255,.9) 0 3px,
+        transparent 4px
+    ),
+
+    radial-gradient(
+        circle at 82% 24%,
+        rgba(255,255,255,.8) 0 4px,
+        transparent 5px
+    ),
+
+    radial-gradient(
+        circle at 28% 48%,
+        rgba(255,225,132,.8) 0 3px,
+        transparent 4px
+    ),
+
+    radial-gradient(
+        circle at 72% 55%,
+        rgba(255,255,255,.7) 0 3px,
+        transparent 4px
+    );
+
+}
+
+
+/*=========================
+        منصة التكريم
+=========================*/
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    height:105px;
+
+    pointer-events:none;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #fff0b9 0%,
+        #e8b94d 45%,
+        #b87820 100%
+    );
+
+    clip-path:
+
+    polygon(
+
+        0 100%,
+
+        0 70%,
+
+        8% 61%,
+
+        18% 67%,
+
+        28% 48%,
+
+        39% 60%,
+
+        50% 34%,
+
+        61% 60%,
+
+        72% 48%,
+
+        82% 67%,
+
+        92% 61%,
+
+        100% 70%,
+
+        100% 100%
+
+    );
+
+}
+
+
+/*=========================
+        المحتوى
+=========================*/
+
+.overlay{
+
+    position:relative;
+
+    z-index:5;
+
+    width:100%;
+
+}
+
+
+/*=========================
+        الشعار
+=========================*/
+
+.logo{
+
+    width:172px;
+
+    height:172px;
+
+    margin:
+
+    0
+
+    auto
+
+    25px;
+
+    object-fit:contain;
+
+    padding:11px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle at 35% 25%,
+
+        #ffffff,
+
+        #fff3c7 58%,
+
+        #e9c76d 100%
+
+    );
+
+    border:
+
+    8px
+
+    solid
+
+    #f7dc81;
+
+    box-shadow:
+
+    0 0 0 6px
+    rgba(255,255,255,.38),
+
+    0 0 0 10px
+    rgba(207,162,54,.28),
+
+    0 10px 0
+    #b98124,
+
+    0 24px 38px
+    rgba(44,27,82,.26);
+
+    animation:
+
+    float
+
+    4s
+
+    ease-in-out
+
+    infinite;
+
+    transition:.3s;
+
+}
+
+
+/* لمعان خفيف */
+
+.logo:hover{
+
+    transform:
+
+    scale(1.07)
+
+    rotate(-4deg);
+
+}
+
+
+/*=========================
+        صورة العنوان
+=========================*/
+
+.hero-title{
+
+    width:
+
+    min(
+        92%,
+        640px
+    );
+
+    display:block;
+
+    margin:
+
+    0
+
+    auto
+
+    20px;
+
+    filter:
+
+    drop-shadow(
+        0 12px 18px
+        rgba(48,30,84,.2)
+    );
+
+    animation:
+
+    float
+
+    3.8s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+
+/*=========================
+        العنوان
+=========================*/
+
+.hero h1{
+
+    position:relative;
+
+    display:inline-block;
+
+    padding:
+
+    17px
+
+    44px;
+
+    border-radius:28px;
+
+    color:
+
+    #fffaf0;
+
+    font-size:56px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #7867d4,
+        #5542aa
+    );
+
+    border:
+
+    5px
+
+    solid
+
+    #f8df8b;
+
+    text-shadow:
+
+    0 3px 0
+    rgba(45,29,90,.4),
+
+    0 7px 16px
+    rgba(0,0,0,.18);
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.18),
+
+    0 9px 0
+    #392b79,
+
+    0 21px 35px
+    rgba(42,27,82,.25);
+
+}
+
+
+/*=========================
+        Game Title
+=========================*/
+
+.game-title{
+
+    font-size:56px;
+
+    font-weight:900;
+
+}
+
+
+/* الحروف */
+
+.game-title span{
+
+    display:inline-block;
+
+    transition:.25s;
+
+}
+
+
+/* حركة أنيقة */
+
+.game-title span:hover{
+
+    transform:
+
+    translateY(-6px)
+
+    rotate(-3deg);
+
+}
+
+
+/*=========================
+        الألوان
+=========================*/
+
+.pink{
+
+    color:#ffb1d2;
+
+}
+
+
+.green{
+
+    color:#b8f0a0;
+
+}
+
+
+.blue{
+
+    color:#b9e8ff;
+
+}
+
+
+/*=========================
+        الوصف
+=========================*/
+
+.subtitle{
+
+    position:relative;
+
+    display:inline-block;
+
+    margin-top:24px;
+
+    padding:
+
+    10px
+
+    24px;
+
+    border-radius:999px;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:
+
+    #fff9e9;
+
+    background:
+
+    rgba(
+        83,
+        65,
+        160,
+        .24
+    );
+
+    border:
+
+    1px
+
+    solid
+
+    rgba(
+        255,
+        255,
+        255,
+        .24
+    );
+
+    text-shadow:
+
+    0 2px 0
+    rgba(48,31,93,.38),
+
+    0 7px 15px
+    rgba(0,0,0,.16);
+
+    backdrop-filter:
+
+    blur(8px);
+
+    animation:
+
+    float
+
+    3.4s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+
+/*=========================
+        نجوم جانبية للعنوان
+=========================*/
+
+.hero h1::before{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:-22px;
+
+    right:-28px;
+
+    font-size:32px;
+
+    color:#ffe98d;
+
+    text-shadow:
+
+    0 0 14px
+    rgba(255,230,100,.75);
+
+    animation:
+
+    sparkle
+
+    2.2s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+
+.hero h1::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    bottom:-22px;
+
+    left:-30px;
+
+    font-size:26px;
+
+    color:#fff;
+
+    text-shadow:
+
+    0 0 14px
+    rgba(255,255,255,.7);
+
+    animation:
+
+    sparkle
+
+    2.8s
+
+    ease-in-out
+
+    infinite;
+
+}
+/*====================================================
+        Theme 4
+        Search + Filters + Statistics
+====================================================*/
+
+/*=========================
+        صندوق البحث
+=========================*/
+
+.search-box{
+
+    max-width:920px;
+
+    margin:38px auto 34px;
+
+    position:relative;
+
+}
+
+
+/* أيقونة البحث */
+
+.search-box::before{
+
+    content:"🔎";
+
+    position:absolute;
+
+    left:24px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:23px;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    filter:
+
+    drop-shadow(
+        0 2px 2px
+        rgba(67,50,100,.16)
+    );
+
+}
+
+
+/* حقل البحث */
+
+.search-box input{
+
+    width:100%;
+
+    padding:
+
+    20px
+
+    68px
+
+    20px
+
+    26px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:24px;
+
+    font-size:19px;
+
+    font-weight:800;
+
+    color:#44385c;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #f7f0ff
+    );
+
+    border:
+
+    4px
+
+    solid
+
+    #d7c8f5;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.8),
+
+    0 8px 0
+    #a894d2,
+
+    0 20px 32px
+    rgba(77,57,120,.16);
+
+    transition:.25s;
+
+}
+
+
+/* Placeholder */
+
+.search-box input::placeholder{
+
+    color:#9b8eae;
+
+}
+
+
+/* Focus */
+
+.search-box input:focus{
+
+    transform:
+
+    translateY(-3px);
+
+    border-color:
+
+    #f0cf70;
+
+    box-shadow:
+
+    0 0 0 6px
+    rgba(255,218,115,.18),
+
+    inset 0 3px 0
+    rgba(255,255,255,.9),
+
+    0 10px 0
+    #a894d2,
+
+    0 25px 38px
+    rgba(77,57,120,.18);
+
+}
+
+
+/*=========================
+        الفلاتر
+=========================*/
+
+.filters{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:16px;
+
+    margin-bottom:46px;
+
+}
+
+
+/*=========================
+        أزرار الفلاتر
+=========================*/
+
+.filter-btn{
+
+    position:relative;
+
+    min-width:155px;
+
+    padding:
+
+    16px
+
+    28px;
+
+    border:none;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    border-radius:19px;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:
+
+    #ffffff;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #8d7be1,
+        #6855ba
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.18),
+
+    0 7px 0
+    #4b3a96,
+
+    0 17px 28px
+    rgba(75,57,130,.2);
+
+    transition:.2s;
+
+}
+
+
+/* اللمعة */
+
+.filter-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-130%;
+
+    left:-55%;
+
+    width:42%;
+
+    height:300%;
+
+    background:
+
+    rgba(
+        255,
+        255,
+        255,
+        .18
+    );
+
+    transform:
+
+    rotate(24deg);
+
+    transition:.55s;
+
+}
+
+
+/* Hover */
+
+.filter-btn:hover{
+
+    transform:
+
+    translateY(-5px)
+
+    scale(1.025);
+
+}
+
+
+/* حركة اللمعة */
+
+.filter-btn:hover::after{
+
+    left:125%;
+
+}
+
+
+/* Active */
+
+.filter-btn:active{
+
+    transform:
+
+    translateY(4px);
+
+    box-shadow:
+
+    0 2px 0
+    #4b3a96;
+
+}
+
+
+/*=========================
+        الزر النشط
+=========================*/
+
+.filter-btn.active{
+
+    color:
+
+    #654b14;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffe995,
+        #f2b93e
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.45),
+
+    0 7px 0
+    #bd7c16,
+
+    0 18px 30px
+    rgba(222,165,46,.28);
+
+}
+
+
+/*=========================
+        الإحصائيات
+=========================*/
+
+.statistics{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(
+        auto-fit,
+        minmax(240px,1fr)
+    );
+
+    gap:25px;
+
+    margin-bottom:48px;
+
+}
+
+
+/*=========================
+        بطاقة الإنجاز
+=========================*/
+
+.stat-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:24px;
+
+    border-radius:28px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff 0%,
+        #f7f1ff 100%
+    );
+
+    border:
+
+    4px
+
+    solid
+
+    #d9cdf2;
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.9),
+
+    0 9px 0
+    #aa97ce,
+
+    0 21px 34px
+    rgba(69,52,104,.14);
+
+    transition:.25s;
+
+}
+
+
+/* هالة البطاقة */
+
+.stat-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-95px;
+
+    left:-70px;
+
+    width:190px;
+
+    height:190px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(
+            255,
+            231,
+            140,
+            .30
+        ),
+
+        transparent 70%
+
+    );
+
+    pointer-events:none;
+
+}
+
+
+/* شريط ذهبي صغير */
+
+.stat-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    right:24px;
+
+    left:24px;
+
+    height:6px;
+
+    border-radius:
+
+    0
+
+    0
+
+    10px
+
+    10px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        #f2c24d,
+        #fff0a4,
+        #f2c24d,
+        transparent
+    );
+
+}
+
+
+/* Hover */
+
+.stat-card:hover{
+
+    transform:
+
+    translateY(-8px)
+
+    rotate(-.6deg);
+
+}
+
+
+/*=========================
+        الأيقونة
+=========================*/
+
+.stat-icon{
+
+    position:relative;
+
+    z-index:2;
+
+    width:74px;
+
+    height:74px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+    border-radius:23px;
+
+    font-size:33px;
+
+    color:#ffffff;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #a996ed,
+        #7964cf
+    );
+
+    border:
+
+    3px
+
+    solid
+
+    rgba(
+        255,
+        255,
+        255,
+        .38
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.2),
+
+    0 6px 0
+    #5c47ae,
+
+    0 14px 22px
+    rgba(79,61,132,.18);
+
+    transition:.25s;
+
+}
+
+
+/* حركة الأيقونة */
+
+.stat-card:hover .stat-icon{
+
+    transform:
+
+    rotate(-7deg)
+
+    scale(1.08);
+
+}
+
+
+/*=========================
+        عنوان الإحصائية
+=========================*/
+
+.stat-card h3{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-bottom:7px;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:#665477;
+
+}
+
+
+/*=========================
+        الرقم
+=========================*/
+
+.stat-card p{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:34px;
+
+    font-weight:900;
+
+    color:#7b61c9;
+
+    text-shadow:
+
+    0 2px 0
+    rgba(255,255,255,.75);
+
+}
+
+
+/*=========================
+        التحميل
+=========================*/
+
+.loading{
+
+    padding:
+
+    75px
+
+    20px;
+
+    text-align:center;
+
+    font-size:27px;
+
+    font-weight:900;
+
+    color:#7660ad;
+
+    animation:
+
+    loadingHonor
+
+    1.5s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+
+/*=========================
+        حركة التحميل
+=========================*/
+
+@keyframes loadingHonor{
+
+    0%,
+    100%{
+
+        transform:
+
+        translateY(0)
+
+        scale(1);
+
+        opacity:.75;
+
+    }
+
+
+    50%{
+
+        transform:
+
+        translateY(-8px)
+
+        scale(1.025);
+
+        opacity:1;
+
+    }
+
+}
+/*====================================================
+        Theme 4
+        Student Cards
+====================================================*/
+
+/*=========================
+        البطاقات
+=========================*/
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(
+        auto-fill,
+        minmax(320px,1fr)
+    );
+
+    gap:32px;
+
+    margin-bottom:55px;
+
+}
+
+
+/*=========================
+        بطاقة الطالب
+=========================*/
+
+.student-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px 26px 26px;
+
+    border-radius:30px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff 0%,
+        #f7f1ff 58%,
+        #eee5ff 100%
+    );
+
+    border:
+
+    5px
+
+    solid
+
+    #cbbdea;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.85),
+
+    0 10px 0
+    #9f8ac9,
+
+    0 23px 38px
+    rgba(72,52,110,.18);
+
+    transition:.3s;
+
+}
+
+
+/*=========================
+        الشريط العلوي
+=========================*/
+
+.student-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:14px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+
+        #a996ed,
+
+        #f2d276,
+
+        #fff0ad,
+
+        #f2d276,
+
+        #a996ed
+
+    );
+
+}
+
+
+/*=========================
+        الإضاءة
+=========================*/
+
+.student-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-135px;
+
+    left:-90px;
+
+    width:260px;
+
+    height:260px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(
+            255,
+            255,
+            255,
+            .48
+        ),
+
+        rgba(
+            255,
+            237,
+            164,
+            .12
+        ) 42%,
+
+        transparent 72%
+
+    );
+
+}
+
+
+/*=========================
+        Hover
+=========================*/
+
+.student-card:hover{
+
+    transform:
+
+    translateY(-10px)
+
+    rotate(-.7deg);
+
+}
+
+
+/*=========================
+        الاسم
+=========================*/
+
+.student-name{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-bottom:22px;
+
+    padding-left:8px;
+
+    font-size:27px;
+
+    font-weight:900;
+
+    color:#58456f;
+
+    text-shadow:
+
+    0 2px 0
+    rgba(255,255,255,.7);
+
+}
+
+
+/*=========================
+        المعلومات
+=========================*/
+
+.student-info{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:15px 0;
+
+    border-bottom:
+
+    2px
+
+    dashed
+
+    #d8cdea;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:#746486;
+
+}
+
+
+/* آخر معلومة */
+
+.student-info:last-of-type{
+
+    border-bottom:none;
+
+}
+
+
+/*=========================
+        النقاط
+=========================*/
+
+.points{
+
+    position:relative;
+
+    z-index:3;
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-width:78px;
+
+    padding:
+
+    10px
+
+    17px;
+
+    border-radius:999px;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    color:#6c5015;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #fff0a7,
+        #f3c34d
+    );
+
+    border:
+
+    2px
+
+    solid
+
+    rgba(
+        255,
+        255,
+        255,
+        .55
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.45),
+
+    0 5px 0
+    #bb841d,
+
+    0 10px 18px
+    rgba(196,145,33,.18);
+
+}
+
+
+/*=========================
+        الرتبة
+=========================*/
+
+.rank{
+
+    position:relative;
+
+    z-index:2;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:21px;
+
+    padding:
+
+    12px
+
+    23px;
+
+    border-radius:17px;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    color:#ffffff;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #9582e2,
+        #6d59bc
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.18),
+
+    0 5px 0
+    #4e3b99;
+
+    transition:.25s;
+
+}
+
+
+/* Hover للرتبة */
+
+.student-card:hover .rank{
+
+    transform:
+
+    translateY(-2px)
+
+    scale(1.03);
+
+}
+
+
+/*====================================================
+        بطاقات البنات
+====================================================*/
+
+.girl-card{
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff 0%,
+        #fff2f8 58%,
+        #ffe4f0 100%
+    );
+
+    border-color:
+
+    #edb6d0;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.9),
+
+    0 10px 0
+    #c982a8,
+
+    0 23px 38px
+    rgba(139,67,110,.16);
+
+}
+
+
+/* الشريط */
+
+.girl-card::before{
+
+    background:
+
+    linear-gradient(
+        90deg,
+
+        #f29bc7,
+
+        #f8d47c,
+
+        #fff1b0,
+
+        #f8d47c,
+
+        #f29bc7
+
+    );
+
+}
+
+
+/* الاسم */
+
+.girl-card .student-name{
+
+    color:#b65384;
+
+}
+
+
+/* المعلومات */
+
+.girl-card .student-info{
+
+    color:#9a6d85;
+
+    border-color:
+
+    #f0c8da;
+
+}
+
+
+/* النقاط */
+
+.girl-card .points{
+
+    color:#8c3f68;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffd2e6,
+        #f08dbd
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.5),
+
+    0 5px 0
+    #bd5b8c,
+
+    0 10px 18px
+    rgba(194,79,132,.16);
+
+}
+
+
+/* الرتبة */
+
+.girl-card .rank{
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ef9bc4,
+        #ce6397
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.2),
+
+    0 5px 0
+    #a94876;
+
+}
+
+
+/*====================================================
+        المركز الأول
+====================================================*/
+
+.gold{
+
+    background:
+
+    linear-gradient(
+        145deg,
+
+        #fffdf0 0%,
+
+        #fff3b7 52%,
+
+        #ffe18a 100%
+
+    );
+
+    border-color:
+
+    #e1b94e;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.85),
+
+    0 11px 0
+    #bd861e,
+
+    0 25px 42px
+    rgba(189,134,30,.24);
+
+}
+
+
+/* الشريط الذهبي */
+
+.gold::before{
+
+    background:
+
+    linear-gradient(
+        90deg,
+
+        #e6b52e,
+
+        #fff0a5,
+
+        #ffffff,
+
+        #fff0a5,
+
+        #e6b52e
+
+    );
+
+}
+
+
+/* لمعان */
+
+.gold::after{
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(
+            255,
+            255,
+            255,
+            .65
+        ),
+
+        rgba(
+            255,
+            218,
+            88,
+            .18
+        ) 45%,
+
+        transparent 72%
+
+    );
+
+}
+
+
+/* الاسم */
+
+.gold .student-name{
+
+    color:#8a6415;
+
+}
+
+
+/* المعلومات */
+
+.gold .student-info{
+
+    color:#806a3e;
+
+    border-color:
+
+    #ead899;
+
+}
+
+
+/* النقاط */
+
+.gold .points{
+
+    color:#77510a;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #fff39e,
+        #e8aa20
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.6),
+
+    0 5px 0
+    #b77808;
+
+}
+
+
+/* الرتبة */
+
+.gold .rank{
+
+    color:#6c4a09;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #fff1a4,
+        #e9ae28
+    );
+
+    box-shadow:
+
+    0 5px 0
+    #b8790b;
+
+}
+
+
+/*====================================================
+        المركز الثاني
+====================================================*/
+
+.silver{
+
+    background:
+
+    linear-gradient(
+        145deg,
+
+        #ffffff 0%,
+
+        #f1f5fb 52%,
+
+        #dfe6ef 100%
+
+    );
+
+    border-color:
+
+    #b9c3cf;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.9),
+
+    0 10px 0
+    #8d9aa8,
+
+    0 23px 38px
+    rgba(74,86,102,.17);
+
+}
+
+
+/* الشريط */
+
+.silver::before{
+
+    background:
+
+    linear-gradient(
+        90deg,
+
+        #aeb9c5,
+
+        #f9fcff,
+
+        #d4dde6,
+
+        #ffffff,
+
+        #aeb9c5
+
+    );
+
+}
+
+
+/* الاسم */
+
+.silver .student-name{
+
+    color:#617080;
+
+}
+
+
+/* المعلومات */
+
+.silver .student-info{
+
+    color:#71808e;
+
+    border-color:
+
+    #d3dbe3;
+
+}
+
+
+/* النقاط */
+
+.silver .points{
+
+    color:#53616d;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #f5f8fa,
+        #b8c3ce
+    );
+
+    box-shadow:
+
+    0 5px 0
+    #8794a1;
+
+}
+
+
+/* الرتبة */
+
+.silver .rank{
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #dfe6ed,
+        #9ba8b6
+    );
+
+    color:#4d5b67;
+
+    box-shadow:
+
+    0 5px 0
+    #778592;
+
+}
+
+
+/*====================================================
+        المركز الثالث
+====================================================*/
+
+.bronze{
+
+    background:
+
+    linear-gradient(
+        145deg,
+
+        #fff9f4 0%,
+
+        #f7ddc9 52%,
+
+        #e9ba94 100%
+
+    );
+
+    border-color:
+
+    #c98755;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.75),
+
+    0 10px 0
+    #9f6236,
+
+    0 23px 38px
+    rgba(112,67,40,.18);
+
+}
+
+
+/* الشريط */
+
+.bronze::before{
+
+    background:
+
+    linear-gradient(
+        90deg,
+
+        #b96e3d,
+
+        #f1c49b,
+
+        #ffe2c3,
+
+        #f1c49b,
+
+        #b96e3d
+
+    );
+
+}
+
+
+/* الاسم */
+
+.bronze .student-name{
+
+    color:#87522f;
+
+}
+
+
+/* المعلومات */
+
+.bronze .student-info{
+
+    color:#8d684f;
+
+    border-color:
+
+    #e4c2a9;
+
+}
+
+
+/* النقاط */
+
+.bronze .points{
+
+    color:#633d25;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #f3c18f,
+        #c87a40
+    );
+
+    box-shadow:
+
+    0 5px 0
+    #92542c;
+
+}
+
+
+/* الرتبة */
+
+.bronze .rank{
+
+    color:#fff8ef;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #d99459,
+        #a95e31
+    );
+
+    box-shadow:
+
+    0 5px 0
+    #7f4322;
+
+}
+/*====================================================
+        Theme 4
+        Celebration Honors UI
+        Reward System
+====================================================*/
+
+/*=========================
+        زر المكافآت
+=========================*/
+
+.reward-btn{
+
+    width:100%;
+
+    margin:25px 0;
+
+    padding:
+
+    19px
+
+    25px;
+
+    border:none;
+
+    cursor:pointer;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:#fffdf5;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #8f7ce0,
+        #6650ba
+    );
+
+    border:
+
+    2px
+
+    solid
+
+    rgba(
+        255,
+        255,
+        255,
+        .18
+    );
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.16),
+
+    0 8px 0
+    #49358f,
+
+    0 19px 30px
+    rgba(74,52,130,.25);
+
+    transition:.22s;
+
+}
+
+
+/*=========================
+        اللمعة
+=========================*/
+
+.reward-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-130%;
+
+    left:-45%;
+
+    width:42%;
+
+    height:310%;
+
+    background:
+
+    linear-gradient(
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.30),
+
+        transparent
+
+    );
+
+    transform:
+
+    rotate(24deg);
+
+    transition:.6s;
+
+}
+
+
+/* Hover */
+
+.reward-btn:hover{
+
+    transform:
+
+    translateY(-5px)
+
+    scale(1.015);
+
+}
+
+
+/* مرور اللمعة */
+
+.reward-btn:hover::after{
+
+    left:125%;
+
+}
+
+
+/* Active */
+
+.reward-btn:active{
+
+    transform:
+
+    translateY(5px);
+
+    box-shadow:
+
+    0 2px 0
+    #49358f;
+
+}
+
+
+/*=========================
+        الزر العائم
+=========================*/
+
+.floating-reward-btn{
+
+    position:fixed;
+
+    bottom:24px;
+
+    left:50%;
+
+    transform:
+
+    translate(
+        -50%,
+        95px
+    );
+
+    opacity:0;
+
+    pointer-events:none;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    padding:
+
+    15px
+
+    25px;
+
+    border:none;
+
+    border-radius:999px;
+
+    color:#634b12;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #fff0a4,
+        #efbd43
+    );
+
+    border:
+
+    3px
+
+    solid
+
+    #fff7cf;
+
+    box-shadow:
+
+    0 8px 0
+    #bd831d,
+
+    0 18px 32px
+    rgba(79,54,20,.24);
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+
+/*=========================
+        إظهار الزر
+=========================*/
+
+.floating-reward-btn.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:
+
+    translate(
+        -50%,
+        0
+    );
+
+}
+
+
+/* Hover */
+
+.floating-reward-btn:hover{
+
+    transform:
+
+    translate(
+        -50%,
+        -5px
+    )
+
+    scale(1.02);
+
+}
+
+
+/* الصورة */
+
+.floating-reward-btn img{
+
+    width:31px;
+
+    height:31px;
+
+    filter:
+
+    drop-shadow(
+        0 3px 2px
+        rgba(98,67,14,.18)
+    );
+
+}
+
+
+/*====================================================
+        النافذة
+====================================================*/
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:
+
+    rgba(
+        43,
+        31,
+        74,
+        .52
+    );
+
+    backdrop-filter:
+
+    blur(10px);
+
+    z-index:99999;
+
+}
+
+
+/*=========================
+        صندوق التكريم
+=========================*/
+
+.modal-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:92%;
+
+    max-width:440px;
+
+    padding:32px;
+
+    border-radius:30px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+
+        #ffffff 0%,
+
+        #faf5ff 58%,
+
+        #f4e7ff 100%
+
+    );
+
+    border:
+
+    5px
+
+    solid
+
+    #d8c36f;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.9),
+
+    0 11px 0
+    #b18a28,
+
+    0 32px 55px
+    rgba(20,12,40,.32);
+
+    animation:
+
+    popup
+
+    .4s
+
+    cubic-bezier(
+        .2,
+        .9,
+        .25,
+        1.15
+    );
+
+}
+
+
+/*=========================
+        لمعان النافذة
+=========================*/
+
+.modal-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-130px;
+
+    right:-100px;
+
+    width:250px;
+
+    height:250px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(
+            255,
+            238,
+            157,
+            .34
+        ),
+
+        transparent 70%
+
+    );
+
+    pointer-events:none;
+
+}
+
+
+/*=========================
+        حركة الظهور
+=========================*/
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(45px)
+
+        scale(.9);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0)
+
+        scale(1);
+
+    }
+
+}
+
+
+/*====================================================
+        حقول الإدخال
+====================================================*/
+
+.modal-box input,
+.modal-box select{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+
+    margin:12px 0;
+
+    padding:
+
+    16px
+
+    18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:#514264;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #f6f0ff
+    );
+
+    border:
+
+    3px
+
+    solid
+
+    #d9cbed;
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.8),
+
+    0 5px 0
+    #b09acd;
+
+    transition:.22s;
+
+}
+
+
+/* Focus */
+
+.modal-box input:focus,
+.modal-box select:focus{
+
+    border-color:
+
+    #e5bc52;
+
+    transform:
+
+    translateY(-2px);
+
+    box-shadow:
+
+    0 0 0 5px
+    rgba(241,203,92,.16),
+
+    0 7px 0
+    #b09acd;
+
+}
+
+
+/*====================================================
+        زر الإرسال
+====================================================*/
+
+#sendReward{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:17px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:19px;
+
+    font-size:19px;
+
+    font-weight:900;
+
+    color:#63470c;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #fff09b,
+        #e9b638
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.55),
+
+    0 6px 0
+    #b57b16,
+
+    0 13px 22px
+    rgba(167,111,20,.18);
+
+    transition:.2s;
+
+}
+
+
+/* Hover */
+
+#sendReward:hover{
+
+    transform:
+
+    translateY(-4px);
+
+}
+
+
+/* Active */
+
+#sendReward:active{
+
+    transform:
+
+    translateY(4px);
+
+    box-shadow:
+
+    0 2px 0
+    #b57b16;
+
+}
+
+
+/*====================================================
+        زر الإغلاق
+====================================================*/
+
+#closeReward{
+
+    width:100%;
+
+    margin-top:13px;
+
+    padding:15px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:#685d75;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #eeeaf3
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.8),
+
+    0 6px 0
+    #c5bdce;
+
+    transition:.2s;
+
+}
+
+
+/* Hover */
+
+#closeReward:hover{
+
+    transform:
+
+    translateY(-3px);
+
+}
+
+
+/* Active */
+
+#closeReward:active{
+
+    transform:
+
+    translateY(3px);
+
+    box-shadow:
+
+    0 2px 0
+    #c5bdce;
+
+}
+
+
+/*====================================================
+        نجاح العملية
+====================================================*/
+
+.modal-box.success{
+
+    animation:
+
+    rewardSuccess
+
+    .75s
+
+    ease;
+
+}
+
+
+@keyframes rewardSuccess{
+
+    0%{
+
+        transform:
+
+        scale(.84);
+
+    }
+
+
+    35%{
+
+        transform:
+
+        scale(1.08);
+
+    }
+
+
+    60%{
+
+        transform:
+
+        scale(.97);
+
+    }
+
+
+    100%{
+
+        transform:
+
+        scale(1);
+
+    }
+
+}
+
+
+/*====================================================
+        عداد المكافآت
+====================================================*/
+
+.reward-total{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:20px;
+
+    padding:12px;
+
+    text-align:center;
+
+    border-radius:17px;
+
+    font-size:29px;
+
+    font-weight:900;
+
+    color:#755819;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(255,239,166,.55),
+        rgba(255,220,111,.28)
+    );
+
+    border:
+
+    2px
+
+    solid
+
+    rgba(226,183,65,.35);
+
+    text-shadow:
+
+    0 2px 0
+    rgba(255,255,255,.7);
+
+}
+
+
+/*====================================================
+        الجواهر المتطايرة
+====================================================*/
+
+.flying-gem{
+
+    position:fixed;
+
+    z-index:100000;
+
+    pointer-events:none;
+
+    font-size:31px;
+
+    filter:
+
+    drop-shadow(
+        0 0 10px
+        rgba(255,215,91,.65)
+    );
+
+    animation:
+
+    flyGem
+
+    1.35s
+
+    cubic-bezier(
+        .15,
+        .75,
+        .3,
+        1
+    )
+
+    forwards;
+
+}
+
+
+@keyframes flyGem{
+
+    from{
+
+        opacity:1;
+
+        transform:
+
+        translate(0,0)
+
+        scale(.4)
+
+        rotate(0deg);
+
+    }
+
+
+    to{
+
+        opacity:0;
+
+        transform:
+
+        translate(
+
+            var(--x),
+
+            var(--y)
+
+        )
+
+        scale(1.55)
+
+        rotate(720deg);
+
+    }
+
+}
+
+
+/*====================================================
+        شرارات التكريم
+====================================================*/
+
+.reward-spark{
+
+    position:fixed;
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:100000;
+
+    box-shadow:
+
+    0 0 13px
+
+    currentColor;
+
+    animation:
+
+    rewardSpark
+
+    .6s
+
+    ease-out
+
+    forwards;
+
+}
+
+
+@keyframes rewardSpark{
+
+    from{
+
+        opacity:1;
+
+        transform:
+
+        translate(0,0)
+
+        scale(1);
+
+    }
+
+
+    to{
+
+        opacity:0;
+
+        transform:
+
+        translate(
+
+            var(--dx),
+
+            var(--dy)
+
+        )
+
+        scale(.15);
+
+    }
+
+}
+
+
+/*====================================================
+        الإيموجي العائم
+====================================================*/
+
+.floating-reward{
+
+    position:fixed;
+
+    z-index:999999;
+
+    font-size:42px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transform:
+
+    translate(
+        -50%,
+        -50%
+    );
+
+    filter:
+
+    drop-shadow(
+        0 6px 7px
+        rgba(62,44,100,.18)
+    );
+
+    transition:.18s;
+
+}
+
+
+/* نبضة الضغط */
+
+.floating-reward.tap{
+
+    transform:
+
+    translate(
+        -50%,
+        -50%
+    )
+
+    scale(1.28)
+
+    rotate(-6deg);
+
+}
+/*====================================================
+        Theme 4
+        Celebration Honors UI
+        Final Part
+====================================================*/
+
+/*=========================
+        صندوق الواتساب
+=========================*/
+
+.whatsapp-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin:48px auto;
+
+    padding:36px;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff 0%,
+        #eefcf5 55%,
+        #ddf5e7 100%
+    );
+
+    border:
+
+    4px
+
+    solid
+
+    #91d6b0;
+
+    box-shadow:
+
+    inset 0 3px 0
+    rgba(255,255,255,.9),
+
+    0 9px 0
+    #65ad84,
+
+    0 21px 35px
+    rgba(46,112,75,.15);
+
+}
+
+
+/*=========================
+        زخرفة
+=========================*/
+
+.whatsapp-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-100px;
+
+    left:-75px;
+
+    width:210px;
+
+    height:210px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(
+            255,
+            255,
+            255,
+            .72
+        ),
+
+        transparent 70%
+
+    );
+
+    pointer-events:none;
+
+}
+
+
+/*=========================
+        العنوان
+=========================*/
+
+.whatsapp-box h3{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    color:#357657;
+
+    margin-bottom:14px;
+
+}
+
+
+/*=========================
+        النص
+=========================*/
+
+.whatsapp-box p{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    font-weight:700;
+
+    color:#587164;
+
+}
+
+
+/*=========================
+        زر الواتساب
+=========================*/
+
+.whatsapp-btn{
+
+    position:relative;
+
+    z-index:2;
+
+    display:inline-block;
+
+    margin-top:24px;
+
+    padding:
+
+    16px
+
+    35px;
+
+    border-radius:19px;
+
+    color:#ffffff;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #58d881,
+        #2fa95d
+    );
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.2),
+
+    0 6px 0
+    #217c43,
+
+    0 15px 25px
+    rgba(38,126,73,.18);
+
+    transition:.22s;
+
+}
+
+
+/* Hover */
+
+.whatsapp-btn:hover{
+
+    transform:
+
+    translateY(-4px)
+
+    scale(1.02);
+
+}
+
+
+/*=========================
+        بطاقة الصلاة
+=========================*/
+
+.salawat-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    max-width:410px;
+
+    margin:26px auto;
+
+    padding:
+
+    20px
+
+    24px;
+
+    text-align:center;
+
+    border-radius:23px;
+
+    font-size:21px;
+
+    font-weight:900;
+
+    color:#765b26;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #fffdf5,
+        #fff1bd
+    );
+
+    border:
+
+    4px
+
+    solid
+
+    #edce69;
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.75),
+
+    0 6px 0
+    #c8a345,
+
+    0 16px 25px
+    rgba(128,93,24,.13);
+
+}
+
+
+/* نجمة صغيرة */
+
+.salawat-card::before{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:7px;
+
+    right:16px;
+
+    font-size:20px;
+
+    color:#f0c447;
+
+    animation:
+
+    sparkle
+
+    2.5s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+
+/*====================================================
+        Footer
+====================================================*/
+
+footer{
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-top:60px;
+
+    padding:
+
+    40px
+
+    30px;
+
+    text-align:center;
+
+    color:#fffdf6;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #5e4a9f,
+        #3f2e78
+    );
+
+    border-top-left-radius:48px;
+
+    border-top-right-radius:48px;
+
+    box-shadow:
+
+    0 -9px 28px
+    rgba(57,41,100,.18);
+
+}
+
+
+/*=========================
+        إضاءة الفوتر
+=========================*/
+
+footer::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-100px;
+
+    left:50%;
+
+    transform:
+
+    translateX(-50%);
+
+    width:500px;
+
+    height:200px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        ellipse,
+
+        rgba(
+            255,
+            224,
+            120,
+            .24
+        ),
+
+        transparent 70%
+
+    );
+
+    pointer-events:none;
+
+}
+
+
+/*====================================================
+        Code Boxes
+====================================================*/
+
+.code-boxes{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:13px;
+
+    direction:ltr;
+
+    margin:22px 0;
+
+}
+
+
+/*=========================
+        خانات الكود
+=========================*/
+
+.code-digit{
+
+    width:76px;
+
+    height:70px;
+
+    border:none;
+
+    outline:none;
+
+    text-align:center;
+
+    border-radius:13px;
+
+    font-size:34px;
+
+    font-weight:900;
+
+    color:#54456b;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #f4efff
+    );
+
+    border:
+
+    3px
+
+    solid
+
+    #cdbfeb;
+
+    box-shadow:
+
+    inset 0 2px 0
+    rgba(255,255,255,.9),
+
+    0 5px 0
+    #9c87c5,
+
+    0 12px 18px
+    rgba(72,52,108,.13);
+
+    transition:.2s;
+
+}
+
+
+/* Focus */
+
+.code-digit:focus{
+
+    transform:
+
+    translateY(-4px)
+
+    scale(1.05);
+
+    border-color:
+
+    #e6bd51;
+
+    box-shadow:
+
+    0 0 0 5px
+    rgba(235,195,82,.16),
+
+    0 7px 0
+    #9c87c5;
+
+}
+
+
+/* الكود المكتمل */
+
+.code-digit.complete{
+
+    border-color:
+
+    #67c98b;
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #f8fff9,
+        #ddf6e6
+    );
+
+}
+
+
+/*====================================================
+        أدوات مساعدة
+====================================================*/
+
+.hide-ui{
+
+    opacity:0;
+
+    transform:
+
+    translateY(-10px);
+
+    pointer-events:none;
+
+    transition:.25s;
+
+}
+
+
+/* Canvas */
+
+canvas.confetti-canvas{
+
+    z-index:1000000 !important;
+
+}
+
+
+/*====================================================
+        لمسة الاحتفال
+====================================================*/
+
+/* 
+
+هذه الزخرفة تستخدم العناصر الموجودة فقط،
+ولا تحتاج إلى إضافة class جديد في HTML.
+
+*/
+
+.reward-btn,
+.filter-btn.active,
+.gold{
+
+    isolation:isolate;
+
+}
+
+
+/* لمعان ذهبي خفيف للمركز الأول */
+
+.gold{
+
+    animation:
+
+    goldGlow
+
+    3s
+
+    ease-in-out
+
+    infinite;
+
+}
+
+
+@keyframes goldGlow{
+
+    0%,
+    100%{
+
+        box-shadow:
+
+        inset 0 3px 0
+        rgba(255,255,255,.85),
+
+        0 11px 0
+        #bd861e,
+
+        0 25px 42px
+        rgba(189,134,30,.22);
+
+    }
+
+
+    50%{
+
+        box-shadow:
+
+        inset 0 3px 0
+        rgba(255,255,255,.9),
+
+        0 11px 0
+        #bd861e,
+
+        0 28px 48px
+        rgba(255,205,66,.42);
+
+    }
+
+}
+
+
+/*====================================================
+        منع تحديد النصوص
+====================================================*/
+
+*{
+
+    -webkit-user-select:none;
+
+    user-select:none;
+
+    -webkit-touch-callout:none;
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+
+input,
+textarea,
+select{
+
+    -webkit-user-select:text;
+
+    user-select:text;
+
+}
+
+
+img{
+
+    -webkit-user-drag:none;
+
+    user-drag:none;
+
+}
+
+
+.logo,
+.hero-title{
+
+    -webkit-user-drag:none;
+
+}
+
+
+html,
+body{
+
+    touch-action:manipulation;
+
+    overscroll-behavior:none;
+
+}
+
+
+/*====================================================
+        Responsive
+====================================================*/
+
+@media(max-width:768px){
+
+    /*=====================
+            Hero
+    =====================*/
+
+    .hero{
+
+        min-height:315px;
+
+        padding:
+
+        32px
+
+        17px
+
+        52px;
+
+        border-bottom-left-radius:38px;
+
+        border-bottom-right-radius:38px;
+
+    }
+
+
+    .hero::after{
+
+        height:78px;
+
+    }
+
+
+    /*=====================
+            الشعار
+    =====================*/
+
+    .logo{
+
+        width:122px;
+
+        height:122px;
+
+        padding:8px;
+
+        border-width:6px;
+
+        margin-bottom:19px;
+
+        box-shadow:
+
+        0 0 0 4px
+        rgba(255,255,255,.35),
+
+        0 0 0 7px
+        rgba(207,162,54,.22),
+
+        0 7px 0
+        #b98124,
+
+        0 16px 26px
+        rgba(44,27,82,.22);
+
+    }
+
+
+    /*=====================
+            العنوان
+    =====================*/
+
+    .hero h1{
+
+        font-size:34px;
+
+        padding:
+
+        14px
+
+        25px;
+
+        border-width:4px;
+
+        border-radius:22px;
+
+    }
+
+
+    .game-title{
+
+        font-size:34px;
+
+    }
+
+
+    .hero h1::before{
+
+        top:-17px;
+
+        right:-20px;
+
+        font-size:23px;
+
+    }
+
+
+    .hero h1::after{
+
+        bottom:-16px;
+
+        left:-20px;
+
+        font-size:20px;
+
+    }
+
+
+    /*=====================
+            الوصف
+    =====================*/
+
+    .subtitle{
+
+        margin-top:18px;
+
+        padding:
+
+        8px
+
+        18px;
+
+        font-size:18px;
+
+    }
+
+
+    /*=====================
+            البحث
+    =====================*/
+
+    .search-box{
+
+        margin:
+
+        30px
+
+        auto;
+
+    }
+
+
+    .search-box input{
+
+        padding:
+
+        18px
+
+        58px
+
+        18px
+
+        18px;
+
+        font-size:17px;
+
+        border-radius:20px;
+
+    }
+
+
+    .search-box::before{
+
+        left:19px;
+
+        font-size:20px;
+
+    }
+
+
+    /*=====================
+            الفلاتر
+    =====================*/
+
+    .filters{
+
+        gap:12px;
+
+        margin-bottom:38px;
+
+    }
+
+
+    .filter-btn{
+
+        width:100%;
+
+        min-width:0;
+
+        padding:15px 20px;
+
+    }
+
+
+    /*=====================
+            الإحصائيات
+    =====================*/
+
+    .statistics{
+
+        grid-template-columns:
+
+        1fr;
+
+        gap:20px;
+
+    }
+
+
+    .stat-card{
+
+        padding:21px;
+
+        border-radius:24px;
+
+    }
+
+
+    .stat-icon{
+
+        width:65px;
+
+        height:65px;
+
+        border-radius:19px;
+
+        font-size:29px;
+
+    }
+
+
+    .stat-card p{
+
+        font-size:30px;
+
+    }
+
+
+    /*=====================
+            البطاقات
+    =====================*/
+
+    .cards{
+
+        grid-template-columns:
+
+        1fr;
+
+        gap:25px;
+
+    }
+
+
+    .student-card{
+
+        padding:
+
+        28px
+
+        22px
+
+        23px;
+
+        border-radius:26px;
+
+    }
+
+
+    .student-name{
+
+        font-size:23px;
+
+        margin-bottom:19px;
+
+    }
+
+
+    .student-info{
+
+        font-size:16px;
+
+        padding:13px 0;
+
+    }
+
+
+    .points{
+
+        min-width:68px;
+
+        padding:
+
+        9px
+
+        14px;
+
+        font-size:20px;
+
+    }
+
+
+    .rank{
+
+        margin-top:18px;
+
+        padding:
+
+        10px
+
+        18px;
+
+        font-size:16px;
+
+    }
+
+
+    /*=====================
+            المكافآت
+    =====================*/
+
+    .reward-btn{
+
+        font-size:19px;
+
+        padding:
+
+        17px
+
+        20px;
+
+    }
+
+
+    .floating-reward-btn{
+
+        width:
+
+        calc(
+            100% - 36px
+        );
+
+        justify-content:center;
+
+        bottom:18px;
+
+        font-size:17px;
+
+    }
+
+
+    .modal{
+
+        padding:14px;
+
+        align-items:center;
+
+    }
+
+
+    .modal-box{
+
+        width:100%;
+
+        padding:26px 21px;
+
+        border-radius:25px;
+
+    }
+
+
+    .modal-box input,
+    .modal-box select{
+
+        font-size:16px;
+
+        padding:
+
+        15px
+
+        16px;
+
+    }
+
+
+    /*=====================
+            واتساب
+    =====================*/
+
+    .whatsapp-box{
+
+        margin:
+
+        38px
+
+        auto;
+
+        padding:
+
+        29px
+
+        20px;
+
+        border-radius:25px;
+
+    }
+
+
+    .whatsapp-box h3{
+
+        font-size:24px;
+
+    }
+
+
+    .whatsapp-box p{
+
+        font-size:16px;
+
+    }
+
+
+    .whatsapp-btn{
+
+        width:100%;
+
+        padding:
+
+        15px
+
+        20px;
+
+        font-size:18px;
+
+    }
+
+
+    /*=====================
+            الصلاة
+    =====================*/
+
+    .salawat-card{
+
+        margin:
+
+        22px
+
+        auto;
+
+        font-size:18px;
+
+        padding:
+
+        17px
+
+        18px;
+
+    }
+
+
+    /*=====================
+            الكود
+    =====================*/
+
+    .code-boxes{
+
+        gap:8px;
+
+    }
+
+
+    .code-digit{
+
+        width:58px;
+
+        height:62px;
+
+        font-size:29px;
+
+        border-radius:11px;
+
+    }
+
+
+    /*=====================
+            Footer
+    =====================*/
+
+    footer{
+
+        margin-top:48px;
+
+        padding:
+
+        32px
+
+        20px;
+
+        border-top-left-radius:34px;
+
+        border-top-right-radius:34px;
+
+        font-size:16px;
+
+    }
+
+}
+
+
+/*====================================================
+        الشاشات الصغيرة جداً
+====================================================*/
+
+@media(max-width:420px){
+
+    .container{
+
+        width:92%;
+
+    }
+
+
+    .hero{
+
+        min-height:290px;
+
+    }
+
+
+    .logo{
+
+        width:108px;
+
+        height:108px;
+
+    }
+
+
+    .hero h1,
+    .game-title{
+
+        font-size:29px;
+
+    }
+
+
+    .subtitle{
+
+        font-size:16px;
+
+    }
+
+
+    .stat-card{
+
+        gap:13px;
+
+        padding:18px;
+
+    }
+
+
+    .stat-icon{
+
+        width:58px;
+
+        height:58px;
+
+        font-size:26px;
+
+    }
+
+
+    .student-card{
+
+        padding:
+
+        26px
+
+        18px
+
+        20px;
+
+    }
+
+
+    .student-info{
+
+        font-size:15px;
+
+    }
+
+
+    .code-digit{
+
+        width:50px;
+
+        height:58px;
+
+        font-size:26px;
+
+    }
+
+}
+
+
+/*====================================================
+        Firefox Android Fix
+====================================================*/
+
+
+/* الصورة الموجودة تحت الشعار */
+
+.hero-title{
+
+    display:block;
+
+    width:
+
+    min(
+        92%,
+        650px
+    )
+
+    !important;
+
+    max-width:
+
+    650px
+
+    !important;
+
+    height:auto !important;
+
+    object-fit:contain;
+
+}
+
+
+/* مربع البحث */
+
+.search-box input{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    color:
+
+    #44385c
+
+    !important;
+
+    -webkit-text-fill-color:
+
+    #44385c
+
+    !important;
+
+    font-family:
+
+    "Cairo",
+    sans-serif
+
+    !important;
+
+    font-size:
+
+    18px
+
+    !important;
+
+    font-weight:
+
+    800
+
+    !important;
+
+    line-height:
+
+    normal
+
+    !important;
+
+    caret-color:
+
+    #7964cf;
+
+}
+
+
+.search-box input::placeholder{
+
+    color:
+
+    #9b8eae
+
+    !important;
+
+    opacity:1;
+
+}
+
+
+/* مربعات الكود */
+
+.code-digit{
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    color:
+
+    #44385c
+
+    !important;
+
+    -webkit-text-fill-color:
+
+    #44385c
+
+    !important;
+
+    font-family:
+
+    "Cairo",
+    sans-serif
+
+    !important;
+
+    font-size:
+
+    36px
+
+    !important;
+
+    font-weight:
+
+    900
+
+    !important;
+
+    line-height:
+
+    70px
+
+    !important;
+
+    text-align:center;
+
+    padding:0 !important;
+
+    caret-color:
+
+    #7964cf;
+
+}
+
+
+@media(max-width:768px){
+
+    .code-digit{
+
+        line-height:
+
+        62px
+
+        !important;
+
+    }
+
+}
+
+
+@media(max-width:420px){
+
+    .code-digit{
+
+        font-size:
+
+        26px
+
+        !important;
+
+        line-height:
+
+        58px
+
+        !important;
+
+    }
+
+}
