@@ -506,7 +506,7 @@ const studentMessages = {
 
     "QGklfaaSWguFcWSXw7Z9": [], // مريم عبد الله
 
-    "f4NQpaTQdHmnJuwUy6TK": [], // مريم عبد الله رمضان
+    "f4NQpaTQdHmnJuwUy6TK": ["بارك الله فيكِ يا فراولة 🍓 عايزينك تختمي القرآن الكريم"], // مريم عبد الله رمضان
 
     "ZFPIKypaVFe2KzCQnxQV": [], // مصطفى أحمد محمد
 
