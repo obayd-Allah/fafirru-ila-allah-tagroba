@@ -100,14 +100,6 @@ const boyMessages = [
     
 
 
-    
-
-   
-
-   
-
-   
-
 ];
 
 const girlMessages = [
@@ -241,7 +233,8 @@ const studentMessages = {
     "8r4cbsx06PJKd58Jc0vL": [], // عمر إسلام علي
 
     "a2MyUvxLbuinhy55URH1": [
-      "ممتاز يا دودة"
+      "ممتاز يا دودة", 
+        "إي رأيك فالهدية؟ عايزك تحب لاخواتك  (عمر وأحمد وحمزة..وكلو) نفس اللي بتحبه لنفسك بالضبط 💙"
     ], // إياد أحمد فتحي
 
     "Eb1NtE2rLxbmYubJu3ib": [], // حمزة أشرف رمضان
