@@ -3073,3 +3073,27 @@ body{
     touch-action:manipulation;
     overscroll-behavior:none;
 }
+/*====================================
+      Countdown - Theme 1
+====================================*/
+
+.contest-countdown{
+    background:rgba(255,255,255,.88);
+    border-radius:28px;
+    box-shadow:0 8px 0 #b9e7fa,
+               0 14px 28px rgba(0,90,150,.14);
+    color:#24425d;
+}
+
+.countdown-number{
+    color:#168dcc;
+    text-shadow:0 2px 0 #d9f5ff;
+}
+
+.countdown-label{
+    color:#52748a;
+}
+
+.countdown-separator{
+    color:#54bce9;
+	}
