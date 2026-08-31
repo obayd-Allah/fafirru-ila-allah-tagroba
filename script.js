@@ -43,8 +43,7 @@ const mosqueId = getCurrentMosqueId();
 const contestEndDates = {
 
     // المسجد الأول
-    "mosque_005": "2026-09-04T20:30:00+03:00",
-
+"mosque_005": "2026-09-04T20:30:45+03:00"
     // المسجد الثالث
     "mosque_003": "2026-09-11T21:15:00+03:00",
 
