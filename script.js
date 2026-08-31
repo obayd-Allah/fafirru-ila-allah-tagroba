@@ -35,6 +35,138 @@ import {
 import { DEFAULT_MOSQUE } from "./mosqueFallback.js";
 
 const mosqueId = getCurrentMosqueId();
+
+/*====================================
+        عداد انتهاء المسابقة
+====================================*/
+
+const contestEndDates = {
+
+    // المسجد الأول
+    "mosque_001": "2026-09-04T20:30:00+03:00",
+
+    // المسجد الثاني
+    "mosque_002": "2026-09-06T22:00:00+03:00",
+
+    // المسجد الثالث
+    "mosque_003": "2026-09-11T21:15:00+03:00",
+
+    // المسجد الرابع
+    "mosque_004": "2026-09-13T20:00:00+03:00"
+
+};
+
+let contestCountdownInterval = null;
+
+function startContestCountdown(){
+
+    const countdown =
+        document.getElementById("contestCountdown");
+
+    if(!countdown) return;
+
+    const endDate =
+        contestEndDates[mosqueId];
+
+    if(!endDate){
+
+        countdown.style.display = "none";
+
+        return;
+    }
+
+    const endTime =
+        new Date(endDate).getTime();
+
+    const days =
+        document.getElementById("countdownDays");
+
+    const hours =
+        document.getElementById("countdownHours");
+
+    const minutes =
+        document.getElementById("countdownMinutes");
+
+    const seconds =
+        document.getElementById("countdownSeconds");
+
+    const finished =
+        document.getElementById("countdownFinished");
+
+    function updateCountdown(){
+
+        const now = Date.now();
+
+        const difference =
+            endTime - now;
+
+        if(difference <= 0){
+
+            days.textContent = "0";
+            hours.textContent = "00";
+            minutes.textContent = "00";
+            seconds.textContent = "00";
+
+            countdown.classList.add(
+                "countdown-ended"
+            );
+
+            if(finished){
+                finished.style.display = "block";
+            }
+
+            if(contestCountdownInterval){
+                clearInterval(
+                    contestCountdownInterval
+                );
+
+                contestCountdownInterval = null;
+            }
+
+            return;
+        }
+
+        const totalSeconds =
+            Math.floor(difference / 1000);
+
+        const d =
+            Math.floor(
+                totalSeconds / 86400
+            );
+
+        const h =
+            Math.floor(
+                (totalSeconds % 86400) / 3600
+            );
+
+        const m =
+            Math.floor(
+                (totalSeconds % 3600) / 60
+            );
+
+        const s =
+            totalSeconds % 60;
+
+        days.textContent = d;
+
+        hours.textContent =
+            String(h).padStart(2,"0");
+
+        minutes.textContent =
+            String(m).padStart(2,"0");
+
+        seconds.textContent =
+            String(s).padStart(2,"0");
+    }
+
+    updateCountdown();
+
+    contestCountdownInterval =
+        setInterval(
+            updateCountdown,
+            1000
+        );
+}
 let mosqueData = null;
 let CURRENT_MOSQUE = null;
 /*====================================
@@ -1209,14 +1341,15 @@ try{
 
     const dataLoading = (async()=>{
 
-        await loadMosqueConfig();
+    await loadMosqueConfig();
 
-        await loadStudents();
+    startContestCountdown();
 
-        await new Promise(r=>setTimeout(r,300));
+    await loadStudents();
 
-    })();
+    await new Promise(r=>setTimeout(r,300));
 
+})();
 
     await Promise.all([
         introMinimumTime,
