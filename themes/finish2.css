@@ -5097,3 +5097,9 @@ body{
     }
 
 }
+/* إخفاء عناصر المسابقة بعد انتهائها */
+#rewardBtn,
+#floatingRewardBtn,
+.statistics {
+    display: none !important;
+}
