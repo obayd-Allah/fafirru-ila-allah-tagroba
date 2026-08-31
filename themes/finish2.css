@@ -5103,3 +5103,21 @@ body{
 .statistics {
     display: none !important;
 }
+/* Countdown - Celebration Honors */
+
+.contest-countdown{
+    background:linear-gradient(180deg,#ffffff,#fff8e8);
+    border:2px solid #d9a52e;
+    border-radius:30px;
+    box-shadow:0 7px 0 rgba(124,77,255,.16),
+               0 15px 30px rgba(80,60,100,.13);
+    color:#44385c;
+}
+
+.countdown-number{
+    color:#7546df;
+}
+
+.countdown-separator{
+    color:#d9a52e;
+}
