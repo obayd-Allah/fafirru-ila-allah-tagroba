@@ -42,18 +42,7 @@ const mosqueId = getCurrentMosqueId();
 
 const contestEndDates = {
 
-    // المسجد الأول
-    "mosque_001": "2026-09-04T20:30:00+03:00",
-
-    // المسجد الثاني
-    "mosque_002": "2026-09-06T22:00:00+03:00",
-
-    // المسجد الثالث
-    "mosque_003": "2026-09-11T21:15:00+03:00",
-
-    // المسجد الرابع
-    "mosque_004": "2026-09-13T20:00:00+03:00"
-
+    
 };
 
 let contestCountdownInterval = null;
