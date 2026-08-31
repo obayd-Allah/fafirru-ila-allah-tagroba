@@ -1492,6 +1492,145 @@ href="">
     }
 
 }
+      /*====================================
+      Contest Countdown
+====================================*/
+
+.contest-countdown{
+
+    width:min(100%,850px);
+
+    margin:0 auto 35px;
+
+    padding:18px 16px;
+
+    text-align:center;
+
+    direction:rtl;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.countdown-title{
+
+    font-size:18px;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+}
+
+.countdown-units{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    direction:ltr;
+
+}
+
+.countdown-unit{
+
+    min-width:72px;
+
+    text-align:center;
+
+}
+
+.countdown-number{
+
+    font-size:clamp(25px,6vw,38px);
+
+    line-height:1;
+
+    font-weight:900;
+
+    font-variant-numeric:tabular-nums;
+
+}
+
+.countdown-label{
+
+    margin-top:6px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    opacity:.8;
+
+}
+
+.countdown-separator{
+
+    font-size:28px;
+
+    font-weight:900;
+
+    opacity:.55;
+
+    margin-top:-12px;
+
+}
+
+.countdown-finished{
+
+    display:none;
+
+    font-size:22px;
+
+    font-weight:900;
+
+}
+
+@media(max-width:500px){
+
+    .contest-countdown{
+
+        padding:15px 8px;
+
+    }
+
+    .countdown-units{
+
+        gap:3px;
+
+    }
+
+    .countdown-unit{
+
+        min-width:62px;
+
+    }
+
+    .countdown-number{
+
+        font-size:26px;
+
+    }
+
+    .countdown-label{
+
+        font-size:11px;
+
+    }
+
+    .countdown-separator{
+
+        font-size:21px;
+
+    }
+
+}
   </style>
 
 
