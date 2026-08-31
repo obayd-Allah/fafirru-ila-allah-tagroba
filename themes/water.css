@@ -2591,3 +2591,29 @@ button:active,
     caret-color:#2196f3;
 
 }
+/* Countdown - Underwater */
+
+.contest-countdown{
+    background:rgba(5,87,135,.72);
+    border:2px solid rgba(255,255,255,.35);
+    border-radius:30px;
+    backdrop-filter:blur(5px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 12px 30px rgba(0,40,70,.28);
+    color:#fff;
+}
+
+.countdown-number{
+    color:#ffffff;
+    text-shadow:0 2px 0 #0876a8,
+                0 0 12px rgba(255,255,255,.3);
+}
+
+.countdown-label{
+    color:#d9f8ff;
+}
+
+.countdown-separator{
+    color:#ffcf70;
+}
