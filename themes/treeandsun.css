@@ -2570,3 +2570,22 @@ body{
     caret-color:#2196f3;
 
 }
+/* Countdown - Adventure Treasure */
+
+.contest-countdown{
+    background:linear-gradient(180deg,#fffdf1,#f5e6b4);
+    border:3px solid #d69a1d;
+    border-radius:28px;
+    box-shadow:0 7px 0 #a96f00,
+               0 15px 30px rgba(80,50,0,.18);
+    color:#4d3a1d;
+}
+
+.countdown-number{
+    color:#a66a00;
+    text-shadow:0 2px 0 #ffe9a7;
+}
+
+.countdown-separator{
+    color:#4fae3e;
+}
