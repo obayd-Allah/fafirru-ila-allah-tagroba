@@ -3302,9 +3302,9 @@ const secondaryIntroThemes = {
         className: "secondary-school4"
     }, 
 finish2: {
-    title: "انتهت المسابقة! 🏁",
-    subtitle: "جوائز الرحمن أعظم",
-    duration: 5000,
+    title: "جوائز الرحمن أعظم",
+    subtitle: "انتهت المسابقة! 🏁",
+    duration: 4100,
     className: "secondary-finish2"
 }
 };
