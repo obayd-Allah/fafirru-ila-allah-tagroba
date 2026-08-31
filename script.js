@@ -3173,8 +3173,8 @@ const secondaryIntroThemes = {
     }, 
 finish2: {
     title: "انتهت المسابقة! 🏁",
-    subtitle: "جوائز الرحمن أعظم 💎",
-    duration: 3000,
+    subtitle: "جوائز الرحمن أعظم",
+    duration: 5000,
     className: "secondary-finish2"
 }
 };
