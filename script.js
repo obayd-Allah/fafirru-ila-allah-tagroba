@@ -3300,6 +3300,13 @@ const secondaryIntroThemes = {
         duration: 2000,
         className: "secondary-school4"
     }, 
+
+    school4no: {
+        title: "أهـلًا بـالـدراسـة 🏫",
+        subtitle: "عام دراسي سعيد! 🎒",
+        duration: 2000,
+        className: "secondary-school4"
+    }, 
 finish2: {
     title: "جوائز الرحمن أعظم",
     subtitle: "انتهت المسابقة! 🏁",
