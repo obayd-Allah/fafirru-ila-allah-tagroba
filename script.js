@@ -3477,3 +3477,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, 3500);
 
 });
+// رسالة خاصة بالمسجدين 002 و003
+if (mosqueId === "mosque_004" || mosqueId === "mosque_003") {
+
+    const style = document.createElement("style");
+
+    style.textContent = `
+        .next-contest-message {
+            margin: 15px auto;
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.8;
+            border-radius: 18px;
+            animation: nextContestMessageShow .8s ease;
+        }
+
+        @keyframes nextContestMessageShow {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+
+    const message = document.createElement("div");
+
+    message.className = "next-contest-message";
+
+    message.textContent =
+        "هل تظنون أن هناك مسابقة أخرى قريبًا..؟";
+
+    // فلتر الأولاد والبنات الحقيقي في مشروعك
+    const filters = document.querySelector(".filters");
+
+    if (filters) {
+        filters.insertAdjacentElement("afterend", message);
+    }
+}
