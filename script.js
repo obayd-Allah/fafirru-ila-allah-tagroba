@@ -3478,37 +3478,109 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 // رسالة خاصة بالمسجدين 002 و003
-if (mosqueId === "mosque_004" || mosqueId === "mosque_003") {
+if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
 
+    // CSS
     const style = document.createElement("style");
 
     style.textContent = `
         .next-contest-message {
-            margin: 15px auto;
-            padding: 14px 20px;
+            position: relative;
+            overflow: hidden;
+
+            width: min(90%, 600px);
+            margin: 18px auto;
+
+            padding: 16px 22px;
+
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.08rem;
             font-weight: 700;
             line-height: 1.8;
-            border-radius: 18px;
-            animation: nextContestMessageShow .8s ease;
+
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.12);
+
+            animation:
+                contestMessageIn 1s ease-out,
+                contestMessageFloat 3.5s ease-in-out 1s infinite;
         }
 
-        @keyframes nextContestMessageShow {
+        /* اللمعة المتحركة */
+        .next-contest-message::after {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: -120%;
+
+            width: 70%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.18),
+                transparent
+            );
+
+            transform: skewX(-20deg);
+
+            animation: contestMessageShine 4s ease-in-out 1.5s infinite;
+        }
+
+        /* ظهور البطاقة */
+        @keyframes contestMessageIn {
             from {
                 opacity: 0;
-                transform: translateY(12px);
+                transform: translateY(25px) scale(0.96);
             }
 
             to {
                 opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* حركة خفيفة جدًا للبطاقة */
+        @keyframes contestMessageFloat {
+            0%, 100% {
                 transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* مرور اللمعة */
+        @keyframes contestMessageShine {
+            0% {
+                left: -120%;
+            }
+
+            35% {
+                left: 140%;
+            }
+
+            100% {
+                left: 140%;
             }
         }
     `;
 
     document.head.appendChild(style);
 
+
+    // إنشاء الرسالة
     const message = document.createElement("div");
 
     message.className = "next-contest-message";
@@ -3516,7 +3588,8 @@ if (mosqueId === "mosque_004" || mosqueId === "mosque_003") {
     message.textContent =
         "هل تظنون أن هناك مسابقة أخرى قريبًا..؟";
 
-    // فلتر الأولاد والبنات الحقيقي في مشروعك
+
+    // وضعها بعد فلتر الأولاد والبنات مباشرة
     const filters = document.querySelector(".filters");
 
     if (filters) {
