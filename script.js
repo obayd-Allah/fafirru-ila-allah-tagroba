@@ -3753,7 +3753,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "quran-message";
 
             quranMessage.textContent =
-                "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الجنة سوف يعطينا الله جوووواائز كبيرة 🎊🎁🎈🎉";
+                "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الـجـنـة سوف يعطينا الله جـوووواائـز كـبـيـرة 🎊🎁🎈🎉";
 
 
             message.insertAdjacentElement(
