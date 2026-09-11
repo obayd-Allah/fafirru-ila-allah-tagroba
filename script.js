@@ -3752,9 +3752,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             quranMessage.className =
                 "quran-message";
 
-            quranMessage.textContent =
-                "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الـجـنـة سوف يعطينا الله جـوووواائـز كـبـيـرة 🎊🎁🎈🎉";
-
+            quranMessage.innerHTML =
+    'نحن نحفظ <strong>القرآن الكريم</strong> من أجل دخول <strong>الجـنـة</strong> 🤍.. لا للجواهر 💎❌.. وفي الـجـنـة سوف يعطينا <strong>الله</strong> جـوووواائـز كـبـيـرة 🎊🎁🎈🎉';
 
             message.insertAdjacentElement(
                 "afterend",
