@@ -3403,6 +3403,7 @@ function prepareSecondaryIntro(theme){
 
 }
 
+//(((((((((((((((((((((((((((((
 
 /* =========================================================
    START APPLICATION
@@ -3410,62 +3411,374 @@ function prepareSecondaryIntro(theme){
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    /*
-       تشغيل الانترو الأساسي فورًا.
-
-       هذا هو المسؤول عن:
-       - الألوان
-       - الدوائر
-       - الحركة
-       - العنوان
-       - الآية أو الحديث
-    */
-
+    // تشغيل المقدمة
     startIntro();
 
-
-    /*
-       نبدأ تحميل إعدادات المسجد وFirebase.
-
-       الانترو الأساسي يعمل في نفس الوقت،
-       لذلك لن تبقى الصفحة فارغة أثناء التحميل.
-    */
-
-    try{
-
+    // تحميل إعدادات المسجد
+    try {
         await loadMosqueConfig();
+    } catch (error) {
+        console.error("حدث خطأ أثناء تحميل إعدادات المسجد:", error);
+    }
 
-    }catch(error){
 
-        console.error(
-            "حدث خطأ أثناء تحميل إعدادات المسجد:",
-            error
-        );
+    /* =====================================================
+       رسائل خاصة بالمسجدين 002 و003
+    ===================================================== */
+
+    if (
+        mosqueId === "mosque_002" ||
+        mosqueId === "mosque_003"
+    ) {
+
+        /* =================================================
+           CSS الرسائل
+        ================================================= */
+
+        const messageStyle = document.createElement("style");
+
+        messageStyle.textContent = `
+
+            /* =============================================
+               الرسالة الأولى
+            ============================================= */
+
+            .next-contest-message {
+                position: relative;
+                overflow: hidden;
+
+                width: min(90%, 600px);
+                margin: 18px auto;
+
+                padding: 16px 22px;
+
+                text-align: center;
+
+                font-size: 1.08rem;
+                font-weight: 700;
+                line-height: 1.8;
+
+                border-radius: 20px;
+
+                background: rgba(255, 255, 255, 0.12);
+
+                border: 1px solid rgba(255, 255, 255, 0.28);
+
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+
+                box-shadow:
+                    0 6px 20px rgba(0, 0, 0, 0.12);
+
+                animation:
+                    contestMessageIn 1s ease-out,
+                    contestMessageFloat
+                    3.5s ease-in-out 1s infinite;
+            }
+
+
+            .next-contest-message::after {
+                content: "";
+
+                position: absolute;
+
+                top: 0;
+                left: -120%;
+
+                width: 80%;
+                height: 100%;
+
+                background:
+                    linear-gradient(
+                        90deg,
+                        transparent,
+                        rgba(255,255,255,0.18),
+                        transparent
+                    );
+
+                transform: skewX(-20deg);
+
+                animation:
+                    contestMessageShine
+                    4.5s ease-in-out
+                    1.5s infinite;
+            }
+
+
+            @keyframes contestMessageIn {
+
+                from {
+                    opacity: 0;
+                    transform: translateY(-18px) scale(0.96);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+
+            }
+
+
+            @keyframes contestMessageFloat {
+
+                0%, 100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-6px);
+                }
+
+            }
+
+
+            @keyframes contestMessageShine {
+
+                0% {
+                    left: -120%;
+                }
+
+                45%, 100% {
+                    left: 140%;
+                }
+
+            }
+
+
+            /* =============================================
+               الرسالة الثانية
+            ============================================= */
+
+            .quran-message {
+
+                position: relative;
+                overflow: hidden;
+
+                width: min(92%, 700px);
+
+                margin: 14px auto 22px;
+
+                padding: 20px 24px;
+
+                text-align: center;
+
+                font-size: 1.08rem;
+                font-weight: 700;
+                line-height: 2;
+
+                border-radius: 18px;
+
+                background:
+                    rgba(145, 110, 190, 0.17);
+
+                border:
+                    1px solid
+                    rgba(190, 155, 225, 0.38);
+
+                box-shadow:
+                    0 6px 20px
+                    rgba(0, 0, 0, 0.12);
+
+                animation:
+                    quranMessageMotion
+                    3.5s ease-in-out infinite;
+            }
+
+
+            .quran-message::before {
+
+                content: "";
+
+                position: absolute;
+
+                width: 220px;
+                height: 220px;
+
+                top: -120px;
+                right: -80px;
+
+                border-radius: 50%;
+
+                background:
+                    rgba(190, 155, 230, 0.13);
+
+                pointer-events: none;
+
+                animation:
+                    quranMessageGlow
+                    3.5s ease-in-out infinite;
+            }
+
+
+            @keyframes quranMessageMotion {
+
+                0% {
+
+                    transform:
+                        translateY(0)
+                        scale(1);
+
+                    border-color:
+                        rgba(190, 155, 225, 0.32);
+
+                    box-shadow:
+                        0 6px 20px
+                        rgba(0, 0, 0, 0.12);
+                }
+
+
+                25% {
+
+                    transform:
+                        translateY(-7px)
+                        scale(1.025);
+
+                    border-color:
+                        rgba(205, 175, 235, 0.48);
+
+                    box-shadow:
+                        0 10px 26px
+                        rgba(0, 0, 0, 0.15);
+                }
+
+
+                50% {
+
+                    transform:
+                        translateY(0)
+                        scale(1.045);
+
+                    border-color:
+                        rgba(220, 190, 245, 0.62);
+
+                    box-shadow:
+                        0 13px 30px
+                        rgba(0, 0, 0, 0.17);
+                }
+
+
+                75% {
+
+                    transform:
+                        translateY(7px)
+                        scale(1.025);
+
+                    border-color:
+                        rgba(205, 175, 235, 0.48);
+
+                    box-shadow:
+                        0 10px 26px
+                        rgba(0, 0, 0, 0.15);
+                }
+
+
+                100% {
+
+                    transform:
+                        translateY(0)
+                        scale(1);
+
+                    border-color:
+                        rgba(190, 155, 225, 0.32);
+
+                    box-shadow:
+                        0 6px 20px
+                        rgba(0, 0, 0, 0.12);
+                }
+
+            }
+
+
+            @keyframes quranMessageGlow {
+
+                0%, 100% {
+
+                    transform: scale(1);
+
+                    opacity: 0.35;
+                }
+
+
+                50% {
+
+                    transform: scale(1.45);
+
+                    opacity: 0.9;
+                }
+
+            }
+
+        `;
+
+        document.head.appendChild(messageStyle);
+
+
+        /* =================================================
+           وضع الرسالتين بعد قسم الأولاد والبنات
+        ================================================= */
+
+        const filters = document.querySelector(".filters");
+
+        if (filters) {
+
+            /* =============================================
+               الرسالة الأولى
+            ============================================= */
+
+            const message =
+                document.createElement("div");
+
+            message.className =
+                "next-contest-message";
+
+            message.textContent =
+                "هل تظنون أن هناك مسابقة أخرى قريبًا..؟";
+
+
+            filters.insertAdjacentElement(
+                "afterend",
+                message
+            );
+
+
+            /* =============================================
+               الرسالة الثانية
+            ============================================= */
+
+            const quranMessage =
+                document.createElement("div");
+
+            quranMessage.className =
+                "quran-message";
+
+            quranMessage.textContent =
+                "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الجنة سوف يعطينا الله جوووواائز كبيرة 🎊🎁🎈🎉";
+
+
+            message.insertAdjacentElement(
+                "afterend",
+                quranMessage
+            );
+
+        } else {
+
+            console.warn(
+                "لم يتم العثور على .filters لإضافة الرسائل."
+            );
+
+        }
 
     }
 
 
-    /*
-       الانتظار قليلًا حتى يظهر الانترو الأساسي.
-
-       Firebase لا يتحكم في مدة ظهور الانترو.
-    */
+    /* =====================================================
+       إنهاء المقدمة
+    ===================================================== */
 
     setTimeout(() => {
 
-
-        /*
-           إنهاء الانترو الأساسي
-        */
-
         finishIntro();
-
-
-        /*
-           إذا كان هناك انترو ثانوي،
-           نشغّل عداد انتهائه بعد بدء خروج
-           الانترو الأساسي.
-        */
 
         setTimeout(() => {
 
@@ -3473,400 +3786,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         }, 900);
 
-
     }, 3500);
-
-});
-// =========================================================
-// رسائل خاصة بالمسجدين 002 و003
-// =========================================================
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    // لا تظهر الرسائل إلا في المسجدين 002 و003
-    if (
-        mosqueId !== "mosque_002" &&
-        mosqueId !== "mosque_003"
-    ) {
-        return;
-    }
-
-
-    // =====================================================
-    // CSS
-    // =====================================================
-
-    const style = document.createElement("style");
-
-    style.textContent = `
-
-        /* =================================================
-           الرسالة الأولى
-        ================================================= */
-
-        .next-contest-message {
-
-            position: relative;
-            overflow: hidden;
-
-            width: min(90%, 600px);
-
-            margin: 18px auto;
-
-            padding: 16px 22px;
-
-            text-align: center;
-
-            font-size: 1.08rem;
-            font-weight: 700;
-            line-height: 1.8;
-
-            border-radius: 20px;
-
-            background:
-                rgba(255, 255, 255, 0.12);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.28);
-
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-
-            box-shadow:
-                0 6px 20px rgba(0, 0, 0, 0.12);
-
-            animation:
-                contestMessageIn
-                1s ease-out,
-                contestMessageFloat
-                3.5s ease-in-out
-                1s infinite;
-        }
-
-
-        /* اللمعة المتحركة */
-
-        .next-contest-message::after {
-
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-            left: -120%;
-
-            width: 70%;
-            height: 100%;
-
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.18),
-                transparent
-            );
-
-            transform: skewX(-20deg);
-
-            animation:
-                contestMessageShine
-                4s ease-in-out
-                1.5s infinite;
-        }
-
-
-        @keyframes contestMessageIn {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(25px)
-                    scale(0.96);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-        }
-
-
-        @keyframes contestMessageFloat {
-
-            0%, 100% {
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-
-            50% {
-                transform:
-                    translateY(-4px)
-                    scale(1.01);
-            }
-        }
-
-
-        @keyframes contestMessageShine {
-
-            0% {
-                left: -120%;
-            }
-
-            35% {
-                left: 140%;
-            }
-
-            100% {
-                left: 140%;
-            }
-        }
-
-
-        /* =================================================
-           الرسالة الثانية
-        ================================================= */
-
-        .quran-message {
-
-            position: relative;
-            overflow: hidden;
-
-            width: min(92%, 700px);
-
-            margin: 14px auto 22px;
-
-            padding: 20px 24px;
-
-            text-align: center;
-
-            font-size: 1.08rem;
-            font-weight: 700;
-
-            line-height: 2;
-
-            border-radius: 17px;
-
-            /*
-               لون مختلف قليلًا عن الرسالة الأولى
-            */
-
-            background:
-                rgba(245, 235, 200, 0.16);
-
-            border:
-                1px solid rgba(245, 220, 145, 0.35);
-
-            box-shadow:
-                0 6px 20px rgba(0, 0, 0, 0.11);
-
-            /*
-               حركة ملحوظة قليلًا:
-               تكبير + تصغير
-               صعود + هبوط
-               تغير بسيط في البوردر
-            */
-
-            animation:
-                quranMessageMotion
-                4s ease-in-out infinite;
-        }
-
-
-        /* دائرة ضوئية خفيفة في الخلفية */
-
-        .quran-message::before {
-
-            content: "";
-
-            position: absolute;
-
-            width: 190px;
-            height: 190px;
-
-            top: -110px;
-            right: -70px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(255, 255, 255, 0.08);
-
-            animation:
-                quranMessageGlow
-                5s ease-in-out infinite;
-        }
-
-
-        @keyframes quranMessageMotion {
-
-            0% {
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-                border-color:
-                    rgba(245, 220, 145, 0.30);
-
-                box-shadow:
-                    0 6px 20px
-                    rgba(0, 0, 0, 0.11);
-            }
-
-
-            25% {
-
-                transform:
-                    translateY(-4px)
-                    scale(1.015);
-
-                border-color:
-                    rgba(245, 220, 145, 0.42);
-
-                box-shadow:
-                    0 9px 24px
-                    rgba(0, 0, 0, 0.13);
-            }
-
-
-            50% {
-
-                transform:
-                    translateY(0)
-                    scale(1.025);
-
-                border-color:
-                    rgba(255, 225, 155, 0.52);
-
-                box-shadow:
-                    0 11px 27px
-                    rgba(0, 0, 0, 0.14);
-            }
-
-
-            75% {
-
-                transform:
-                    translateY(4px)
-                    scale(1.015);
-
-                border-color:
-                    rgba(245, 220, 145, 0.42);
-
-                box-shadow:
-                    0 9px 24px
-                    rgba(0, 0, 0, 0.13);
-            }
-
-
-            100% {
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-                border-color:
-                    rgba(245, 220, 145, 0.30);
-
-                box-shadow:
-                    0 6px 20px
-                    rgba(0, 0, 0, 0.11);
-            }
-        }
-
-
-        @keyframes quranMessageGlow {
-
-            0%, 100% {
-
-                transform:
-                    scale(1);
-
-                opacity:
-                    0.45;
-            }
-
-
-            50% {
-
-                transform:
-                    scale(1.25);
-
-                opacity:
-                    0.8;
-            }
-        }
-
-    `;
-
-
-    document.head.appendChild(style);
-
-
-    // =====================================================
-    // الرسالة الأولى
-    // =====================================================
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "next-contest-message";
-
-    message.textContent =
-        "هل تظنون أن هناك مسابقة أخرى قريبًا..؟";
-
-
-    // فلتر الأولاد والبنات
-    const filters =
-        document.querySelector(".filters");
-
-
-    if (!filters) {
-
-        console.warn(
-            "لم يتم العثور على فلتر الأولاد والبنات"
-        );
-
-        return;
-    }
-
-
-    // وضع الرسالة الأولى بعد الفلتر مباشرة
-
-    filters.insertAdjacentElement(
-        "afterend",
-        message
-    );
-
-
-    // =====================================================
-    // الرسالة الثانية
-    // =====================================================
-
-    const quranMessage =
-        document.createElement("div");
-
-    quranMessage.className =
-        "quran-message";
-
-
-    /*
-       النص كله قطعة واحدة
-       بدون تقسيم إلى 3 أجزاء
-    */
-
-    quranMessage.textContent =
-        "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الجنة سوف يعطينا الله جوووواائز كبيرة 🎊🎁🎈🎉";
-
-
-    // وضع الرسالة الثانية تحت الأولى
-
-    message.insertAdjacentElement(
-        "afterend",
-        quranMessage
-    );
 
 });
