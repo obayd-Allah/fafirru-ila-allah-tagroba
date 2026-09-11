@@ -3613,7 +3613,7 @@ document.addEventListener("DOMContentLoaded", async () => {
            الرسالة الثانية
         ================================================= */
 
-        .quran-message {
+        
 .quran-message {
     position: relative;
     overflow: hidden;
