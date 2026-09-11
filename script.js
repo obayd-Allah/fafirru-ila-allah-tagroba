@@ -3614,90 +3614,124 @@ document.addEventListener("DOMContentLoaded", async () => {
         ================================================= */
 
         .quran-message {
+.quran-message {
+    position: relative;
+    overflow: hidden;
 
-            position: relative;
-            overflow: hidden;
+    width: min(92%, 700px);
+    margin: 14px auto 22px;
 
-            width: min(92%, 700px);
+    padding: 20px 24px;
 
-            margin: 12px auto 22px;
+    text-align: center;
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 2;
 
-            padding: 20px 24px;
+    border-radius: 17px;
 
-            text-align: center;
+    /* لون مختلف قليلًا عن الرسالة الأولى */
+    background: rgba(245, 235, 200, 0.16);
 
-            font-size: 1.08rem;
-            font-weight: 700;
+    border: 1px solid rgba(245, 220, 145, 0.35);
 
-            line-height: 2;
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.11);
 
-            border-radius: 14px;
-
-            background:
-                rgba(255, 248, 220, 0.14);
-
-            border:
-                1px solid rgba(255, 220, 130, 0.32);
-
-            box-shadow:
-                0 5px 18px rgba(0, 0, 0, 0.10);
-
-            animation:
-                quranMessageAppear 1.2s ease-out;
-        }
+    /* حركة ملحوظة لكن هادئة */
+    animation: quranMessageMotion 4s ease-in-out infinite;
+}
 
 
-        .quran-message::before {
+/* دائرة ضوئية خفيفة تتحرك في الخلفية */
+.quran-message::before {
+    content: "";
 
-            content: "";
+    position: absolute;
 
-            position: absolute;
+    width: 190px;
+    height: 190px;
 
-            width: 180px;
-            height: 180px;
+    top: -110px;
+    right: -70px;
 
-            top: -100px;
-            right: -70px;
+    border-radius: 50%;
 
-            border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
 
-            background:
-                rgba(255, 255, 255, 0.07);
-
-            animation:
-                quranMessageGlow
-                5s ease-in-out infinite;
-        }
+    animation: quranMessageGlow 5s ease-in-out infinite;
+}
 
 
-        @keyframes quranMessageAppear {
+/* الحركة الأساسية */
+@keyframes quranMessageMotion {
 
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
+    0% {
+        transform: translateY(0) scale(1);
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        border-color:
+            rgba(245, 220, 145, 0.30);
+
+        box-shadow:
+            0 6px 20px rgba(0, 0, 0, 0.11);
+    }
+
+    25% {
+        transform: translateY(-4px) scale(1.015);
+
+        border-color:
+            rgba(245, 220, 145, 0.42);
+
+        box-shadow:
+            0 9px 24px rgba(0, 0, 0, 0.13);
+    }
+
+    50% {
+        transform: translateY(0) scale(1.025);
+
+        border-color:
+            rgba(255, 225, 155, 0.52);
+
+        box-shadow:
+            0 11px 27px rgba(0, 0, 0, 0.14);
+    }
+
+    75% {
+        transform: translateY(4px) scale(1.015);
+
+        border-color:
+            rgba(245, 220, 145, 0.42);
+
+        box-shadow:
+            0 9px 24px rgba(0, 0, 0, 0.13);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+
+        border-color:
+            rgba(245, 220, 145, 0.30);
+
+        box-shadow:
+            0 6px 20px rgba(0, 0, 0, 0.11);
+    }
+}
 
 
-        @keyframes quranMessageGlow {
+/* حركة الخلفية */
+@keyframes quranMessageGlow {
 
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.45;
+    }
 
-            50% {
-                transform: scale(1.35);
-                opacity: 1;
-            }
-        }
-
-    `;
+    50% {
+        transform: scale(1.25);
+        opacity: 0.8;
+    }
+}
+            
 
     document.head.appendChild(style);
 
