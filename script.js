@@ -3481,24 +3481,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 // رسائل خاصة بالمسجدين 002 و003
 // =========================================================
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    // انتظار تحميل إعدادات المسجد
-    try {
-        await loadMosqueConfig();
-    } catch (error) {
-        console.error("حدث خطأ أثناء تحميل إعدادات المسجد:", error);
-    }
-
-
-    // الرسائل تظهر فقط في المسجدين 002 و003
-    if (mosqueId !== "mosque_002" && mosqueId !== "mosque_003") {
+    // لا تظهر الرسائل إلا في المسجدين 002 و003
+    if (
+        mosqueId !== "mosque_002" &&
+        mosqueId !== "mosque_003"
+    ) {
         return;
     }
 
 
     // =====================================================
-    // CSS للرسالتين
+    // CSS
     // =====================================================
 
     const style = document.createElement("style");
@@ -3510,23 +3505,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         ================================================= */
 
         .next-contest-message {
+
             position: relative;
             overflow: hidden;
 
             width: min(90%, 600px);
+
             margin: 18px auto;
 
             padding: 16px 22px;
 
             text-align: center;
+
             font-size: 1.08rem;
             font-weight: 700;
             line-height: 1.8;
 
             border-radius: 20px;
 
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.28);
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.28);
 
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -3535,10 +3536,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 0 6px 20px rgba(0, 0, 0, 0.12);
 
             animation:
-                contestMessageIn 1s ease-out,
-                contestMessageFloat 3.5s ease-in-out 1s infinite;
+                contestMessageIn
+                1s ease-out,
+                contestMessageFloat
+                3.5s ease-in-out
+                1s infinite;
         }
 
+
+        /* اللمعة المتحركة */
 
         .next-contest-message::after {
 
@@ -3563,7 +3569,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             animation:
                 contestMessageShine
-                4s ease-in-out 1.5s infinite;
+                4s ease-in-out
+                1.5s infinite;
         }
 
 
@@ -3571,12 +3578,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             from {
                 opacity: 0;
-                transform: translateY(25px) scale(0.96);
+                transform:
+                    translateY(25px)
+                    scale(0.96);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
@@ -3584,11 +3595,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         @keyframes contestMessageFloat {
 
             0%, 100% {
-                transform: translateY(0);
+                transform:
+                    translateY(0)
+                    scale(1);
             }
 
             50% {
-                transform: translateY(-4px);
+                transform:
+                    translateY(-4px)
+                    scale(1.01);
             }
         }
 
@@ -3613,125 +3628,179 @@ document.addEventListener("DOMContentLoaded", async () => {
            الرسالة الثانية
         ================================================= */
 
-        
-.quran-message {
-    position: relative;
-    overflow: hidden;
+        .quran-message {
 
-    width: min(92%, 700px);
-    margin: 14px auto 22px;
+            position: relative;
+            overflow: hidden;
 
-    padding: 20px 24px;
+            width: min(92%, 700px);
 
-    text-align: center;
-    font-size: 1.08rem;
-    font-weight: 700;
-    line-height: 2;
+            margin: 14px auto 22px;
 
-    border-radius: 17px;
+            padding: 20px 24px;
 
-    /* لون مختلف قليلًا عن الرسالة الأولى */
-    background: rgba(245, 235, 200, 0.16);
+            text-align: center;
 
-    border: 1px solid rgba(245, 220, 145, 0.35);
+            font-size: 1.08rem;
+            font-weight: 700;
 
-    box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.11);
+            line-height: 2;
 
-    /* حركة ملحوظة لكن هادئة */
-    animation: quranMessageMotion 4s ease-in-out infinite;
-}
+            border-radius: 17px;
 
+            /*
+               لون مختلف قليلًا عن الرسالة الأولى
+            */
 
-/* دائرة ضوئية خفيفة تتحرك في الخلفية */
-.quran-message::before {
-    content: "";
+            background:
+                rgba(245, 235, 200, 0.16);
 
-    position: absolute;
+            border:
+                1px solid rgba(245, 220, 145, 0.35);
 
-    width: 190px;
-    height: 190px;
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.11);
 
-    top: -110px;
-    right: -70px;
+            /*
+               حركة ملحوظة قليلًا:
+               تكبير + تصغير
+               صعود + هبوط
+               تغير بسيط في البوردر
+            */
 
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    animation: quranMessageGlow 5s ease-in-out infinite;
-}
+            animation:
+                quranMessageMotion
+                4s ease-in-out infinite;
+        }
 
 
-/* الحركة الأساسية */
-@keyframes quranMessageMotion {
+        /* دائرة ضوئية خفيفة في الخلفية */
 
-    0% {
-        transform: translateY(0) scale(1);
+        .quran-message::before {
 
-        border-color:
-            rgba(245, 220, 145, 0.30);
+            content: "";
 
-        box-shadow:
-            0 6px 20px rgba(0, 0, 0, 0.11);
-    }
+            position: absolute;
 
-    25% {
-        transform: translateY(-4px) scale(1.015);
+            width: 190px;
+            height: 190px;
 
-        border-color:
-            rgba(245, 220, 145, 0.42);
+            top: -110px;
+            right: -70px;
 
-        box-shadow:
-            0 9px 24px rgba(0, 0, 0, 0.13);
-    }
+            border-radius: 50%;
 
-    50% {
-        transform: translateY(0) scale(1.025);
+            background:
+                rgba(255, 255, 255, 0.08);
 
-        border-color:
-            rgba(255, 225, 155, 0.52);
-
-        box-shadow:
-            0 11px 27px rgba(0, 0, 0, 0.14);
-    }
-
-    75% {
-        transform: translateY(4px) scale(1.015);
-
-        border-color:
-            rgba(245, 220, 145, 0.42);
-
-        box-shadow:
-            0 9px 24px rgba(0, 0, 0, 0.13);
-    }
-
-    100% {
-        transform: translateY(0) scale(1);
-
-        border-color:
-            rgba(245, 220, 145, 0.30);
-
-        box-shadow:
-            0 6px 20px rgba(0, 0, 0, 0.11);
-    }
-}
+            animation:
+                quranMessageGlow
+                5s ease-in-out infinite;
+        }
 
 
-/* حركة الخلفية */
-@keyframes quranMessageGlow {
+        @keyframes quranMessageMotion {
 
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.45;
-    }
+            0% {
 
-    50% {
-        transform: scale(1.25);
-        opacity: 0.8;
-    }
-}
-            
+                transform:
+                    translateY(0)
+                    scale(1);
+
+                border-color:
+                    rgba(245, 220, 145, 0.30);
+
+                box-shadow:
+                    0 6px 20px
+                    rgba(0, 0, 0, 0.11);
+            }
+
+
+            25% {
+
+                transform:
+                    translateY(-4px)
+                    scale(1.015);
+
+                border-color:
+                    rgba(245, 220, 145, 0.42);
+
+                box-shadow:
+                    0 9px 24px
+                    rgba(0, 0, 0, 0.13);
+            }
+
+
+            50% {
+
+                transform:
+                    translateY(0)
+                    scale(1.025);
+
+                border-color:
+                    rgba(255, 225, 155, 0.52);
+
+                box-shadow:
+                    0 11px 27px
+                    rgba(0, 0, 0, 0.14);
+            }
+
+
+            75% {
+
+                transform:
+                    translateY(4px)
+                    scale(1.015);
+
+                border-color:
+                    rgba(245, 220, 145, 0.42);
+
+                box-shadow:
+                    0 9px 24px
+                    rgba(0, 0, 0, 0.13);
+            }
+
+
+            100% {
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+                border-color:
+                    rgba(245, 220, 145, 0.30);
+
+                box-shadow:
+                    0 6px 20px
+                    rgba(0, 0, 0, 0.11);
+            }
+        }
+
+
+        @keyframes quranMessageGlow {
+
+            0%, 100% {
+
+                transform:
+                    scale(1);
+
+                opacity:
+                    0.45;
+            }
+
+
+            50% {
+
+                transform:
+                    scale(1.25);
+
+                opacity:
+                    0.8;
+            }
+        }
+
+    `;
+
 
     document.head.appendChild(style);
 
@@ -3740,27 +3809,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     // الرسالة الأولى
     // =====================================================
 
-    const message = document.createElement("div");
+    const message =
+        document.createElement("div");
 
-    message.className = "next-contest-message";
+    message.className =
+        "next-contest-message";
 
     message.textContent =
         "هل تظنون أن هناك مسابقة أخرى قريبًا..؟";
 
 
     // فلتر الأولاد والبنات
-    const filters = document.querySelector(".filters");
+    const filters =
+        document.querySelector(".filters");
 
 
-    if (filters) {
-
-        // وضع الرسالة بعد الفلتر مباشرة
-        filters.insertAdjacentElement(
-            "afterend",
-            message
-        );
-
-    } else {
+    if (!filters) {
 
         console.warn(
             "لم يتم العثور على فلتر الأولاد والبنات"
@@ -3768,6 +3832,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         return;
     }
+
+
+    // وضع الرسالة الأولى بعد الفلتر مباشرة
+
+    filters.insertAdjacentElement(
+        "afterend",
+        message
+    );
 
 
     // =====================================================
@@ -3780,11 +3852,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     quranMessage.className =
         "quran-message";
 
+
+    /*
+       النص كله قطعة واحدة
+       بدون تقسيم إلى 3 أجزاء
+    */
+
     quranMessage.textContent =
         "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الجنة سوف يعطينا الله جوووواائز كبيرة 🎊🎁🎈🎉";
 
 
     // وضع الرسالة الثانية تحت الأولى
+
     message.insertAdjacentElement(
         "afterend",
         quranMessage
