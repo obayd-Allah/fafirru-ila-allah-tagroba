@@ -3596,3 +3596,95 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
         filters.insertAdjacentElement("afterend", message);
     }
 }
+// الرسالة الثانية
+if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
+
+    const style2 = document.createElement("style");
+
+    style2.textContent = `
+        .quran-message {
+            position: relative;
+            overflow: hidden;
+
+            width: min(92%, 700px);
+            margin: 12px auto 22px;
+
+            padding: 20px 24px;
+
+            text-align: center;
+            font-size: 1.08rem;
+            font-weight: 700;
+            line-height: 2;
+
+            border-radius: 14px;
+
+            background: rgba(255, 248, 220, 0.14);
+            border: 1px solid rgba(255, 220, 130, 0.32);
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.10);
+
+            animation: quranMessageAppear 1.2s ease-out;
+        }
+
+        .quran-message::before {
+            content: "";
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            top: -100px;
+            right: -70px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            animation: quranMessageGlow 5s ease-in-out infinite;
+        }
+
+        @keyframes quranMessageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes quranMessageGlow {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.35);
+                opacity: 1;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+
+
+    const quranMessage = document.createElement("div");
+
+    quranMessage.className = "quran-message";
+
+    quranMessage.textContent =
+    "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الجنة سوف يعطينا الله جوووواائز كبيرة 🎊🎁🎈🎉";
+
+
+    // وضعها تحت الرسالة الأولى
+    const firstMessage =
+        document.querySelector(".next-contest-message");
+
+    if (firstMessage) {
+        firstMessage.insertAdjacentElement("afterend", quranMessage);
+    }
+}
