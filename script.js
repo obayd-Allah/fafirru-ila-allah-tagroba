@@ -3477,13 +3477,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, 3500);
 
 });
-// رسالة خاصة بالمسجدين 002 و003
-if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
+// =========================================================
+// رسائل خاصة بالمسجدين 002 و003
+// =========================================================
 
-    // CSS
+document.addEventListener("DOMContentLoaded", async () => {
+
+    // انتظار تحميل إعدادات المسجد
+    try {
+        await loadMosqueConfig();
+    } catch (error) {
+        console.error("حدث خطأ أثناء تحميل إعدادات المسجد:", error);
+    }
+
+
+    // الرسائل تظهر فقط في المسجدين 002 و003
+    if (mosqueId !== "mosque_002" && mosqueId !== "mosque_003") {
+        return;
+    }
+
+
+    // =====================================================
+    // CSS للرسالتين
+    // =====================================================
+
     const style = document.createElement("style");
 
     style.textContent = `
+
+        /* =================================================
+           الرسالة الأولى
+        ================================================= */
+
         .next-contest-message {
             position: relative;
             overflow: hidden;
@@ -3514,11 +3539,13 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
                 contestMessageFloat 3.5s ease-in-out 1s infinite;
         }
 
-        /* اللمعة المتحركة */
+
         .next-contest-message::after {
+
             content: "";
 
             position: absolute;
+
             top: 0;
             left: -120%;
 
@@ -3534,11 +3561,14 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
 
             transform: skewX(-20deg);
 
-            animation: contestMessageShine 4s ease-in-out 1.5s infinite;
+            animation:
+                contestMessageShine
+                4s ease-in-out 1.5s infinite;
         }
 
-        /* ظهور البطاقة */
+
         @keyframes contestMessageIn {
+
             from {
                 opacity: 0;
                 transform: translateY(25px) scale(0.96);
@@ -3550,8 +3580,9 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
             }
         }
 
-        /* حركة خفيفة جدًا للبطاقة */
+
         @keyframes contestMessageFloat {
+
             0%, 100% {
                 transform: translateY(0);
             }
@@ -3561,8 +3592,9 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
             }
         }
 
-        /* مرور اللمعة */
+
         @keyframes contestMessageShine {
+
             0% {
                 left: -120%;
             }
@@ -3575,60 +3607,50 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
                 left: 140%;
             }
         }
-    `;
-
-    document.head.appendChild(style);
 
 
-    // إنشاء الرسالة
-    const message = document.createElement("div");
+        /* =================================================
+           الرسالة الثانية
+        ================================================= */
 
-    message.className = "next-contest-message";
-
-    message.textContent =
-        "هل تظنون أن هناك مسابقة أخرى قريبًا..؟";
-
-
-    // وضعها بعد فلتر الأولاد والبنات مباشرة
-    const filters = document.querySelector(".filters");
-
-    if (filters) {
-        filters.insertAdjacentElement("afterend", message);
-    }
-}
-// الرسالة الثانية
-if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
-
-    const style2 = document.createElement("style");
-
-    style2.textContent = `
         .quran-message {
+
             position: relative;
             overflow: hidden;
 
             width: min(92%, 700px);
+
             margin: 12px auto 22px;
 
             padding: 20px 24px;
 
             text-align: center;
+
             font-size: 1.08rem;
             font-weight: 700;
+
             line-height: 2;
 
             border-radius: 14px;
 
-            background: rgba(255, 248, 220, 0.14);
-            border: 1px solid rgba(255, 220, 130, 0.32);
+            background:
+                rgba(255, 248, 220, 0.14);
+
+            border:
+                1px solid rgba(255, 220, 130, 0.32);
 
             box-shadow:
                 0 5px 18px rgba(0, 0, 0, 0.10);
 
-            animation: quranMessageAppear 1.2s ease-out;
+            animation:
+                quranMessageAppear 1.2s ease-out;
         }
 
+
         .quran-message::before {
+
             content: "";
+
             position: absolute;
 
             width: 180px;
@@ -3639,12 +3661,17 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
 
             border-radius: 50%;
 
-            background: rgba(255, 255, 255, 0.07);
+            background:
+                rgba(255, 255, 255, 0.07);
 
-            animation: quranMessageGlow 5s ease-in-out infinite;
+            animation:
+                quranMessageGlow
+                5s ease-in-out infinite;
         }
 
+
         @keyframes quranMessageAppear {
+
             from {
                 opacity: 0;
                 transform: translateY(18px);
@@ -3656,7 +3683,9 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
             }
         }
 
+
         @keyframes quranMessageGlow {
+
             0%, 100% {
                 transform: scale(1);
                 opacity: 0.5;
@@ -3667,24 +3696,64 @@ if (mosqueId === "mosque_002" || mosqueId === "mosque_003") {
                 opacity: 1;
             }
         }
+
     `;
 
     document.head.appendChild(style);
 
 
-    const quranMessage = document.createElement("div");
+    // =====================================================
+    // الرسالة الأولى
+    // =====================================================
 
-    quranMessage.className = "quran-message";
+    const message = document.createElement("div");
+
+    message.className = "next-contest-message";
+
+    message.textContent =
+        "هل تظنون أن هناك مسابقة أخرى قريبًا..؟";
+
+
+    // فلتر الأولاد والبنات
+    const filters = document.querySelector(".filters");
+
+
+    if (filters) {
+
+        // وضع الرسالة بعد الفلتر مباشرة
+        filters.insertAdjacentElement(
+            "afterend",
+            message
+        );
+
+    } else {
+
+        console.warn(
+            "لم يتم العثور على فلتر الأولاد والبنات"
+        );
+
+        return;
+    }
+
+
+    // =====================================================
+    // الرسالة الثانية
+    // =====================================================
+
+    const quranMessage =
+        document.createElement("div");
+
+    quranMessage.className =
+        "quran-message";
 
     quranMessage.textContent =
-    "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الجنة سوف يعطينا الله جوووواائز كبيرة 🎊🎁🎈🎉";
+        "نحن نحفظ القرآن الكريم من أجل دخول الجنة 🤍.. لا للجواهر 💎❌.. وفي الجنة سوف يعطينا الله جوووواائز كبيرة 🎊🎁🎈🎉";
 
 
-    // وضعها تحت الرسالة الأولى
-    const firstMessage =
-        document.querySelector(".next-contest-message");
+    // وضع الرسالة الثانية تحت الأولى
+    message.insertAdjacentElement(
+        "afterend",
+        quranMessage
+    );
 
-    if (firstMessage) {
-        firstMessage.insertAdjacentElement("afterend", quranMessage);
-    }
-}
+});
