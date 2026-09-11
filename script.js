@@ -3427,8 +3427,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     ===================================================== */
 
     if (
-        mosqueId === "mosque_002" ||
-        mosqueId === "mosque_003"
+        mosqueId === "mosque_001" ||
+        mosqueId === "mosque_002"
     ) {
 
         /* =================================================
