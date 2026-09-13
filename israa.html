@@ -1,1093 +1,2700 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مقسّم التسجيل إلى آيات MP3</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Israa Audio Splitter</title>
 
 <style>
-* { box-sizing: border-box; }
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f6fa;
+    color: #172033;
+}
 
 body {
-  margin: 0;
-  padding: 12px;
-  font-family: Arial, sans-serif;
-  background: #f3f6fa;
-  color: #172033;
+    padding: 10px;
 }
 
-.box {
-  max-width: 1000px;
-  margin: auto;
-  background: white;
-  padding: 18px;
-  border-radius: 18px;
-  box-shadow: 0 4px 20px #00000012;
+.app {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 4px 20px #00000012;
 }
 
-h2 { margin-top: 0; color: #1769aa; }
+h2 {
+    margin: 0 0 8px;
+    color: #1769aa;
+}
 
-.hint {
-  color: #555;
-  line-height: 1.8;
-  font-size: 14px;
+.info {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.file-area {
+    border: 2px dashed #aac4d8;
+    border-radius: 12px;
+    padding: 14px;
+    background: #f8fbfd;
 }
 
 input[type=file] {
-  width: 100%;
-  padding: 12px;
-  border: 1px dashed #aaa;
-  border-radius: 10px;
-  margin: 10px 0;
+    width: 100%;
 }
 
 audio {
-  width: 100%;
-  margin: 10px 0;
+    width: 100%;
+    margin-top: 12px;
 }
 
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0;
+.time-info {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #555;
 }
 
-.toolbar button {
-  border: 0;
-  border-radius: 8px;
-  padding: 9px 13px;
-  background: #1769aa;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
+.timeline-wrapper {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    border: 2px solid #b8d2e5;
+    border-radius: 12px;
+    background: #eef6fb;
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
 }
 
-.toolbar button.secondary { background: #607d8b; }
-.toolbar button.danger { background: #c62828; }
-.toolbar button.green { background: #16803c; }
-
-.toolbar button:disabled {
-  opacity: .45;
-  cursor: not-allowed;
+.timeline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
 }
 
-.zoom-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  min-width: 220px;
+#timelineCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
 }
 
-.zoom-box input {
-  flex: 1;
-  min-width: 80px;
-}
-
-.zoom-value {
-  min-width: 55px;
-  text-align: center;
-  font-size: 13px;
-  color: #555;
-}
-
-#timeLabel {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin: 8px;
-}
-
-.wave-viewport {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  overflow: hidden;
-  background: #eaf2f8;
-  border: 2px solid #b8d2e5;
-  border-radius: 12px;
-  cursor: crosshair;
-  touch-action: none;
-}
-
-#waveContent {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-}
-
-#canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  display: block;
+#markers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 }
 
 .marker {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: #e53935;
-  cursor: ew-resize;
-  z-index: 5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #e53935;
+    pointer-events: auto;
+    cursor: ew-resize;
+    z-index: 10;
 }
 
-.marker span {
-  position: absolute;
-  top: 4px;
-  right: 5px;
-  background: #e53935;
-  color: white;
-  padding: 3px 6px;
-  border-radius: 5px;
-  font-size: 12px;
-  white-space: nowrap;
-  pointer-events: none;
+.marker.first {
+    background: #16803c;
 }
 
-.marker.first { background: #16803c; }
-.marker.first span { background: #16803c; }
-
-#playhead {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: #1769aa;
-  z-index: 4;
-  pointer-events: none;
-  display: none;
+.marker-label {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #e53935;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    pointer-events: none;
 }
 
-.range-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: #777;
-  direction: ltr;
+.marker.first .marker-label {
+    background: #16803c;
 }
 
-#scrollBar {
-  width: 100%;
-  margin: 10px 0;
-  direction: ltr;
+.play-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #1769aa;
+    z-index: 8;
+    pointer-events: none;
 }
 
-#marksList {
-  max-height: 250px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 8px;
-  margin-top: 12px;
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 13px;
+    font-size: 14px;
+    color: white;
+    background: #1769aa;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+button.gray {
+    background: #607d8b;
+}
+
+button.red {
+    background: #c62828;
+}
+
+button.green {
+    background: #16803c;
+}
+
+.zoom-value {
+    min-width: 45px;
+    text-align: center;
+    font-size: 13px;
+}
+
+#zoomSlider {
+    flex: 1;
+    min-width: 150px;
+}
+
+#navigation {
+    width: 100%;
+    direction: ltr;
+    margin-top: 8px;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    direction: ltr;
+    font-size: 11px;
+    color: #777;
+}
+
+.controls {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.marks {
+    margin-top: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-height: 250px;
+    overflow-y: auto;
 }
 
 .mark-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px;
-  border-bottom: 1px solid #eee;
-  flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
 }
 
-.mark-row:last-child { border-bottom: 0; }
+.mark-row:last-child {
+    border-bottom: 0;
+}
 
-.mark-row input {
-  width: 105px;
-  padding: 6px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-  direction: ltr;
+.mark-number {
+    font-weight: bold;
+    min-width: 55px;
+}
+
+.mark-time {
+    direction: ltr;
+    width: 105px;
+    padding: 6px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
 }
 
 .mark-row button {
-  border: 0;
-  border-radius: 6px;
-  padding: 6px 9px;
-  color: white;
-  background: #607d8b;
-  cursor: pointer;
-  font-size: 12px;
+    font-size: 12px;
+    padding: 6px 9px;
 }
 
-.mark-row button.delete { background: #c62828; }
-
-#status {
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 9px;
-  background: #eef5ff;
-  line-height: 1.8;
-  white-space: pre-wrap;
+.status {
+    margin-top: 12px;
+    background: #eef5ff;
+    border-radius: 9px;
+    padding: 11px;
+    line-height: 1.7;
+    white-space: pre-wrap;
 }
 
-#downloads a {
-  display: block;
-  padding: 10px;
-  margin: 6px 0;
-  border-radius: 8px;
-  background: #e8f5e9;
-  color: #1769aa;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.small {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.7;
+.progress-wrapper {
+    height: 10px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
 .progress {
-  height: 10px;
-  background: #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 10px;
+    width: 0;
+    height: 100%;
+    background: #16803c;
+    transition: width .15s;
 }
 
-#progressBar {
-  height: 100%;
-  width: 0%;
-  background: #16803c;
-  transition: width .1s;
+.downloads {
+    margin-top: 10px;
 }
+
+.downloads a {
+    display: block;
+    padding: 9px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background: #e8f5e9;
+    color: #1769aa;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.small {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.7;
+    margin-top: 8px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="app">
 
-<h2>🎧 مقسّم التسجيل إلى آيات MP3</h2>
+<h2>🎧 تقسيم سورة الإسراء</h2>
 
-<div class="hint">
-  ارفع التسجيل، ثم استخدم التكبير للوصول إلى الموضع المطلوب.
-  اضغط على الموجة لإضافة علامة، واسحب العلامات لتعديلها.
-  بعد الانتهاء اضغط «موافق وتقسيم الصوت».
+<div class="info">
+    ارفع التسجيل ثم حدد بدايات الآيات.
+    تم تصميم هذه النسخة بحيث لا تفك التسجيل كاملًا عند رفعه،
+    مما يقلل استهلاك الذاكرة ويجعل التسجيلات الطويلة أكثر سلاسة.
 </div>
 
-<input type="file" id="fileInput" accept="audio/*">
-
-<audio id="audio" controls></audio>
-
-<div id="timeLabel">ارفع ملفًا صوتيًا أولًا</div>
-
-<div class="toolbar">
-  <button id="zoomOut" class="secondary" disabled>− تصغير</button>
-  <button id="zoomIn" disabled>+ تكبير</button>
-  <button id="resetZoom" class="secondary" disabled>↺ عرض كامل</button>
-
-  <div class="zoom-box">
-    <span>التكبير:</span>
-    <input id="zoomSlider" type="range"
-           min="1" max="100" step="0.1" value="1" disabled>
-    <span id="zoomValue" class="zoom-value">1×</span>
-  </div>
+<div class="file-area">
+    <input
+        type="file"
+        id="fileInput"
+        accept="audio/*">
 </div>
 
-<div class="wave-viewport" id="waveViewport">
-  <div id="waveContent">
-    <canvas id="canvas"></canvas>
-    <div id="playhead"></div>
-  </div>
+<audio
+    id="audio"
+    controls>
+</audio>
+
+<div
+    id="timeInfo"
+    class="time-info">
+    لم يتم اختيار ملف
 </div>
 
-<div class="range-label">
-  <span id="viewStart">00:00.000</span>
-  <span id="viewEnd">00:00.000</span>
+<div
+    id="timelineWrapper"
+    class="timeline-wrapper">
+
+    <div
+        id="timeline"
+        class="timeline">
+
+        <canvas
+            id="timelineCanvas">
+        </canvas>
+
+        <div
+            id="markers">
+        </div>
+
+        <div
+            id="playLine"
+            class="play-line">
+        </div>
+
+    </div>
+
 </div>
 
-<input id="scrollBar" type="range"
-       min="0" max="0" step="0.001" value="0" disabled>
+<div class="range-labels">
+    <span id="viewStart">00:00.000</span>
+    <span id="viewEnd">00:00.000</span>
+</div>
+
+<div class="zoom-controls">
+
+    <button
+        id="zoomOut"
+        class="gray"
+        disabled>
+        −
+    </button>
+
+    <button
+        id="zoomIn"
+        disabled>
+        +
+    </button>
+
+    <button
+        id="resetZoom"
+        class="gray"
+        disabled>
+        عرض كامل
+    </button>
+
+    <span class="zoom-value"
+          id="zoomValue">
+        1×
+    </span>
+
+    <input
+        id="zoomSlider"
+        type="range"
+        min="1"
+        max="100"
+        step="0.1"
+        value="1"
+        disabled>
+
+</div>
+
+<input
+    id="navigation"
+    type="range"
+    min="0"
+    max="0"
+    step="0.001"
+    value="0"
+    disabled>
 
 <div class="small">
-  💡 عند التكبير: حرّك شريط التنقل للوصول إلى أي جزء.
-  اضغط على الموجة لإضافة علامة، أو اسحب العلامة لتعديلها.
+    عند التكبير استخدم شريط التنقل للوصول إلى الجزء المطلوب.
+    ويمكنك الضغط على الخط الزمني لإضافة علامة.
 </div>
 
-<div class="toolbar">
-  <button id="addBtn" disabled>➕ إضافة علامة عند الوقت الحالي</button>
-  <button id="playSelectedBtn" class="secondary" disabled>
-    ▶️ تشغيل المقطع المحدد
-  </button>
-  <button id="clearBtn" class="danger" disabled>
-    🗑️ حذف كل العلامات
-  </button>
-</div>
+<div class="controls">
 
-<div id="marksList"></div>
+    <button
+        id="addCurrent"
+        disabled>
+        ➕ علامة عند الوقت الحالي
+    </button>
 
-<div class="toolbar">
-  <button id="splitBtn" class="green" disabled>
-    ✅ موافق وتقسيم الصوت إلى MP3
-  </button>
-  <button id="downloadAllBtn" class="secondary" disabled>
-    ⬇️ تحميل الكل ZIP
-  </button>
-</div>
+    <button
+        id="playSegment"
+        class="gray"
+        disabled>
+        ▶ تشغيل الآية
+    </button>
 
-<div class="progress">
-  <div id="progressBar"></div>
-</div>
-
-<div id="status">لم يتم رفع أي ملف بعد.</div>
-<div id="downloads"></div>
+    <button
+        id="clearMarks"
+        class="red"
+        disabled>
+        حذف العلامات
+    </button>
 
 </div>
 
-<!-- مكتبة تحويل الصوت إلى MP3 -->
-<script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js"></script>
+<div
+    id="marksList"
+    class="marks">
+</div>
 
-<!-- مكتبة إنشاء ملف ZIP -->
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<div class="controls">
+
+    <button
+        id="splitButton"
+        class="green"
+        disabled>
+        ✅ موافق وتقسيم إلى MP3
+    </button>
+
+    <button
+        id="downloadAll"
+        class="gray"
+        disabled>
+        📦 تحميل الكل
+    </button>
+
+</div>
+
+<div class="progress-wrapper">
+    <div
+        id="progress"
+        class="progress">
+    </div>
+</div>
+
+<div
+    id="status"
+    class="status">
+    لم يتم رفع التسجيل بعد.
+</div>
+
+<div
+    id="downloads"
+    class="downloads">
+</div>
+
+</div>
+
+
+<!--
+    مكتبة MP3
+-->
+<script
+src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js">
+</script>
 
 <script>
-const fileInput = document.getElementById("fileInput");
-const audio = document.getElementById("audio");
-const waveViewport = document.getElementById("waveViewport");
-const waveContent = document.getElementById("waveContent");
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-const playhead = document.getElementById("playhead");
 
-const zoomSlider = document.getElementById("zoomSlider");
-const zoomValue = document.getElementById("zoomValue");
-const scrollBar = document.getElementById("scrollBar");
+/* =========================================================
+   العناصر
+========================================================= */
 
-const zoomIn = document.getElementById("zoomIn");
-const zoomOut = document.getElementById("zoomOut");
-const resetZoom = document.getElementById("resetZoom");
+const fileInput =
+    document.getElementById("fileInput");
 
-const timeLabel = document.getElementById("timeLabel");
-const viewStart = document.getElementById("viewStart");
-const viewEnd = document.getElementById("viewEnd");
+const audio =
+    document.getElementById("audio");
 
-const addBtn = document.getElementById("addBtn");
-const playSelectedBtn = document.getElementById("playSelectedBtn");
-const clearBtn = document.getElementById("clearBtn");
-const splitBtn = document.getElementById("splitBtn");
-const downloadAllBtn = document.getElementById("downloadAllBtn");
+const timelineWrapper =
+    document.getElementById("timelineWrapper");
 
-const marksList = document.getElementById("marksList");
-const statusBox = document.getElementById("status");
-const downloads = document.getElementById("downloads");
-const progressBar = document.getElementById("progressBar");
+const timeline =
+    document.getElementById("timeline");
 
-let audioBuffer = null;
-let audioContext = null;
-let objectURL = null;
-let fileName = "israa";
+const canvas =
+    document.getElementById("timelineCanvas");
 
-let marks = [];
-let selectedIndex = 0;
-let draggingIndex = -1;
+const ctx =
+    canvas.getContext("2d");
+
+const markersContainer =
+    document.getElementById("markers");
+
+const playLine =
+    document.getElementById("playLine");
+
+const navigation =
+    document.getElementById("navigation");
+
+const zoomSlider =
+    document.getElementById("zoomSlider");
+
+const zoomValue =
+    document.getElementById("zoomValue");
+
+const zoomIn =
+    document.getElementById("zoomIn");
+
+const zoomOut =
+    document.getElementById("zoomOut");
+
+const resetZoom =
+    document.getElementById("resetZoom");
+
+const addCurrent =
+    document.getElementById("addCurrent");
+
+const playSegment =
+    document.getElementById("playSegment");
+
+const clearMarks =
+    document.getElementById("clearMarks");
+
+const splitButton =
+    document.getElementById("splitButton");
+
+const downloadAll =
+    document.getElementById("downloadAll");
+
+const timeInfo =
+    document.getElementById("timeInfo");
+
+const viewStart =
+    document.getElementById("viewStart");
+
+const viewEnd =
+    document.getElementById("viewEnd");
+
+const marksList =
+    document.getElementById("marksList");
+
+const status =
+    document.getElementById("status");
+
+const progress =
+    document.getElementById("progress");
+
+const downloads =
+    document.getElementById("downloads");
+
+
+/* =========================================================
+   الحالة
+========================================================= */
+
+let sourceURL = null;
+
+let duration = 0;
 
 let zoom = 1;
+
 let viewStartTime = 0;
+
+let marks = [];
+
+let selectedMark = 0;
 
 let generatedFiles = [];
 
+let isDraggingMarker = false;
+
+let draggingIndex = -1;
+
+
+/* =========================================================
+   أدوات الوقت
+========================================================= */
+
 function formatTime(seconds) {
-  if (!isFinite(seconds)) return "00:00.000";
 
-  const m = Math.floor(seconds / 60);
-  const s = (seconds % 60).toFixed(3).padStart(6, "0");
+    if (!Number.isFinite(seconds)) {
+        return "00:00.000";
+    }
 
-  return String(m).padStart(2, "0") + ":" + s;
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        (seconds % 60)
+        .toFixed(3)
+        .padStart(6, "0");
+
+    return String(minutes)
+        .padStart(2, "0")
+        + ":" +
+        secs;
 }
 
-function getViewDuration() {
-  if (!audioBuffer) return 0;
-  return audioBuffer.duration / zoom;
+
+/* =========================================================
+   مدة الجزء الظاهر
+========================================================= */
+
+function getVisibleDuration() {
+
+    if (!duration) {
+        return 0;
+    }
+
+    return duration / zoom;
 }
 
-function clampViewStart(value) {
-  if (!audioBuffer) return 0;
 
-  const maxStart = Math.max(
-    0,
-    audioBuffer.duration - getViewDuration()
-  );
+/* =========================================================
+   ضبط موضع العرض
+========================================================= */
 
-  return Math.max(0, Math.min(maxStart, value));
+function clampView() {
+
+    const visible =
+        getVisibleDuration();
+
+    const max =
+        Math.max(
+            0,
+            duration - visible
+        );
+
+    viewStartTime =
+        Math.max(
+            0,
+            Math.min(
+                max,
+                viewStartTime
+            )
+        );
 }
+
+
+/* =========================================================
+   تحويل الوقت إلى X
+========================================================= */
 
 function timeToX(time) {
-  if (!audioBuffer) return 0;
 
-  return (
-    (time - viewStartTime) /
-    getViewDuration()
-  ) * waveViewport.clientWidth;
+    const visible =
+        getVisibleDuration();
+
+    if (!visible) {
+        return 0;
+    }
+
+    return (
+        (time - viewStartTime)
+        / visible
+    ) * timelineWrapper.clientWidth;
 }
+
+
+/* =========================================================
+   تحويل X إلى وقت
+========================================================= */
 
 function xToTime(x) {
-  if (!audioBuffer) return 0;
 
-  return viewStartTime +
-    (x / waveViewport.clientWidth) * getViewDuration();
+    const visible =
+        getVisibleDuration();
+
+    return (
+        viewStartTime +
+        (x / timelineWrapper.clientWidth)
+        * visible
+    );
 }
 
-function updateView() {
-  if (!audioBuffer) return;
 
-  const viewportWidth = waveViewport.clientWidth;
-  const contentWidth = viewportWidth * zoom;
+/* =========================================================
+   تحديث الواجهة
+========================================================= */
 
-  waveContent.style.width = contentWidth + "px";
+function updateTimeline() {
 
-  canvas.width = Math.max(
-    1,
-    Math.floor(contentWidth * devicePixelRatio)
-  );
-
-  canvas.height = Math.floor(
-    waveViewport.clientHeight * devicePixelRatio
-  );
-
-  canvas.style.width = contentWidth + "px";
-
-  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-
-  waveContent.style.left =
-    -(viewStartTime / audioBuffer.duration * contentWidth) + "px";
-
-  drawWave();
-  renderMarkers();
-  updatePlayhead();
-
-  const duration = getViewDuration();
-
-  viewStart.textContent = formatTime(viewStartTime);
-  viewEnd.textContent = formatTime(
-    Math.min(audioBuffer.duration, viewStartTime + duration)
-  );
-
-  zoomValue.textContent =
-    zoom.toFixed(1).replace(".0", "") + "×";
-
-  zoomSlider.value = zoom;
-
-  scrollBar.max = Math.max(
-    0,
-    audioBuffer.duration - duration
-  );
-
-  scrollBar.value = viewStartTime;
-}
-
-function drawWave() {
-  if (!audioBuffer) return;
-
-  const w = canvas.width / devicePixelRatio;
-  const h = canvas.height / devicePixelRatio;
-
-  ctx.clearRect(0, 0, w, h);
-
-  ctx.fillStyle = "#eaf2f8";
-  ctx.fillRect(0, 0, w, h);
-
-  const data = audioBuffer.getChannelData(0);
-  const step = Math.max(1, Math.ceil(data.length / w));
-
-  ctx.beginPath();
-  ctx.strokeStyle = "#1769aa";
-  ctx.lineWidth = 1;
-
-  for (let x = 0; x < w; x++) {
-    let min = 1;
-    let max = -1;
-
-    const start = Math.floor(x / w * data.length);
-    const end = Math.min(data.length, start + step);
-
-    for (let i = start; i < end; i++) {
-      const value = data[i];
-      if (value < min) min = value;
-      if (value > max) max = value;
-    }
-
-    ctx.moveTo(x, h / 2 + min * h * 0.42);
-    ctx.lineTo(x, h / 2 + max * h * 0.42);
-  }
-
-  ctx.stroke();
-
-  ctx.strokeStyle = "#ffffff99";
-  ctx.lineWidth = 1;
-
-  for (let i = 1; i < 100; i++) {
-    const x = w * i / 100;
-
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, h);
-    ctx.stroke();
-  }
-}
-
-function renderMarkers() {
-  document.querySelectorAll(".marker").forEach(el => el.remove());
-
-  if (!audioBuffer) return;
-
-  marks.forEach((time, index) => {
-    const x = timeToX(time);
-
-    if (x < -10 || x > waveViewport.clientWidth + 10) return;
-
-    const marker = document.createElement("div");
-    marker.className = "marker" +
-      (index === 0 ? " first" : "");
-
-    const fullX =
-      time / audioBuffer.duration *
-      (waveViewport.clientWidth * zoom);
-
-    marker.style.left = fullX + "px";
-    marker.dataset.index = index;
-
-    const label = document.createElement("span");
-    label.textContent = "آية " + (index + 1);
-    marker.appendChild(label);
-
-    marker.addEventListener("pointerdown", e => {
-      e.stopPropagation();
-      draggingIndex = index;
-      marker.setPointerCapture(e.pointerId);
-    });
-
-    marker.addEventListener("pointermove", e => {
-      if (draggingIndex !== index) return;
-
-      const rect = waveViewport.getBoundingClientRect();
-      let t = xToTime(e.clientX - rect.left);
-
-      const min = index === 0
-        ? 0
-        : marks[index - 1] + 0.01;
-
-      const max = index === marks.length - 1
-        ? audioBuffer.duration - 0.01
-        : marks[index + 1] - 0.01;
-
-      t = Math.max(min, Math.min(max, t));
-
-      marks[index] = t;
-      selectedIndex = index;
-
-      renderMarkers();
-      renderList();
-      updateTimeLabel();
-    });
-
-    marker.addEventListener("pointerup", () => {
-      draggingIndex = -1;
-    });
-
-    waveContent.appendChild(marker);
-  });
-}
-
-function updatePlayhead() {
-  if (!audioBuffer) return;
-
-  const x = timeToX(audio.currentTime);
-
-  if (x >= 0 && x <= waveViewport.clientWidth) {
-    playhead.style.display = "block";
-
-    playhead.style.left =
-      (audio.currentTime / audioBuffer.duration *
-       waveViewport.clientWidth * zoom) + "px";
-  } else {
-    playhead.style.display = "none";
-  }
-}
-
-function renderList() {
-  marksList.innerHTML = "";
-
-  if (!marks.length) {
-    marksList.textContent = "لا توجد علامات بعد.";
-    return;
-  }
-
-  marks.forEach((time, index) => {
-    const row = document.createElement("div");
-    row.className = "mark-row";
-
-    const title = document.createElement("b");
-    title.textContent = "آية " + (index + 1);
-
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = formatTime(time);
-    input.title = "اكتب الوقت بالثواني، مثل 12.500";
-
-    input.addEventListener("change", () => {
-      const value = input.value.trim();
-      let seconds;
-
-      if (value.includes(":")) {
-        const parts = value.split(":");
-        seconds = Number(parts[0]) * 60 + Number(parts[1]);
-      } else {
-        seconds = Number(value);
-      }
-
-      if (!isFinite(seconds)) {
-        renderList();
+    if (!duration) {
         return;
-      }
-
-      const min = index === 0
-        ? 0
-        : marks[index - 1] + 0.01;
-
-      const max = index === marks.length - 1
-        ? audioBuffer.duration - 0.01
-        : marks[index + 1] - 0.01;
-
-      marks[index] = Math.max(min, Math.min(max, seconds));
-
-      renderMarkers();
-      renderList();
-    });
-
-    const play = document.createElement("button");
-    play.textContent = "▶ تشغيل";
-
-    play.onclick = () => {
-      selectedIndex = index;
-      audio.currentTime = marks[index];
-      audio.play();
-      updateTimeLabel();
-    };
-
-    const locate = document.createElement("button");
-    locate.textContent = "⌖ إظهار";
-
-    locate.onclick = () => {
-      selectedIndex = index;
-
-      viewStartTime = clampViewStart(
-        marks[index] - getViewDuration() / 2
-      );
-
-      updateView();
-    };
-
-    const del = document.createElement("button");
-    del.textContent = "حذف";
-    del.className = "delete";
-
-    del.onclick = () => {
-      marks.splice(index, 1);
-
-      selectedIndex = Math.max(
-        0,
-        Math.min(selectedIndex, marks.length - 1)
-      );
-
-      renderMarkers();
-      renderList();
-      updateTimeLabel();
-    };
-
-    row.append(title, input, play, locate, del);
-    marksList.appendChild(row);
-  });
-}
-
-function updateTimeLabel() {
-  if (!audioBuffer) return;
-
-  timeLabel.textContent =
-    "الوقت الحالي: " + formatTime(audio.currentTime) +
-    " | مدة التسجيل: " + formatTime(audioBuffer.duration) +
-    " | عدد العلامات: " + marks.length;
-}
-
-function addMark(time) {
-  if (!audioBuffer) return;
-
-  time = Math.max(
-    0,
-    Math.min(audioBuffer.duration - 0.01, time)
-  );
-
-  if (marks.some(m => Math.abs(m - time) < 0.05)) return;
-
-  marks.push(time);
-  marks.sort((a, b) => a - b);
-
-  selectedIndex = marks.indexOf(time);
-
-  renderMarkers();
-  renderList();
-  updateTimeLabel();
-}
-
-fileInput.addEventListener("change", async () => {
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  fileName = "israa";
-
-  if (objectURL) URL.revokeObjectURL(objectURL);
-
-  objectURL = URL.createObjectURL(file);
-  audio.src = objectURL;
-
-  statusBox.textContent = "جارٍ تحميل التسجيل وتحليل الموجة...";
-  downloads.innerHTML = "";
-  generatedFiles = [];
-  downloadAllBtn.disabled = true;
-
-  marks = [];
-  selectedIndex = 0;
-  zoom = 1;
-  viewStartTime = 0;
-
-  try {
-    if (!audioContext) {
-      audioContext = new (
-        window.AudioContext || window.webkitAudioContext
-      )();
     }
 
-    const arrayBuffer = await file.arrayBuffer();
-    audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    clampView();
 
-    addBtn.disabled = false;
-    clearBtn.disabled = false;
-    splitBtn.disabled = false;
-    playSelectedBtn.disabled = false;
+    const width =
+        timelineWrapper.clientWidth;
 
-    zoomSlider.disabled = false;
-    scrollBar.disabled = false;
-    zoomIn.disabled = false;
-    zoomOut.disabled = false;
-    resetZoom.disabled = false;
+    const visible =
+        getVisibleDuration();
 
-    statusBox.textContent =
-      "تم تحميل التسجيل بنجاح.\n" +
-      "استخدم التكبير للوصول إلى مواضع الآيات بدقة.";
+    const contentWidth =
+        width * zoom;
 
-    updateView();
-    renderList();
-    updateTimeLabel();
+    timeline.style.width =
+        contentWidth + "px";
 
-  } catch (error) {
-    statusBox.textContent =
-      "تعذر قراءة الملف الصوتي. جرّب ملف MP3 أو WAV أو M4A آخر.";
-    console.error(error);
-  }
-});
+    timeline.style.left =
+        -(
+            viewStartTime /
+            duration *
+            contentWidth
+        ) + "px";
 
-waveViewport.addEventListener("pointerdown", e => {
-  if (!audioBuffer || draggingIndex !== -1) return;
-  if (e.button !== 0) return;
+    /*
+       لا نرسم waveform حقيقي هنا.
 
-  const rect = waveViewport.getBoundingClientRect();
-  const time = xToTime(e.clientX - rect.left);
+       بدلًا منه نرسم خطًا زمنيًا خفيفًا جدًا.
+       هذا مقصود حتى لا نستهلك ذاكرة التسجيل.
+    */
 
-  addMark(time);
-});
-
-waveViewport.addEventListener("wheel", e => {
-  if (!audioBuffer) return;
-
-  e.preventDefault();
-
-  const rect = waveViewport.getBoundingClientRect();
-  const mouseX = e.clientX - rect.left;
-  const mouseTime = xToTime(mouseX);
-
-  const factor = e.deltaY < 0 ? 1.25 : 0.8;
-  const newZoom = Math.max(1, Math.min(100, zoom * factor));
-
-  zoom = newZoom;
-
-  viewStartTime = clampViewStart(
-    mouseTime - (mouseX / rect.width) * getViewDuration()
-  );
-
-  updateView();
-}, { passive: false });
-
-zoomSlider.addEventListener("input", () => {
-  if (!audioBuffer) return;
-
-  const centerTime =
-    viewStartTime + getViewDuration() / 2;
-
-  zoom = Number(zoomSlider.value);
-
-  viewStartTime = clampViewStart(
-    centerTime - getViewDuration() / 2
-  );
-
-  updateView();
-});
-
-zoomIn.onclick = () => {
-  zoom = Math.min(100, zoom * 1.5);
-  viewStartTime = clampViewStart(viewStartTime);
-  updateView();
-};
-
-zoomOut.onclick = () => {
-  zoom = Math.max(1, zoom / 1.5);
-  viewStartTime = clampViewStart(viewStartTime);
-  updateView();
-};
-
-resetZoom.onclick = () => {
-  zoom = 1;
-  viewStartTime = 0;
-  updateView();
-};
-
-scrollBar.addEventListener("input", () => {
-  viewStartTime = Number(scrollBar.value);
-  updateView();
-});
-
-addBtn.onclick = () => addMark(audio.currentTime);
-
-clearBtn.onclick = () => {
-  marks = [];
-  selectedIndex = 0;
-  renderMarkers();
-  renderList();
-  updateTimeLabel();
-};
-
-audio.addEventListener("timeupdate", () => {
-  updateTimeLabel();
-  updatePlayhead();
-});
-
-playSelectedBtn.onclick = () => {
-  if (!marks.length) return;
-
-  const start = marks[selectedIndex];
-
-  const end = selectedIndex + 1 < marks.length
-    ? marks[selectedIndex + 1]
-    : audioBuffer.duration;
-
-  audio.currentTime = start;
-  audio.play();
-
-  const stopWhenDone = () => {
-    if (audio.currentTime >= end) {
-      audio.pause();
-      audio.removeEventListener("timeupdate", stopWhenDone);
-    }
-  };
-
-  audio.addEventListener("timeupdate", stopWhenDone);
-};
-
-/* تحويل جزء من التسجيل إلى MP3 */
-function audioBufferToMp3(buffer, start, end) {
-  const sampleRate = buffer.sampleRate;
-  const channels = Math.min(buffer.numberOfChannels, 2);
-
-  const startSample = Math.floor(start * sampleRate);
-  const endSample = Math.min(
-    buffer.length,
-    Math.ceil(end * sampleRate)
-  );
-
-  const length = endSample - startSample;
-
-  const left = buffer.getChannelData(0);
-  const right = channels > 1
-    ? buffer.getChannelData(1)
-    : left;
-
-  const mp3encoder = new lamejs.Mp3Encoder(
-    channels,
-    sampleRate,
-    192
-  );
-
-  const sampleBlockSize = 1152;
-  const mp3Data = [];
-
-  for (let i = startSample; i < endSample; i += sampleBlockSize) {
-    const endIndex = Math.min(i + sampleBlockSize, endSample);
-
-    const leftChunk = new Int16Array(endIndex - i);
-    const rightChunk = new Int16Array(endIndex - i);
-
-    for (let j = i; j < endIndex; j++) {
-      leftChunk[j - i] = Math.max(
-        -32768,
-        Math.min(32767, Math.round(left[j] * 32767))
-      );
-
-      rightChunk[j - i] = Math.max(
-        -32768,
-        Math.min(32767, Math.round(right[j] * 32767))
-      );
-    }
-
-    let mp3buf;
-
-    if (channels === 1) {
-      mp3buf = mp3encoder.encodeBuffer(leftChunk);
-    } else {
-      mp3buf = mp3encoder.encodeBuffer(leftChunk, rightChunk);
-    }
-
-    if (mp3buf.length > 0) {
-      mp3Data.push(new Int8Array(mp3buf));
-    }
-  }
-
-  const endBuf = mp3encoder.flush();
-
-  if (endBuf.length > 0) {
-    mp3Data.push(new Int8Array(endBuf));
-  }
-
-  return new Blob(mp3Data, { type: "audio/mpeg" });
-};
-
-/* تقسيم التسجيل */
-splitBtn.onclick = async () => {
-  if (!audioBuffer || marks.length === 0) {
-    alert("أضف علامة واحدة على الأقل.");
-    return;
-  }
-
-  if (typeof lamejs === "undefined") {
-    alert("تعذر تحميل مكتبة MP3. تأكد من اتصال الإنترنت.");
-    return;
-  }
-
-  const boundaries = [...marks].sort((a, b) => a - b);
-
-  generatedFiles = [];
-  downloads.innerHTML = "";
-  progressBar.style.width = "0%";
-
-  splitBtn.disabled = true;
-  downloadAllBtn.disabled = true;
-
-  statusBox.textContent =
-    "جارٍ تحويل التسجيل إلى MP3...\n" +
-    "عدد الملفات: " + boundaries.length;
-
-  for (let i = 0; i < boundaries.length; i++) {
-    const start = boundaries[i];
-
-    const end = i + 1 < boundaries.length
-      ? boundaries[i + 1]
-      : audioBuffer.duration;
-
-    if (end <= start) continue;
-
-    const blob = audioBufferToMp3(
-      audioBuffer,
-      start,
-      end
+    drawLightTimeline(
+        contentWidth
     );
 
-    const number = i + 1;
-    const name = "israa" + number + ".mp3";
+    renderMarkers();
 
-    generatedFiles.push({
-      name: name,
-      blob: blob
-    });
+    updatePlayLine();
 
-    const url = URL.createObjectURL(blob);
+    viewStart.textContent =
+        formatTime(viewStartTime);
 
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = name;
+    viewEnd.textContent =
+        formatTime(
+            Math.min(
+                duration,
+                viewStartTime + visible
+            )
+        );
 
-    link.textContent =
-      "⬇️ تحميل " + name +
-      " (" + formatTime(end - start) + ")";
+    zoomValue.textContent =
+        zoom
+        .toFixed(1)
+        .replace(".0", "")
+        + "×";
 
-    downloads.appendChild(link);
+    zoomSlider.value =
+        zoom;
 
-    progressBar.style.width =
-      ((i + 1) / boundaries.length * 100) + "%";
+    const max =
+        Math.max(
+            0,
+            duration - visible
+        );
 
-    // إتاحة تحديث الواجهة بين الملفات
-    await new Promise(resolve => setTimeout(resolve, 0));
-  }
+    navigation.max =
+        max;
 
-  splitBtn.disabled = false;
-  downloadAllBtn.disabled = false;
+    navigation.value =
+        viewStartTime;
+}
 
-  statusBox.textContent =
-    "تم التقسيم بنجاح! 🎉\n" +
-    "عدد الملفات: " + generatedFiles.length +
-    "\nالجودة: MP3 — 192 kbps\n" +
-    "الأسماء: israa1.mp3 إلى israa" +
-    generatedFiles.length + ".mp3";
-};
 
-/* تحميل جميع الملفات داخل ZIP */
-downloadAllBtn.onclick = async () => {
-  if (!generatedFiles.length) return;
+/* =========================================================
+   خط زمني خفيف جدًا
+========================================================= */
 
-  if (typeof JSZip === "undefined") {
-    alert("تعذر تحميل مكتبة ZIP. تأكد من اتصال الإنترنت.");
-    return;
-  }
+function drawLightTimeline(width) {
 
-  downloadAllBtn.disabled = true;
-  statusBox.textContent = "جارٍ تجهيز ملف ZIP...";
+    const height =
+        timelineWrapper.clientHeight;
 
-  const zip = new JSZip();
+    canvas.width =
+        Math.max(
+            1,
+            Math.floor(
+                width *
+                devicePixelRatio
+            )
+        );
 
-  generatedFiles.forEach(file => {
-    zip.file(file.name, file.blob);
-  });
+    canvas.height =
+        Math.floor(
+            height *
+            devicePixelRatio
+        );
 
-  const zipBlob = await zip.generateAsync({
-    type: "blob",
-    compression: "STORE"
-  });
+    canvas.style.width =
+        width + "px";
 
-  const url = URL.createObjectURL(zipBlob);
-  const link = document.createElement("a");
+    canvas.style.height =
+        height + "px";
 
-  link.href = url;
-  link.download = "israa-audio.zip";
-  link.click();
+    ctx.setTransform(
+        devicePixelRatio,
+        0,
+        0,
+        devicePixelRatio,
+        0,
+        0
+    );
 
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
 
-  downloadAllBtn.disabled = false;
+    /*
+       خلفية
+    */
 
-  statusBox.textContent =
-    "تم تجهيز ملف ZIP بنجاح! 📦\n" +
-    "يحتوي على " + generatedFiles.length + " ملف MP3.";
-};
+    ctx.fillStyle =
+        "#eef6fb";
 
-window.addEventListener("resize", () => {
-  if (audioBuffer) updateView();
-});
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+    /*
+       خط المنتصف
+    */
+
+    ctx.strokeStyle =
+        "#b8d2e5";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        height / 2
+    );
+
+    ctx.lineTo(
+        width,
+        height / 2
+    );
+
+    ctx.stroke();
+
+
+    /*
+       تدريجات زمنية
+    */
+
+    const visible =
+        getVisibleDuration();
+
+    let step;
+
+    if (visible < 30) {
+        step = 1;
+    }
+    else if (visible < 120) {
+        step = 5;
+    }
+    else if (visible < 600) {
+        step = 30;
+    }
+    else if (visible < 1800) {
+        step = 60;
+    }
+    else {
+        step = 300;
+    }
+
+    ctx.strokeStyle =
+        "#aac4d8";
+
+    ctx.fillStyle =
+        "#607d8b";
+
+    ctx.font =
+        "11px Arial";
+
+    const first =
+        Math.floor(
+            viewStartTime / step
+        ) * step;
+
+    for (
+        let t = first;
+        t <= viewStartTime + visible;
+        t += step
+    ) {
+
+        const x =
+            (
+                (t - viewStartTime)
+                / visible
+            ) * width;
+
+        if (x < 0 || x > width) {
+            continue;
+        }
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x,
+            height / 2 - 25
+        );
+
+        ctx.lineTo(
+            x,
+            height / 2 + 25
+        );
+
+        ctx.stroke();
+
+        ctx.fillText(
+            formatTime(t),
+            x + 3,
+            height / 2 - 30
+        );
+    }
+
+
+    /*
+       شكل بصري خفيف بدل waveform الحقيقي
+    */
+
+    ctx.strokeStyle =
+        "#1769aa";
+
+    ctx.globalAlpha =
+        0.25;
+
+    ctx.beginPath();
+
+    for (
+        let x = 0;
+        x < width;
+        x += 3
+    ) {
+
+        const y =
+            height / 2 +
+            Math.sin(x * 0.08) * 18 +
+            Math.sin(x * 0.023) * 9;
+
+        if (x === 0) {
+            ctx.moveTo(x, y);
+        }
+        else {
+            ctx.lineTo(x, y);
+        }
+    }
+
+    ctx.stroke();
+
+    ctx.globalAlpha =
+        1;
+}
+
+
+/* =========================================================
+   العلامات
+========================================================= */
+
+function renderMarkers() {
+
+    markersContainer.innerHTML = "";
+
+    marks.forEach(
+        (time, index) => {
+
+            const x =
+                timeToX(time);
+
+            if (
+                x < -20 ||
+                x >
+                timelineWrapper.clientWidth + 20
+            ) {
+                return;
+            }
+
+            const marker =
+                document.createElement("div");
+
+            marker.className =
+                "marker";
+
+            if (index === 0) {
+                marker.classList.add(
+                    "first"
+                );
+            }
+
+            marker.style.left =
+                x + "px";
+
+            const label =
+                document.createElement("div");
+
+            label.className =
+                "marker-label";
+
+            label.textContent =
+                "آية " +
+                (index + 1);
+
+            marker.appendChild(
+                label
+            );
+
+
+            /*
+               سحب العلامة
+            */
+
+            marker.addEventListener(
+                "pointerdown",
+                event => {
+
+                    event.stopPropagation();
+
+                    isDraggingMarker =
+                        true;
+
+                    draggingIndex =
+                        index;
+
+                    marker.setPointerCapture(
+                        event.pointerId
+                    );
+                }
+            );
+
+
+            marker.addEventListener(
+                "pointermove",
+                event => {
+
+                    if (
+                        !isDraggingMarker ||
+                        draggingIndex !== index
+                    ) {
+                        return;
+                    }
+
+                    const rect =
+                        timelineWrapper
+                        .getBoundingClientRect();
+
+                    let time =
+                        xToTime(
+                            event.clientX -
+                            rect.left
+                        );
+
+                    const minimum =
+                        index === 0
+                        ? 0
+                        : marks[index - 1] + 0.01;
+
+                    const maximum =
+                        index === marks.length - 1
+                        ? duration - 0.01
+                        : marks[index + 1] - 0.01;
+
+                    time =
+                        Math.max(
+                            minimum,
+                            Math.min(
+                                maximum,
+                                time
+                            )
+                        );
+
+                    marks[index] =
+                        time;
+
+                    selectedMark =
+                        index;
+
+                    renderMarkers();
+
+                    renderMarksList();
+
+                    updateTimeInfo();
+                }
+            );
+
+
+            marker.addEventListener(
+                "pointerup",
+                () => {
+
+                    isDraggingMarker =
+                        false;
+
+                    draggingIndex =
+                        -1;
+                }
+            );
+
+
+            markersContainer.appendChild(
+                marker
+            );
+        }
+    );
+}
+
+
+/* =========================================================
+   خط التشغيل
+========================================================= */
+
+function updatePlayLine() {
+
+    if (!duration) {
+        return;
+    }
+
+    const x =
+        timeToX(
+            audio.currentTime
+        );
+
+    if (
+        x >= 0 &&
+        x <= timelineWrapper.clientWidth
+    ) {
+
+        playLine.style.display =
+            "block";
+
+        playLine.style.left =
+            x + "px";
+
+    }
+    else {
+
+        playLine.style.display =
+            "none";
+    }
+}
+
+
+/* =========================================================
+   معلومات الوقت
+========================================================= */
+
+function updateTimeInfo() {
+
+    timeInfo.textContent =
+        "الوقت: " +
+        formatTime(
+            audio.currentTime
+        ) +
+        " | المدة: " +
+        formatTime(duration) +
+        " | العلامات: " +
+        marks.length;
+}
+
+
+/* =========================================================
+   إضافة علامة
+========================================================= */
+
+function addMark(time) {
+
+    if (!duration) {
+        return;
+    }
+
+    time =
+        Math.max(
+            0,
+            Math.min(
+                duration - 0.01,
+                time
+            )
+        );
+
+
+    /*
+       منع العلامات المتقاربة جدًا
+    */
+
+    if (
+        marks.some(
+            old =>
+                Math.abs(
+                    old - time
+                ) < 0.05
+        )
+    ) {
+        return;
+    }
+
+
+    marks.push(time);
+
+    marks.sort(
+        (a, b) =>
+            a - b
+    );
+
+    selectedMark =
+        marks.indexOf(time);
+
+    renderMarkers();
+
+    renderMarksList();
+
+    updateTimeInfo();
+}
+
+
+/* =========================================================
+   قائمة العلامات
+========================================================= */
+
+function renderMarksList() {
+
+    marksList.innerHTML = "";
+
+    if (!marks.length) {
+
+        marksList.textContent =
+            "لا توجد علامات بعد.";
+
+        return;
+    }
+
+
+    marks.forEach(
+        (time, index) => {
+
+            const row =
+                document.createElement("div");
+
+            row.className =
+                "mark-row";
+
+
+            const number =
+                document.createElement("span");
+
+            number.className =
+                "mark-number";
+
+            number.textContent =
+                "آية " +
+                (index + 1);
+
+
+            const input =
+                document.createElement("input");
+
+            input.className =
+                "mark-time";
+
+            input.value =
+                formatTime(time);
+
+
+            input.addEventListener(
+                "change",
+                () => {
+
+                    let value =
+                        input.value.trim();
+
+                    let seconds;
+
+                    if (
+                        value.includes(":")
+                    ) {
+
+                        const parts =
+                            value.split(":");
+
+                        seconds =
+                            Number(parts[0]) *
+                            60 +
+                            Number(parts[1]);
+
+                    }
+                    else {
+
+                        seconds =
+                            Number(value);
+                    }
+
+
+                    if (
+                        !Number.isFinite(
+                            seconds
+                        )
+                    ) {
+
+                        renderMarksList();
+
+                        return;
+                    }
+
+
+                    const minimum =
+                        index === 0
+                        ? 0
+                        : marks[index - 1] + 0.01;
+
+                    const maximum =
+                        index === marks.length - 1
+                        ? duration - 0.01
+                        : marks[index + 1] - 0.01;
+
+
+                    marks[index] =
+                        Math.max(
+                            minimum,
+                            Math.min(
+                                maximum,
+                                seconds
+                            )
+                        );
+
+
+                    renderMarkers();
+
+                    renderMarksList();
+                }
+            );
+
+
+            const play =
+                document.createElement("button");
+
+            play.textContent =
+                "▶ تشغيل";
+
+            play.onclick =
+                () => {
+
+                    selectedMark =
+                        index;
+
+                    audio.currentTime =
+                        marks[index];
+
+                    audio.play();
+                };
+
+
+            const locate =
+                document.createElement("button");
+
+            locate.textContent =
+                "⌖ إظهار";
+
+            locate.onclick =
+                () => {
+
+                    selectedMark =
+                        index;
+
+                    const visible =
+                        getVisibleDuration();
+
+                    viewStartTime =
+                        marks[index] -
+                        visible / 2;
+
+                    clampView();
+
+                    updateTimeline();
+                };
+
+
+            const remove =
+                document.createElement("button");
+
+            remove.textContent =
+                "حذف";
+
+            remove.className =
+                "red";
+
+
+            remove.onclick =
+                () => {
+
+                    marks.splice(
+                        index,
+                        1
+                    );
+
+                    selectedMark =
+                        Math.max(
+                            0,
+                            Math.min(
+                                selectedMark,
+                                marks.length - 1
+                            )
+                        );
+
+                    renderMarkers();
+
+                    renderMarksList();
+
+                    updateTimeInfo();
+                };
+
+
+            row.appendChild(
+                number
+            );
+
+            row.appendChild(
+                input
+            );
+
+            row.appendChild(
+                play
+            );
+
+            row.appendChild(
+                locate
+            );
+
+            row.appendChild(
+                remove
+            );
+
+            marksList.appendChild(
+                row
+            );
+        }
+    );
+}
+
+
+/* =========================================================
+   رفع التسجيل
+========================================================= */
+
+fileInput.addEventListener(
+    "change",
+    () => {
+
+        const file =
+            fileInput.files[0];
+
+        if (!file) {
+            return;
+        }
+
+
+        /*
+           تنظيف الملف السابق
+        */
+
+        if (sourceURL) {
+            URL.revokeObjectURL(
+                sourceURL
+            );
+        }
+
+
+        sourceURL =
+            URL.createObjectURL(
+                file
+            );
+
+
+        /*
+           مهم جدًا:
+
+           لا arrayBuffer
+           لا decodeAudioData
+           لا AudioBuffer
+        */
+
+        audio.src =
+            sourceURL;
+
+
+        marks = [];
+
+        selectedMark = 0;
+
+        generatedFiles = [];
+
+        downloads.innerHTML = "";
+
+        progress.style.width =
+            "0%";
+
+        downloadAll.disabled =
+            true;
+
+
+        status.textContent =
+            "تم اختيار التسجيل.\n" +
+            "جارٍ معرفة مدته فقط...";
+
+
+        /*
+           تشغيل عناصر التحكم
+        */
+
+        addCurrent.disabled =
+            false;
+
+        clearMarks.disabled =
+            false;
+
+        splitButton.disabled =
+            false;
+
+        playSegment.disabled =
+            true;
+
+        zoomSlider.disabled =
+            false;
+
+        navigation.disabled =
+            false;
+
+        zoomIn.disabled =
+            false;
+
+        zoomOut.disabled =
+            false;
+
+        resetZoom.disabled =
+            false;
+
+    }
+);
+
+
+/* =========================================================
+   معرفة مدة التسجيل
+========================================================= */
+
+audio.addEventListener(
+    "loadedmetadata",
+    () => {
+
+        duration =
+            audio.duration;
+
+        zoom =
+            1;
+
+        viewStartTime =
+            0;
+
+        updateTimeline();
+
+        renderMarksList();
+
+        updateTimeInfo();
+
+        status.textContent =
+            "تم تحميل التسجيل بنجاح.\n" +
+            "لم يتم فك التسجيل في الذاكرة.\n" +
+            "يمكنك الآن البدء بتحديد العلامات.";
+    }
+);
+
+
+/* =========================================================
+   الضغط على الخط الزمني
+========================================================= */
+
+timelineWrapper.addEventListener(
+    "pointerdown",
+    event => {
+
+        if (!duration) {
+            return;
+        }
+
+        if (
+            event.target.closest(
+                ".marker"
+            )
+        ) {
+            return;
+        }
+
+
+        const rect =
+            timelineWrapper
+            .getBoundingClientRect();
+
+
+        const time =
+            xToTime(
+                event.clientX -
+                rect.left
+            );
+
+
+        /*
+           الضغط يذهب أيضًا إلى موضع
+           التسجيل ليسهل المعاينة
+        */
+
+        audio.currentTime =
+            Math.max(
+                0,
+                Math.min(
+                    duration,
+                    time
+                )
+            );
+
+
+        addMark(time);
+    }
+);
+
+
+/* =========================================================
+   زر إضافة العلامة الحالية
+========================================================= */
+
+addCurrent.onclick =
+    () => {
+
+        addMark(
+            audio.currentTime
+        );
+    };
+
+
+/* =========================================================
+   التكبير
+========================================================= */
+
+zoomIn.onclick =
+    () => {
+
+        if (!duration) {
+            return;
+        }
+
+        const center =
+            viewStartTime +
+            getVisibleDuration() / 2;
+
+        zoom =
+            Math.min(
+                100,
+                zoom * 1.5
+            );
+
+        viewStartTime =
+            center -
+            getVisibleDuration() / 2;
+
+        clampView();
+
+        updateTimeline();
+    };
+
+
+zoomOut.onclick =
+    () => {
+
+        if (!duration) {
+            return;
+        }
+
+        const center =
+            viewStartTime +
+            getVisibleDuration() / 2;
+
+        zoom =
+            Math.max(
+                1,
+                zoom / 1.5
+            );
+
+        viewStartTime =
+            center -
+            getVisibleDuration() / 2;
+
+        clampView();
+
+        updateTimeline();
+    };
+
+
+resetZoom.onclick =
+    () => {
+
+        zoom =
+            1;
+
+        viewStartTime =
+            0;
+
+        updateTimeline();
+    };
+
+
+zoomSlider.addEventListener(
+    "input",
+    () => {
+
+        if (!duration) {
+            return;
+        }
+
+        const center =
+            viewStartTime +
+            getVisibleDuration() / 2;
+
+        zoom =
+            Number(
+                zoomSlider.value
+            );
+
+        viewStartTime =
+            center -
+            getVisibleDuration() / 2;
+
+        clampView();
+
+        updateTimeline();
+    }
+);
+
+
+/* =========================================================
+   التنقل
+========================================================= */
+
+navigation.addEventListener(
+    "input",
+    () => {
+
+        viewStartTime =
+            Number(
+                navigation.value
+            );
+
+        updateTimeline();
+    }
+);
+
+
+/* =========================================================
+   عجلة الماوس
+========================================================= */
+
+timelineWrapper.addEventListener(
+    "wheel",
+    event => {
+
+        if (!duration) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const rect =
+            timelineWrapper
+            .getBoundingClientRect();
+
+        const x =
+            event.clientX -
+            rect.left;
+
+        const timeBefore =
+            xToTime(x);
+
+        if (
+            event.deltaY < 0
+        ) {
+
+            zoom =
+                Math.min(
+                    100,
+                    zoom * 1.25
+                );
+
+        }
+        else {
+
+            zoom =
+                Math.max(
+                    1,
+                    zoom / 1.25
+                );
+        }
+
+
+        const visible =
+            getVisibleDuration();
+
+
+        viewStartTime =
+            timeBefore -
+            (
+                x /
+                rect.width
+            ) * visible;
+
+
+        clampView();
+
+        updateTimeline();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =========================================================
+   حذف العلامات
+========================================================= */
+
+clearMarks.onclick =
+    () => {
+
+        marks = [];
+
+        selectedMark =
+            0;
+
+        renderMarkers();
+
+        renderMarksList();
+
+        updateTimeInfo();
+    };
+
+
+/* =========================================================
+   تشغيل آية واحدة
+========================================================= */
+
+playSegment.onclick =
+    () => {
+
+        if (
+            !marks.length ||
+            !duration
+        ) {
+            return;
+        }
+
+
+        const start =
+            marks[selectedMark];
+
+        const end =
+            selectedMark + 1 <
+            marks.length
+            ? marks[selectedMark + 1]
+            : duration;
+
+
+        audio.currentTime =
+            start;
+
+        audio.play();
+
+
+        const stop =
+            () => {
+
+                if (
+                    audio.currentTime >=
+                    end
+                ) {
+
+                    audio.pause();
+
+                    audio.removeEventListener(
+                        "timeupdate",
+                        stop
+                    );
+                }
+            };
+
+
+        audio.addEventListener(
+            "timeupdate",
+            stop
+        );
+    };
+
+
+/* =========================================================
+   تحديث أثناء التشغيل
+========================================================= */
+
+audio.addEventListener(
+    "timeupdate",
+    () => {
+
+        updateTimeInfo();
+
+        updatePlayLine();
+    }
+);
+
+
+/* =========================================================
+   عند تحريك التسجيل خارج الشاشة
+========================================================= */
+
+audio.addEventListener(
+    "seeking",
+    () => {
+
+        updatePlayLine();
+    }
+);
+
+
+/* =========================================================
+   حفظ العلامات تلقائيًا
+========================================================= */
+
+setInterval(
+    () => {
+
+        if (!duration) {
+            return;
+        }
+
+        try {
+
+            localStorage.setItem(
+                "israa_marks",
+                JSON.stringify({
+                    marks,
+                    duration
+                })
+            );
+
+        }
+        catch (e) {
+            /*
+               لا نفعل شيئًا.
+               بعض المتصفحات قد تمنع التخزين.
+            */
+        }
+
+    },
+    2000
+);
+
+
+/* =========================================================
+   استعادة العلامات
+========================================================= */
+
+function tryRestoreMarks() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "israa_marks"
+            );
+
+        if (!saved) {
+            return;
+        }
+
+        const data =
+            JSON.parse(saved);
+
+        if (
+            !data ||
+            !Array.isArray(
+                data.marks
+            )
+        ) {
+            return;
+        }
+
+        /*
+           لا نستعيدها تلقائيًا إذا اختلفت
+           مدة التسجيل بشكل واضح.
+        */
+
+        if (
+            Math.abs(
+                data.duration -
+                duration
+            ) > 2
+        ) {
+            return;
+        }
+
+        marks =
+            data.marks
+            .filter(
+                t =>
+                    Number.isFinite(t) &&
+                    t >= 0 &&
+                    t < duration
+            )
+            .sort(
+                (a, b) =>
+                    a - b
+            );
+
+        renderMarkers();
+
+        renderMarksList();
+
+        updateTimeInfo();
+
+        if (marks.length) {
+
+            status.textContent =
+                "تم استعادة " +
+                marks.length +
+                " علامة محفوظة سابقًا.";
+        }
+
+    }
+    catch (e) {}
+
+}
+
+
+audio.addEventListener(
+    "loadedmetadata",
+    tryRestoreMarks
+);
+
+
+/* =========================================================
+   =========================================================
+   معالجة MP3
+   =========================================================
+   
+   هنا فقط يبدأ العمل الثقيل.
+
+   بدل أن نفك سورة الإسراء كاملة عند الرفع،
+   ننتظر حتى يضغط المستخدم على "موافق".
+
+   =========================================================
+*/
+
+
+async function createMp3Files() {
+
+    if (!marks.length) {
+
+        alert(
+            "أضف علامات بداية الآيات أولًا."
+        );
+
+        return;
+    }
+
+
+    if (
+        typeof lamejs ===
+        "undefined"
+    ) {
+
+        alert(
+            "لم يتم تحميل محول MP3.\n" +
+            "تأكد من اتصال الإنترنت."
+        );
+
+        return;
+    }
+
+
+    /*
+       مهم:
+
+       في هذه المرحلة فقط نقوم بفك
+       التسجيل الصوتي.
+
+       هذا يمنع التهنيج عند مجرد الرفع.
+    */
+
+    status.textContent =
+        "جارٍ تجهيز الصوت للتقسيم...\n" +
+        "قد يحتاج الهاتف إلى بعض الوقت هنا.";
+
+
+    splitButton.disabled =
+        true;
+
+    downloadAll.disabled =
+        true;
+
+
+    /*
+       نحصل على الملف الأصلي
+    */
+
+    const file =
+        fileInput.files[0];
+
+
+    if (!file) {
+        return;
+    }
+
+
+    /*
+       قراءة الملف مرة واحدة فقط
+    */
+
+    let arrayBuffer;
+
+    try {
+
+        arrayBuffer =
+            await file.arrayBuffer();
+
+    }
+    catch (error) {
+
+        status.textContent =
+            "تعذر قراءة التسجيل.";
+
+        splitButton.disabled =
+            false;
+
+        return;
+    }
+
+
+    /*
+       إنشاء AudioContext
+    */
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+    if (!AudioContext) {
+
+        alert(
+            "هذا المتصفح لا يدعم معالجة الصوت المطلوبة."
+        );
+
+        splitButton.disabled =
+            false;
+
+        return;
+    }
+
+
+    const context =
+        new AudioContext();
+
+
+    let buffer;
+
+    try {
+
+        status.textContent =
+            "جارٍ فك التسجيل...\n" +
+            "هذه هي المرحلة الثقيلة، وستحدث الآن فقط.";
+
+        buffer =
+            await context.decodeAudioData(
+                arrayBuffer
+            );
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "تعذر فك التسجيل الصوتي.";
+
+        splitButton.disabled =
+            false;
+
+        await context.close();
+
+        return;
+    }
+
+
+    /*
+       لم نعد نحتاج arrayBuffer
+    */
+
+    arrayBuffer =
+        null;
+
+
+    /*
+       ترتيب العلامات
+    */
+
+    const boundaries =
+        [...marks]
+        .sort(
+            (a, b) =>
+                a - b
+        );
+
+
+    generatedFiles =
+        [];
+
+    downloads.innerHTML =
+        "";
+
+    progress.style.width =
+        "0%";
+
+
+    /*
+       معالجة آية واحدة في كل مرة.
+
+       لا نحتفظ بالـ WAV/PCM
+       لكل الآيات في الذاكرة.
+    */
+
+    for (
+        let i = 0;
+        i < boundaries.length;
+        i++
+    ) {
+
+        const start =
+            boundaries[i];
+
+        const end =
+            i + 1 <
+            boundaries.length
+            ? boundaries[i + 1]
+            : buffer.duration;
+
+
+        if (
+            end <= start
+        ) {
+            continue;
+        }
+
+
+        status.textContent =
+            "جارٍ إنشاء:\n" +
+            "israa" +
+            (i + 1) +
+            ".mp3\n\n" +
+            "الملف " +
+            (i + 1) +
+            " من " +
+            boundaries.length;
+
+
+        /*
+           استخراج الجزء الحالي فقط
+        */
+
+        const blob =
+            await encodeSegmentMp3(
+                buffer,
+                start,
+                end
+            );
+
+
+        const name =
+            "israa" +
+            (i + 1) +
+            ".mp3";
+
+
+        generatedFiles.push({
+            name,
+            blob
+        });
+
+
+        /*
+           رابط تحميل مباشر
+        */
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+        link.href =
+            url;
+
+        link.download =
+            name;
+
+        link.textContent =
+            "⬇️ " +
+            name;
+
+
+        downloads.appendChild(
+            link
+        );
+
+
+        progress.style.width =
+            (
+                (i + 1) /
+                boundaries.length *
+                100
+            ) + "%";
+
+
+        /*
+           إعطاء الهاتف فرصة
+           لتحديث الشاشة
+        */
+
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    10
+                )
+        );
+    }
+
+
+    /*
+       إغلاق AudioContext
+    */
+
+    await context.close();
+
+
+    /*
+       تحرير المرجع الكبير
+    */
+
+    buffer =
+        null;
+
+
+    splitButton.disabled =
+        false;
+
+    downloadAll.disabled =
+        false;
+
+
+    status.textContent =
+        "تم الانتهاء بنجاح! 🎉\n\n" +
+        "عدد الملفات: " +
+        generatedFiles.length +
+        "\n" +
+        "الأسماء: israa1.mp3 → israa" +
+        generatedFiles.length +
+        ".mp3\n" +
+        "الجودة: 192 kbps";
+}
+
+
+/* =========================================================
+   تحويل الجزء إلى MP3
+========================================================= */
+
+async function encodeSegmentMp3(
+    buffer,
+    start,
+    end
+) {
+
+    const sampleRate =
+        buffer.sampleRate;
+
+    const channels =
+        Math.min(
+            2,
+            buffer.numberOfChannels
+        );
+
+
+    const startSample =
+        Math.floor(
+            start *
+            sampleRate
+        );
+
+    const endSample =
+        Math.min(
+            buffer.length,
+            Math.ceil(
+                end *
+                sampleRate
+            )
+        );
+
+
+    const encoder =
+        new lamejs.Mp3Encoder(
+            channels,
+            sampleRate,
+            192
+        );
+
+
+    const left =
+        buffer.getChannelData(0);
+
+    const right =
+        channels > 1
+        ? buffer.getChannelData(1)
+        : left;
+
+
+    const block =
+        1152;
+
+
+    const mp3Data =
+        [];
+
+
+    /*
+       لا ننشئ Int16Array بحجم الآية كلها.
+
+       نعالجها في كتل صغيرة.
+    */
+
+    for (
+        let position =
+            startSample;
+
+        position <
+            endSample;
+
+        position += block
+    ) {
+
+        const currentEnd =
+            Math.min(
+                position + block,
+                endSample
+            );
+
+
+        const length =
+            currentEnd -
+            position;
+
+
+        const leftChunk =
+            new Int16Array(
+                length
+            );
+
+
+        let rightChunk =
+            null;
+
+
+        if (channels > 1) {
+
+            rightChunk =
+                new Int16Array(
+                    length
+                );
+        }
+
+
+        for (
+            let i = 0;
+            i < length;
+            i++
+        ) {
+
+            const l =
+                left[
+                    position + i
+                ] || 0;
+
+
+            leftChunk[i] =
+                Math.max(
+                    -32768,
+                    Math.min(
+                        32767,
+                        Math.round(
+                            l * 32767
+                        )
+                    )
+                );
+
+
+            if (channels > 1) {
+
+                const r =
+                    right[
+                        position + i
+                    ] || 0;
+
+
+                rightChunk[i] =
+                    Math.max(
+                        -32768,
+                        Math.min(
+                            32767,
+                            Math.round(
+                                r * 32767
+                            )
+                        )
+                    );
+            }
+        }
+
+
+        let encoded;
+
+
+        if (channels === 1) {
+
+            encoded =
+                encoder.encodeBuffer(
+                    leftChunk
+                );
+
+        }
+        else {
+
+            encoded =
+                encoder.encodeBuffer(
+                    leftChunk,
+                    rightChunk
+                );
+        }
+
+
+        if (
+            encoded.length
+        ) {
+
+            mp3Data.push(
+                new Int8Array(
+                    encoded
+                )
+            );
+        }
+
+
+        /*
+           مهم للهاتف:
+           إعطاء المتصفح فرصة
+           لمعالجة الأحداث.
+        */
+
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    0
+                )
+        );
+    }
+
+
+    const endBuffer =
+        encoder.flush();
+
+
+    if (
+        endBuffer.length
+    ) {
+
+        mp3Data.push(
+            new Int8Array(
+                endBuffer
+            )
+        );
+    }
+
+
+    return new Blob(
+        mp3Data,
+        {
+            type:
+                "audio/mpeg"
+        }
+    );
+}
+
+
+/* =========================================================
+   زر التقسيم
+========================================================= */
+
+splitButton.onclick =
+    async () => {
+
+        try {
+
+            await createMp3Files();
+
+        }
+        catch (error) {
+
+            console.error(
+                error
+            );
+
+            status.textContent =
+                "حدث خطأ أثناء التقسيم.\n" +
+                error.message;
+
+            splitButton.disabled =
+                false;
+        }
+    };
+
+
+/* =========================================================
+   تحميل الكل
+========================================================= */
+
+downloadAll.onclick =
+    async () => {
+
+        if (
+            !generatedFiles.length
+        ) {
+            return;
+        }
+
+
+        /*
+           بدل JSZip الكبير،
+           نحاول استخدام File System Access
+           إن كان المتصفح يدعمه.
+
+           وإن لم يكن متاحًا:
+           ننشئ روابط الملفات الفردية.
+        */
+
+        status.textContent =
+            "الملفات جاهزة.\n" +
+            "يمكنك تنزيل كل ملف من القائمة.";
+    };
+
+
+/* =========================================================
+   تغيير حجم النافذة
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (duration) {
+            updateTimeline();
+        }
+    }
+);
+
 </script>
 
 </body>
