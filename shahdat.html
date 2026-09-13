@@ -1,0 +1,2888 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مولد شهادات الطلاب</title>
+
+<!-- مكتبة PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<!-- =====================================================
+     الخطوط العربية
+===================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="
+https://fonts.googleapis.com/css2?
+family=Almarai:wght@400;500;700;800&
+family=Amiri:wght@400;700&
+family=Aref+Ruqaa:wght@400;700&
+family=Cairo:wght@400;500;600;700;800;900&
+family=Changa:wght@400;500;600;700;800&
+family=El+Messiri:wght@400;500;600;700&
+family=Harmattan:wght@400;500;600;700&
+family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&
+family=Katibeh&
+family=Lateef:wght@400;500;600;700&
+family=Lalezar&
+family=Lemonada:wght@300;400;500;600;700&
+family=Mada:wght@400;500;600;700;800;900&
+family=Marhey:wght@300;400;500;600;700&
+family=Noto+Kufi+Arabic:wght@400;500;600;700;800;900&
+family=Noto+Naskh+Arabic:wght@400;500;600;700&
+family=Noto+Sans+Arabic:wght@400;500;600;700;800;900&
+family=Noto+Serif+Arabic:wght@400;500;600;700;800;900&
+family=Readex+Pro:wght@300;400;500;600;700&
+family=Reem+Kufi:wght@400;500;600;700&
+family=Rakkas&
+family=Scheherazade+New:wght@400;700&
+family=Tajawal:wght@400;500;700;800;900&
+display=swap"
+rel="stylesheet">
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+    margin:0;
+    background:#f1f3f6;
+    font-family:"Cairo",sans-serif;
+    color:#222;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+    background:
+    linear-gradient(
+        135deg,
+        #d60057,
+        #ff2678
+    );
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    box-shadow:
+    0 4px 20px
+    rgba(0,0,0,.2);
+
+}
+
+
+header h1{
+
+    margin:0;
+
+    font-size:28px;
+
+}
+
+
+header p{
+
+    margin:5px 0 0;
+
+    opacity:.9;
+
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+
+    max-width:1800px;
+
+    margin:auto;
+
+    padding:20px;
+
+    display:grid;
+
+    grid-template-columns:
+    400px minmax(0,1fr);
+
+    gap:20px;
+
+}
+
+
+/* =====================================================
+   PANELS
+===================================================== */
+
+.panel,
+.preview-box{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    box-shadow:
+    0 5px 25px
+    rgba(0,0,0,.1);
+
+    min-width:0;
+
+}
+
+
+.panel h2{
+
+    color:#d90057;
+
+    margin-top:0;
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section{
+
+    border-top:
+    2px solid #eee;
+
+    margin-top:20px;
+
+    padding-top:15px;
+
+}
+
+
+.section-title{
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    color:#d90057;
+
+    margin-bottom:10px;
+
+}
+
+
+/* =====================================================
+   LABELS
+===================================================== */
+
+label{
+
+    display:block;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    margin-top:12px;
+
+    margin-bottom:5px;
+
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    border:
+    2px solid #e4e4e4;
+
+    border-radius:10px;
+
+    padding:10px;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    background:white;
+
+}
+
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:#e40061;
+
+}
+
+
+textarea{
+
+    min-height:170px;
+
+    resize:vertical;
+
+}
+
+
+/* =====================================================
+   ROW
+===================================================== */
+
+.row{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:10px;
+
+}
+
+
+/* =====================================================
+   COLOR ROW
+===================================================== */
+
+.color-row{
+
+    display:grid;
+
+    grid-template-columns:
+    55px 1fr;
+
+    gap:8px;
+
+    align-items:center;
+
+}
+
+
+.color-picker{
+
+    width:55px !important;
+
+    height:42px;
+
+    padding:3px;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   RANGE VALUE
+===================================================== */
+
+.range-value{
+
+    text-align:center;
+
+    background:#fff0f6;
+
+    padding:5px;
+
+    border-radius:7px;
+
+    color:#c50050;
+
+    font-weight:bold;
+
+    margin-top:5px;
+
+    font-size:13px;
+
+}
+
+
+input[type="range"]{
+
+    padding:0;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+button{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    margin-top:12px;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+button:hover{
+
+    transform:
+    translateY(-2px);
+
+}
+
+
+button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+#resetPosition{
+
+    background:#eeeeee;
+
+}
+
+
+#generatePDF{
+
+    background:
+    linear-gradient(
+        135deg,
+        #d90057,
+        #ff2678
+    );
+
+    color:white;
+
+    font-size:17px;
+
+    box-shadow:
+    0 5px 15px
+    rgba(217,0,87,.3);
+
+}
+
+
+/* =====================================================
+   PREVIEW HEADER
+===================================================== */
+
+.preview-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:15px;
+
+}
+
+
+.preview-title{
+
+    font-weight:bold;
+
+    font-size:18px;
+
+}
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+.canvas-wrapper{
+
+    width:100%;
+
+    overflow:auto;
+
+    text-align:center;
+
+    background:#eee;
+
+    border-radius:15px;
+
+    padding:10px;
+
+    max-height:75vh;
+
+}
+
+
+canvas{
+
+    display:block;
+
+    margin:auto;
+
+    cursor:grab;
+
+    touch-action:none;
+
+    box-shadow:
+    0 5px 25px
+    rgba(0,0,0,.25);
+
+}
+
+
+canvas:active{
+
+    cursor:grabbing;
+
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.info{
+
+    background:#fff1f6;
+
+    color:#a90046;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    margin-top:15px;
+
+    font-size:13px;
+
+    text-align:center;
+
+}
+
+
+/* =====================================================
+   COORDINATES
+===================================================== */
+
+.coordinates{
+
+    margin-top:10px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    color:#555;
+
+}
+
+
+/* =====================================================
+   ZOOM
+===================================================== */
+
+.zoom-buttons{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+
+.zoom-buttons button{
+
+    margin:0;
+
+    width:auto;
+
+    padding:8px 15px;
+
+    background:#eee;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+#status{
+
+    text-align:center;
+
+    margin-top:10px;
+
+    font-weight:bold;
+
+    color:#d90057;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:1000px){
+
+    .container{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+@media(max-width:500px){
+
+    .container{
+
+        padding:10px;
+
+    }
+
+
+    .panel,
+    .preview-box{
+
+        padding:15px;
+
+    }
+
+
+    .row{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    header h1{
+
+        font-size:22px;
+
+    }
+
+
+    .canvas-wrapper{
+
+        padding:5px;
+
+        max-height:70vh;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>
+🏆 مولد شهادات الطلاب
+</h1>
+
+<p>
+ارفع الشهادة ← اضبط الاسم ← أضف الطلاب ← أنشئ PDF
+</p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     لوحة التحكم
+===================================================== -->
+
+<div class="panel">
+
+
+<h2>
+⚙️ إعدادات الشهادة
+</h2>
+
+
+<!-- =====================================================
+     الصورة
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+🖼️ صورة الشهادة
+</div>
+
+<label>
+ارفع صورة الشهادة
+</label>
+
+<input
+type="file"
+id="imageInput"
+accept="image/*">
+
+</div>
+
+
+<!-- =====================================================
+     الاسم
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+✍️ الاسم التجريبي
+</div>
+
+<input
+type="text"
+id="previewName"
+value="اسم الطالب">
+
+</div>
+
+
+<!-- =====================================================
+     الخط
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+🔤 الخط والنص
+</div>
+
+
+<div class="row">
+
+
+<div>
+
+<label>
+نوع الخط
+</label>
+
+<select id="fontFamily">
+
+<option value="Cairo">
+Cairo — كايرو
+</option>
+
+<option value="Amiri">
+Amiri — أميري
+</option>
+
+<option value="Aref Ruqaa">
+Aref Ruqaa — عارف رقعة
+</option>
+
+<option value="Noto Naskh Arabic">
+Noto Naskh Arabic — نسخي
+</option>
+
+<option value="Noto Kufi Arabic">
+Noto Kufi Arabic — كوفي
+</option>
+
+<option value="Noto Sans Arabic">
+Noto Sans Arabic — عربي حديث
+</option>
+
+<option value="Noto Serif Arabic">
+Noto Serif Arabic — سيريف عربي
+</option>
+
+<option value="Tajawal">
+Tajawal — تجوال
+</option>
+
+<option value="Almarai">
+Almarai — المراعي
+</option>
+
+<option value="El Messiri">
+El Messiri — المسيري
+</option>
+
+<option value="Marhey">
+Marhey — مرح
+</option>
+
+<option value="Reem Kufi">
+Reem Kufi — ريم كوفي
+</option>
+
+<option value="Lalezar">
+Lalezar — لاله زار
+</option>
+
+<option value="Changa">
+Changa — تشانجا
+</option>
+
+<option value="Katibeh">
+Katibeh — كتيبة
+</option>
+
+<option value="Rakkas">
+Rakkas — رقاص
+</option>
+
+<option value="Scheherazade New">
+Scheherazade New — شهرزاد
+</option>
+
+<option value="Lateef">
+Lateef — لطيف
+</option>
+
+<option value="Harmattan">
+Harmattan — هارماتان
+</option>
+
+<option value="Mada">
+Mada — مدى
+</option>
+
+<option value="Lemonada">
+Lemonada — ليمونادة
+</option>
+
+<option value="Readex Pro">
+Readex Pro — ريدكس
+</option>
+
+<option value="IBM Plex Sans Arabic">
+IBM Plex Sans Arabic
+</option>
+
+<option value="Arial">
+Arial
+</option>
+
+<option value="Tahoma">
+Tahoma
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+حجم الخط
+</label>
+
+<input
+type="number"
+id="fontSize"
+value="70"
+min="5"
+max="500">
+
+</div>
+
+
+</div>
+
+
+<label>
+وزن الخط
+</label>
+
+<select id="fontWeight">
+
+<option value="300">
+خفيف
+</option>
+
+<option value="400">
+عادي
+</option>
+
+<option value="500">
+متوسط
+</option>
+
+<option value="600">
+شبه عريض
+</option>
+
+<option value="700">
+عريض
+</option>
+
+<option value="800">
+عريض جدًا
+</option>
+
+<option value="900" selected>
+أقصى سماكة
+</option>
+
+</select>
+
+
+<label>
+محاذاة الاسم
+</label>
+
+<select id="textAlign">
+
+<option value="center">
+في المنتصف
+</option>
+
+<option value="right">
+يمين
+</option>
+
+<option value="left">
+يسار
+</option>
+
+</select>
+
+</div>
+
+
+<!-- =====================================================
+     لون النص
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+🎨 لون النص
+</div>
+
+
+<div class="color-row">
+
+<input
+type="color"
+id="textColorPicker"
+class="color-picker"
+value="#182b59">
+
+
+<input
+type="text"
+id="textColor"
+value="#182b59"
+placeholder="#FFFFFF">
+
+</div>
+
+
+<label>
+شفافية النص
+</label>
+
+<input
+type="range"
+id="textOpacity"
+min="0"
+max="100"
+value="100">
+
+
+<div
+class="range-value"
+id="textOpacityValue">
+
+100%
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     الحدود
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+⬜ حدود النص
+</div>
+
+
+<div class="color-row">
+
+<input
+type="color"
+id="strokeColorPicker"
+class="color-picker"
+value="#ffffff">
+
+
+<input
+type="text"
+id="strokeColor"
+value="#ffffff"
+placeholder="#FFFFFF">
+
+</div>
+
+
+<label>
+سمك الحدود
+</label>
+
+<input
+type="range"
+id="strokeWidth"
+min="0"
+max="40"
+value="0"
+step="0.5">
+
+
+<div
+class="range-value"
+id="strokeWidthValue">
+
+0px
+
+</div>
+
+
+<label>
+شفافية الحدود
+</label>
+
+<input
+type="range"
+id="strokeOpacity"
+min="0"
+max="100"
+value="100">
+
+
+<div
+class="range-value"
+id="strokeOpacityValue">
+
+100%
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     الظل
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+🌑 ظل النص
+</div>
+
+
+<div class="color-row">
+
+<input
+type="color"
+id="shadowColorPicker"
+class="color-picker"
+value="#000000">
+
+
+<input
+type="text"
+id="shadowColor"
+value="#000000"
+placeholder="#000000">
+
+</div>
+
+
+<label>
+شفافية الظل
+</label>
+
+<input
+type="range"
+id="shadowOpacity"
+min="0"
+max="100"
+value="40">
+
+
+<div
+class="range-value"
+id="shadowOpacityValue">
+
+40%
+
+</div>
+
+
+<label>
+ضبابية الظل
+</label>
+
+<input
+type="range"
+id="shadowBlur"
+min="0"
+max="100"
+value="8">
+
+
+<div
+class="range-value"
+id="shadowBlurValue">
+
+8px
+
+</div>
+
+
+<div class="row">
+
+
+<div>
+
+<label>
+موضع الظل X ↔️
+</label>
+
+<input
+type="number"
+id="shadowX"
+value="4"
+min="-100"
+max="100">
+
+</div>
+
+
+<div>
+
+<label>
+موضع الظل Y ↕️
+</label>
+
+<input
+type="number"
+id="shadowY"
+value="5"
+min="-100"
+max="100">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     مكان الاسم
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+🎯 مكان الاسم بدقة
+</div>
+
+
+<div class="row">
+
+
+<div>
+
+<label>
+الموقع X
+</label>
+
+<input
+type="number"
+id="nameX"
+value="0">
+
+</div>
+
+
+<div>
+
+<label>
+الموقع Y
+</label>
+
+<input
+type="number"
+id="nameY"
+value="0">
+
+</div>
+
+
+</div>
+
+
+<button id="resetPosition">
+
+🎯 إعادة الاسم للمنتصف
+
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     أسماء الطلاب
+===================================================== -->
+
+<div class="section">
+
+<div class="section-title">
+📋 أسماء الطلاب
+</div>
+
+
+<textarea
+id="students"
+placeholder="اكتب كل اسم في سطر
+
+مثال:
+
+أحمد محمد
+محمد علي
+عبد الرحمن
+يوسف أحمد">
+</textarea>
+
+
+<div class="info">
+
+💡 كل اسم في سطر منفصل، وسيتم إنشاء شهادة مستقلة لكل اسم.
+
+</div>
+
+</div>
+
+
+<button id="generatePDF">
+
+📄 إنشاء ملف PDF لجميع الطلاب
+
+</button>
+
+
+<div id="status"></div>
+
+
+</div>
+
+
+<!-- =====================================================
+     المعاينة
+===================================================== -->
+
+<div class="preview-box">
+
+
+<div class="preview-header">
+
+
+<div class="preview-title">
+
+🖼️ معاينة الشهادة
+
+</div>
+
+
+<div class="zoom-buttons">
+
+
+<button id="zoomOut">
+➖
+</button>
+
+
+<button id="zoomReset">
+🔄
+</button>
+
+
+<button id="zoomIn">
+➕
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<div class="canvas-wrapper">
+
+<canvas id="canvas"></canvas>
+
+</div>
+
+
+<div
+class="coordinates"
+id="coordinates">
+
+X = 0 | Y = 0
+
+</div>
+
+
+<div class="info">
+
+🖱️ اضغط على الاسم واسحبه لمكانه.<br>
+
+🎯 أو اكتب إحداثيات X و Y بدقة.
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   العناصر
+===================================================== */
+
+const canvas =
+document.getElementById("canvas");
+
+const ctx =
+canvas.getContext("2d");
+
+const canvasWrapper =
+document.querySelector(".canvas-wrapper");
+
+const imageInput =
+document.getElementById("imageInput");
+
+const previewName =
+document.getElementById("previewName");
+
+const fontFamily =
+document.getElementById("fontFamily");
+
+const fontSize =
+document.getElementById("fontSize");
+
+const fontWeight =
+document.getElementById("fontWeight");
+
+const textAlign =
+document.getElementById("textAlign");
+
+const textColor =
+document.getElementById("textColor");
+
+const textColorPicker =
+document.getElementById("textColorPicker");
+
+const textOpacity =
+document.getElementById("textOpacity");
+
+const strokeColor =
+document.getElementById("strokeColor");
+
+const strokeColorPicker =
+document.getElementById("strokeColorPicker");
+
+const strokeWidth =
+document.getElementById("strokeWidth");
+
+const strokeOpacity =
+document.getElementById("strokeOpacity");
+
+const shadowColor =
+document.getElementById("shadowColor");
+
+const shadowColorPicker =
+document.getElementById("shadowColorPicker");
+
+const shadowOpacity =
+document.getElementById("shadowOpacity");
+
+const shadowBlur =
+document.getElementById("shadowBlur");
+
+const shadowX =
+document.getElementById("shadowX");
+
+const shadowY =
+document.getElementById("shadowY");
+
+const nameXInput =
+document.getElementById("nameX");
+
+const nameYInput =
+document.getElementById("nameY");
+
+const students =
+document.getElementById("students");
+
+const resetPosition =
+document.getElementById("resetPosition");
+
+const generatePDF =
+document.getElementById("generatePDF");
+
+const coordinates =
+document.getElementById("coordinates");
+
+const status =
+document.getElementById("status");
+
+
+/* =====================================================
+   المتغيرات
+===================================================== */
+
+let certificateImage =
+new Image();
+
+let imageLoaded =
+false;
+
+let nameX =
+0;
+
+let nameY =
+0;
+
+let dragging =
+false;
+
+let dragOffsetX =
+0;
+
+let dragOffsetY =
+0;
+
+let zoom =
+1;
+
+
+/* =====================================================
+   HEX → RGBA
+===================================================== */
+
+function hexToRGBA(
+    hex,
+    opacity
+){
+
+    hex =
+    String(hex || "").trim();
+
+
+    if(
+        !hex.startsWith("#")
+    ){
+
+        hex =
+        "#" + hex;
+
+    }
+
+
+    if(
+        hex.length === 4
+    ){
+
+        hex =
+        "#" +
+        hex[1] + hex[1] +
+        hex[2] + hex[2] +
+        hex[3] + hex[3];
+
+    }
+
+
+    if(
+        !/^#[0-9A-Fa-f]{6}$/.test(hex)
+    ){
+
+        return `rgba(0,0,0,${opacity})`;
+
+    }
+
+
+    const r =
+    parseInt(
+        hex.substring(1,3),
+        16
+    );
+
+
+    const g =
+    parseInt(
+        hex.substring(3,5),
+        16
+    );
+
+
+    const b =
+    parseInt(
+        hex.substring(5,7),
+        16
+    );
+
+
+    return `rgba(${r},${g},${b},${opacity})`;
+
+}
+
+
+/* =====================================================
+   حجم الشهادة داخل المعاينة
+===================================================== */
+
+function updateCanvasDisplaySize(){
+
+    if(
+        !canvas.width ||
+        !canvas.height
+    ){
+
+        return;
+
+    }
+
+
+    const availableWidth =
+    canvasWrapper.clientWidth - 20;
+
+
+    const fitScale =
+    availableWidth /
+    canvas.width;
+
+
+    const finalScale =
+    fitScale * zoom;
+
+
+    canvas.style.width =
+    (canvas.width * finalScale) +
+    "px";
+
+
+    canvas.style.height =
+    (canvas.height * finalScale) +
+    "px";
+
+}
+
+
+/* =====================================================
+   تحميل الصورة
+===================================================== */
+
+imageInput.addEventListener(
+"change",
+function(e){
+
+    const file =
+    e.target.files[0];
+
+
+    if(!file)
+        return;
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload =
+    function(event){
+
+        certificateImage.onload =
+        function(){
+
+            canvas.width =
+            certificateImage.naturalWidth ||
+            certificateImage.width;
+
+
+            canvas.height =
+            certificateImage.naturalHeight ||
+            certificateImage.height;
+
+
+            nameX =
+            canvas.width / 2;
+
+
+            nameY =
+            canvas.height / 2;
+
+
+            nameXInput.value =
+            Math.round(nameX);
+
+
+            nameYInput.value =
+            Math.round(nameY);
+
+
+            imageLoaded =
+            true;
+
+
+            zoom =
+            1;
+
+
+            updateCanvasDisplaySize();
+
+
+            drawCertificate();
+
+        };
+
+
+        certificateImage.src =
+        event.target.result;
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =====================================================
+   رسم الشهادة
+===================================================== */
+
+function drawCertificate(
+    name = previewName.value
+){
+
+    if(!imageLoaded)
+        return;
+
+
+    /* =================================================
+       تنظيف
+    ================================================= */
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* =================================================
+       رسم صورة الشهادة
+    ================================================= */
+
+    ctx.drawImage(
+        certificateImage,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* =================================================
+       إعداد الخط
+    ================================================= */
+
+    const size =
+    Number(fontSize.value);
+
+
+    ctx.font =
+    `${fontWeight.value} ${size}px "${fontFamily.value}"`;
+
+
+    ctx.textAlign =
+    textAlign.value;
+
+
+    ctx.textBaseline =
+    "middle";
+
+
+    /* =================================================
+       الألوان
+    ================================================= */
+
+    const currentTextColor =
+    hexToRGBA(
+        textColor.value,
+        Number(textOpacity.value) / 100
+    );
+
+
+    const currentStrokeColor =
+    hexToRGBA(
+        strokeColor.value,
+        Number(strokeOpacity.value) / 100
+    );
+
+
+    const currentShadowColor =
+    hexToRGBA(
+        shadowColor.value,
+        Number(shadowOpacity.value) / 100
+    );
+
+
+    const currentStrokeWidth =
+    Number(strokeWidth.value);
+
+
+    /* =================================================
+       1 — رسم الظل فقط
+       
+       مهم:
+       الظل مستقل تمامًا عن الحدود.
+    ================================================= */
+
+    if(
+        Number(shadowOpacity.value) > 0 &&
+        Number(shadowBlur.value) >= 0
+    ){
+
+        ctx.save();
+
+
+        ctx.shadowColor =
+        currentShadowColor;
+
+
+        ctx.shadowBlur =
+        Number(shadowBlur.value);
+
+
+        ctx.shadowOffsetX =
+        Number(shadowX.value);
+
+
+        ctx.shadowOffsetY =
+        Number(shadowY.value);
+
+
+        /*
+           لا نستخدم stroke هنا
+           حتى لا يتأثر لون الحدود بالظل
+        */
+
+        ctx.fillStyle =
+        currentTextColor;
+
+
+        ctx.fillText(
+            name,
+            nameX,
+            nameY
+        );
+
+
+        ctx.restore();
+
+    }
+
+
+    /* =================================================
+       2 — رسم الحدود
+       
+       بدون ظل نهائيًا
+    ================================================= */
+
+    if(
+        currentStrokeWidth > 0 &&
+        Number(strokeOpacity.value) > 0
+    ){
+
+        ctx.save();
+
+
+        /*
+           إلغاء الظل تمامًا
+        */
+
+        ctx.shadowColor =
+        "rgba(0,0,0,0)";
+
+
+        ctx.shadowBlur =
+        0;
+
+
+        ctx.shadowOffsetX =
+        0;
+
+
+        ctx.shadowOffsetY =
+        0;
+
+
+        /*
+           لون الحدود
+        */
+
+        ctx.strokeStyle =
+        currentStrokeColor;
+
+
+        /*
+           سمك الحدود
+        */
+
+        ctx.lineWidth =
+        currentStrokeWidth;
+
+
+        /*
+           تحسين شكل الحواف
+        */
+
+        ctx.lineJoin =
+        "round";
+
+
+        ctx.lineCap =
+        "round";
+
+
+        ctx.strokeText(
+            name,
+            nameX,
+            nameY
+        );
+
+
+        ctx.restore();
+
+    }
+
+
+    /* =================================================
+       3 — رسم النص فوق الحدود
+       
+       بدون ظل
+    ================================================= */
+
+    ctx.save();
+
+
+    ctx.shadowColor =
+    "rgba(0,0,0,0)";
+
+
+    ctx.shadowBlur =
+    0;
+
+
+    ctx.shadowOffsetX =
+    0;
+
+
+    ctx.shadowOffsetY =
+    0;
+
+
+    ctx.fillStyle =
+    currentTextColor;
+
+
+    ctx.fillText(
+        name,
+        nameX,
+        nameY
+    );
+
+
+    ctx.restore();
+
+
+    /* =================================================
+       الإحداثيات
+    ================================================= */
+
+    nameXInput.value =
+    Math.round(nameX);
+
+
+    nameYInput.value =
+    Math.round(nameY);
+
+
+    coordinates.textContent =
+    `X = ${Math.round(nameX)} | Y = ${Math.round(nameY)}`;
+
+}
+
+
+/* =====================================================
+   ربط الألوان
+===================================================== */
+
+function connectColorInputs(
+    picker,
+    textInput
+){
+
+    picker.addEventListener(
+    "input",
+    function(){
+
+        textInput.value =
+        picker.value.toUpperCase();
+
+
+        drawCertificate();
+
+    });
+
+
+    textInput.addEventListener(
+    "input",
+    function(){
+
+        let value =
+        textInput.value.trim();
+
+
+        /*
+           إضافة # تلقائيًا
+        */
+
+        if(
+            /^[0-9A-Fa-f]{6}$/.test(value)
+        ){
+
+            value =
+            "#" + value;
+
+            textInput.value =
+            value;
+
+        }
+
+
+        /*
+           تحديث المنتقي فقط
+           إذا كان اللون صحيحًا
+        */
+
+        if(
+            /^#[0-9A-Fa-f]{6}$/.test(value)
+        ){
+
+            picker.value =
+            value.toLowerCase();
+
+        }
+
+
+        drawCertificate();
+
+    });
+
+}
+
+
+connectColorInputs(
+    textColorPicker,
+    textColor
+);
+
+
+connectColorInputs(
+    strokeColorPicker,
+    strokeColor
+);
+
+
+connectColorInputs(
+    shadowColorPicker,
+    shadowColor
+);
+
+
+/* =====================================================
+   التحديث المباشر
+===================================================== */
+
+const updateElements = [
+
+    previewName,
+
+    fontFamily,
+
+    fontSize,
+
+    fontWeight,
+
+    textAlign,
+
+    textOpacity,
+
+    strokeWidth,
+
+    strokeOpacity,
+
+    shadowOpacity,
+
+    shadowBlur,
+
+    shadowX,
+
+    shadowY
+
+];
+
+
+updateElements.forEach(
+element => {
+
+    element.addEventListener(
+        "input",
+        drawCertificate
+    );
+
+
+    element.addEventListener(
+        "change",
+        drawCertificate
+    );
+
+});
+
+
+/* =====================================================
+   أشرطة التحكم
+===================================================== */
+
+function connectRange(
+    inputId,
+    valueId,
+    suffix
+){
+
+    const input =
+    document.getElementById(inputId);
+
+
+    const value =
+    document.getElementById(valueId);
+
+
+    function update(){
+
+        value.textContent =
+        input.value + suffix;
+
+
+        drawCertificate();
+
+    }
+
+
+    input.addEventListener(
+        "input",
+        update
+    );
+
+}
+
+
+connectRange(
+    "textOpacity",
+    "textOpacityValue",
+    "%"
+);
+
+
+connectRange(
+    "strokeWidth",
+    "strokeWidthValue",
+    "px"
+);
+
+
+connectRange(
+    "strokeOpacity",
+    "strokeOpacityValue",
+    "%"
+);
+
+
+connectRange(
+    "shadowOpacity",
+    "shadowOpacityValue",
+    "%"
+);
+
+
+connectRange(
+    "shadowBlur",
+    "shadowBlurValue",
+    "px"
+);
+
+
+/* =====================================================
+   X و Y
+===================================================== */
+
+nameXInput.addEventListener(
+"input",
+function(){
+
+    nameX =
+    Number(nameXInput.value);
+
+
+    if(
+        !Number.isFinite(nameX)
+    ){
+
+        nameX = 0;
+
+    }
+
+
+    drawCertificate();
+
+});
+
+
+nameYInput.addEventListener(
+"input",
+function(){
+
+    nameY =
+    Number(nameYInput.value);
+
+
+    if(
+        !Number.isFinite(nameY)
+    ){
+
+        nameY = 0;
+
+    }
+
+
+    drawCertificate();
+
+});
+
+
+/* =====================================================
+   موضع الماوس على Canvas
+===================================================== */
+
+function getCanvasPosition(
+    clientX,
+    clientY
+){
+
+    const rect =
+    canvas.getBoundingClientRect();
+
+
+    const scaleX =
+    canvas.width /
+    rect.width;
+
+
+    const scaleY =
+    canvas.height /
+    rect.height;
+
+
+    return {
+
+        x:
+        (clientX - rect.left)
+        * scaleX,
+
+        y:
+        (clientY - rect.top)
+        * scaleY
+
+    };
+
+}
+
+
+/* =====================================================
+   تحديد الاسم
+===================================================== */
+
+function isClickOnText(pos){
+
+    const name =
+    previewName.value ||
+    "اسم الطالب";
+
+
+    const size =
+    Number(fontSize.value);
+
+
+    ctx.font =
+    `${fontWeight.value} ${size}px "${fontFamily.value}"`;
+
+
+    const textWidth =
+    ctx.measureText(name).width;
+
+
+    let left;
+
+    let right;
+
+
+    if(
+        textAlign.value ===
+        "center"
+    ){
+
+        left =
+        nameX -
+        textWidth / 2;
+
+
+        right =
+        nameX +
+        textWidth / 2;
+
+    }
+
+
+    else if(
+        textAlign.value ===
+        "right"
+    ){
+
+        left =
+        nameX -
+        textWidth;
+
+
+        right =
+        nameX;
+
+    }
+
+
+    else{
+
+        left =
+        nameX;
+
+
+        right =
+        nameX +
+        textWidth;
+
+    }
+
+
+    const top =
+    nameY -
+    size / 2;
+
+
+    const bottom =
+    nameY +
+    size / 2;
+
+
+    const padding =
+    Math.max(
+        20,
+        size * .25
+    );
+
+
+    return (
+
+        pos.x >=
+        left - padding &&
+
+        pos.x <=
+        right + padding &&
+
+        pos.y >=
+        top - padding &&
+
+        pos.y <=
+        bottom + padding
+
+    );
+
+}
+
+
+/* =====================================================
+   بداية السحب
+===================================================== */
+
+function startDrag(
+    clientX,
+    clientY
+){
+
+    if(!imageLoaded)
+        return false;
+
+
+    const pos =
+    getCanvasPosition(
+        clientX,
+        clientY
+    );
+
+
+    if(
+        !isClickOnText(pos)
+    ){
+
+        return false;
+
+    }
+
+
+    dragging =
+    true;
+
+
+    dragOffsetX =
+    pos.x -
+    nameX;
+
+
+    dragOffsetY =
+    pos.y -
+    nameY;
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   تحريك الاسم
+===================================================== */
+
+function moveDrag(
+    clientX,
+    clientY
+){
+
+    if(!dragging)
+        return;
+
+
+    const pos =
+    getCanvasPosition(
+        clientX,
+        clientY
+    );
+
+
+    nameX =
+    pos.x -
+    dragOffsetX;
+
+
+    nameY =
+    pos.y -
+    dragOffsetY;
+
+
+    nameX =
+    Math.max(
+        0,
+        Math.min(
+            canvas.width,
+            nameX
+        )
+    );
+
+
+    nameY =
+    Math.max(
+        0,
+        Math.min(
+            canvas.height,
+            nameY
+        )
+    );
+
+
+    drawCertificate();
+
+}
+
+
+/* =====================================================
+   الماوس
+===================================================== */
+
+canvas.addEventListener(
+"mousedown",
+function(e){
+
+    startDrag(
+        e.clientX,
+        e.clientY
+    );
+
+});
+
+
+canvas.addEventListener(
+"mousemove",
+function(e){
+
+    moveDrag(
+        e.clientX,
+        e.clientY
+    );
+
+});
+
+
+canvas.addEventListener(
+"mouseup",
+function(){
+
+    dragging =
+    false;
+
+});
+
+
+canvas.addEventListener(
+"mouseleave",
+function(){
+
+    dragging =
+    false;
+
+});
+
+
+/* =====================================================
+   اللمس
+===================================================== */
+
+canvas.addEventListener(
+"touchstart",
+function(e){
+
+    const touch =
+    e.touches[0];
+
+
+    const started =
+    startDrag(
+        touch.clientX,
+        touch.clientY
+    );
+
+
+    if(started){
+
+        e.preventDefault();
+
+    }
+
+},
+{
+    passive:false
+});
+
+
+canvas.addEventListener(
+"touchmove",
+function(e){
+
+    if(!dragging)
+        return;
+
+
+    const touch =
+    e.touches[0];
+
+
+    moveDrag(
+        touch.clientX,
+        touch.clientY
+    );
+
+
+    e.preventDefault();
+
+},
+{
+    passive:false
+});
+
+
+canvas.addEventListener(
+"touchend",
+function(){
+
+    dragging =
+    false;
+
+});
+
+
+/* =====================================================
+   إعادة الاسم للمنتصف
+===================================================== */
+
+resetPosition.addEventListener(
+"click",
+function(){
+
+    if(!imageLoaded)
+        return;
+
+
+    nameX =
+    canvas.width / 2;
+
+
+    nameY =
+    canvas.height / 2;
+
+
+    textAlign.value =
+    "center";
+
+
+    drawCertificate();
+
+});
+
+
+/* =====================================================
+   التكبير
+===================================================== */
+
+document
+.getElementById("zoomIn")
+.addEventListener(
+"click",
+function(){
+
+    zoom += .25;
+
+
+    if(zoom > 3){
+
+        zoom = 3;
+
+    }
+
+
+    updateCanvasDisplaySize();
+
+});
+
+
+/* =====================================================
+   التصغير
+===================================================== */
+
+document
+.getElementById("zoomOut")
+.addEventListener(
+"click",
+function(){
+
+    zoom -= .25;
+
+
+    if(zoom < .25){
+
+        zoom = .25;
+
+    }
+
+
+    updateCanvasDisplaySize();
+
+});
+
+
+/* =====================================================
+   إعادة التكبير
+===================================================== */
+
+document
+.getElementById("zoomReset")
+.addEventListener(
+"click",
+function(){
+
+    zoom =
+    1;
+
+
+    updateCanvasDisplaySize();
+
+});
+
+
+/* =====================================================
+   تغيير حجم الشاشة
+===================================================== */
+
+window.addEventListener(
+"resize",
+function(){
+
+    if(imageLoaded){
+
+        updateCanvasDisplaySize();
+
+    }
+
+});
+
+
+/* =====================================================
+   إنشاء PDF
+===================================================== */
+
+generatePDF.addEventListener(
+"click",
+async function(){
+
+    if(!imageLoaded){
+
+        alert(
+            "⚠️ ارفع صورة الشهادة أولًا"
+        );
+
+        return;
+
+    }
+
+
+    const names =
+    students.value
+    .split("\n")
+    .map(
+        name =>
+        name.trim()
+    )
+    .filter(
+        name =>
+        name !== ""
+    );
+
+
+    if(names.length === 0){
+
+        alert(
+            "⚠️ اكتب أسماء الطلاب أولًا"
+        );
+
+        return;
+
+    }
+
+
+    generatePDF.disabled =
+    true;
+
+
+    generatePDF.textContent =
+    "⏳ جاري إنشاء PDF...";
+
+
+    status.textContent =
+    `جاري تجهيز ${names.length} شهادة...`;
+
+
+    try{
+
+        const {
+            jsPDF
+        } =
+        window.jspdf;
+
+
+        const orientation =
+
+        canvas.width >
+        canvas.height
+
+        ? "landscape"
+
+        : "portrait";
+
+
+        const pdf =
+        new jsPDF({
+
+            orientation:
+            orientation,
+
+            unit:
+            "px",
+
+            format:[
+                canvas.width,
+                canvas.height
+            ],
+
+            compress:
+            true
+
+        });
+
+
+        for(
+            let i = 0;
+            i < names.length;
+            i++
+        ){
+
+            status.textContent =
+            `⏳ جاري إنشاء الشهادة ${i + 1} من ${names.length}`;
+
+
+            drawCertificate(
+                names[i]
+            );
+
+
+            /*
+               ننتظر قليلًا حتى يكتمل الرسم
+            */
+
+            await new Promise(
+                resolve =>
+                setTimeout(
+                    resolve,
+                    50
+                )
+            );
+
+
+            const imageData =
+            canvas.toDataURL(
+                "image/jpeg",
+                .95
+            );
+
+
+            if(i > 0){
+
+                pdf.addPage(
+                    [
+                        canvas.width,
+                        canvas.height
+                    ],
+                    orientation
+                );
+
+            }
+
+
+            pdf.addImage(
+
+                imageData,
+
+                "JPEG",
+
+                0,
+
+                0,
+
+                canvas.width,
+
+                canvas.height,
+
+                undefined,
+
+                "FAST"
+
+            );
+
+        }
+
+
+        /* =================================================
+           إعادة الاسم التجريبي
+        ================================================= */
+
+        drawCertificate();
+
+
+        status.textContent =
+        "✅ تم إنشاء ملف PDF بنجاح!";
+
+
+        pdf.save(
+            "شهادات الطلاب.pdf"
+        );
+
+    }
+
+
+    catch(error){
+
+        console.error(error);
+
+
+        status.textContent =
+        "❌ حدث خطأ أثناء إنشاء PDF";
+
+
+        alert(
+            "حدث خطأ أثناء إنشاء ملف PDF"
+        );
+
+    }
+
+
+    finally{
+
+        generatePDF.disabled =
+        false;
+
+
+        generatePDF.textContent =
+        "📄 إنشاء ملف PDF لجميع الطلاب";
+
+    }
+
+});
+
+
+/* =====================================================
+   التأكد من تحميل الخطوط
+===================================================== */
+
+if(
+    document.fonts &&
+    document.fonts.ready
+){
+
+    document.fonts.ready.then(
+        function(){
+
+            if(imageLoaded){
+
+                drawCertificate();
+
+            }
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
