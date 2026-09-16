@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تجربة تحويل الصوت إلى معلم</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 18px;
+      font-family: Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #263b62, #101827 65%);
+      color: #f5f7ff;
+    }
+
+    .container {
+      width: min(760px, 100%);
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(20, 29, 48, 0.95);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 25px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: #c5cee2;
+      text-align: center;
+      line-height: 1.9;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .upload-box {
+      display: block;
+      border: 2px dashed #7188b8;
+      border-radius: 17px;
+      padding: 24px 15px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(83, 112, 171, 0.12);
+      transition: 0.2s;
+    }
+
+    .upload-box:hover {
+      background: rgba(83, 112, 171, 0.22);
+      border-color: #a9c3ff;
+    }
+
+    .upload-box strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .upload-box span {
+      color: #c4cde0;
+      font-size: 13px;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .file-name {
+      margin-top: 12px;
+      color: #b9e8c4;
+      font-size: 14px;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    .settings {
+      margin-top: 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .setting {
+      background: rgba(255,255,255,0.055);
+      border-radius: 15px;
+      padding: 13px;
+    }
+
+    .setting label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 9px;
+      font-size: 14px;
+      color: #e5eaff;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #9cbcff;
+    }
+
+    select {
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      border: 1px solid #586b91;
+      background: #18243b;
+      color: white;
+      font-size: 15px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 13px;
+      padding: 13px 12px;
+      font-size: 15px;
+      font-family: inherit;
+      cursor: pointer;
+      color: white;
+      background: #405b91;
+      transition: 0.2s;
+    }
+
+    button:hover:not(:disabled) {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #557ee1, #7656bd);
+    }
+
+    .success {
+      background: linear-gradient(135deg, #258d6d, #247a91);
+    }
+
+    .danger {
+      background: #8d3e51;
+    }
+
+    .wide {
+      grid-column: 1 / -1;
+    }
+
+    .status {
+      min-height: 45px;
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      color: #d6def0;
+      line-height: 1.8;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .audio-section {
+      margin-top: 20px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .audio-card {
+      padding: 14px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.055);
+    }
+
+    .audio-card h3 {
+      margin: 0 0 9px;
+      font-size: 16px;
+    }
+
+    audio {
+      width: 100%;
+      height: 42px;
+    }
+
+    .download-area {
+      display: none;
+      margin-top: 17px;
+      text-align: center;
+    }
+
+    .download-area a {
+      display: inline-block;
+      text-decoration: none;
+      background: #2e8c67;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-size: 15px;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 13px;
+      border-right: 4px solid #d4a64a;
+      border-radius: 10px;
+      background: rgba(212,166,74,0.10);
+      color: #f3dfac;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    progress {
+      width: 100%;
+      height: 13px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 10px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>🎙️ تجربة الصوت المعلم</h1>
+
+      <div class="subtitle">
+        ارفع تسجيلًا قصيرًا، وستُنشأ نسخة ثانية أعلى قليلًا في الطبقة
+        وتُخلط خلف الصوت الأصلي، مع الحفاظ على مدة التسجيل وسرعته.
+      </div>
+
+      <label class="upload-box" for="fileInput">
+        <strong>📂 اختر ملفًا صوتيًا</strong>
+        <span>MP3 أو WAV أو OGG أو أي صيغة يدعمها المتصفح</span>
+      </label>
+
+      <input id="fileInput" type="file" accept="audio/*" />
+
+      <div id="fileName" class="file-name">
+        لم يتم اختيار ملف بعد
+      </div>
+
+      <div class="settings">
+        <div class="setting">
+          <label>
+            <span>ارتفاع طبقة الترديد</span>
+            <b id="pitchValue">+4 نغمات</b>
+          </label>
+
+          <input
+            id="pitch"
+            type="range"
+            min="1"
+            max="8"
+            step="1"
+            value="4"
+          />
+        </div>
+
+        <div class="setting">
+          <label>
+            <span>مستوى صوت الترديد</span>
+            <b id="repeatVolumeValue">32%</b>
+          </label>
+
+          <input
+            id="repeatVolume"
+            type="range"
+            min="5"
+            max="70"
+            step="1"
+            value="32"
+          />
+        </div>
+
+        <div class="setting">
+          <label>
+            <span>تأخير الترديد</span>
+            <b id="delayValue">180 مللي ثانية</b>
+          </label>
+
+          <input
+            id="delay"
+            type="range"
+            min="60"
+            max="500"
+            step="10"
+            value="180"
+          />
+        </div>
+
+        <div class="setting">
+          <label>
+            <span>نوع المزج</span>
+          </label>
+
+          <select id="mixMode">
+            <option value="soft">ترديد خفيف خلف الأصل</option>
+            <option value="clear">ترديد أوضح</option>
+            <option value="double">ترديد مزدوج خفيف</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="processButton" class="primary wide" disabled>
+        ✨ إنشاء نسخة المعلم
+      </button>
+
+      <progress id="progress" max="100" value="0"></progress>
+
+      <div id="status" class="status">
+        اختر ملفًا صوتيًا للبدء.
+      </div>
+
+      <div class="buttons">
+        <button id="playOriginalButton" disabled>
+          ▶️ تشغيل الأصل
+        </button>
+
+        <button id="playTeacherButton" class="success" disabled>
+          ▶️ تشغيل نسخة المعلم
+        </button>
+
+        <button id="stopButton" class="danger wide" disabled>
+          ⏹️ إيقاف
+        </button>
+      </div>
+
+      <div class="audio-section">
+        <div class="audio-card">
+          <h3>الصوت الأصلي</h3>
+          <audio id="originalAudio" controls></audio>
+        </div>
+
+        <div class="audio-card">
+          <h3>نسخة المعلم الناتجة</h3>
+          <audio id="teacherAudio" controls></audio>
+        </div>
+      </div>
+
+      <div id="downloadArea" class="download-area">
+        <a id="downloadLink" href="#" download="teacher-version.wav">
+          ⬇️ تنزيل نسخة المعلم WAV
+        </a>
+      </div>
+
+      <div class="notice">
+        ⚠️ هذه تجربة معالجة صوتية وليست تحويلًا احترافيًا إلى صوت طفل مستقل.
+        استمع إلى النتيجة وتأكد من وضوح الحروف وعدم تشويه التلاوة قبل اعتمادها.
+        يُفضّل البدء بتسجيل قصير وواضح ومن دون صدى أو ضوضاء.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    "use strict";
+
+    const fileInput = document.getElementById("fileInput");
+    const fileName = document.getElementById("fileName");
+
+    const pitchInput = document.getElementById("pitch");
+    const repeatVolumeInput = document.getElementById("repeatVolume");
+    const delayInput = document.getElementById("delay");
+    const mixModeInput = document.getElementById("mixMode");
+
+    const pitchValue = document.getElementById("pitchValue");
+    const repeatVolumeValue = document.getElementById("repeatVolumeValue");
+    const delayValue = document.getElementById("delayValue");
+
+    const processButton = document.getElementById("processButton");
+    const playOriginalButton = document.getElementById("playOriginalButton");
+    const playTeacherButton = document.getElementById("playTeacherButton");
+    const stopButton = document.getElementById("stopButton");
+
+    const originalAudio = document.getElementById("originalAudio");
+    const teacherAudio = document.getElementById("teacherAudio");
+
+    const statusBox = document.getElementById("status");
+    const progress = document.getElementById("progress");
+
+    const downloadArea = document.getElementById("downloadArea");
+    const downloadLink = document.getElementById("downloadLink");
+
+    let selectedFile = null;
+    let originalBuffer = null;
+    let teacherBlobUrl = null;
+    let originalBlobUrl = null;
+
+    let audioContext = null;
+    let currentSource = null;
+
+    pitchInput.addEventListener("input", () => {
+      pitchValue.textContent = "+" + pitchInput.value + " نغمات";
+    });
+
+    repeatVolumeInput.addEventListener("input", () => {
+      repeatVolumeValue.textContent = repeatVolumeInput.value + "%";
+    });
+
+    delayInput.addEventListener("input", () => {
+      delayValue.textContent = delayInput.value + " مللي ثانية";
+    });
+
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      selectedFile = file;
+      fileName.textContent = "الملف المختار: " + file.name;
+
+      processButton.disabled = false;
+      playOriginalButton.disabled = true;
+      playTeacherButton.disabled = true;
+      stopButton.disabled = true;
+
+      downloadArea.style.display = "none";
+      teacherAudio.removeAttribute("src");
+      originalAudio.removeAttribute("src");
+
+      if (originalBlobUrl) {
+        URL.revokeObjectURL(originalBlobUrl);
+      }
+
+      originalBlobUrl = URL.createObjectURL(file);
+      originalAudio.src = originalBlobUrl;
+
+      statusBox.textContent = "جارٍ قراءة الملف وتجهيزه...";
+
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+
+        const temporaryContext = new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+        originalBuffer = await temporaryContext.decodeAudioData(arrayBuffer);
+        await temporaryContext.close();
+
+        playOriginalButton.disabled = false;
+
+        statusBox.textContent =
+          "تم تحميل الملف. يمكنك الآن إنشاء نسخة المعلم.";
+      } catch (error) {
+        console.error(error);
+        statusBox.textContent =
+          "تعذر قراءة الملف. جرّب WAV أو MP3 قصيرًا.";
+        processButton.disabled = true;
+      }
+    });
+
+    processButton.addEventListener("click", async () => {
+      if (!originalBuffer) {
+        return;
+      }
+
+      processButton.disabled = true;
+      playOriginalButton.disabled = true;
+      playTeacherButton.disabled = true;
+      downloadArea.style.display = "none";
+
+      progress.style.display = "block";
+      progress.value = 0;
+
+      statusBox.textContent =
+        "جارٍ إنشاء طبقة الترديد. قد يستغرق ذلك قليلًا...";
+
+      try {
+        const resultBuffer = await createTeacherAudio(
+          originalBuffer,
+          {
+            pitchSemitones: Number(pitchInput.value),
+            repeatVolume: Number(repeatVolumeInput.value) / 100,
+            delayMs: Number(delayInput.value),
+            mixMode: mixModeInput.value
+          },
+          (value, message) => {
+            progress.value = value;
+            statusBox.textContent = message;
+          }
+        );
+
+        const wavBlob = audioBufferToWav(resultBuffer);
+
+        if (teacherBlobUrl) {
+          URL.revokeObjectURL(teacherBlobUrl);
+        }
+
+        teacherBlobUrl = URL.createObjectURL(wavBlob);
+        teacherAudio.src = teacherBlobUrl;
+
+        downloadLink.href = teacherBlobUrl;
+        downloadArea.style.display = "block";
+
+        playTeacherButton.disabled = false;
+        playOriginalButton.disabled = false;
+
+        statusBox.textContent =
+          "تم إنشاء نسخة المعلم بنجاح. استمع إليها وقارنها بالأصل.";
+
+      } catch (error) {
+        console.error(error);
+        statusBox.textContent =
+          "حدث خطأ أثناء المعالجة: " + error.message;
+      } finally {
+        processButton.disabled = false;
+        progress.style.display = "none";
+      }
+    });
+
+    playOriginalButton.addEventListener("click", async () => {
+      stopAllAudio();
+      originalAudio.currentTime = 0;
+      await originalAudio.play();
+      stopButton.disabled = false;
+    });
+
+    playTeacherButton.addEventListener("click", async () => {
+      stopAllAudio();
+      teacherAudio.currentTime = 0;
+      await teacherAudio.play();
+      stopButton.disabled = false;
+    });
+
+    stopButton.addEventListener("click", () => {
+      stopAllAudio();
+    });
+
+    originalAudio.addEventListener("ended", () => {
+      stopButton.disabled = true;
+    });
+
+    teacherAudio.addEventListener("ended", () => {
+      stopButton.disabled = true;
+    });
+
+    function stopAllAudio() {
+      originalAudio.pause();
+      teacherAudio.pause();
+
+      if (currentSource) {
+        try {
+          currentSource.stop();
+        } catch (_) {}
+        currentSource = null;
+      }
+
+      stopButton.disabled = true;
+    }
+
+    /*
+      إنشاء نسخة المعلم:
+
+      - نستخدم granular pitch shifting.
+      - لا نغيّر playbackRate.
+      - لا نمدد أو نقصر التسجيل.
+      - نأخذ مقاطع صغيرة من الصوت ونرتبها بتداخل.
+      - نرفع الطبقة مع الحفاظ على الزمن تقريبًا.
+      - نضيف EQ خفيفًا لتقليل الغلظة.
+      - نمزج الطبقة الثانية خلف الأصل.
+    */
+    async function createTeacherAudio(
+      inputBuffer,
+      settings,
+      onProgress
+    ) {
+      const sampleRate = inputBuffer.sampleRate;
+      const channels = inputBuffer.numberOfChannels;
+      const inputLength = inputBuffer.length;
+
+      const inputChannels = [];
+
+      for (let channel = 0; channel < channels; channel++) {
+        inputChannels.push(inputBuffer.getChannelData(channel));
+      }
+
+      const pitchRatio = Math.pow(
+        2,
+        settings.pitchSemitones / 12
+      );
+
+      /*
+        إعدادات granular synthesis.
+        حجم المقطع 55ms تقريبًا.
+        التداخل يساعد على تقليل التقطيع.
+      */
+      const grainSize = Math.max(
+        1024,
+        Math.round(sampleRate * 0.055)
+      );
+
+      const hop = Math.max(
+        256,
+        Math.round(grainSize * 0.25)
+      );
+
+      const outputLength = inputLength;
+      const delaySamples = Math.round(
+        sampleRate * settings.delayMs / 1000
+      );
+
+      const repeatChannels = [];
+
+      for (let channel = 0; channel < channels; channel++) {
+        repeatChannels.push(new Float32Array(outputLength));
+      }
+
+      /*
+        نافذة Hann ناعمة لكل مقطع.
+      */
+      const window = new Float32Array(grainSize);
+
+      for (let i = 0; i < grainSize; i++) {
+        window[i] =
+          0.5 -
+          0.5 * Math.cos(
+            2 * Math.PI * i / (grainSize - 1)
+          );
+      }
+
+      /*
+        pitchRatio > 1:
+        نقرأ المقطع من المصدر بسرعة أعلى،
+        لكن نضعه في موضع زمني ثابت، ولذلك لا نستخدم playbackRate
+        ولا نغيّر مدة الملف النهائية.
+      */
+      let grainNumber = 0;
+      const totalGrains = Math.ceil(inputLength / hop);
+
+      for (
+        let outputPosition = 0;
+        outputPosition < outputLength;
+        outputPosition += hop
+      ) {
+        const sourceCenter =
+          outputPosition * pitchRatio;
+
+        const sourceStart =
+          Math.round(sourceCenter - grainSize / 2);
+
+        for (let channel = 0; channel < channels; channel++) {
+          const input = inputChannels[channel];
+          const output = repeatChannels[channel];
+
+          for (let i = 0; i < grainSize; i++) {
+            const sourceIndex =
+              sourceStart + i;
+
+            if (
+              sourceIndex < 0 ||
+              sourceIndex >= inputLength
+            ) {
+              continue;
+            }
+
+            const destinationIndex =
+              outputPosition + i;
+
+            if (destinationIndex >= outputLength) {
+              break;
+            }
+
+            /*
+              interpolation خطية لتقليل الخشونة.
+            */
+            const fractional =
+              sourceCenter - Math.floor(sourceCenter);
+
+            const indexA =
+              Math.floor(sourceCenter) + i - Math.floor(grainSize / 2);
+
+            const indexB = indexA + 1;
+
+            let sampleA = 0;
+            let sampleB = 0;
+
+            if (indexA >= 0 && indexA < inputLength) {
+              sampleA = input[indexA];
+            }
+
+            if (indexB >= 0 && indexB < inputLength) {
+              sampleB = input[indexB];
+            }
+
+            const sample =
+              sampleA +
+              (sampleB - sampleA) * fractional;
+
+            output[destinationIndex] +=
+              sample * window[i];
+          }
+        }
+
+        grainNumber++;
+
+        if (grainNumber % 8 === 0) {
+          const percent = Math.min(
+            92,
+            Math.round(grainNumber / totalGrains * 92)
+          );
+
+          onProgress(
+            percent,
+            "جارٍ معالجة طبقة الترديد... " + percent + "%"
+          );
+
+          /*
+            إتاحة فرصة للمتصفح لتحديث الواجهة.
+          */
+          await yieldToBrowser();
+        }
+      }
+
+      /*
+        تطبيع طبقة الترديد الناتجة لأن التداخل قد يرفع المستوى.
+      */
+      for (let channel = 0; channel < channels; channel++) {
+        normalizeAudio(repeatChannels[channel]);
+      }
+
+      /*
+        معالجة إضافية:
+        - High-pass لإزالة بعض الرخامة والاهتزازات المنخفضة.
+        - Presence boost خفيف.
+        - تخفيف الطبقة الثانية.
+        - تأخير الترديد.
+      */
+      for (let channel = 0; channel < channels; channel++) {
+        applyTeacherTone(
+          repeatChannels[channel],
+          sampleRate
+        );
+      }
+
+      /*
+        إنشاء النتيجة النهائية.
+      */
+      const outputContext = new OfflineAudioContext(
+        channels,
+        outputLength,
+        sampleRate
+      );
+
+      const outputBuffer = outputContext.createBuffer(
+        channels,
+        outputLength,
+        sampleRate
+      );
+
+      const modeMultiplier =
+        settings.mixMode === "clear"
+          ? 1.18
+          : settings.mixMode === "double"
+            ? 0.82
+            : 1.0;
+
+      const finalRepeatVolume =
+        settings.repeatVolume * modeMultiplier;
+
+      for (let channel = 0; channel < channels; channel++) {
+        const original = inputChannels[channel];
+        const repeat = repeatChannels[channel];
+        const output = outputBuffer.getChannelData(channel);
+
+        for (let i = 0; i < outputLength; i++) {
+          const delayedIndex = i - delaySamples;
+
+          let repeatedSample = 0;
+
+          if (
+            delayedIndex >= 0 &&
+            delayedIndex < outputLength
+          ) {
+            repeatedSample = repeat[delayedIndex];
+          }
+
+          /*
+            الأصل يبقى واضحًا.
+            الترديد خلفه بنسبة منخفضة.
+          */
+          output[i] =
+            original[i] * 0.92 +
+            repeatedSample * finalRepeatVolume;
+
+          /*
+            حماية من clipping.
+          */
+          if (output[i] > 1) {
+            output[i] = 1;
+          } else if (output[i] < -1) {
+            output[i] = -1;
+          }
+        }
+      }
+
+      onProgress(100, "اكتملت المعالجة.");
+
+      return outputBuffer;
+    }
+
+    /*
+      فلتر بسيط:
+      - إزالة جزء من الترددات المنخفضة.
+      - تعزيز خفيف للمنطقة المتوسطة/العالية.
+      لا يغيّر السرعة أو المدة.
+    */
+    function applyTeacherTone(data, sampleRate) {
+      let previousInput = 0;
+      let previousOutput = 0;
+
+      const cutoff = 115;
+      const rc = 1 / (2 * Math.PI * cutoff);
+      const dt = 1 / sampleRate;
+      const alpha = rc / (rc + dt);
+
+      for (let i = 0; i < data.length; i++) {
+        const input = data[i];
+
+        const highPassed =
+          alpha *
+          (previousOutput + input - previousInput);
+
+        previousInput = input;
+        previousOutput = highPassed;
+
+        /*
+          رفع بسيط للوضوح مع إبقاء الصوت منخفضًا.
+        */
+        data[i] =
+          highPassed * 1.08;
+      }
+
+      normalizeAudio(data);
+    }
+
+    function normalizeAudio(data) {
+      let peak = 0;
+
+      for (let i = 0; i < data.length; i++) {
+        const value = Math.abs(data[i]);
+
+        if (value > peak) {
+          peak = value;
+        }
+      }
+
+      if (peak < 0.00001) {
+        return;
+      }
+
+      const factor = Math.min(
+        1.0,
+        0.92 / peak
+      );
+
+      for (let i = 0; i < data.length; i++) {
+        data[i] *= factor;
+      }
+    }
+
+    function yieldToBrowser() {
+      return new Promise(resolve => {
+        setTimeout(resolve, 0);
+      });
+    }
+
+    /*
+      تحويل AudioBuffer إلى WAV قابل للتنزيل.
+    */
+    function audioBufferToWav(buffer) {
+      const numberOfChannels = buffer.numberOfChannels;
+      const sampleRate = buffer.sampleRate;
+      const format = 1;
+      const bitDepth = 16;
+
+      const channelData = [];
+
+      for (
+        let channel = 0;
+        channel < numberOfChannels;
+        channel++
+      ) {
+        channelData.push(
+          buffer.getChannelData(channel)
+        );
+      }
+
+      const length = buffer.length;
+      const bytesPerSample = bitDepth / 8;
+      const blockAlign =
+        numberOfChannels * bytesPerSample;
+
+      const dataSize =
+        length * blockAlign;
+
+      const arrayBuffer =
+        new ArrayBuffer(44 + dataSize);
+
+      const view =
+        new DataView(arrayBuffer);
+
+      writeString(view, 0, "RIFF");
+      view.setUint32(4, 36 + dataSize, true);
+      writeString(view, 8, "WAVE");
+      writeString(view, 12, "fmt ");
+
+      view.setUint32(16, 16, true);
+      view.setUint16(20, format, true);
+      view.setUint16(
+        22,
+        numberOfChannels,
+        true
+      );
+
+      view.setUint32(
+        24,
+        sampleRate,
+        true
+      );
+
+      view.setUint32(
+        28,
+        sampleRate * blockAlign,
+        true
+      );
+
+      view.setUint16(
+        32,
+        blockAlign,
+        true
+      );
+
+      view.setUint16(
+        34,
+        bitDepth,
+        true
+      );
+
+      writeString(view, 36, "data");
+      view.setUint32(40, dataSize, true);
+
+      let offset = 44;
+
+      for (let i = 0; i < length; i++) {
+        for (
+          let channel = 0;
+          channel < numberOfChannels;
+          channel++
+        ) {
+          let sample = channelData[channel][i];
+
+          sample = Math.max(
+            -1,
+            Math.min(1, sample)
+          );
+
+          const intSample =
+            sample < 0
+              ? sample * 0x8000
+              : sample * 0x7FFF;
+
+          view.setInt16(
+            offset,
+            intSample,
+            true
+          );
+
+          offset += 2;
+        }
+      }
+
+      return new Blob(
+        [view],
+        { type: "audio/wav" }
+      );
+    }
+
+    function writeString(view, offset, string) {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(
+          offset + i,
+          string.charCodeAt(i)
+        );
+      }
+    }
+  </script>
+</body>
+</html>
