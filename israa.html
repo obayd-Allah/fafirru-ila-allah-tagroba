@@ -2,2698 +2,3362 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Israa Audio Splitter</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>تقسيم التسجيلات إلى آيات</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
+:root{
+  --bg:#f3f6fa;
+  --card:#fff;
+  --text:#172033;
+  --muted:#687386;
+  --border:#d8e0ea;
+  --blue:#1769e0;
+  --blue2:#0d4fae;
+  --gold:#d89400;
+  --gold2:#a96800;
+  --green:#16834b;
+  --red:#d9363e;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: #f3f6fa;
-    color: #172033;
+*{
+  box-sizing:border-box;
 }
 
-body {
-    padding: 10px;
+body{
+  margin:0;
+  padding:10px;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;
 }
 
-.app {
-    width: 100%;
-    max-width: 1000px;
-    margin: auto;
-    background: white;
-    border-radius: 18px;
-    padding: 16px;
-    box-shadow: 0 4px 20px #00000012;
+.container{
+  width:min(100%,1050px);
+  margin:auto;
 }
 
-h2 {
-    margin: 0 0 8px;
-    color: #1769aa;
+h1{
+  text-align:center;
+  margin:8px 0 4px;
+  font-size:clamp(21px,4vw,31px);
 }
 
-.info {
-    color: #555;
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 12px;
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:14px;
 }
 
-.file-area {
-    border: 2px dashed #aac4d8;
-    border-radius: 12px;
-    padding: 14px;
-    background: #f8fbfd;
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:13px;
+  margin-bottom:12px;
+  box-shadow:0 4px 18px rgba(20,40,70,.05);
 }
 
-input[type=file] {
-    width: 100%;
+.title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:10px;
 }
 
-audio {
-    width: 100%;
-    margin-top: 12px;
+input[type=file]{
+  width:100%;
+  padding:9px;
+  border:1px dashed #aebbd0;
+  border-radius:11px;
+  background:#f8faff;
 }
 
-.time-info {
-    text-align: center;
-    margin: 10px 0;
-    font-size: 14px;
-    color: #555;
+.audio-item{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:11px;
+  margin-bottom:10px;
+  background:#fbfdff;
 }
 
-.timeline-wrapper {
-    position: relative;
-    width: 100%;
-    height: 190px;
-    border: 2px solid #b8d2e5;
-    border-radius: 12px;
-    background: #eef6fb;
-    overflow: hidden;
-    touch-action: none;
-    user-select: none;
+.audio-header{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:center;
 }
 
-.timeline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+.audio-name{
+  width:100%;
+  padding:9px;
+  border:1px solid #cbd5e1;
+  border-radius:9px;
+  direction:ltr;
+  text-align:left;
+  font-family:monospace;
+  font-weight:bold;
 }
 
-#timelineCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+audio{
+  width:100%;
+  margin-top:9px;
 }
 
-#markers {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+.folder-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:9px;
 }
 
-.marker {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: #e53935;
-    pointer-events: auto;
-    cursor: ew-resize;
-    z-index: 10;
+.folder-path{
+  flex:1;
+  min-width:0;
+  padding:8px 10px;
+  border-radius:9px;
+  background:#eef3f8;
+  color:var(--muted);
+  font-size:12px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  direction:ltr;
+  text-align:left;
 }
 
-.marker.first {
-    background: #16803c;
+button{
+  border:0;
+  border-radius:11px;
+  padding:10px 13px;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
 }
 
-.marker-label {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: #e53935;
-    color: white;
-    border-radius: 5px;
-    padding: 3px 6px;
-    font-size: 11px;
-    white-space: nowrap;
-    pointer-events: none;
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
 }
 
-.marker.first .marker-label {
-    background: #16803c;
+button:active{
+  transform:scale(.97);
 }
 
-.play-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #1769aa;
-    z-index: 8;
-    pointer-events: none;
+.blue{
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:#fff;
 }
 
-.zoom-controls {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-top: 10px;
-    flex-wrap: wrap;
+.gold{
+  background:linear-gradient(135deg,#e9aa1b,var(--gold2));
+  color:#fff;
 }
 
-button {
-    border: 0;
-    border-radius: 8px;
-    padding: 9px 13px;
-    font-size: 14px;
-    color: white;
-    background: #1769aa;
-    cursor: pointer;
+.green{
+  background:linear-gradient(135deg,#20a565,var(--green));
+  color:#fff;
 }
 
-button:disabled {
-    opacity: .45;
-    cursor: not-allowed;
+.gray{
+  background:#e8edf4;
+  color:#263449;
 }
 
-button.gray {
-    background: #607d8b;
+.red{
+  background:linear-gradient(135deg,#ef5350,var(--red));
+  color:#fff;
 }
 
-button.red {
-    background: #c62828;
+.timeline-wrap{
+  position:relative;
+  height:145px;
+  width:100%;
+  overflow:hidden;
+  border:1px solid #cbd5e1;
+  border-radius:13px;
+  background:#f8fbff;
+  touch-action:none;
 }
 
-button.green {
-    background: #16803c;
+#timeline{
+  width:100%;
+  height:145px;
+  display:block;
 }
 
-.zoom-value {
-    min-width: 45px;
-    text-align: center;
-    font-size: 13px;
+.time-row{
+  display:flex;
+  justify-content:space-between;
+  direction:ltr;
+  font-family:monospace;
+  font-size:14px;
+  margin:8px 0;
 }
 
-#zoomSlider {
-    flex: 1;
-    min-width: 150px;
+.help{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+  margin-top:7px;
 }
 
-#navigation {
-    width: 100%;
-    direction: ltr;
-    margin-top: 8px;
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:11px;
 }
 
-.range-labels {
-    display: flex;
-    justify-content: space-between;
-    direction: ltr;
-    font-size: 11px;
-    color: #777;
+.zoom-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
 }
 
-.controls {
-    display: flex;
-    gap: 7px;
-    flex-wrap: wrap;
-    margin-top: 10px;
+.zoom-row input{
+  flex:1;
 }
 
-.marks {
-    margin-top: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    max-height: 250px;
-    overflow-y: auto;
+.zoom-label{
+  color:var(--muted);
+  font-size:13px;
+  white-space:nowrap;
 }
 
-.mark-row {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 7px;
-    border-bottom: 1px solid #eee;
-    flex-wrap: wrap;
+/* =========================
+   السرعة
+========================= */
+
+.speed-panel{
+  margin-top:13px;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#f8fbff;
 }
 
-.mark-row:last-child {
-    border-bottom: 0;
+.speed-title{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:8px;
 }
 
-.mark-number {
-    font-weight: bold;
-    min-width: 55px;
+.speed-display{
+  text-align:center;
+  direction:ltr;
+  font-family:monospace;
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:9px;
 }
 
-.mark-time {
-    direction: ltr;
-    width: 105px;
-    padding: 6px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
+.speed-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:7px;
 }
 
-.mark-row button {
-    font-size: 12px;
-    padding: 6px 9px;
+.speed-btn{
+  min-height:43px;
+  padding:8px;
+  background:#e8edf4;
+  color:#263449;
 }
 
-.status {
-    margin-top: 12px;
-    background: #eef5ff;
-    border-radius: 9px;
-    padding: 11px;
-    line-height: 1.7;
-    white-space: pre-wrap;
+.speed-btn.main{
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:white;
 }
 
-.progress-wrapper {
-    height: 10px;
-    background: #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 10px;
+.speed-hint{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:8px;
 }
 
-.progress {
-    width: 0;
-    height: 100%;
-    background: #16803c;
-    transition: width .15s;
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  margin-top:11px;
+  font-size:13px;
+  color:var(--muted);
 }
 
-.downloads {
-    margin-top: 10px;
+.legend span{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
 }
 
-.downloads a {
-    display: block;
-    padding: 9px;
-    margin: 5px 0;
-    border-radius: 8px;
-    background: #e8f5e9;
-    color: #1769aa;
-    text-decoration: none;
-    font-weight: bold;
+.dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  display:inline-block;
 }
 
-.small {
-    font-size: 12px;
-    color: #777;
-    line-height: 1.7;
-    margin-top: 8px;
+.dot-blue{background:#1769e0}
+.dot-gold{background:#d89400}
+.dot-red{background:#ef4444}
+
+.marker-list{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
 
+.marker{
+  display:grid;
+  grid-template-columns:auto 1fr 95px auto;
+  gap:8px;
+  align-items:center;
+  padding:8px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#fbfdff;
+}
+
+.badge{
+  width:29px;
+  height:29px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.badge-end{
+  background:#1769e0;
+}
+
+.badge-pause{
+  background:#d89400;
+}
+
+.marker-desc{
+  font-size:13px;
+  line-height:1.6;
+}
+
+.marker-desc small{
+  color:var(--muted);
+}
+
+.time-input{
+  width:95px;
+  padding:7px;
+  direction:ltr;
+  text-align:center;
+  font-family:monospace;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+}
+
+pre{
+  direction:ltr;
+  text-align:left;
+  white-space:pre-wrap;
+  word-break:break-word;
+  background:#101827;
+  color:#d9e7ff;
+  border-radius:11px;
+  padding:12px;
+  font-size:12px;
+  line-height:1.7;
+  max-height:330px;
+  overflow:auto;
+}
+
+.status{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+  margin-top:8px;
+  min-height:20px;
+}
+
+.progress{
+  display:none;
+  margin-top:10px;
+}
+
+.progress.show{
+  display:block;
+}
+
+progress{
+  width:100%;
+  height:18px;
+}
+
+.output{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:10px;
+  margin-top:9px;
+  background:#fbfdff;
+}
+
+.output-name{
+  font-family:monospace;
+  direction:ltr;
+  text-align:left;
+  font-weight:bold;
+}
+
+@media(max-width:650px){
+
+  .marker{
+    grid-template-columns:auto 1fr auto;
+  }
+
+  .marker .time-input{
+    grid-column:2;
+    width:100%;
+  }
+
+  .folder-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .controls button{
+    flex:1 1 auto;
+    min-height:44px;
+  }
+
+  .audio-header{
+    grid-template-columns:1fr;
+  }
+
+  .speed-controls{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-<h2>🎧 تقسيم سورة الإسراء</h2>
+<h1>🎙️ تقسيم تسجيلات القرآن إلى آيات</h1>
 
-<div class="info">
-    ارفع التسجيل ثم حدد بدايات الآيات.
-    تم تصميم هذه النسخة بحيث لا تفك التسجيل كاملًا عند رفعه،
-    مما يقلل استهلاك الذاكرة ويجعل التسجيلات الطويلة أكثر سلاسة.
+<div class="subtitle">
+حدد العلامات مرة واحدة، وسيتم تطبيقها على جميع التسجيلات بنفس التوقيت
 </div>
 
-<div class="file-area">
-    <input
-        type="file"
-        id="fileInput"
-        accept="audio/*">
-</div>
 
-<audio
-    id="audio"
-    controls>
-</audio>
+<!-- =====================
+     التسجيلات
+===================== -->
 
-<div
-    id="timeInfo"
-    class="time-info">
-    لم يتم اختيار ملف
-</div>
+<div class="card">
 
-<div
-    id="timelineWrapper"
-    class="timeline-wrapper">
-
-    <div
-        id="timeline"
-        class="timeline">
-
-        <canvas
-            id="timelineCanvas">
-        </canvas>
-
-        <div
-            id="markers">
-        </div>
-
-        <div
-            id="playLine"
-            class="play-line">
-        </div>
-
-    </div>
-
-</div>
-
-<div class="range-labels">
-    <span id="viewStart">00:00.000</span>
-    <span id="viewEnd">00:00.000</span>
-</div>
-
-<div class="zoom-controls">
-
-    <button
-        id="zoomOut"
-        class="gray"
-        disabled>
-        −
-    </button>
-
-    <button
-        id="zoomIn"
-        disabled>
-        +
-    </button>
-
-    <button
-        id="resetZoom"
-        class="gray"
-        disabled>
-        عرض كامل
-    </button>
-
-    <span class="zoom-value"
-          id="zoomValue">
-        1×
-    </span>
-
-    <input
-        id="zoomSlider"
-        type="range"
-        min="1"
-        max="100"
-        step="0.1"
-        value="1"
-        disabled>
-
-</div>
+<div class="title">١. التسجيلات</div>
 
 <input
-    id="navigation"
-    type="range"
-    min="0"
-    max="0"
-    step="0.001"
-    value="0"
-    disabled>
+  id="audioFiles"
+  type="file"
+  accept="audio/*"
+  multiple
+>
 
-<div class="small">
-    عند التكبير استخدم شريط التنقل للوصول إلى الجزء المطلوب.
-    ويمكنك الضغط على الخط الزمني لإضافة علامة.
+<div id="audioList"></div>
+
+<div id="audioStatus" class="status">
+لم تتم إضافة تسجيلات بعد.
+</div>
+
+</div>
+
+
+<!-- =====================
+     التحكم والعلامات
+===================== -->
+
+<div class="card">
+
+<div class="title">٢. تحديد الآيات والوقفات</div>
+
+<div class="time-row">
+<span id="currentTime">00:00.00</span>
+<span id="duration">00:00.00</span>
+</div>
+
+<div class="timeline-wrap" id="timelineWrap">
+<canvas id="timeline"></canvas>
+</div>
+
+<div class="help">
+اضغط على الشريط للانتقال إلى الموضع المطلوب.
+يمكنك سحب العلامات مباشرة.
+استخدم التكبير للوصول إلى موضع الوقف بدقة أكبر.
+</div>
+
+<div class="zoom-row">
+
+<span class="zoom-label">التكبير</span>
+
+<input
+  id="zoom"
+  type="range"
+  min="1"
+  max="100"
+  value="1"
+>
+
+<span id="zoomText">1×</span>
+
+</div>
+
+<div class="zoom-row">
+
+<span class="zoom-label">التحرك</span>
+
+<input
+  id="view"
+  type="range"
+  min="0"
+  max="0"
+  step="0.01"
+  value="0"
+>
+
+</div>
+
+
+<!-- =====================
+     التحكم في السرعة
+===================== -->
+
+<div class="speed-panel">
+
+<div class="speed-title">
+🎚️ سرعة التشغيل أثناء المونتاج
+</div>
+
+<div id="speedDisplay" class="speed-display">
+1.00×
+</div>
+
+<div class="speed-controls">
+
+<button
+  id="speedDown"
+  class="speed-btn"
+>
+➖ 0.05×
+</button>
+
+<button
+  id="speedReset"
+  class="speed-btn main"
+>
+↺ 1.00×
+</button>
+
+<button
+  id="speedUp"
+  class="speed-btn"
+>
+➕ 0.05×
+</button>
+
+</div>
+
+<div class="speed-hint">
+السرعة تؤثر على الاستماع فقط، ولا تغيّر توقيت العلامات أو الملفات الناتجة.
+</div>
+
+</div>
+
+
+<div class="controls">
+
+<button
+  id="endBtn"
+  class="blue"
+  disabled
+>
+🔵 نهاية آية
+</button>
+
+<button
+  id="pauseBtn"
+  class="gold"
+  disabled
+>
+🟡 وقفة داخلية
+</button>
+
+<button
+  id="playAyahBtn"
+  class="green"
+  disabled
+>
+▶ تشغيل الآية الحالية
+</button>
+
+<button
+  id="undoBtn"
+  class="gray"
+  disabled
+>
+↩ تراجع
+</button>
+
+<button
+  id="clearBtn"
+  class="red"
+  disabled
+>
+حذف العلامات
+</button>
+
+</div>
+
+<div class="legend">
+
+<span>
+<i class="dot dot-blue"></i>
+نهاية آية
+</span>
+
+<span>
+<i class="dot dot-gold"></i>
+وقفة داخلية
+</span>
+
+<span>
+<i class="dot dot-red"></i>
+موضع التشغيل
+</span>
+
+</div>
+
+</div>
+
+
+<!-- =====================
+     العلامات
+===================== -->
+
+<div class="card">
+
+<div class="title">
+٣. العلامات
+</div>
+
+<div id="markers" class="marker-list">
+
+<div class="status">
+لم تتم إضافة علامات بعد.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================
+     مصفوفة الوقفات
+===================== -->
+
+<div class="card">
+
+<div class="title">
+٤. مصفوفة الوقفات
+</div>
+
+<pre id="pauseArray">const ayahPauses = [];</pre>
+
+<div class="controls">
+
+<button
+  id="copyBtn"
+  class="blue"
+  disabled
+>
+📋 نسخ المصفوفة
+</button>
+
+<button
+  id="exportBtn"
+  class="gray"
+  disabled
+>
+تصدير العلامات
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================
+     التقسيم
+===================== -->
+
+<div class="card">
+
+<div class="title">
+٥. إنشاء الملفات
+</div>
+
+<div class="help">
+
+سيتم استخدام نفس علامات الآيات لجميع التسجيلات.
+كل تسجيل سيُحفظ في المجلد الذي تختاره له.
+
+<br><br>
+
+مثال:
+
+<br><br>
+
+<bdi>ufj/1.mp3</bdi><br>
+<bdi>ufj/2.mp3</bdi><br>
+<bdi>ufj/3.mp3</bdi>
+
+<br><br>
+
+<bdi>oddb/1.mp3</bdi><br>
+<bdi>oddb/2.mp3</bdi><br>
+<bdi>oddb/3.mp3</bdi>
+
 </div>
 
 <div class="controls">
 
-    <button
-        id="addCurrent"
-        disabled>
-        ➕ علامة عند الوقت الحالي
-    </button>
-
-    <button
-        id="playSegment"
-        class="gray"
-        disabled>
-        ▶ تشغيل الآية
-    </button>
-
-    <button
-        id="clearMarks"
-        class="red"
-        disabled>
-        حذف العلامات
-    </button>
+<button
+  id="splitBtn"
+  class="green"
+  disabled
+>
+🚀 بدء إنشاء الملفات
+</button>
 
 </div>
 
-<div
-    id="marksList"
-    class="marks">
+<div id="progressBox" class="progress">
+
+<div id="progressText" class="status">
+جاري التحضير...
 </div>
 
-<div class="controls">
-
-    <button
-        id="splitButton"
-        class="green"
-        disabled>
-        ✅ موافق وتقسيم إلى MP3
-    </button>
-
-    <button
-        id="downloadAll"
-        class="gray"
-        disabled>
-        📦 تحميل الكل
-    </button>
+<progress
+  id="progressBar"
+  value="0"
+  max="100"
+></progress>
 
 </div>
 
-<div class="progress-wrapper">
-    <div
-        id="progress"
-        class="progress">
-    </div>
-</div>
+<div id="output"></div>
 
-<div
-    id="status"
-    class="status">
-    لم يتم رفع التسجيل بعد.
-</div>
-
-<div
-    id="downloads"
-    class="downloads">
 </div>
 
 </div>
 
 
-<!--
-    مكتبة MP3
--->
-<script
-src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
 
 <script>
 
-/* =========================================================
+"use strict";
+
+
+/* =========================================
    العناصر
-========================================================= */
+========================================= */
 
-const fileInput =
-    document.getElementById("fileInput");
+const audioFilesInput =
+  document.getElementById("audioFiles");
 
-const audio =
-    document.getElementById("audio");
+const audioList =
+  document.getElementById("audioList");
 
-const timelineWrapper =
-    document.getElementById("timelineWrapper");
+const audioStatus =
+  document.getElementById("audioStatus");
 
-const timeline =
-    document.getElementById("timeline");
+const timelineWrap =
+  document.getElementById("timelineWrap");
 
 const canvas =
-    document.getElementById("timelineCanvas");
+  document.getElementById("timeline");
 
 const ctx =
-    canvas.getContext("2d");
+  canvas.getContext("2d",{alpha:false});
 
-const markersContainer =
-    document.getElementById("markers");
+const currentTimeEl =
+  document.getElementById("currentTime");
 
-const playLine =
-    document.getElementById("playLine");
+const durationEl =
+  document.getElementById("duration");
 
-const navigation =
-    document.getElementById("navigation");
+const zoomInput =
+  document.getElementById("zoom");
 
-const zoomSlider =
-    document.getElementById("zoomSlider");
+const zoomText =
+  document.getElementById("zoomText");
 
-const zoomValue =
-    document.getElementById("zoomValue");
+const viewInput =
+  document.getElementById("view");
 
-const zoomIn =
-    document.getElementById("zoomIn");
+const endBtn =
+  document.getElementById("endBtn");
 
-const zoomOut =
-    document.getElementById("zoomOut");
+const pauseBtn =
+  document.getElementById("pauseBtn");
 
-const resetZoom =
-    document.getElementById("resetZoom");
+const playAyahBtn =
+  document.getElementById("playAyahBtn");
 
-const addCurrent =
-    document.getElementById("addCurrent");
+const undoBtn =
+  document.getElementById("undoBtn");
 
-const playSegment =
-    document.getElementById("playSegment");
+const clearBtn =
+  document.getElementById("clearBtn");
 
-const clearMarks =
-    document.getElementById("clearMarks");
+const markersEl =
+  document.getElementById("markers");
 
-const splitButton =
-    document.getElementById("splitButton");
+const pauseArrayEl =
+  document.getElementById("pauseArray");
 
-const downloadAll =
-    document.getElementById("downloadAll");
+const copyBtn =
+  document.getElementById("copyBtn");
 
-const timeInfo =
-    document.getElementById("timeInfo");
+const exportBtn =
+  document.getElementById("exportBtn");
 
-const viewStart =
-    document.getElementById("viewStart");
+const splitBtn =
+  document.getElementById("splitBtn");
 
-const viewEnd =
-    document.getElementById("viewEnd");
+const progressBox =
+  document.getElementById("progressBox");
 
-const marksList =
-    document.getElementById("marksList");
+const progressText =
+  document.getElementById("progressText");
 
-const status =
-    document.getElementById("status");
+const progressBar =
+  document.getElementById("progressBar");
 
-const progress =
-    document.getElementById("progress");
-
-const downloads =
-    document.getElementById("downloads");
+const outputEl =
+  document.getElementById("output");
 
 
-/* =========================================================
+/* =========================================
+   عناصر السرعة
+========================================= */
+
+const speedDown =
+  document.getElementById("speedDown");
+
+const speedReset =
+  document.getElementById("speedReset");
+
+const speedUp =
+  document.getElementById("speedUp");
+
+const speedDisplay =
+  document.getElementById("speedDisplay");
+
+
+/* =========================================
    الحالة
-========================================================= */
+========================================= */
 
-let sourceURL = null;
+let recordings = [];
+
+let referenceIndex = 0;
 
 let duration = 0;
 
+let endMarkers = [];
+
+let pauseMarkers = [];
+
 let zoom = 1;
 
-let viewStartTime = 0;
+let viewStart = 0;
 
-let marks = [];
+let dragging = null;
 
-let selectedMark = 0;
-
-let generatedFiles = [];
-
-let isDraggingMarker = false;
-
-let draggingIndex = -1;
+let animationFrame = 0;
 
 
-/* =========================================================
-   أدوات الوقت
-========================================================= */
+/* =========================================
+   سرعة التشغيل
+========================================= */
 
-function formatTime(seconds) {
+let playbackSpeed = 1;
 
-    if (!Number.isFinite(seconds)) {
-        return "00:00.000";
-    }
+const MIN_SPEED = 0.25;
 
-    const minutes =
-        Math.floor(seconds / 60);
+const MAX_SPEED = 2;
 
-    const secs =
-        (seconds % 60)
-        .toFixed(3)
-        .padStart(6, "0");
-
-    return String(minutes)
-        .padStart(2, "0")
-        + ":" +
-        secs;
-}
+const SPEED_STEP = 0.05;
 
 
-/* =========================================================
-   مدة الجزء الظاهر
-========================================================= */
+function updatePlaybackSpeed(){
 
-function getVisibleDuration() {
+  playbackSpeed =
+    Math.round(playbackSpeed * 100) / 100;
 
-    if (!duration) {
-        return 0;
-    }
-
-    return duration / zoom;
-}
-
-
-/* =========================================================
-   ضبط موضع العرض
-========================================================= */
-
-function clampView() {
-
-    const visible =
-        getVisibleDuration();
-
-    const max =
-        Math.max(
-            0,
-            duration - visible
-        );
-
-    viewStartTime =
-        Math.max(
-            0,
-            Math.min(
-                max,
-                viewStartTime
-            )
-        );
-}
-
-
-/* =========================================================
-   تحويل الوقت إلى X
-========================================================= */
-
-function timeToX(time) {
-
-    const visible =
-        getVisibleDuration();
-
-    if (!visible) {
-        return 0;
-    }
-
-    return (
-        (time - viewStartTime)
-        / visible
-    ) * timelineWrapper.clientWidth;
-}
-
-
-/* =========================================================
-   تحويل X إلى وقت
-========================================================= */
-
-function xToTime(x) {
-
-    const visible =
-        getVisibleDuration();
-
-    return (
-        viewStartTime +
-        (x / timelineWrapper.clientWidth)
-        * visible
+  playbackSpeed =
+    clamp(
+      playbackSpeed,
+      MIN_SPEED,
+      MAX_SPEED
     );
+
+  speedDisplay.textContent =
+    playbackSpeed.toFixed(2) + "×";
+
+  const audio =
+    referenceAudio();
+
+  if(audio){
+
+    audio.playbackRate =
+      playbackSpeed;
+
+  }
+
 }
 
 
-/* =========================================================
-   تحديث الواجهة
-========================================================= */
+speedDown.addEventListener(
+  "click",
+  ()=>{
 
-function updateTimeline() {
+    playbackSpeed -= SPEED_STEP;
 
-    if (!duration) {
+    updatePlaybackSpeed();
+
+  }
+);
+
+
+speedUp.addEventListener(
+  "click",
+  ()=>{
+
+    playbackSpeed += SPEED_STEP;
+
+    updatePlaybackSpeed();
+
+  }
+);
+
+
+speedReset.addEventListener(
+  "click",
+  ()=>{
+
+    playbackSpeed = 1;
+
+    updatePlaybackSpeed();
+
+  }
+);
+
+
+/* =========================================
+   أدوات
+========================================= */
+
+function clamp(v,min,max){
+
+  return Math.max(
+    min,
+    Math.min(max,v)
+  );
+
+}
+
+
+function id(){
+
+  return Date.now().toString(36) +
+         Math.random().toString(36).slice(2);
+
+}
+
+
+function timeString(seconds){
+
+  if(!Number.isFinite(seconds))
+    return "00:00.00";
+
+  const m =
+    Math.floor(seconds/60);
+
+  const s =
+    seconds%60;
+
+  return String(m).padStart(2,"0") +
+         ":" +
+         s.toFixed(2).padStart(5,"0");
+
+}
+
+
+function visibleDuration(){
+
+  return duration ?
+    duration/zoom :
+    1;
+
+}
+
+
+function viewEnd(){
+
+  return Math.min(
+    duration,
+    viewStart + visibleDuration()
+  );
+
+}
+
+
+function timeToX(time,width){
+
+  return (
+    (time-viewStart) /
+    visibleDuration()
+  ) * width;
+
+}
+
+
+function xToTime(x,width){
+
+  return viewStart +
+    (x/width)*visibleDuration();
+
+}
+
+
+/* =========================================
+   اختيار التسجيلات
+========================================= */
+
+audioFilesInput.addEventListener(
+"change",
+()=>{
+
+  const files =
+    Array.from(audioFilesInput.files);
+
+  if(!files.length)
+    return;
+
+  recordings = [];
+
+  audioList.innerHTML = "";
+
+  endMarkers = [];
+
+  pauseMarkers = [];
+
+  duration = 0;
+
+  viewStart = 0;
+
+  files.forEach((file,index)=>{
+
+    const item = {
+
+      id:id(),
+
+      file:file,
+
+      name:
+        file.name
+          .replace(/\.[^/.]+$/,"")
+          .replace(/[^a-zA-Z0-9_-]/g,"_") ||
+        "recording_"+(index+1),
+
+      directory:null,
+
+      url:
+        URL.createObjectURL(file),
+
+      element:null,
+
+      nameInput:null,
+
+      folderPath:null
+
+    };
+
+    recordings.push(item);
+
+    createRecordingUI(item,index);
+
+  });
+
+
+  referenceIndex = 0;
+
+  const first =
+    recordings[0];
+
+  if(first){
+
+    first.element.load();
+
+  }
+
+  audioStatus.textContent =
+    "تمت إضافة " +
+    recordings.length +
+    " تسجيلات. " +
+    "التسجيل الأول هو المرجع لتحديد العلامات.";
+
+  updatePlaybackSpeed();
+
+  updateButtons();
+
+});
+
+
+/* =========================================
+   واجهة كل تسجيل
+========================================= */
+
+function createRecordingUI(item,index){
+
+  const box =
+    document.createElement("div");
+
+  box.className =
+    "audio-item";
+
+
+  const header =
+    document.createElement("div");
+
+  header.className =
+    "audio-header";
+
+
+  const nameInput =
+    document.createElement("input");
+
+  nameInput.className =
+    "audio-name";
+
+  nameInput.value =
+    item.name;
+
+  nameInput.placeholder =
+    "اسم التسجيل مثل ufj";
+
+
+  nameInput.addEventListener(
+    "input",
+    ()=>{
+
+      item.name =
+        nameInput.value
+          .trim()
+          .replace(/[^a-zA-Z0-9_-]/g,"_");
+
+      if(!item.name)
+        item.name =
+          "recording_"+(index+1);
+
+    }
+  );
+
+
+  const referenceButton =
+    document.createElement("button");
+
+  referenceButton.className =
+    index === 0 ?
+      "blue" :
+      "gray";
+
+  referenceButton.textContent =
+    index === 0 ?
+      "🎯 المرجع" :
+      "اجعله المرجع";
+
+
+  const audio =
+    document.createElement("audio");
+
+  audio.controls = true;
+
+  audio.preload = "metadata";
+
+  audio.src =
+    item.url;
+
+  audio.playbackRate =
+    playbackSpeed;
+
+
+  const folderRow =
+    document.createElement("div");
+
+  folderRow.className =
+    "folder-row";
+
+
+  const folderButton =
+    document.createElement("button");
+
+  folderButton.className =
+    "gray";
+
+  folderButton.textContent =
+    "📁 اختيار مجلد الحفظ";
+
+
+  const folderPath =
+    document.createElement("div");
+
+  folderPath.className =
+    "folder-path";
+
+  folderPath.textContent =
+    "لم يتم اختيار مجلد";
+
+
+  folderButton.addEventListener(
+    "click",
+    async ()=>{
+
+      if(!("showDirectoryPicker" in window)){
+
+        alert(
+          "هذا المتصفح لا يدعم اختيار مجلد مباشرة. جرّب Chrome أو Edge على جهاز يدعم هذه الخاصية."
+        );
+
         return;
+
+      }
+
+
+      try{
+
+        const directory =
+          await window.showDirectoryPicker({
+            mode:"readwrite"
+          });
+
+        item.directory =
+          directory;
+
+        folderPath.textContent =
+          "📁 " +
+          directory.name;
+
+        folderButton.textContent =
+          "✓ تغيير المجلد";
+
+      }catch(error){
+
+        console.log(error);
+
+      }
+
     }
+  );
 
-    clampView();
 
-    const width =
-        timelineWrapper.clientWidth;
+  referenceButton.addEventListener(
+    "click",
+    ()=>{
 
-    const visible =
-        getVisibleDuration();
+      referenceIndex =
+        recordings.indexOf(item);
 
-    const contentWidth =
-        width * zoom;
+      recordings.forEach(
+        (recording,i)=>{
 
-    timeline.style.width =
-        contentWidth + "px";
+          const button =
+            recording.referenceButton;
 
-    timeline.style.left =
-        -(
-            viewStartTime /
-            duration *
-            contentWidth
-        ) + "px";
+          if(!button)
+            return;
 
-    /*
-       لا نرسم waveform حقيقي هنا.
+          button.className =
+            i === referenceIndex ?
+              "blue" :
+              "gray";
 
-       بدلًا منه نرسم خطًا زمنيًا خفيفًا جدًا.
-       هذا مقصود حتى لا نستهلك ذاكرة التسجيل.
-    */
+          button.textContent =
+            i === referenceIndex ?
+              "🎯 المرجع" :
+              "اجعله المرجع";
 
-    drawLightTimeline(
-        contentWidth
-    );
+        }
+      );
 
-    renderMarkers();
 
-    updatePlayLine();
+      loadReferenceDuration();
 
-    viewStart.textContent =
-        formatTime(viewStartTime);
+      updatePlaybackSpeed();
 
-    viewEnd.textContent =
-        formatTime(
-            Math.min(
-                duration,
-                viewStartTime + visible
-            )
-        );
+    }
+  );
 
-    zoomValue.textContent =
-        zoom
-        .toFixed(1)
-        .replace(".0", "")
-        + "×";
 
-    zoomSlider.value =
-        zoom;
+  item.element =
+    audio;
 
-    const max =
-        Math.max(
-            0,
-            duration - visible
-        );
+  item.referenceButton =
+    referenceButton;
 
-    navigation.max =
-        max;
+  item.nameInput =
+    nameInput;
 
-    navigation.value =
-        viewStartTime;
+  item.folderPath =
+    folderPath;
+
+
+  header.appendChild(nameInput);
+
+  header.appendChild(referenceButton);
+
+  folderRow.appendChild(folderButton);
+
+  folderRow.appendChild(folderPath);
+
+  box.appendChild(header);
+
+  box.appendChild(audio);
+
+  box.appendChild(folderRow);
+
+  audioList.appendChild(box);
+
+
+  audio.addEventListener(
+    "loadedmetadata",
+    ()=>{
+
+      if(
+        recordings.indexOf(item) ===
+        referenceIndex
+      ){
+
+        loadReferenceDuration();
+
+      }
+
+    }
+  );
+
+
+  audio.addEventListener(
+    "timeupdate",
+    ()=>{
+
+      if(
+        recordings.indexOf(item) ===
+        referenceIndex
+      ){
+
+        currentTimeEl.textContent =
+          timeString(audio.currentTime);
+
+        requestDraw();
+
+      }
+
+    }
+  );
+
 }
 
 
-/* =========================================================
-   خط زمني خفيف جدًا
-========================================================= */
+/* =========================================
+   التسجيل المرجعي
+========================================= */
 
-function drawLightTimeline(width) {
+function referenceAudio(){
 
-    const height =
-        timelineWrapper.clientHeight;
+  return recordings[referenceIndex]?.element;
 
-    canvas.width =
-        Math.max(
-            1,
-            Math.floor(
-                width *
-                devicePixelRatio
-            )
-        );
-
-    canvas.height =
-        Math.floor(
-            height *
-            devicePixelRatio
-        );
-
-    canvas.style.width =
-        width + "px";
-
-    canvas.style.height =
-        height + "px";
-
-    ctx.setTransform(
-        devicePixelRatio,
-        0,
-        0,
-        devicePixelRatio,
-        0,
-        0
-    );
-
-    ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-    /*
-       خلفية
-    */
-
-    ctx.fillStyle =
-        "#eef6fb";
-
-    ctx.fillRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-    /*
-       خط المنتصف
-    */
-
-    ctx.strokeStyle =
-        "#b8d2e5";
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        0,
-        height / 2
-    );
-
-    ctx.lineTo(
-        width,
-        height / 2
-    );
-
-    ctx.stroke();
-
-
-    /*
-       تدريجات زمنية
-    */
-
-    const visible =
-        getVisibleDuration();
-
-    let step;
-
-    if (visible < 30) {
-        step = 1;
-    }
-    else if (visible < 120) {
-        step = 5;
-    }
-    else if (visible < 600) {
-        step = 30;
-    }
-    else if (visible < 1800) {
-        step = 60;
-    }
-    else {
-        step = 300;
-    }
-
-    ctx.strokeStyle =
-        "#aac4d8";
-
-    ctx.fillStyle =
-        "#607d8b";
-
-    ctx.font =
-        "11px Arial";
-
-    const first =
-        Math.floor(
-            viewStartTime / step
-        ) * step;
-
-    for (
-        let t = first;
-        t <= viewStartTime + visible;
-        t += step
-    ) {
-
-        const x =
-            (
-                (t - viewStartTime)
-                / visible
-            ) * width;
-
-        if (x < 0 || x > width) {
-            continue;
-        }
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            x,
-            height / 2 - 25
-        );
-
-        ctx.lineTo(
-            x,
-            height / 2 + 25
-        );
-
-        ctx.stroke();
-
-        ctx.fillText(
-            formatTime(t),
-            x + 3,
-            height / 2 - 30
-        );
-    }
-
-
-    /*
-       شكل بصري خفيف بدل waveform الحقيقي
-    */
-
-    ctx.strokeStyle =
-        "#1769aa";
-
-    ctx.globalAlpha =
-        0.25;
-
-    ctx.beginPath();
-
-    for (
-        let x = 0;
-        x < width;
-        x += 3
-    ) {
-
-        const y =
-            height / 2 +
-            Math.sin(x * 0.08) * 18 +
-            Math.sin(x * 0.023) * 9;
-
-        if (x === 0) {
-            ctx.moveTo(x, y);
-        }
-        else {
-            ctx.lineTo(x, y);
-        }
-    }
-
-    ctx.stroke();
-
-    ctx.globalAlpha =
-        1;
 }
 
 
-/* =========================================================
-   العلامات
-========================================================= */
+function loadReferenceDuration(){
 
-function renderMarkers() {
+  const audio =
+    referenceAudio();
 
-    markersContainer.innerHTML = "";
+  if(!audio)
+    return;
 
-    marks.forEach(
-        (time, index) => {
+  if(!Number.isFinite(audio.duration))
+    return;
 
-            const x =
-                timeToX(time);
+  duration =
+    audio.duration;
 
-            if (
-                x < -20 ||
-                x >
-                timelineWrapper.clientWidth + 20
-            ) {
-                return;
-            }
+  durationEl.textContent =
+    timeString(duration);
 
-            const marker =
-                document.createElement("div");
-
-            marker.className =
-                "marker";
-
-            if (index === 0) {
-                marker.classList.add(
-                    "first"
-                );
-            }
-
-            marker.style.left =
-                x + "px";
-
-            const label =
-                document.createElement("div");
-
-            label.className =
-                "marker-label";
-
-            label.textContent =
-                "آية " +
-                (index + 1);
-
-            marker.appendChild(
-                label
-            );
-
-
-            /*
-               سحب العلامة
-            */
-
-            marker.addEventListener(
-                "pointerdown",
-                event => {
-
-                    event.stopPropagation();
-
-                    isDraggingMarker =
-                        true;
-
-                    draggingIndex =
-                        index;
-
-                    marker.setPointerCapture(
-                        event.pointerId
-                    );
-                }
-            );
-
-
-            marker.addEventListener(
-                "pointermove",
-                event => {
-
-                    if (
-                        !isDraggingMarker ||
-                        draggingIndex !== index
-                    ) {
-                        return;
-                    }
-
-                    const rect =
-                        timelineWrapper
-                        .getBoundingClientRect();
-
-                    let time =
-                        xToTime(
-                            event.clientX -
-                            rect.left
-                        );
-
-                    const minimum =
-                        index === 0
-                        ? 0
-                        : marks[index - 1] + 0.01;
-
-                    const maximum =
-                        index === marks.length - 1
-                        ? duration - 0.01
-                        : marks[index + 1] - 0.01;
-
-                    time =
-                        Math.max(
-                            minimum,
-                            Math.min(
-                                maximum,
-                                time
-                            )
-                        );
-
-                    marks[index] =
-                        time;
-
-                    selectedMark =
-                        index;
-
-                    renderMarkers();
-
-                    renderMarksList();
-
-                    updateTimeInfo();
-                }
-            );
-
-
-            marker.addEventListener(
-                "pointerup",
-                () => {
-
-                    isDraggingMarker =
-                        false;
-
-                    draggingIndex =
-                        -1;
-                }
-            );
-
-
-            markersContainer.appendChild(
-                marker
-            );
-        }
+  viewInput.max =
+    String(
+      Math.max(
+        0,
+        duration-visibleDuration()
+      )
     );
+
+  viewInput.value =
+    String(viewStart);
+
+  normalize();
+
+  renderAll();
+
+  updatePlaybackSpeed();
+
+  updateButtons();
+
 }
 
 
-/* =========================================================
-   خط التشغيل
-========================================================= */
+/* =========================================
+   الرسم
+========================================= */
 
-function updatePlayLine() {
+function resizeCanvas(){
 
-    if (!duration) {
-        return;
-    }
+  const rect =
+    timelineWrap.getBoundingClientRect();
+
+  const dpr =
+    Math.min(
+      window.devicePixelRatio || 1,
+      2
+    );
+
+  canvas.width =
+    Math.max(
+      1,
+      Math.floor(rect.width*dpr)
+    );
+
+  canvas.height =
+    Math.max(
+      1,
+      Math.floor(rect.height*dpr)
+    );
+
+  canvas.style.width =
+    rect.width+"px";
+
+  canvas.style.height =
+    rect.height+"px";
+
+  ctx.setTransform(
+    dpr,0,0,dpr,0,0
+  );
+
+  requestDraw();
+
+}
+
+
+function draw(){
+
+  const rect =
+    timelineWrap.getBoundingClientRect();
+
+  const width =
+    rect.width;
+
+  const height =
+    rect.height;
+
+  if(!width || !height)
+    return;
+
+
+  ctx.fillStyle =
+    "#f8fbff";
+
+  ctx.fillRect(
+    0,0,width,height
+  );
+
+
+  ctx.strokeStyle =
+    "#e0e7f0";
+
+  ctx.lineWidth = 1;
+
+
+  for(let i=0;i<=10;i++){
 
     const x =
+      i/10*width;
+
+    ctx.beginPath();
+
+    ctx.moveTo(x,0);
+
+    ctx.lineTo(x,height);
+
+    ctx.stroke();
+
+  }
+
+
+  const bars =
+    Math.min(
+      600,
+      Math.max(
+        80,
+        Math.floor(width*1.2)
+      )
+    );
+
+
+  for(let i=0;i<bars;i++){
+
+    const x =
+      i/bars*width;
+
+    const t =
+      viewStart +
+      i/bars*visibleDuration();
+
+    const v =
+      .15 +
+      Math.abs(
+        Math.sin(t*1.71) *
+        Math.cos(t*.41)
+      )*.55;
+
+    const h =
+      v*height*.62;
+
+    ctx.fillStyle =
+      "#b8c9dd";
+
+    ctx.fillRect(
+      x,
+      height/2-h/2,
+      Math.max(1,width/bars-1),
+      h
+    );
+
+  }
+
+
+  /* نهاية الآيات */
+
+  endMarkers.forEach(
+    marker=>{
+
+      if(
+        marker.time < viewStart ||
+        marker.time > viewEnd()
+      )
+        return;
+
+      const x =
         timeToX(
-            audio.currentTime
+          marker.time,
+          width
         );
 
-    if (
-        x >= 0 &&
-        x <= timelineWrapper.clientWidth
-    ) {
+      ctx.strokeStyle =
+        "#1769e0";
 
-        playLine.style.display =
-            "block";
+      ctx.lineWidth = 3;
 
-        playLine.style.left =
-            x + "px";
+      ctx.beginPath();
+
+      ctx.moveTo(x,0);
+
+      ctx.lineTo(x,height);
+
+      ctx.stroke();
+
+      ctx.fillStyle =
+        "#1769e0";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        x,
+        17,
+        7,
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
 
     }
-    else {
-
-        playLine.style.display =
-            "none";
-    }
-}
+  );
 
 
-/* =========================================================
-   معلومات الوقت
-========================================================= */
+  /* الوقفات الداخلية */
 
-function updateTimeInfo() {
+  pauseMarkers.forEach(
+    marker=>{
 
-    timeInfo.textContent =
-        "الوقت: " +
-        formatTime(
-            audio.currentTime
-        ) +
-        " | المدة: " +
-        formatTime(duration) +
-        " | العلامات: " +
-        marks.length;
-}
-
-
-/* =========================================================
-   إضافة علامة
-========================================================= */
-
-function addMark(time) {
-
-    if (!duration) {
+      if(
+        marker.time < viewStart ||
+        marker.time > viewEnd()
+      )
         return;
-    }
 
-    time =
-        Math.max(
-            0,
-            Math.min(
-                duration - 0.01,
-                time
-            )
+      const x =
+        timeToX(
+          marker.time,
+          width
         );
 
+      ctx.strokeStyle =
+        "#d89400";
 
-    /*
-       منع العلامات المتقاربة جدًا
-    */
+      ctx.lineWidth = 2;
 
-    if (
-        marks.some(
-            old =>
-                Math.abs(
-                    old - time
-                ) < 0.05
-        )
-    ) {
-        return;
-    }
+      ctx.beginPath();
 
+      ctx.moveTo(x,28);
 
-    marks.push(time);
+      ctx.lineTo(x,height);
 
-    marks.sort(
-        (a, b) =>
-            a - b
-    );
+      ctx.stroke();
 
-    selectedMark =
-        marks.indexOf(time);
+      ctx.fillStyle =
+        "#d89400";
 
-    renderMarkers();
+      ctx.beginPath();
 
-    renderMarksList();
+      ctx.arc(
+        x,
+        17,
+        6,
+        0,
+        Math.PI*2
+      );
 
-    updateTimeInfo();
-}
-
-
-/* =========================================================
-   قائمة العلامات
-========================================================= */
-
-function renderMarksList() {
-
-    marksList.innerHTML = "";
-
-    if (!marks.length) {
-
-        marksList.textContent =
-            "لا توجد علامات بعد.";
-
-        return;
-    }
-
-
-    marks.forEach(
-        (time, index) => {
-
-            const row =
-                document.createElement("div");
-
-            row.className =
-                "mark-row";
-
-
-            const number =
-                document.createElement("span");
-
-            number.className =
-                "mark-number";
-
-            number.textContent =
-                "آية " +
-                (index + 1);
-
-
-            const input =
-                document.createElement("input");
-
-            input.className =
-                "mark-time";
-
-            input.value =
-                formatTime(time);
-
-
-            input.addEventListener(
-                "change",
-                () => {
-
-                    let value =
-                        input.value.trim();
-
-                    let seconds;
-
-                    if (
-                        value.includes(":")
-                    ) {
-
-                        const parts =
-                            value.split(":");
-
-                        seconds =
-                            Number(parts[0]) *
-                            60 +
-                            Number(parts[1]);
-
-                    }
-                    else {
-
-                        seconds =
-                            Number(value);
-                    }
-
-
-                    if (
-                        !Number.isFinite(
-                            seconds
-                        )
-                    ) {
-
-                        renderMarksList();
-
-                        return;
-                    }
-
-
-                    const minimum =
-                        index === 0
-                        ? 0
-                        : marks[index - 1] + 0.01;
-
-                    const maximum =
-                        index === marks.length - 1
-                        ? duration - 0.01
-                        : marks[index + 1] - 0.01;
-
-
-                    marks[index] =
-                        Math.max(
-                            minimum,
-                            Math.min(
-                                maximum,
-                                seconds
-                            )
-                        );
-
-
-                    renderMarkers();
-
-                    renderMarksList();
-                }
-            );
-
-
-            const play =
-                document.createElement("button");
-
-            play.textContent =
-                "▶ تشغيل";
-
-            play.onclick =
-                () => {
-
-                    selectedMark =
-                        index;
-
-                    audio.currentTime =
-                        marks[index];
-
-                    audio.play();
-                };
-
-
-            const locate =
-                document.createElement("button");
-
-            locate.textContent =
-                "⌖ إظهار";
-
-            locate.onclick =
-                () => {
-
-                    selectedMark =
-                        index;
-
-                    const visible =
-                        getVisibleDuration();
-
-                    viewStartTime =
-                        marks[index] -
-                        visible / 2;
-
-                    clampView();
-
-                    updateTimeline();
-                };
-
-
-            const remove =
-                document.createElement("button");
-
-            remove.textContent =
-                "حذف";
-
-            remove.className =
-                "red";
-
-
-            remove.onclick =
-                () => {
-
-                    marks.splice(
-                        index,
-                        1
-                    );
-
-                    selectedMark =
-                        Math.max(
-                            0,
-                            Math.min(
-                                selectedMark,
-                                marks.length - 1
-                            )
-                        );
-
-                    renderMarkers();
-
-                    renderMarksList();
-
-                    updateTimeInfo();
-                };
-
-
-            row.appendChild(
-                number
-            );
-
-            row.appendChild(
-                input
-            );
-
-            row.appendChild(
-                play
-            );
-
-            row.appendChild(
-                locate
-            );
-
-            row.appendChild(
-                remove
-            );
-
-            marksList.appendChild(
-                row
-            );
-        }
-    );
-}
-
-
-/* =========================================================
-   رفع التسجيل
-========================================================= */
-
-fileInput.addEventListener(
-    "change",
-    () => {
-
-        const file =
-            fileInput.files[0];
-
-        if (!file) {
-            return;
-        }
-
-
-        /*
-           تنظيف الملف السابق
-        */
-
-        if (sourceURL) {
-            URL.revokeObjectURL(
-                sourceURL
-            );
-        }
-
-
-        sourceURL =
-            URL.createObjectURL(
-                file
-            );
-
-
-        /*
-           مهم جدًا:
-
-           لا arrayBuffer
-           لا decodeAudioData
-           لا AudioBuffer
-        */
-
-        audio.src =
-            sourceURL;
-
-
-        marks = [];
-
-        selectedMark = 0;
-
-        generatedFiles = [];
-
-        downloads.innerHTML = "";
-
-        progress.style.width =
-            "0%";
-
-        downloadAll.disabled =
-            true;
-
-
-        status.textContent =
-            "تم اختيار التسجيل.\n" +
-            "جارٍ معرفة مدته فقط...";
-
-
-        /*
-           تشغيل عناصر التحكم
-        */
-
-        addCurrent.disabled =
-            false;
-
-        clearMarks.disabled =
-            false;
-
-        splitButton.disabled =
-            false;
-
-        playSegment.disabled =
-            true;
-
-        zoomSlider.disabled =
-            false;
-
-        navigation.disabled =
-            false;
-
-        zoomIn.disabled =
-            false;
-
-        zoomOut.disabled =
-            false;
-
-        resetZoom.disabled =
-            false;
+      ctx.fill();
 
     }
-);
+  );
 
 
-/* =========================================================
-   معرفة مدة التسجيل
-========================================================= */
+  /* موضع التشغيل */
 
-audio.addEventListener(
-    "loadedmetadata",
-    () => {
+  const audio =
+    referenceAudio();
 
-        duration =
-            audio.duration;
+  if(audio){
 
-        zoom =
-            1;
+    const time =
+      audio.currentTime;
 
-        viewStartTime =
-            0;
+    if(
+      time >= viewStart &&
+      time <= viewEnd()
+    ){
 
-        updateTimeline();
+      const x =
+        timeToX(time,width);
 
-        renderMarksList();
+      ctx.strokeStyle =
+        "#ef4444";
 
-        updateTimeInfo();
+      ctx.lineWidth = 2;
 
-        status.textContent =
-            "تم تحميل التسجيل بنجاح.\n" +
-            "لم يتم فك التسجيل في الذاكرة.\n" +
-            "يمكنك الآن البدء بتحديد العلامات.";
-    }
-);
+      ctx.beginPath();
 
+      ctx.moveTo(x,0);
 
-/* =========================================================
-   الضغط على الخط الزمني
-========================================================= */
+      ctx.lineTo(x,height);
 
-timelineWrapper.addEventListener(
-    "pointerdown",
-    event => {
+      ctx.stroke();
 
-        if (!duration) {
-            return;
-        }
+      ctx.fillStyle =
+        "#ef4444";
 
-        if (
-            event.target.closest(
-                ".marker"
-            )
-        ) {
-            return;
-        }
+      ctx.beginPath();
 
+      ctx.arc(
+        x,
+        height-10,
+        5,
+        0,
+        Math.PI*2
+      );
 
-        const rect =
-            timelineWrapper
-            .getBoundingClientRect();
-
-
-        const time =
-            xToTime(
-                event.clientX -
-                rect.left
-            );
-
-
-        /*
-           الضغط يذهب أيضًا إلى موضع
-           التسجيل ليسهل المعاينة
-        */
-
-        audio.currentTime =
-            Math.max(
-                0,
-                Math.min(
-                    duration,
-                    time
-                )
-            );
-
-
-        addMark(time);
-    }
-);
-
-
-/* =========================================================
-   زر إضافة العلامة الحالية
-========================================================= */
-
-addCurrent.onclick =
-    () => {
-
-        addMark(
-            audio.currentTime
-        );
-    };
-
-
-/* =========================================================
-   التكبير
-========================================================= */
-
-zoomIn.onclick =
-    () => {
-
-        if (!duration) {
-            return;
-        }
-
-        const center =
-            viewStartTime +
-            getVisibleDuration() / 2;
-
-        zoom =
-            Math.min(
-                100,
-                zoom * 1.5
-            );
-
-        viewStartTime =
-            center -
-            getVisibleDuration() / 2;
-
-        clampView();
-
-        updateTimeline();
-    };
-
-
-zoomOut.onclick =
-    () => {
-
-        if (!duration) {
-            return;
-        }
-
-        const center =
-            viewStartTime +
-            getVisibleDuration() / 2;
-
-        zoom =
-            Math.max(
-                1,
-                zoom / 1.5
-            );
-
-        viewStartTime =
-            center -
-            getVisibleDuration() / 2;
-
-        clampView();
-
-        updateTimeline();
-    };
-
-
-resetZoom.onclick =
-    () => {
-
-        zoom =
-            1;
-
-        viewStartTime =
-            0;
-
-        updateTimeline();
-    };
-
-
-zoomSlider.addEventListener(
-    "input",
-    () => {
-
-        if (!duration) {
-            return;
-        }
-
-        const center =
-            viewStartTime +
-            getVisibleDuration() / 2;
-
-        zoom =
-            Number(
-                zoomSlider.value
-            );
-
-        viewStartTime =
-            center -
-            getVisibleDuration() / 2;
-
-        clampView();
-
-        updateTimeline();
-    }
-);
-
-
-/* =========================================================
-   التنقل
-========================================================= */
-
-navigation.addEventListener(
-    "input",
-    () => {
-
-        viewStartTime =
-            Number(
-                navigation.value
-            );
-
-        updateTimeline();
-    }
-);
-
-
-/* =========================================================
-   عجلة الماوس
-========================================================= */
-
-timelineWrapper.addEventListener(
-    "wheel",
-    event => {
-
-        if (!duration) {
-            return;
-        }
-
-        event.preventDefault();
-
-        const rect =
-            timelineWrapper
-            .getBoundingClientRect();
-
-        const x =
-            event.clientX -
-            rect.left;
-
-        const timeBefore =
-            xToTime(x);
-
-        if (
-            event.deltaY < 0
-        ) {
-
-            zoom =
-                Math.min(
-                    100,
-                    zoom * 1.25
-                );
-
-        }
-        else {
-
-            zoom =
-                Math.max(
-                    1,
-                    zoom / 1.25
-                );
-        }
-
-
-        const visible =
-            getVisibleDuration();
-
-
-        viewStartTime =
-            timeBefore -
-            (
-                x /
-                rect.width
-            ) * visible;
-
-
-        clampView();
-
-        updateTimeline();
-
-    },
-    {
-        passive: false
-    }
-);
-
-
-/* =========================================================
-   حذف العلامات
-========================================================= */
-
-clearMarks.onclick =
-    () => {
-
-        marks = [];
-
-        selectedMark =
-            0;
-
-        renderMarkers();
-
-        renderMarksList();
-
-        updateTimeInfo();
-    };
-
-
-/* =========================================================
-   تشغيل آية واحدة
-========================================================= */
-
-playSegment.onclick =
-    () => {
-
-        if (
-            !marks.length ||
-            !duration
-        ) {
-            return;
-        }
-
-
-        const start =
-            marks[selectedMark];
-
-        const end =
-            selectedMark + 1 <
-            marks.length
-            ? marks[selectedMark + 1]
-            : duration;
-
-
-        audio.currentTime =
-            start;
-
-        audio.play();
-
-
-        const stop =
-            () => {
-
-                if (
-                    audio.currentTime >=
-                    end
-                ) {
-
-                    audio.pause();
-
-                    audio.removeEventListener(
-                        "timeupdate",
-                        stop
-                    );
-                }
-            };
-
-
-        audio.addEventListener(
-            "timeupdate",
-            stop
-        );
-    };
-
-
-/* =========================================================
-   تحديث أثناء التشغيل
-========================================================= */
-
-audio.addEventListener(
-    "timeupdate",
-    () => {
-
-        updateTimeInfo();
-
-        updatePlayLine();
-    }
-);
-
-
-/* =========================================================
-   عند تحريك التسجيل خارج الشاشة
-========================================================= */
-
-audio.addEventListener(
-    "seeking",
-    () => {
-
-        updatePlayLine();
-    }
-);
-
-
-/* =========================================================
-   حفظ العلامات تلقائيًا
-========================================================= */
-
-setInterval(
-    () => {
-
-        if (!duration) {
-            return;
-        }
-
-        try {
-
-            localStorage.setItem(
-                "israa_marks",
-                JSON.stringify({
-                    marks,
-                    duration
-                })
-            );
-
-        }
-        catch (e) {
-            /*
-               لا نفعل شيئًا.
-               بعض المتصفحات قد تمنع التخزين.
-            */
-        }
-
-    },
-    2000
-);
-
-
-/* =========================================================
-   استعادة العلامات
-========================================================= */
-
-function tryRestoreMarks() {
-
-    try {
-
-        const saved =
-            localStorage.getItem(
-                "israa_marks"
-            );
-
-        if (!saved) {
-            return;
-        }
-
-        const data =
-            JSON.parse(saved);
-
-        if (
-            !data ||
-            !Array.isArray(
-                data.marks
-            )
-        ) {
-            return;
-        }
-
-        /*
-           لا نستعيدها تلقائيًا إذا اختلفت
-           مدة التسجيل بشكل واضح.
-        */
-
-        if (
-            Math.abs(
-                data.duration -
-                duration
-            ) > 2
-        ) {
-            return;
-        }
-
-        marks =
-            data.marks
-            .filter(
-                t =>
-                    Number.isFinite(t) &&
-                    t >= 0 &&
-                    t < duration
-            )
-            .sort(
-                (a, b) =>
-                    a - b
-            );
-
-        renderMarkers();
-
-        renderMarksList();
-
-        updateTimeInfo();
-
-        if (marks.length) {
-
-            status.textContent =
-                "تم استعادة " +
-                marks.length +
-                " علامة محفوظة سابقًا.";
-        }
+      ctx.fill();
 
     }
-    catch (e) {}
+
+  }
 
 }
 
 
-audio.addEventListener(
-    "loadedmetadata",
-    tryRestoreMarks
-);
+function requestDraw(){
 
+  cancelAnimationFrame(animationFrame);
 
-/* =========================================================
-   =========================================================
-   معالجة MP3
-   =========================================================
-   
-   هنا فقط يبدأ العمل الثقيل.
+  animationFrame =
+    requestAnimationFrame(draw);
 
-   بدل أن نفك سورة الإسراء كاملة عند الرفع،
-   ننتظر حتى يضغط المستخدم على "موافق".
-
-   =========================================================
-*/
-
-
-async function createMp3Files() {
-
-    if (!marks.length) {
-
-        alert(
-            "أضف علامات بداية الآيات أولًا."
-        );
-
-        return;
-    }
-
-
-    if (
-        typeof lamejs ===
-        "undefined"
-    ) {
-
-        alert(
-            "لم يتم تحميل محول MP3.\n" +
-            "تأكد من اتصال الإنترنت."
-        );
-
-        return;
-    }
-
-
-    /*
-       مهم:
-
-       في هذه المرحلة فقط نقوم بفك
-       التسجيل الصوتي.
-
-       هذا يمنع التهنيج عند مجرد الرفع.
-    */
-
-    status.textContent =
-        "جارٍ تجهيز الصوت للتقسيم...\n" +
-        "قد يحتاج الهاتف إلى بعض الوقت هنا.";
-
-
-    splitButton.disabled =
-        true;
-
-    downloadAll.disabled =
-        true;
-
-
-    /*
-       نحصل على الملف الأصلي
-    */
-
-    const file =
-        fileInput.files[0];
-
-
-    if (!file) {
-        return;
-    }
-
-
-    /*
-       قراءة الملف مرة واحدة فقط
-    */
-
-    let arrayBuffer;
-
-    try {
-
-        arrayBuffer =
-            await file.arrayBuffer();
-
-    }
-    catch (error) {
-
-        status.textContent =
-            "تعذر قراءة التسجيل.";
-
-        splitButton.disabled =
-            false;
-
-        return;
-    }
-
-
-    /*
-       إنشاء AudioContext
-    */
-
-    const AudioContext =
-        window.AudioContext ||
-        window.webkitAudioContext;
-
-    if (!AudioContext) {
-
-        alert(
-            "هذا المتصفح لا يدعم معالجة الصوت المطلوبة."
-        );
-
-        splitButton.disabled =
-            false;
-
-        return;
-    }
-
-
-    const context =
-        new AudioContext();
-
-
-    let buffer;
-
-    try {
-
-        status.textContent =
-            "جارٍ فك التسجيل...\n" +
-            "هذه هي المرحلة الثقيلة، وستحدث الآن فقط.";
-
-        buffer =
-            await context.decodeAudioData(
-                arrayBuffer
-            );
-
-    }
-    catch (error) {
-
-        console.error(error);
-
-        status.textContent =
-            "تعذر فك التسجيل الصوتي.";
-
-        splitButton.disabled =
-            false;
-
-        await context.close();
-
-        return;
-    }
-
-
-    /*
-       لم نعد نحتاج arrayBuffer
-    */
-
-    arrayBuffer =
-        null;
-
-
-    /*
-       ترتيب العلامات
-    */
-
-    const boundaries =
-        [...marks]
-        .sort(
-            (a, b) =>
-                a - b
-        );
-
-
-    generatedFiles =
-        [];
-
-    downloads.innerHTML =
-        "";
-
-    progress.style.width =
-        "0%";
-
-
-    /*
-       معالجة آية واحدة في كل مرة.
-
-       لا نحتفظ بالـ WAV/PCM
-       لكل الآيات في الذاكرة.
-    */
-
-    for (
-        let i = 0;
-        i < boundaries.length;
-        i++
-    ) {
-
-        const start =
-            boundaries[i];
-
-        const end =
-            i + 1 <
-            boundaries.length
-            ? boundaries[i + 1]
-            : buffer.duration;
-
-
-        if (
-            end <= start
-        ) {
-            continue;
-        }
-
-
-        status.textContent =
-            "جارٍ إنشاء:\n" +
-            "israa" +
-            (i + 1) +
-            ".mp3\n\n" +
-            "الملف " +
-            (i + 1) +
-            " من " +
-            boundaries.length;
-
-
-        /*
-           استخراج الجزء الحالي فقط
-        */
-
-        const blob =
-            await encodeSegmentMp3(
-                buffer,
-                start,
-                end
-            );
-
-
-        const name =
-            "israa" +
-            (i + 1) +
-            ".mp3";
-
-
-        generatedFiles.push({
-            name,
-            blob
-        });
-
-
-        /*
-           رابط تحميل مباشر
-        */
-
-        const url =
-            URL.createObjectURL(
-                blob
-            );
-
-
-        const link =
-            document.createElement(
-                "a"
-            );
-
-        link.href =
-            url;
-
-        link.download =
-            name;
-
-        link.textContent =
-            "⬇️ " +
-            name;
-
-
-        downloads.appendChild(
-            link
-        );
-
-
-        progress.style.width =
-            (
-                (i + 1) /
-                boundaries.length *
-                100
-            ) + "%";
-
-
-        /*
-           إعطاء الهاتف فرصة
-           لتحديث الشاشة
-        */
-
-        await new Promise(
-            resolve =>
-                setTimeout(
-                    resolve,
-                    10
-                )
-        );
-    }
-
-
-    /*
-       إغلاق AudioContext
-    */
-
-    await context.close();
-
-
-    /*
-       تحرير المرجع الكبير
-    */
-
-    buffer =
-        null;
-
-
-    splitButton.disabled =
-        false;
-
-    downloadAll.disabled =
-        false;
-
-
-    status.textContent =
-        "تم الانتهاء بنجاح! 🎉\n\n" +
-        "عدد الملفات: " +
-        generatedFiles.length +
-        "\n" +
-        "الأسماء: israa1.mp3 → israa" +
-        generatedFiles.length +
-        ".mp3\n" +
-        "الجودة: 192 kbps";
 }
 
-
-/* =========================================================
-   تحويل الجزء إلى MP3
-========================================================= */
-
-async function encodeSegmentMp3(
-    buffer,
-    start,
-    end
-) {
-
-    const sampleRate =
-        buffer.sampleRate;
-
-    const channels =
-        Math.min(
-            2,
-            buffer.numberOfChannels
-        );
-
-
-    const startSample =
-        Math.floor(
-            start *
-            sampleRate
-        );
-
-    const endSample =
-        Math.min(
-            buffer.length,
-            Math.ceil(
-                end *
-                sampleRate
-            )
-        );
-
-
-    const encoder =
-        new lamejs.Mp3Encoder(
-            channels,
-            sampleRate,
-            192
-        );
-
-
-    const left =
-        buffer.getChannelData(0);
-
-    const right =
-        channels > 1
-        ? buffer.getChannelData(1)
-        : left;
-
-
-    const block =
-        1152;
-
-
-    const mp3Data =
-        [];
-
-
-    /*
-       لا ننشئ Int16Array بحجم الآية كلها.
-
-       نعالجها في كتل صغيرة.
-    */
-
-    for (
-        let position =
-            startSample;
-
-        position <
-            endSample;
-
-        position += block
-    ) {
-
-        const currentEnd =
-            Math.min(
-                position + block,
-                endSample
-            );
-
-
-        const length =
-            currentEnd -
-            position;
-
-
-        const leftChunk =
-            new Int16Array(
-                length
-            );
-
-
-        let rightChunk =
-            null;
-
-
-        if (channels > 1) {
-
-            rightChunk =
-                new Int16Array(
-                    length
-                );
-        }
-
-
-        for (
-            let i = 0;
-            i < length;
-            i++
-        ) {
-
-            const l =
-                left[
-                    position + i
-                ] || 0;
-
-
-            leftChunk[i] =
-                Math.max(
-                    -32768,
-                    Math.min(
-                        32767,
-                        Math.round(
-                            l * 32767
-                        )
-                    )
-                );
-
-
-            if (channels > 1) {
-
-                const r =
-                    right[
-                        position + i
-                    ] || 0;
-
-
-                rightChunk[i] =
-                    Math.max(
-                        -32768,
-                        Math.min(
-                            32767,
-                            Math.round(
-                                r * 32767
-                            )
-                        )
-                    );
-            }
-        }
-
-
-        let encoded;
-
-
-        if (channels === 1) {
-
-            encoded =
-                encoder.encodeBuffer(
-                    leftChunk
-                );
-
-        }
-        else {
-
-            encoded =
-                encoder.encodeBuffer(
-                    leftChunk,
-                    rightChunk
-                );
-        }
-
-
-        if (
-            encoded.length
-        ) {
-
-            mp3Data.push(
-                new Int8Array(
-                    encoded
-                )
-            );
-        }
-
-
-        /*
-           مهم للهاتف:
-           إعطاء المتصفح فرصة
-           لمعالجة الأحداث.
-        */
-
-        await new Promise(
-            resolve =>
-                setTimeout(
-                    resolve,
-                    0
-                )
-        );
-    }
-
-
-    const endBuffer =
-        encoder.flush();
-
-
-    if (
-        endBuffer.length
-    ) {
-
-        mp3Data.push(
-            new Int8Array(
-                endBuffer
-            )
-        );
-    }
-
-
-    return new Blob(
-        mp3Data,
-        {
-            type:
-                "audio/mpeg"
-        }
-    );
-}
-
-
-/* =========================================================
-   زر التقسيم
-========================================================= */
-
-splitButton.onclick =
-    async () => {
-
-        try {
-
-            await createMp3Files();
-
-        }
-        catch (error) {
-
-            console.error(
-                error
-            );
-
-            status.textContent =
-                "حدث خطأ أثناء التقسيم.\n" +
-                error.message;
-
-            splitButton.disabled =
-                false;
-        }
-    };
-
-
-/* =========================================================
-   تحميل الكل
-========================================================= */
-
-downloadAll.onclick =
-    async () => {
-
-        if (
-            !generatedFiles.length
-        ) {
-            return;
-        }
-
-
-        /*
-           بدل JSZip الكبير،
-           نحاول استخدام File System Access
-           إن كان المتصفح يدعمه.
-
-           وإن لم يكن متاحًا:
-           ننشئ روابط الملفات الفردية.
-        */
-
-        status.textContent =
-            "الملفات جاهزة.\n" +
-            "يمكنك تنزيل كل ملف من القائمة.";
-    };
-
-
-/* =========================================================
-   تغيير حجم النافذة
-========================================================= */
 
 window.addEventListener(
-    "resize",
-    () => {
-
-        if (duration) {
-            updateTimeline();
-        }
-    }
+  "resize",
+  resizeCanvas
 );
+
+
+/* =========================================
+   التكبير
+========================================= */
+
+zoomInput.addEventListener(
+  "input",
+  ()=>{
+
+    const old =
+      visibleDuration();
+
+    zoom =
+      Number(zoomInput.value);
+
+    zoomText.textContent =
+      zoom+"×";
+
+    const audio =
+      referenceAudio();
+
+    const center =
+      audio ?
+        audio.currentTime :
+        viewStart+old/2;
+
+    const newDuration =
+      visibleDuration();
+
+    viewStart =
+      clamp(
+        center-newDuration/2,
+        0,
+        Math.max(
+          0,
+          duration-newDuration
+        )
+      );
+
+    viewInput.max =
+      String(
+        Math.max(
+          0,
+          duration-newDuration
+        )
+      );
+
+    viewInput.value =
+      String(viewStart);
+
+    requestDraw();
+
+  }
+);
+
+
+viewInput.addEventListener(
+  "input",
+  ()=>{
+
+    viewStart =
+      Number(viewInput.value)||0;
+
+    requestDraw();
+
+  }
+);
+
+
+/* =========================================
+   عجلة التكبير
+========================================= */
+
+timelineWrap.addEventListener(
+  "wheel",
+  event=>{
+
+    if(!duration)
+      return;
+
+    event.preventDefault();
+
+    const rect =
+      timelineWrap.getBoundingClientRect();
+
+    const x =
+      event.clientX -
+      rect.left;
+
+    const pointerTime =
+      xToTime(
+        x,
+        rect.width
+      );
+
+    const next =
+      clamp(
+        zoom +
+        (event.deltaY < 0 ? 5 : -5),
+        1,
+        100
+      );
+
+    zoom =
+      next;
+
+    zoomInput.value =
+      String(zoom);
+
+    zoomText.textContent =
+      zoom+"×";
+
+    const newDuration =
+      visibleDuration();
+
+    viewStart =
+      clamp(
+        pointerTime -
+        x/rect.width*newDuration,
+        0,
+        Math.max(
+          0,
+          duration-newDuration
+        )
+      );
+
+    viewInput.max =
+      String(
+        Math.max(
+          0,
+          duration-newDuration
+        )
+      );
+
+    viewInput.value =
+      String(viewStart);
+
+    requestDraw();
+
+  },
+  {passive:false}
+);
+
+
+/* =========================================
+   سحب العلامات
+========================================= */
+
+timelineWrap.addEventListener(
+  "pointerdown",
+  event=>{
+
+    if(!duration)
+      return;
+
+    const rect =
+      timelineWrap.getBoundingClientRect();
+
+    const x =
+      event.clientX -
+      rect.left;
+
+    const time =
+      xToTime(
+        x,
+        rect.width
+      );
+
+    const threshold =
+      Math.max(
+        .08,
+        visibleDuration() /
+        rect.width * 12
+      );
+
+
+    let closest = null;
+
+    let distance =
+      Infinity;
+
+
+    for(const marker of
+        endMarkers){
+
+      const d =
+        Math.abs(
+          marker.time-time
+        );
+
+      if(
+        d < threshold &&
+        d < distance
+      ){
+
+        closest = {
+          type:"end",
+          id:marker.id
+        };
+
+        distance=d;
+
+      }
+
+    }
+
+
+    for(const marker of
+        pauseMarkers){
+
+      const d =
+        Math.abs(
+          marker.time-time
+        );
+
+      if(
+        d < threshold &&
+        d < distance
+      ){
+
+        closest = {
+          type:"pause",
+          id:marker.id
+        };
+
+        distance=d;
+
+      }
+
+    }
+
+
+    if(closest){
+
+      dragging =
+        closest;
+
+      timelineWrap.setPointerCapture(
+        event.pointerId
+      );
+
+      return;
+
+    }
+
+
+    const audio =
+      referenceAudio();
+
+    if(audio){
+
+      audio.currentTime =
+        clamp(
+          time,
+          0,
+          duration
+        );
+
+      requestDraw();
+
+    }
+
+  }
+);
+
+
+timelineWrap.addEventListener(
+  "pointermove",
+  event=>{
+
+    if(!dragging)
+      return;
+
+    const rect =
+      timelineWrap.getBoundingClientRect();
+
+    const x =
+      event.clientX -
+      rect.left;
+
+    const time =
+      clamp(
+        xToTime(
+          x,
+          rect.width
+        ),
+        0,
+        duration
+      );
+
+
+    if(dragging.type === "end"){
+
+      const marker =
+        endMarkers.find(
+          x=>x.id===dragging.id
+        );
+
+      if(marker)
+        marker.time=time;
+
+    }else{
+
+      const marker =
+        pauseMarkers.find(
+          x=>x.id===dragging.id
+        );
+
+      if(marker)
+        marker.time=time;
+
+    }
+
+
+    normalize();
+
+    renderAll();
+
+  }
+);
+
+
+timelineWrap.addEventListener(
+  "pointerup",
+  ()=>{
+    dragging=null;
+  }
+);
+
+
+timelineWrap.addEventListener(
+  "pointercancel",
+  ()=>{
+    dragging=null;
+  }
+);
+
+
+/* =========================================
+   نهاية الآية
+========================================= */
+
+endBtn.addEventListener(
+  "click",
+  ()=>{
+
+    const audio =
+      referenceAudio();
+
+    if(!audio)
+      return;
+
+    const time =
+      audio.currentTime;
+
+    const duplicate =
+      endMarkers.some(
+        x=>Math.abs(
+          x.time-time
+        )<.08
+      );
+
+    if(duplicate)
+      return;
+
+
+    endMarkers.push({
+
+      id:id(),
+
+      time
+
+    });
+
+
+    normalize();
+
+    renderAll();
+
+    audioStatus.textContent =
+      "تمت إضافة نهاية الآية رقم " +
+      endMarkers.length +
+      " عند " +
+      timeString(time);
+
+  }
+);
+
+
+/* =========================================
+   الوقفات الداخلية
+========================================= */
+
+pauseBtn.addEventListener(
+  "click",
+  ()=>{
+
+    const audio =
+      referenceAudio();
+
+    if(!audio)
+      return;
+
+    const time =
+      audio.currentTime;
+
+    const ayah =
+      currentAyah(time);
+
+    const start =
+      ayahStart(ayah);
+
+    const end =
+      ayahEnd(ayah);
+
+
+    if(time <= start+.05){
+
+      audioStatus.textContent =
+        "هذه النقطة عند بداية الآية تقريبًا.";
+
+      return;
+
+    }
+
+
+    if(time >= end-.05){
+
+      audioStatus.textContent =
+        "هذه النقطة قريبة من نهاية الآية. استخدم زر نهاية آية.";
+
+      return;
+
+    }
+
+
+    const duplicate =
+      pauseMarkers.some(
+        x=>Math.abs(
+          x.time-time
+        )<.08
+      );
+
+    if(duplicate)
+      return;
+
+
+    pauseMarkers.push({
+
+      id:id(),
+
+      time
+
+    });
+
+
+    normalize();
+
+    renderAll();
+
+
+    audioStatus.textContent =
+      "تم تسجيل الوقفة في الآية " +
+      ayah +
+      " عند " +
+      (time-start).toFixed(2) +
+      " ثانية من بدايتها.";
+
+  }
+);
+
+
+/* =========================================
+   حساب الآية
+========================================= */
+
+function sortedEnds(){
+
+  return endMarkers
+    .slice()
+    .sort(
+      (a,b)=>a.time-b.time
+    );
+
+}
+
+
+function currentAyah(time){
+
+  let n=1;
+
+  for(const marker of
+      sortedEnds()){
+
+    if(marker.time <
+       time-.005){
+
+      n++;
+
+    }else{
+
+      break;
+
+    }
+
+  }
+
+  return n;
+
+}
+
+
+function ayahStart(n){
+
+  if(n<=1)
+    return 0;
+
+  const ends =
+    sortedEnds();
+
+  return ends[n-2] ?
+    ends[n-2].time :
+    0;
+
+}
+
+
+function ayahEnd(n){
+
+  const ends =
+    sortedEnds();
+
+  return ends[n-1] ?
+    ends[n-1].time :
+    duration;
+
+}
+
+
+/* =========================================
+   التطبيع
+========================================= */
+
+function normalize(){
+
+  endMarkers =
+    endMarkers
+      .filter(
+        x=>x.time>=0 &&
+           x.time<=duration
+      )
+      .sort(
+        (a,b)=>a.time-b.time
+      );
+
+
+  pauseMarkers =
+    pauseMarkers
+      .filter(
+        x=>x.time>=0 &&
+           x.time<=duration
+      )
+      .sort(
+        (a,b)=>a.time-b.time
+      );
+
+
+  viewStart =
+    clamp(
+      viewStart,
+      0,
+      Math.max(
+        0,
+        duration-visibleDuration()
+      )
+    );
+
+}
+
+
+/* =========================================
+   قائمة العلامات
+========================================= */
+
+function renderMarkers(){
+
+  if(!endMarkers.length &&
+     !pauseMarkers.length){
+
+    markersEl.innerHTML =
+      `<div class="status">
+       لم تتم إضافة علامات بعد.
+       </div>`;
+
+    return;
+
+  }
+
+
+  markersEl.innerHTML="";
+
+
+  const all = [
+
+    ...endMarkers.map(
+      x=>({...x,type:"end"})
+    ),
+
+    ...pauseMarkers.map(
+      x=>({...x,type:"pause"})
+    )
+
+  ].sort(
+    (a,b)=>a.time-b.time
+  );
+
+
+  all.forEach(marker=>{
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "marker";
+
+
+    const badge =
+      document.createElement("div");
+
+    badge.className =
+      "badge " +
+      (
+        marker.type==="end" ?
+        "badge-end" :
+        "badge-pause"
+      );
+
+    badge.textContent =
+      marker.type==="end" ?
+      "آ" :
+      "و";
+
+
+    const desc =
+      document.createElement("div");
+
+    desc.className =
+      "marker-desc";
+
+
+    const title =
+      document.createElement("b");
+
+
+    const small =
+      document.createElement("small");
+
+
+    if(marker.type==="end"){
+
+      const n =
+        sortedEnds()
+          .findIndex(
+            x=>x.id===marker.id
+          )+1;
+
+      title.textContent =
+        "نهاية الآية "+n;
+
+      small.textContent =
+        "من بداية التسجيل";
+
+    }else{
+
+      const n =
+        currentAyah(marker.time);
+
+      const relative =
+        marker.time -
+        ayahStart(n);
+
+      title.textContent =
+        "وقفة داخل الآية "+n;
+
+      small.textContent =
+        "من بداية الآية: " +
+        relative.toFixed(2) +
+        " ثانية";
+
+    }
+
+
+    desc.appendChild(title);
+
+    desc.appendChild(
+      document.createElement("br")
+    );
+
+    desc.appendChild(small);
+
+
+    const input =
+      document.createElement("input");
+
+    input.className =
+      "time-input";
+
+    input.type="number";
+
+    input.step="0.01";
+
+    input.min="0";
+
+    input.max=
+      String(duration);
+
+    input.value=
+      marker.time.toFixed(2);
+
+
+    input.addEventListener(
+      "change",
+      ()=>{
+
+        let value =
+          Number(input.value);
+
+        if(!Number.isFinite(value))
+          value=marker.time;
+
+        marker.time =
+          clamp(
+            value,
+            0,
+            duration
+          );
+
+        normalize();
+
+        renderAll();
+
+      }
+    );
+
+
+    const del =
+      document.createElement("button");
+
+    del.className="red";
+
+    del.textContent="حذف";
+
+    del.style.padding=
+      "8px 10px";
+
+
+    del.addEventListener(
+      "click",
+      ()=>{
+
+        if(marker.type==="end"){
+
+          endMarkers =
+            endMarkers.filter(
+              x=>x.id!==marker.id
+            );
+
+        }else{
+
+          pauseMarkers =
+            pauseMarkers.filter(
+              x=>x.id!==marker.id
+            );
+
+        }
+
+        normalize();
+
+        renderAll();
+
+      }
+    );
+
+
+    row.appendChild(badge);
+
+    row.appendChild(desc);
+
+    row.appendChild(input);
+
+    row.appendChild(del);
+
+    markersEl.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================
+   مصفوفة الوقفات
+========================================= */
+
+function getPauseArray(){
+
+  const result=[];
+
+  const ends =
+    sortedEnds();
+
+
+  for(let i=0;i<ends.length;i++){
+
+    const ayah=i+1;
+
+    const start =
+      i===0 ?
+      0 :
+      ends[i-1].time;
+
+    const end =
+      ends[i].time;
+
+
+    const pauses =
+      pauseMarkers
+        .filter(
+          p=>
+            p.time>start+.005 &&
+            p.time<end-.005
+        )
+        .sort(
+          (a,b)=>a.time-b.time
+        )
+        .map(
+          p=>
+            Number(
+              (p.time-start)
+              .toFixed(2)
+            )
+        );
+
+
+    result.push({
+      ayah:ayah,
+      pauses:pauses
+    });
+
+  }
+
+
+  return result;
+
+}
+
+
+function renderPauseArray(){
+
+  const array =
+    getPauseArray();
+
+  pauseArrayEl.textContent =
+    "const ayahPauses = " +
+    JSON.stringify(
+      array,
+      null,
+      2
+    ) +
+    ";";
+
+}
+
+
+/* =========================================
+   نسخ
+========================================= */
+
+copyBtn.addEventListener(
+  "click",
+  async ()=>{
+
+    const text =
+      pauseArrayEl.textContent;
+
+    try{
+
+      await navigator.clipboard.writeText(
+        text
+      );
+
+    }catch{
+
+      const area =
+        document.createElement("textarea");
+
+      area.value=text;
+
+      document.body.appendChild(area);
+
+      area.select();
+
+      document.execCommand("copy");
+
+      area.remove();
+
+    }
+
+    audioStatus.textContent =
+      "تم نسخ مصفوفة الوقفات.";
+
+  }
+);
+
+
+/* =========================================
+   تصدير
+========================================= */
+
+exportBtn.addEventListener(
+  "click",
+  ()=>{
+
+    const data={
+
+      duration,
+
+      endMarkers,
+
+      pauseMarkers
+
+    };
+
+
+    const blob =
+      new Blob(
+        [
+          JSON.stringify(
+            data,
+            null,
+            2
+          )
+        ],
+        {
+          type:
+            "application/json"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(blob);
+
+    const a =
+      document.createElement("a");
+
+    a.href=url;
+
+    a.download=
+      "quran-markers.json";
+
+    a.click();
+
+    setTimeout(
+      ()=>URL.revokeObjectURL(url),
+      1000
+    );
+
+  }
+);
+
+
+/* =========================================
+   تشغيل الآية الحالية
+========================================= */
+
+playAyahBtn.addEventListener(
+  "click",
+  ()=>{
+
+    const audio =
+      referenceAudio();
+
+    if(!audio)
+      return;
+
+
+    const n =
+      currentAyah(
+        audio.currentTime
+      );
+
+    const start =
+      ayahStart(n);
+
+    const end =
+      ayahEnd(n);
+
+
+    audio.currentTime =
+      start;
+
+    audio.playbackRate =
+      playbackSpeed;
+
+    audio.play();
+
+
+    const stop=()=>{
+
+      if(
+        audio.currentTime >=
+        end-.03
+      ){
+
+        audio.pause();
+
+        audio.removeEventListener(
+          "timeupdate",
+          stop
+        );
+
+      }
+
+    };
+
+
+    audio.addEventListener(
+      "timeupdate",
+      stop
+    );
+
+  }
+);
+
+
+/* =========================================
+   تراجع
+========================================= */
+
+undoBtn.addEventListener(
+  "click",
+  ()=>{
+
+    const all=[
+
+      ...endMarkers.map(
+        x=>({...x,type:"end"})
+      ),
+
+      ...pauseMarkers.map(
+        x=>({...x,type:"pause"})
+      )
+
+    ].sort(
+      (a,b)=>a.time-b.time
+    );
+
+
+    if(!all.length)
+      return;
+
+
+    const last =
+      all[all.length-1];
+
+
+    if(last.type==="end"){
+
+      endMarkers =
+        endMarkers.filter(
+          x=>x.id!==last.id
+        );
+
+    }else{
+
+      pauseMarkers =
+        pauseMarkers.filter(
+          x=>x.id!==last.id
+        );
+
+    }
+
+
+    renderAll();
+
+  }
+);
+
+
+/* =========================================
+   حذف الكل
+========================================= */
+
+clearBtn.addEventListener(
+  "click",
+  ()=>{
+
+    if(!confirm(
+      "حذف جميع العلامات؟"
+    ))
+      return;
+
+
+    endMarkers=[];
+
+    pauseMarkers=[];
+
+    renderAll();
+
+  }
+);
+
+
+/* =========================================
+   تحديث الأزرار
+========================================= */
+
+function updateButtons(){
+
+  const ready =
+    Boolean(
+      recordings.length &&
+      duration>0
+    );
+
+
+  endBtn.disabled=!ready;
+
+  pauseBtn.disabled=!ready;
+
+  playAyahBtn.disabled=!ready;
+
+  clearBtn.disabled =
+    !ready ||
+    (!endMarkers.length &&
+     !pauseMarkers.length);
+
+  undoBtn.disabled =
+    !ready ||
+    (!endMarkers.length &&
+     !pauseMarkers.length);
+
+  copyBtn.disabled =
+    !ready ||
+    !endMarkers.length;
+
+  exportBtn.disabled =
+    !ready ||
+    (!endMarkers.length &&
+     !pauseMarkers.length);
+
+  splitBtn.disabled =
+    !ready ||
+    !endMarkers.length ||
+    !recordings.length;
+
+}
+
+
+/* =========================================
+   الرسم الكامل
+========================================= */
+
+function renderAll(){
+
+  renderMarkers();
+
+  renderPauseArray();
+
+  updateButtons();
+
+  requestDraw();
+
+}
+
+
+/* =========================================
+   ترميز MP3
+========================================= */
+
+function encodeSegment(
+  buffer,
+  startSeconds,
+  endSeconds
+){
+
+  const sampleRate =
+    buffer.sampleRate;
+
+  const channels =
+    Math.min(
+      buffer.numberOfChannels,
+      2
+    );
+
+
+  const startSample =
+    Math.max(
+      0,
+      Math.floor(
+        startSeconds*sampleRate
+      )
+    );
+
+
+  const endSample =
+    Math.min(
+      buffer.length,
+      Math.ceil(
+        endSeconds*sampleRate
+      )
+    );
+
+
+  const count =
+    endSample-startSample;
+
+
+  const encoder =
+    new lamejs.Mp3Encoder(
+      channels,
+      sampleRate,
+      192
+    );
+
+
+  const mp3=[];
+
+  const block=1152;
+
+
+  const left =
+    buffer.getChannelData(0);
+
+  const right =
+    channels>1 ?
+    buffer.getChannelData(1) :
+    left;
+
+
+  for(
+    let offset=0;
+    offset<count;
+    offset+=block
+  ){
+
+    const len =
+      Math.min(
+        block,
+        count-offset
+      );
+
+
+    const l =
+      new Int16Array(len);
+
+    const r =
+      new Int16Array(len);
+
+
+    for(let i=0;i<len;i++){
+
+      const index =
+        startSample+
+        offset+
+        i;
+
+
+      l[i] =
+        clamp(
+          Math.round(
+            left[index]*32767
+          ),
+          -32768,
+          32767
+        );
+
+
+      r[i] =
+        clamp(
+          Math.round(
+            right[index]*32767
+          ),
+          -32768,
+          32767
+        );
+
+    }
+
+
+    const encoded =
+      channels===1 ?
+      encoder.encodeBuffer(l) :
+      encoder.encodeBuffer(l,r);
+
+
+    if(encoded.length)
+      mp3.push(encoded);
+
+  }
+
+
+  const final =
+    encoder.flush();
+
+
+  if(final.length)
+    mp3.push(final);
+
+
+  return new Blob(
+    mp3,
+    {
+      type:"audio/mpeg"
+    }
+  );
+
+}
+
+
+/* =========================================
+   إنشاء الملفات
+========================================= */
+
+splitBtn.addEventListener(
+  "click",
+  async ()=>{
+
+    if(!recordings.length)
+      return;
+
+
+    if(!endMarkers.length){
+
+      alert(
+        "أضف علامات نهاية الآيات أولًا."
+      );
+
+      return;
+
+    }
+
+
+    if(!window.lamejs){
+
+      alert(
+        "تعذر تحميل محول MP3."
+      );
+
+      return;
+
+    }
+
+
+    const missing =
+      recordings.filter(
+        r=>!r.directory
+      );
+
+
+    if(missing.length){
+
+      alert(
+        "يجب اختيار مجلد حفظ لكل تسجيل أولًا."
+      );
+
+      return;
+
+    }
+
+
+    if(!confirm(
+      "سيتم إنشاء الملفات لجميع التسجيلات باستخدام نفس العلامات. هل نبدأ؟"
+    ))
+      return;
+
+
+    splitBtn.disabled=true;
+
+    progressBox.classList.add("show");
+
+    outputEl.innerHTML="";
+
+    progressBar.value=0;
+
+
+    try{
+
+      for(
+        let recordingIndex=0;
+        recordingIndex<recordings.length;
+        recordingIndex++
+      ){
+
+        const recording =
+          recordings[recordingIndex];
+
+
+        progressText.textContent =
+          "جاري تجهيز: " +
+          recording.name;
+
+
+        /*
+          قراءة التسجيل الحالي فقط
+        */
+
+        const arrayBuffer =
+          await recording.file.arrayBuffer();
+
+
+        const audioContext =
+          new AudioContext();
+
+
+        let buffer;
+
+
+        try{
+
+          buffer =
+            await audioContext
+              .decodeAudioData(
+                arrayBuffer
+              );
+
+        }catch(error){
+
+          await audioContext.close();
+
+          throw error;
+
+        }
+
+
+        const ends =
+          sortedEnds();
+
+
+        let start=0;
+
+
+        for(
+          let i=0;
+          i<ends.length;
+          i++
+        ){
+
+          const end =
+            ends[i].time;
+
+
+          if(end<=start){
+
+            start=end;
+
+            continue;
+
+          }
+
+
+          progressText.textContent =
+            "التسجيل: " +
+            recording.name +
+            " — إنشاء " +
+            (i+1) +
+            " / " +
+            ends.length;
+
+
+          const blob =
+            encodeSegment(
+              buffer,
+              start,
+              end
+            );
+
+
+          const filename =
+            (i+1)+".mp3";
+
+
+          /*
+            الكتابة مباشرة إلى المجلد
+          */
+
+          const fileHandle =
+            await recording.directory
+              .getFileHandle(
+                filename,
+                {
+                  create:true
+                }
+              );
+
+
+          const writable =
+            await fileHandle
+              .createWritable();
+
+
+          await writable.write(blob);
+
+          await writable.close();
+
+
+          start=end;
+
+
+          const totalFiles =
+            recordings.length *
+            ends.length;
+
+
+          const completed =
+            recordingIndex*
+              ends.length +
+            i+1;
+
+
+          progressBar.value =
+            completed/
+            totalFiles*
+            100;
+
+
+          /*
+            إعطاء المتصفح فرصة للتنفس
+          */
+
+          await new Promise(
+            resolve =>
+              setTimeout(
+                resolve,
+                0
+              )
+          );
+
+        }
+
+
+        await audioContext.close();
+
+        buffer=null;
+
+
+        progressText.textContent =
+          "اكتمل: " +
+          recording.name;
+
+
+        await new Promise(
+          resolve =>
+            setTimeout(
+              resolve,
+              50
+            )
+        );
+
+      }
+
+
+      progressBar.value=100;
+
+      progressText.textContent =
+        "🎉 اكتمل إنشاء جميع الملفات.";
+
+
+      recordings.forEach(
+        recording=>{
+
+          const box =
+            document.createElement("div");
+
+          box.className="output";
+
+          box.innerHTML =
+            "<div class='output-name'>" +
+            recording.name +
+            "/</div>" +
+            "<div class='status'>" +
+            "تم إنشاء " +
+            endMarkers.length +
+            " ملف MP3 داخل المجلد الذي اخترته." +
+            "</div>";
+
+          outputEl.appendChild(box);
+
+        }
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      progressText.textContent =
+        "حدث خطأ أثناء الإنشاء.";
+
+
+      alert(
+        "حدث خطأ أثناء إنشاء الملفات. إذا كان التسجيل طويلًا جدًا، قد تكون ذاكرة الهاتف غير كافية."
+      );
+
+    }finally{
+
+      splitBtn.disabled=false;
+
+      updateButtons();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   البداية
+========================================= */
+
+speedDisplay.textContent =
+  playbackSpeed.toFixed(2)+"×";
+
+resizeCanvas();
+
+renderAll();
 
 </script>
 
